@@ -190,7 +190,7 @@
                 }
             };
 
-            ajax.open("GET", "sendLugar.php?nombre="+nombre+"&desc="+desc+"&costo="+costo+"&capacidad="+capacidad, true);
+            ajax.open("GET", "../php/sendLugar.php?nombre="+nombre+"&desc="+desc+"&costo="+costo+"&capacidad="+capacidad, true);
             ajax.send();
         }
 
@@ -211,7 +211,7 @@
             };
 
 
-            ajax.open("GET","buscarLugares.php?bar="+nombre,true);
+            ajax.open("GET", "../php/buscarLugares.php?bar=" + nombre, true);
             ajax.send();
 
         }
@@ -233,7 +233,7 @@
             };
 
 
-            ajax.open("GET", "modifyLugares.php?bar=" + nombre, true);
+            ajax.open("GET", "../php/modifyLugares.php?bar=" + nombre, true);
             ajax.send();
 
         }
@@ -275,7 +275,7 @@
                 }
             };
 
-            ajax.open("GET", "updtLugares.php?nombre=" + nombre + "&desc=" + desc + "&costo=" + costo + "&capacidad=" + capacidad+"&num="+numero, true);
+            ajax.open("GET", "../php/updtLugares.php?nombre=" + nombre + "&desc=" + desc + "&costo=" + costo + "&capacidad=" + capacidad + "&num=" + numero, true);
             ajax.send();
 
             document.getElementById("tbNum").style.display = "none";
