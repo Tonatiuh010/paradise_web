@@ -1,0 +1,79 @@
+﻿body{
+
+}
+
+
+table{
+   
+  
+}
+
+header{
+    width:100%;
+    border:3px solid;
+    border-color:black;
+}
+
+article{
+    
+    float:right;
+    width:75%;
+    border:3px solid;
+    border-color:black;
+}
+
+nav {
+    float:left;
+    width:15%;
+    border:3px solid;
+    border-color:black;
+
+}
+
+
+section:after{
+    clear:both;
+}
+
+h1 {
+    color:aqua;
+}
+
+.list{
+    width:50%;
+    border:3px solid;
+    border-color:yellow;
+}
+
+.searchForm {
+    width:auto;
+    float:right;
+    border:3px solid;
+    border-color:yellow;
+
+}
+
+.sectionPrincipal{
+    margin:auto 0;
+    width:100%;
+    height:100%;
+}
+
+.upBar{
+    text-align:center;
+    
+    width:50%;
+    height:initial;
+    border:3px solid;
+    border-color:yellow;
+    margin:auto 0;
+}
+
+.registerSection {
+    width:100%;
+    height:auto;
+    align-content:flex-start;
+    text-align:left;
+    
+
+}
