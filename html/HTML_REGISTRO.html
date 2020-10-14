@@ -1,0 +1,139 @@
+﻿
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/CSS_CLIENTE_REGISTRO.css" type="text/css">
+    <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Paradise - Registro</title>
+</head>
+<body>
+    <nav>
+        <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
+
+        <section class="pruebaMenu">
+            <article class="pMT"><a href="HTML_PRINCIPAL.html" ;>INICIO</a></article>
+            <article class="pMTx"><a href="construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article class="pMT3"><a href="construccion.html" ;>LUGARES Y SALONES</a></article>
+            <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
+            <article class="pMTxt"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+        </section>
+        <br />
+        <section class="barraBusqueda">
+            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="search" class="boton">Buscar</button>
+        </section>
+    </nav>
+
+    <main>
+        <section class="secS"></section>
+            <section class="secMargin">
+                <br /><br />
+                <img alt="Paradise Logo" src="../img/logoOficial.png" width="60%"/>
+                <br /><br />
+                <h2>Inserte eslogan aquí :V</h2>
+                <h3>Registrate</h3>
+                <br /><br />
+                <section>
+                    <form> <!--action="../php/config.php" method="post"-->
+                        <table class="registrar">
+                            <tr>
+                                <th class="ins1"><label>Nombre: </label></th>
+                                <th class="ins2"><input class="formInput" name="cliNombre" type="text" maxlength="30" id="cliNombre" required /></th>
+                            </tr>
+                            <tr>
+                                <th class="ins1"><label>Apellido Paterno: </label></th>
+                                <th class="ins2"><input class="formInput" name="cliApPat" type="text" maxlength="30" id="cliApPat" required /></th>
+                            </tr>
+                            <tr>
+                                <th class="ins1"><label>Apellido Materno: </label></th>
+                                <th class="ins2"><input class="formInput" name="cliApMat" type="text" maxlength="30" id="cliApMat" /></th>
+                            </tr>
+                            <tr>
+                                <th class="ins1"><label>Número de Teléfono: </label></th>
+                                <th class="ins2"><input class="formInput" name="tcTelefono" type="tel" id="tcTelefono" /></th>
+                            </tr>
+                            <scrip><!--Recordatorio que te deje agregar otra fila y columna--></scrip>
+                            <tr>
+                                <th class="ins1"><label>Correo Electrónico: </label></th>
+                                <th class="ins2"><input class="formInput" name="ccCorreo" type="email" maxlength="30" id="ccCorreo" required /></th>
+                            </tr>
+                            <scrip><!--Recordatorio que te deje agregar otra fila y columna--></scrip>
+                            <tr>
+                                <th class="ins1"><label>Fecha de nacimiento:&nbsp;</label></th>
+                                <th class="ins2"><input class="formInput" name="cliFecNac" type="date" id="cliFecNac" required><br /></th>
+                            </tr>
+                            <tr>
+                                <th class="ins1"><label>Ciudad: </label></th>
+                                <th class="ins2">
+                                    <select name="ciudad" id="ciudad" required>
+                                        <option value="Tijuana">Tijuana</option>
+                                        <option value="Ensenada">Ensenada</option>
+                                        <option value="Rosarito">Rosarito</option>
+                                        <option value="Tecate">Tecate</option>
+                                        <option value="Mexicali">Mexicali</option>
+                                        <option value="Mexicali">Otra</option>
+                                    </select>
+                                </th>
+                            </tr>
+                            <tr><th><br /><br /></th></tr>
+                            <tr>
+                                <th class="ins1"><label>Contraseña:&nbsp;</label></th>
+                                <th class="ins2"><input class="formInput" name="contraseña" type="password" id="contraseña" required><br /></th>
+                            </tr>
+                            <tr>
+                                <th class="ins1"><label>Confirmar Contraseña:&nbsp;</label></th>
+                                <th class="ins2"><input class="formInput" name="Confconstraseña" type="password" id="Confcontraseña" required><br /></th>
+                            </tr>
+                            <!--CONFIRMAR QUE LA CONTRAEÑA SEA IGUAL EN AMBOS INPUT-->
+                            <tr>
+                                <th colspan="3" class="terminos">
+                                    <br />
+                                    <input type="checkbox" name="legal" id="legal" value="OK" required />
+                                    &nbsp;Acepto que he leído y comprendido los siguientes Términos y Condiciones de Uso,
+                                    y al hacer click en el recuadro, así como utilizar el presente
+                                    servicio, dejo constancia expresa que los acepto de manera libre y consciente
+                                    habiendo de mi parte revisado satisfactoriamente la información la cual considero
+                                    adecuada y suficiente.
+                                    <br /><br /><br />
+                                    Después aceptar los Términos y Condiciones e inscribirse, deberá esperar un lapso no
+                                    mayor a 2 semanas para recibir un correo indicando si su solicitud fue aceptada o
+                                    rechazada. Gracias por su preferencia.
+                                </th>
+                            </tr>
+                            <tr><th colspan="3">&nbsp;<br />&nbsp;</th></tr>
+                            <tr><th><input type="submit" name="submit" value="Inscribirme" class="botonR" onclick="registrarUS()"/><br />&nbsp;</th></tr>
+                            <tr><th colspan="3">&nbsp;<br />&nbsp;<br />&nbsp;</th></tr>
+                        </table>
+                    </form>
+                </section>  
+                <section id="inscrito">
+                </section>             
+            </section>
+    </main>
+
+    <script>
+        function registrarUS() {
+
+
+            nombre = document.getElementById("cliNombre").value;
+            apPat = document.getElementById("cliApPat").value;
+            apMat = document.getElementById("cliApMat").value;
+            fechaNac = document.getElementById("cliFecNac").value;
+
+            telefono = document.getElementById("tcTelefono").value;
+            correo = document.getElementById("ccCorreo").value;
+
+
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("inscrito").innerHTML = ajax.responseText;
+                }
+            };
+            ajax.open("GET", "config.php?nombre=" + nombre + "&apPat=" + apPat + "&apMat=" + apMat + "&fechaNac=" + fechaNac, true);
+            ajax.send();
+        }
+    </script>
+</body>
+</html>
+
