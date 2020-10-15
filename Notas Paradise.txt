@@ -1,0 +1,50 @@
+
+
+-- Agregar Esto a la BD Final
+
+DELIMITER //
+create procedure SP_insert_agente (
+in nombre varchar(30),
+in apPat varchar(20),
+in apMat varchar(20),
+in fecNac date,
+in edad tinyint,
+in genero char(1),
+out matricula char(7)
+) 
+begin
+declare cont int;
+
+select count(*)+1 into cont from agente;
+
+select upper(concat(substring(nombre,1,2),'0',substr(apPat,1,2),cont,substr(apPat,CHAR_LENGTH(apPat)))) into matricula;
+
+insert into agente values(matricula,
+nombre,apPat,apMat,fecNac,edad,genero);
+
+
+end //
+DELIMITER ;
+
+-- Tareas Pendientes. 
+
+
+ /*
+ Notas. 
+ 
+ $ Agregar ciudades (Tablas).
+ 
+ $ Agregar disparador en direccion, impedir doble referencia hacia salón. Solved usando UNIQUE. 
+ 
+ $ Agregar disparador en agente campo edad.
+ 
+ $ Investigar índices. ;-;
+ 
+ $ Añadir restricciones de fecha para las tablas de cliente y agente
+ 
+ $ Añadir disparadores tabla reservación, campos update fecha y costoXdías.
+ 
+ $ Investigar acerca del método de pago. 
+ 
+ */
+ 
