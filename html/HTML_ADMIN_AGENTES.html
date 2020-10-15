@@ -1,21 +1,25 @@
-ï»¿
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Paradise - Administrador</title>
-    <link rel="stylesheet" href="css/cssBase.css" />
+    <link rel="stylesheet" href="../css/cssBase.css" />
 </head>
+
 <body>
     <header>
 
         <!--Encabezado-->
-        TÃ­tulo
+        Agentes
 
     </header>
 
+
+
+
+
+
     <section class="sectionPrincipal">
-    
+
         <article id="barAdmin">
             <table class="upBar">
 
@@ -41,7 +45,7 @@
             <ul>
 
                 <li>
-                    <a >Esquemas (OpciÃ³n predefinida)</a>
+                    <a>Esquemas (Opción predefinida)</a>
                 </li>
 
                 <li>
@@ -49,11 +53,11 @@
                 </li>
 
                 <li>
-                    <a>Agentes</a>
+                    <a  href="HTML_ADMIN_AGENTES.html">Agentes</a>
                 </li>
 
                 <li>
-                    <a href="mainAdmin.html">Lugares</a>
+                    <a href="HTML_ADMIN_LUGARES.html">Lugares</a>
 
                     <ol>
                         Provedores
@@ -76,85 +80,110 @@
 
 
             <section class="consultPanel" id="pnlConsult" style="display:Block">
-                <section class='searchForm' >
-                    <input type='search' placeholder='B&uacute;squeda de lugares.'  id='id_lugar'>
+                <section class='searchForm'>
+                    <input type='search' placeholder='B&uacute;squeda de lugares.' id='id_lugar'>
                     <input type='button' value='Buscar' onclick="buscarLugar()">
 
                 </section>
 
 
-               
+
             </section>
 
             <section class="addPanel" id="pnlAdd" style="display:none">
                 <section class='registerSection' name='searchAdminForm'>
-                    NÃºmero del Lugar: <input id="tbNum" style="display:none" type="text" disabled><br />
+                    Número del Lugar: <input id="tbNum" style="display:none" type="text" disabled><br />
 
-                    Nombre del Lugar: <input type='text'  id='txtNombreLugar' maxlength="30" autofocus required><br />
-                    Costo del Lugar: <input type='number' id="txtCostoLugar" required/><br />
-                    Capacidad del Lugar: <input type='number' id="txtCapacidadLugar" required/><br />
-                    
-                    DescripciÃ³n del Lugar: <input type='text' id="txtDescLugar" maxlength="120"/> 
-                    
-                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar()"/> <br />
+                    Nombre del Lugar: <input type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
+                    Costo del Lugar: <input type='number' id="txtCostoLugar" required /><br />
+                    Capacidad del Lugar: <input type='number' id="txtCapacidadLugar" required /><br />
+
+                    Descripción del Lugar: <input type='text' id="txtDescLugar" maxlength="120" />
+
+                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar()" /> <br />
 
                     <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="updateLugar()" /> <br />
 
 
 
                     <!--<button onclick="document.getElementById('intPnlDirection').style.display='block'">
-                        AÃ±adir DirecciÃ³n 
-                    </button> --Elemento tipo barra desplegable al momento del click desprender el resto del formulario. 
+                        Añadir Dirección
+                    </button> --Elemento tipo barra desplegable al momento del click desprender el resto del formulario.
 
 
                     <section style="display:none" id="intPnlDirection">
                         Calle: <input type='text' name='txtCalleDirec'><br />
-                        NÃºmero interior: <input type='text' name='txtNumIntDirec'><br />
-                        NÃºmero Exterior: <input type='number' name="txtNumExtDirec" /><br />
-                        CÃ³digo Postal: <input type='number' name="txtCP" /><br />
+                        Número interior: <input type='text' name='txtNumIntDirec'><br />
+                        Número Exterior: <input type='number' name="txtNumExtDirec" /><br />
+                        Código Postal: <input type='number' name="txtCP" /><br />
                         <input type="button" style="float:right" value="Enviar" /> <br />
                     </section>-->
 
                     <p id="msg">En proceso</p>
 
-                </section>            
+                </section>
             </section>
 
             <section class="modifyPanel" id="pnlModify" style="display:none">
-                <section class='searchForm' >
+                <section class='searchForm'>
 
 
 
-                    <input type='search' placeholder='B&uacute;squeda de lugares. ' id="shcMod" >
-                    <button  onclick="buscarLugarM()">Buscar</button>
+                    <input type='search' placeholder='B&uacute;squeda de lugares. ' id="shcMod">
+                    <button onclick="buscarLugarM()">Buscar</button>
 
                 </section>
             </section>
 
             <section id="listLugar" style="display:none; width:100%;"></section>
         </article>
-        
+
     </section>
-    
+
 
     <script>
+
+        function petate() {
+
+
+
+
+            var x = parseInt(document.getElementById("txtNum1").value);
+
+            var y = parseInt(document.getElementById("txtNum2").value);
+
+
+
+
+            document.getElementById("result").innerHTML=(x+y);
+
+        }
+
+
         function turnOnPnlConsult() {
             document.getElementById("listLugar").innerHTML = "";
-            document.getElementById('pnlConsult').style.display="block";
+            document.getElementById('pnlConsult').style.display = "block";
             document.getElementById('pnlAdd').style.display = "None";
             document.getElementById('pnlModify').style.display = "None";
             document.getElementById("listLugar").style.display = "none";
-            
+
         }
 
 
         function turnOnPnlAdd() {
             document.getElementById("listLugar").innerHTML = "";
             document.getElementById('pnlConsult').style.display = "None";
+
             document.getElementById('pnlAdd').style.display = "block";
+
+
+
+            document.getElementById('pnlAdd').style.color = "green";
+
+
             document.getElementById('pnlModify').style.display = "None";
             document.getElementById("listLugar").style.display = "none";
-            
+
         }
 
         function turnOnPnlModify() {
@@ -163,7 +192,7 @@
             document.getElementById('pnlAdd').style.display = "None";
             document.getElementById('pnlModify').style.display = "block";
             document.getElementById("listLugar").style.display = "none";
-            
+
         }
 
         function registrarLugar() {
@@ -202,7 +231,7 @@
             var ajax = new XMLHttpRequest();
 
             var nombre= document.getElementById("id_lugar").value;
-            
+
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     document.getElementById("listLugar").style.display = "block";
@@ -243,7 +272,7 @@
         function modifyLugar(a) {
             turnOnPnlAdd();
             document.getElementById("btnModify").style.display = "block";
-            document.getElementById("btnSend").style.display = "none";                        
+            document.getElementById("btnSend").style.display = "none";
 
 
 
@@ -256,12 +285,12 @@
             document.getElementById("tbNum").style.display = "block";
 
             document.getElementById("tbNum").value = a.numero;
-            
+
         }
 
         function updateLugar() {
             document.getElementById("listLugar").innerHTML = "";
-                
+
             var numero = document.getElementById("tbNum").value;
             var nombre = document.getElementById("txtNombreLugar").value;
             var desc = document.getElementById("txtDescLugar").value;
