@@ -99,36 +99,76 @@
                     </form>
                 </section>
 
-                <section class="historial" id="historial" style="display:none">accion de historial</section>
+                <section class="historial" id="historial" style="display:none">
+                    <br />
+                    <h3>Historial de tus reservaciones</h3>
+                    <section id="listaRes" style="display:none; width:100%; height:100%;"></section>
+                    <br />
+                </section>
+
                 <section class="configuracion" id="configuracion" style="display:none">accion de configuracion</section>
             </section>
         </section>
     </main>
 
-    <script>
-        function usarReservacion() {
-            document.getElementById('reservacion').style.display="block";
-            document.getElementById('historial').style.display = "None";
-            document.getElementById('configuracion').style.display = "None";
+    
 
-        }
+        <script>
+            function usarReservacion() {
+                document.getElementById('reservacion').style.display = "block";
+                document.getElementById('historial').style.display = "None";
+                document.getElementById('configuracion').style.display = "None";
+
+            }
 
 
-        function usarHistorial() {
-            document.getElementById('reservacion').style.display = "None";
-            document.getElementById('historial').style.display = "block";
-            document.getElementById('configuracion').style.display = "None";
+            function usarHistorial() {
+                document.getElementById('reservacion').style.display = "None";
+                document.getElementById('historial').style.display = "block";
+                document.getElementById('configuracion').style.display = "None";
 
-        }
+                document.getElementById("listaRes").innerHTML = "";
 
-        function usarConfiguracion() {
-            document.getElementById('reservacion').style.display = "None";
-            document.getElementById('historial').style.display = "None";
-            document.getElementById('configuracion').style.display = "block";
+                var ajax = new XMLHttpRequest();
 
-        }
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        document.getElementById("listaRes").style.display = "block";
+                        document.getElementById("listaRes").innerHTML = ajax.responseText;
+                    }
+                };
 
-    </script>
+
+                ajax.open("GET", "../php/showResPerUs.php?", true);
+                ajax.send();
+            }
+
+            function usarConfiguracion() {
+                document.getElementById('reservacion').style.display = "None";
+                document.getElementById('historial').style.display = "None";
+                document.getElementById('configuracion').style.display = "block";
+
+            }
+
+            function buscarRes() {
+                document.getElementById("listaRes").innerHTML = "";
+
+                var ajax = new XMLHttpRequest();
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        document.getElementById("listLugar").style.display = "block";
+                        document.getElementById("listLugar").innerHTML = ajax.responseText;
+                    }
+                };
+
+
+                ajax.open("GET", "../php/buscarLugares.php?", true);
+                ajax.send();
+
+            }
+
+        </script>
 
 </body>
 </html>
