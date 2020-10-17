@@ -1,5 +1,3 @@
-
-
 <?php
 $HOST="localhost";
 $USER="root";
@@ -15,7 +13,7 @@ $mysqli= mysqli_connect("localhost","root","","paradise");
         printf("Fallo la conexion: %s\n", mysqli_connect_error());
         exit();
     }else{
-        $sql = "INSERT INTO cliente(cliNombre,cliApPat,cliApMat,cliFecNac) VALUES('".$_GET["nombre"]."','".$_GET["apPat"]."','".$_GET["apMat"]."','".$_GET["fechaNac"]."');";
+        $sql = "update cliente set cliNombre = '".$_GET["nombre"]."', cliApPat = '".$_GET["apPat"]."', cliApMat = '".$_GET["apMat"]."', cliFecNac = '".$_GET["fechaNac"]."' where cliNum = 24";
         $res = mysqli_query($mysqli, $sql);
 
             if($res === TRUE)
