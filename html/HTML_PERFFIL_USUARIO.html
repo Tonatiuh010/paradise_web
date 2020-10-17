@@ -106,49 +106,14 @@
                     <br />
                 </section>
 
-                <section class="configuracion" id="configuracion" style="display:none">
-                accion de configuracion
-                    <form>
-                        <!--action="../php/config.php" method="post"-->
-                        <table class="registrar">
-                            <tr>
-                                <th class="ins1"><label>Nombre: </label></th>
-                                <th class="ins2"><input class="formInput" name="cliNombre" type="text" maxlength="30" id="cliNombre" required /></th>
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Apellido Paterno: </label></th>
-                                <th class="ins2"><input class="formInput" name="cliApPat" type="text" maxlength="30" id="cliApPat" required /></th>
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Apellido Materno: </label></th>
-                                <th class="ins2"><input class="formInput" name="cliApMat" type="text" maxlength="30" id="cliApMat" /></th>
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Número de Teléfono: </label></th>
-                                <th class="ins2"><input class="formInput" name="tcTelefono" type="tel" id="tcTelefono" /></th>
-                            </tr>
-                            <scrip><!--Recordatorio que te deje agregar otra fila y columna--></scrip>
-                            <tr>
-                                <th class="ins1"><label>Correo Electrónico: </label></th>
-                                <th class="ins2"><input class="formInput" name="ccCorreo" type="email" maxlength="30" id="ccCorreo" required /></th>
-                            </tr>
-                            <scrip><!--Recordatorio que te deje agregar otra fila y columna--></scrip>
-                            <tr>
-                                <th class="ins1"><label>Fecha de nacimiento:&nbsp;</label></th>
-                                <th class="ins2"><input class="formInput" name="cliFecNac" type="date" id="cliFecNac" required><br /></th>
-                            </tr>
-                            <!--CONFIRMAR QUE LA CONTRAEÑA SEA IGUAL EN AMBOS INPUT-->
-                            <tr><th><input type="submit" name="submit" value="Inscribirme" class="botonR" onclick="registrarUS()" /><br />&nbsp;</th></tr>
-                        </table>
-                    </form>
-                </section>
-
+                <section class="configuracion" id="configuracion" style="display:none">accion de configuracion</section>
             </section>
         </section>
     </main>
 
+    
 
-    <script>
+        <script>
             function usarReservacion() {
                 document.getElementById('reservacion').style.display = "block";
                 document.getElementById('historial').style.display = "None";
@@ -185,28 +150,23 @@
 
             }
 
+            function buscarRes() {
+                document.getElementById("listaRes").innerHTML = "";
 
-        function registrarUS() {
+                var ajax = new XMLHttpRequest();
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        document.getElementById("listLugar").style.display = "block";
+                        document.getElementById("listLugar").innerHTML = ajax.responseText;
+                    }
+                };
 
 
-            nombre = document.getElementById("cliNombre").value;
-            apPat = document.getElementById("cliApPat").value;
-            apMat = document.getElementById("cliApMat").value;
-            fechaNac = document.getElementById("cliFecNac").value;
+                ajax.open("GET", "../php/buscarLugares.php?", true);
+                ajax.send();
 
-            telefono = document.getElementById("tcTelefono").value;
-            correo = document.getElementById("ccCorreo").value;
-
-
-            var ajax = new XMLHttpRequest();
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("inscrito").innerHTML = ajax.responseText;
-                }
-            };
-            ajax.open("GET", "../php/modifyUser.php?nombre=" + nombre + "&apPat=" + apPat + "&apMat=" + apMat + "&fechaNac=" + fechaNac, true);
-            ajax.send();
-        }
+            }
 
         </script>
 
