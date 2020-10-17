@@ -18,7 +18,7 @@ if ($conn->connect_error){
 
 
 
-$sql="select * from salon where salNombre like '".$_GET['bar']."%';";
+$sql="select * from VW_lugar_admin where nombre like '".$_GET['bar']."%';";
 $result=$conn->query($sql);
 
 if ($result->num_rows>0)
@@ -30,28 +30,28 @@ if ($result->num_rows>0)
     <table style='width:22%;margin-right:8%; border:2px solid;margin-bottom:3%;'>
         <tr>
             <td>Numero del Lugar </td>
-            <td>".$row['salNum']." </td>
+            <td>".$row['numero']." </td>
         </tr>
 
         <tr>
             <td>Nombre del Lugar </td>
-            <td>".$row['salNombre']." </td>
+            <td>".$row['nombre']." </td>
         </tr>
 
         <tr>
             <td>Descripci&oacute;n del Lugar </td>
-            <td>".$row['salDesc']." </td>
+            <td>".$row['_desc']." </td>
         </tr>
 
         <tr>
             <td>Costo del Lugar </td>
-            <td>".$row['salCosto']." </td>
+            <td>".$row['costo']." </td>
         </tr>
 
 
         <tr>
             <td>Capacidad del Lugar </td>
-            <td>".$row['salCapacidad']." </td>
+            <td>".$row['capacidad']." </td>
         </tr>
     </table >
     ";
@@ -60,7 +60,7 @@ if ($result->num_rows>0)
 
     }
 } else {
-    echo "No data founded";
+    echo "No data founded</br>";
 
     echo "Sentence:".$sql;
 }

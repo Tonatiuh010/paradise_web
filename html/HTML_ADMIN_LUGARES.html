@@ -54,7 +54,7 @@
                 </li>
 
                 <li>
-                    <a>Agentes</a>
+                    <a href="HTML_ADMIN_AGENTES.html">Agentes</a>
                 </li>
 
                 <li>
@@ -144,22 +144,6 @@
 
     <script>
 
-        function petate() {
-            
-          
-
-
-            var x = parseInt(document.getElementById("txtNum1").value);
-
-            var y = parseInt(document.getElementById("txtNum2").value);
-
-
-            
-
-            document.getElementById("result").innerHTML=(x+y);
-            
-        }
-
 
         function turnOnPnlConsult() {
             document.getElementById("listLugar").innerHTML = "";
@@ -174,14 +158,7 @@
         function turnOnPnlAdd() {
             document.getElementById("listLugar").innerHTML = "";
             document.getElementById('pnlConsult').style.display = "None";
-
             document.getElementById('pnlAdd').style.display = "block";
-
-
-
-            document.getElementById('pnlAdd').style.color = "green";
-
-
             document.getElementById('pnlModify').style.display = "None";
             document.getElementById("listLugar").style.display = "none";
             
@@ -192,26 +169,20 @@
             document.getElementById('pnlConsult').style.display = "None";
             document.getElementById('pnlAdd').style.display = "None";
             document.getElementById('pnlModify').style.display = "block";
-            document.getElementById("listLugar").style.display = "none";
-            
+            document.getElementById("listLugar").style.display = "none";            
         }
 
         function registrarLugar() {
             document.getElementById("listLugar").innerHTML = "";
 
-            nombre = document.getElementById("txtNombreLugar").value;
-            desc = document.getElementById("txtDescLugar").value;
-            costo = document.getElementById("txtCostoLugar").value;
-            capacidad = document.getElementById("txtCapacidadLugar").value;
+            var lugarOb = {
+                nombre: document.getElementById("txtNombreLugar").value,
+                desc: document.getElementById("txtDescLugar").value,
+                costo: document.getElementById("txtCostoLugar").value,
+                capacidad: document.getElementById("txtCapacidadLugar").value
+            };
 
-            //var lugarOb = {
-            //    "nombre": document.getElementById("txtNombreLugar").value,
-            //    "desc": document.getElementById("txtDescLugar").value,
-            //    "costo": document.getElementById("txtCostoLugar").value,
-            //    "capacidad": document.getElementById("txtCapacidadLugar").value
-            //};
-
-            //console.log(lugarOb);
+            
 
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange= function () {
@@ -220,7 +191,7 @@
                 }
             };
 
-            ajax.open("GET", "../php/sendLugar.php?nombre="+nombre+"&desc="+desc+"&costo="+costo+"&capacidad="+capacidad, true);
+            ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
             ajax.send();
         }
 

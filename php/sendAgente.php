@@ -12,24 +12,13 @@
         exit();
     }
 
+    $ob_agente=json_decode($_GET['b']);
 
-    $ob_agente=$_GET['b'];
+    $sql="call SP_insert_agente('".$ob_agente->nombre."','".$ob_agente->apPat."','".$ob_agente->apMat."','".$ob_agente->date."','".$ob_agente->genre."');";
 
-    echo $ob_agente->nombre;
-
-    //$sql="insert into salon (salNombre,salDesc,salCosto,salCapacidad) 
-    //values ('".$_GET['nombre']."','".$_GET['desc']."',".$_GET['costo'].",".$_GET['capacidad'].");";//SQL Sentence
-
-
-
-    //if ($conn->query($sql)===TRUE){
-
-    //    echo "Registrado!";
-
-    //} else {
-
-    //    echo "Error al momento de registrar:".$sql."-->".$conn->error;
-    //}
-
-
+    if ($conn->query($sql)===TRUE){
+        echo "Registrado!";
+    } else {
+        echo "Error al momento de registrar:".$sql."-->".$conn->error;
+    }
 ?>

@@ -2,29 +2,37 @@
 
 -- Agregar Esto a la BD Final
 
+drop trigger DIS_AGENTE_INSERT;
 DELIMITER //
-create procedure SP_insert_agente (
-in nombre varchar(30),
-in apPat varchar(20),
-in apMat varchar(20),
-in fecNac date,
-in edad tinyint,
-in genero char(1),
-out matricula char(7)
-) 
-begin
-declare cont int;
-
-select count(*)+1 into cont from agente;
-
-select upper(concat(substring(nombre,1,2),'0',substr(apPat,1,2),cont,substr(apPat,CHAR_LENGTH(apPat)))) into matricula;
-
-insert into agente values(matricula,
-nombre,apPat,apMat,fecNac,edad,genero);
-
-
+create trigger DIS_AGENTE_INSERT before insert on agente
+for each row 
+begin 
+	declare edad int;
+	select timestampdiff(year,new.agFecNac,curdate())  into edad;
+    
+	set new.agEdad=edad; 
+    set new.agMatricula=upper(concat(substr(new.agNombre,1,1),substr(new.agNombre,char_length(new.agNombre),1),substr(new.agNombre,char_length(new.agNombre)/2,1),'0',substr(new.agApPat,1,1),substr(new.agApPat,char_length(new.agApPat),1),substr(new.agApPat,char_length(new.agApPat)/2,1)));
 end //
 DELIMITER ;
+
+drop procedure SP_insert_agente;
+DELIMITER //
+create procedure SP_insert_agente (
+	in nombre varchar(30),
+	in apPat varchar(20),
+	in apMat varchar(20),
+	in fecNac date,
+	in genero char(1)
+) 
+begin
+    
+	insert into agente (agNombre,agApPat,agApMat,agFecNac,FK_genero)values(
+	nombre,apPat,apMat,fecNac,genero);
+end //
+DELIMITER ;
+
+#call SP_insert_agente('Chapis','Pepogi','Ramirez','2000-12-23','F');
+#select @matricula as Matricula;
 
 -- Tareas Pendientes. 
 

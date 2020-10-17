@@ -159,25 +159,15 @@
         }
 
         function registrarAgente() {
-            document.getElementById("listAgente").innerHTML = "";
+            document.getElementById("listAgente").innerHTML = "";          
 
-            nombre = document.getElementById("txtNombreAgente").value;
-            apPat = document.getElementById("txtApPatAgente").value;
-            apMat = document.getElementById("txtApMatAgente").value;
-            genre = document.getElementById("genreBox").options[0].value;
-            date = document.getElementById("dateNac").value;
-
-            console.log(date);
-
-            var agenteOb = {
-                "nombre" : document.getElementById("txtNombreAgente").value,
-                "apPat" : document.getElementById("txtApPatAgente").value,
-                "apMat" : document.getElementById("txtApMatAgente").value,
-                "genre": document.getElementById("genreBox").options[0].value,
-                "date" : document.getElementById("dateNac").value
+            var agenteOb = {nombre : document.getElementById("txtNombreAgente").value,
+                apPat :document.getElementById("txtApPatAgente").value,
+                apMat : document.getElementById("txtApMatAgente").value,
+                genre: document.getElementById("genreBox").options[0].value,
+                date: document.getElementById("dateNac").value
             };
-
-            //console.log(agenteOb);
+        
 
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange= function () {
@@ -186,7 +176,7 @@
                 }
             };
 
-            ajax.open("GET", "../php/sendAgente.php?b="+agenteOb/*+nombre+"&desc="+desc+"&costo="+costo+"&capacidad="+capacidad*/, true);
+            ajax.open("GET", "../php/sendAgente.php?b=" + JSON.stringify(agenteOb), true);
             ajax.send();
         }
 

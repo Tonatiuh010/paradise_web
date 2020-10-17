@@ -13,11 +13,9 @@ if ($conn->connect_error){
 	die("Conexión Fallida: ".$conn->connect_error);
     exit();
 }
+$ob_lugar=json_decode($_GET['b']);
 
-$sql="insert into salon (salNombre,salDesc,salCosto,salCapacidad) 
-values ('".$_GET['nombre']."','".$_GET['desc']."',".$_GET['costo'].",".$_GET['capacidad'].");";//SQL Sentence
-
-
+$sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.");";//SQL Sentence
 
 if ($conn->query($sql)===TRUE){
 
