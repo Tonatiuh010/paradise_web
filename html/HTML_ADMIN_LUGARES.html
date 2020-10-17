@@ -81,29 +81,23 @@
 
 
             <section class="consultPanel" id="pnlConsult" style="display:Block">
-                <section class='searchForm' >
+                <section class='searchForm'>
                     <input type='search' placeholder='B&uacute;squeda de lugares.'  id='id_lugar'>
-                    <input type='button' value='Buscar' onclick="buscarLugar()">
-
-                </section>
-
-
-               
+                    <input type='button' value='Buscar' onclick="buscarLugar(true)" id="btnM" style="display:none">
+                    <input type='button' value='Buscar' onclick="buscarLugar(false)" id="btnS" style="display:block">
+                </section>               
             </section>
 
             <section class="addPanel" id="pnlAdd" style="display:none">
                 <section class='registerSection' name='searchAdminForm'>
-                    Número del Lugar: <input id="tbNum" style="display:none" type="text" disabled><br />
-
-                    Nombre del Lugar: <input type='text'  id='txtNombreLugar' maxlength="30" autofocus required><br />
-                    Costo del Lugar: <input type='number' id="txtCostoLugar" required/><br />
-                    Capacidad del Lugar: <input type='number' id="txtCapacidadLugar" required/><br />
-                    
+                    <label id="lblNum" style="display:none"> Número del Lugar:</label> <input id="tbNum" style="display:none" type="text" disabled><br/>
+                    Nombre del Lugar: <input type='text'  id='txtNombreLugar' maxlength="30" autofocus required><br/>
+                    Costo del Lugar: <input type='number' id="txtCostoLugar" required/><br/>
+                    Capacidad del Lugar: <input type='number' id="txtCapacidadLugar" required/><br/>                    
                     Descripción del Lugar: <input type='text' id="txtDescLugar" maxlength="120"/> 
                     
-                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar()"/> <br />
-
-                    <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="updateLugar()" /> <br />
+                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar(true)"/> <br />
+                    <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarLugar(false)" /> <br />
 
 
 
@@ -125,18 +119,15 @@
                 </section>            
             </section>
 
-            <section class="modifyPanel" id="pnlModify" style="display:none">
+            <!--<section class="modifyPanel" id="pnlModify" style="display:none">
                 <section class='searchForm' >
-
-
-
                     <input type='search' placeholder='B&uacute;squeda de lugares. ' id="shcMod" >
                     <button  onclick="buscarLugarM()">Buscar</button>
-
                 </section>
-            </section>
+            </section>-->
 
             <section id="listLugar" style="display:none; width:100%;"></section>
+
         </article>
         
     </section>
@@ -148,40 +139,57 @@
         function turnOnPnlConsult() {
             document.getElementById("listLugar").innerHTML = "";
             document.getElementById('pnlConsult').style.display = "block";
-            document.getElementById('pnlAdd').style.display = "None";
-            document.getElementById('pnlModify').style.display = "None";
+            document.getElementById('pnlAdd').style.display = "None";         
             document.getElementById("listLugar").style.display = "none";
-            
+
+            document.getElementById('btnM').style.display = "none";
+            document.getElementById('btnS').style.display = "block";
         }
 
 
         function turnOnPnlAdd() {
             document.getElementById("listLugar").innerHTML = "";
             document.getElementById('pnlConsult').style.display = "None";
-            document.getElementById('pnlAdd').style.display = "block";
-            document.getElementById('pnlModify').style.display = "None";
+            document.getElementById('pnlAdd').style.display = "block";           
             document.getElementById("listLugar").style.display = "none";
             
         }
 
         function turnOnPnlModify() {
             document.getElementById("listLugar").innerHTML = "";
-            document.getElementById('pnlConsult').style.display = "None";
-            document.getElementById('pnlAdd').style.display = "None";
-            document.getElementById('pnlModify').style.display = "block";
+            document.getElementById('pnlConsult').style.display = "block";
+            document.getElementById('pnlAdd').style.display = "None";        
             document.getElementById("listLugar").style.display = "none";            
+            document.getElementById('btnM').style.display = "block";
+            document.getElementById('btnS').style.display = "none";
         }
 
-        function registrarLugar() {
+        function registrarLugar(res) {
             document.getElementById("listLugar").innerHTML = "";
 
-            var lugarOb = {
+            var lugarOb = null;
+
+        if (res==true){
+
+               lugarOb = {
                 nombre: document.getElementById("txtNombreLugar").value,
                 desc: document.getElementById("txtDescLugar").value,
                 costo: document.getElementById("txtCostoLugar").value,
-                capacidad: document.getElementById("txtCapacidadLugar").value
-            };
+                capacidad: document.getElementById("txtCapacidadLugar").value,
+                type : true
+                
+                };
+        } else {
 
+               lugarOb = {
+                numero :parseInt( document.getElementById("tbNum").value),
+                nombre: document.getElementById("txtNombreLugar").value,
+                desc: document.getElementById("txtDescLugar").value,
+                costo: document.getElementById("txtCostoLugar").value,
+                capacidad: document.getElementById("txtCapacidadLugar").value,
+                type : false
+            };
+        }
             
 
             var ajax = new XMLHttpRequest();
@@ -191,18 +199,33 @@
                 }
             };
 
-            ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
+            //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
+            ajax.open("GET", "../php/registerUpdateLugar.php?b=" + JSON.stringify(lugarOb), true);
             ajax.send();
         }
 
 
-        function buscarLugar() {
+        function buscarLugar(res) {
             document.getElementById("listLugar").innerHTML = "";
 
 
             var ajax = new XMLHttpRequest();
 
-            var nombre= document.getElementById("id_lugar").value;
+            //var nombre = document.getElementById("id_lugar").value;
+
+            var searchForm = null;
+
+            if (res == true) {
+                searchForm = {
+                    search: document.getElementById("id_lugar").value,
+                    type : true
+                };
+            } else {
+                searchForm = {
+                    search: document.getElementById("id_lugar").value,
+                    type: false
+                };
+            }
             
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
@@ -212,32 +235,31 @@
             };
 
 
-            ajax.open("GET", "../php/buscarLugares.php?bar=" + nombre, true);
+            ajax.open("GET", "../php/busquedaLugar.php?b=" +JSON.stringify(searchForm), true);
             ajax.send();
 
         }
 
 
-        function buscarLugarM() {
-            document.getElementById("listLugar").innerHTML = "";
+        //function buscarLugarM() {
+        //    document.getElementById("listLugar").innerHTML = "";
 
 
-            var ajax = new XMLHttpRequest();
+        //    var ajax = new XMLHttpRequest();
 
-            var nombre = document.getElementById("shcMod").value;
+        //    var nombre = document.getElementById("shcMod").value;
 
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("listLugar").style.display = "block";
-                    document.getElementById("listLugar").innerHTML = ajax.responseText;
-                }
-            };
+        //    ajax.onreadystatechange = function () {
+        //        if (ajax.readyState == 4 && ajax.status == 200) {
+        //            document.getElementById("listLugar").style.display = "block";
+        //            document.getElementById("listLugar").innerHTML = ajax.responseText;
+        //        }
+        //    };
 
+        //    ajax.open("GET", "../php/modifyLugares.php?bar=" + nombre, true);
+        //    ajax.send();
 
-            ajax.open("GET", "../php/modifyLugares.php?bar=" + nombre, true);
-            ajax.send();
-
-        }
+        //}
 
 
 
@@ -255,33 +277,12 @@
 
 
             document.getElementById("tbNum").style.display = "block";
-
+            document.getElementById("lblNum").style.display = "block";
             document.getElementById("tbNum").value = a.numero;
             
         }
 
-        function updateLugar() {
-            document.getElementById("listLugar").innerHTML = "";
-                
-            var numero = document.getElementById("tbNum").value;
-            var nombre = document.getElementById("txtNombreLugar").value;
-            var desc = document.getElementById("txtDescLugar").value;
-            var costo = document.getElementById("txtCostoLugar").value;
-           var capacidad = document.getElementById("txtCapacidadLugar").value;
-
-            var ajax = new XMLHttpRequest();
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("msg").innerHTML = ajax.responseText;
-                }
-            };
-
-            ajax.open("GET", "../php/updtLugares.php?nombre=" + nombre + "&desc=" + desc + "&costo=" + costo + "&capacidad=" + capacidad + "&num=" + numero, true);
-            ajax.send();
-
-            document.getElementById("tbNum").style.display = "none";
-
-        }
+        
 
     </script>
 

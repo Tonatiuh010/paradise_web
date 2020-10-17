@@ -12,13 +12,13 @@ $dbname="paradise";
 $conn= new mysqli($servername	,$username	,$password	,$dbname);
 
 if ($conn->connect_error){
-	die("Conexión Fallida: ".$conn->connect_error);
+	die("ConexiÃ³n Fallida: ".$conn->connect_error);
     exit();
 }
 
+    $shc=json_decode($_GET['b']);
 
-
-$sql="select * from VW_lugar_admin where nombre like '".$_GET['bar']."%';";
+$sql="select * from VW_lugar_admin where nombre like '".$shc->search."%';";
 $result=$conn->query($sql);
 
 if ($result->num_rows>0)
@@ -26,6 +26,12 @@ if ($result->num_rows>0)
 
     while ($row=$result->fetch_assoc()){
 
+   $ob_lugar='{ "nombre":"'.$row['nombre'].'", 
+               "desc":"'.$row['_desc'].'", 
+               "costo":'.$row['costo'].',
+               "capacidad":'.$row['capacidad'].', 
+               "numero":'.$row['numero'].'}';
+    
     echo "
     <table style='width:22%;margin-right:8%; border:2px solid;margin-bottom:3%;'>
         <tr>
@@ -55,6 +61,11 @@ if ($result->num_rows>0)
         </tr>
     </table >
     ";
+
+    if ($shc->type==true){
+        echo "<button onclick='modifyLugar(".$ob_lugar.")'>click</button>";   
+    }
+    
 
 
 
