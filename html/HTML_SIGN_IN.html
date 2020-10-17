@@ -22,6 +22,11 @@
             <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
             <button type="button" id="search" class="boton">Buscar</button>
         </section>
+
+        <section class="icon_use" id="icon" style="display:none">
+            <a href="HTML_PERFFIL_USUARIO.html"><img src="../img/Loto_paradise.png" alt="icon" width="100%"/></a>
+        </section>
+
     </nav>
     <main>
         <br />
@@ -33,19 +38,53 @@
                     <img src="../img/logoOficial.png" alt="Logotipo" width="90%" />
                     <form class="uspss">
                         <br /><label>Correo o nombre de usuario: </label><br /><br />
-                        <input  class="formInput" name="cliNombre" type="text" maxlength="30" id="cliNombre" required/>
+                        <input  class="formInput" name="cliNombre" type="text" maxlength="30" id="User" required/>
                         <br /><br /><label>Contraseña:</label><br /><br />
-                        <input class="formInput" name="cliNombre" type="password" maxlength="30" id="cliNombre" required/>
+                        <input class="formInput" name="cliNombre" type="password" maxlength="30" id="Password" required/>
                         <br /><br /><br />
-                        <button type="button" id="signIn" class="botonR">Acceder</button>
+                        <button type="button" id="signIn" class="botonR" onclick="inicio_sesion()">Acceder</button>
                         <br /><br /><a href="construccion.html";>¿Olvidaste tu contraseña?</a>
                         <br /><br /><hr /><p>Crear cuenta</p>
                         <a href="HTML_REGISTRO.html"><section id="newUS" class="secbotonR">Crear cuenta</section></a>
                         <!--<button type="button" id="newUS" class="botonR" >Crear cuenta</button>-->
+                        <section id="prueba"></section>
                     </form>
                 </section>
             </section>
         </section>
     </main>
+    <script>
+        function inicio_sesion()
+        {
+            document.getElementById("prueba").innerHTML = "";
+            user = document.getElementById("User").value;
+            passwd = document.getElementById("Password").value;
+
+
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = ajax.responseText;
+                    if(respuesta==true)
+                    {
+                        location.href = "HTML_PRINCIPAL.html";
+                    } else {
+                        document.getElementById("prueba").innerHTML = "No se pudo conectar";
+                    }
+                }
+            };
+            ajax.open("GET", "../php/conectividad.php?user=" + user + "&passwd=" + passwd, true);
+            ajax.send();
+
+        }
+
+        function showIcon()
+        {
+            document.getElementById('icon').style.display = "block";
+        }
+
+
+
+    </script>
 </body>
 </html>
