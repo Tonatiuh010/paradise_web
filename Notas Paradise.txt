@@ -52,7 +52,7 @@ DELIMITER ;
  
  $ Añadir disparadores tabla reservación, campos update fecha y costoXdías.
  
- $ Investigar acerca del método de pago. 
+ $ Investigar acerca del método de pago. :v
  
  */
  
