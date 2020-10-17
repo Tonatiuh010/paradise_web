@@ -57,6 +57,15 @@ nav
     clear:both;
 }
 
+.icon_use
+{
+    float:left;
+    width:4%;
+    height:50%;
+    /*background-color:aqua;*/
+    clear:both;
+}
+
 .busqueda
 {
     width:70%;
