@@ -37,12 +37,11 @@ DELIMITER ;
 #select @matricula as Matricula;
 
 
-#		PROCEDIMIENTO ALMACENADO Y TRIGGER PARA INSERTAR A UN CLIENTE
+#		PROCEDIMIENTO ALMACENADO PARA INSERTAR A UN CLIENTE
 
-drop procedure SP_insert_cliente;
-drop trigger DIS_CLIENTE_INSERT;
+#drop trigger DIS_CLIENTE_INSERT;
 
-DELIMITER //
+/*DELIMITER //
 create trigger DIS_CLIENTE_INSERT before insert on cliente
 for each row 
 begin 
@@ -52,10 +51,10 @@ begin
 	set new.cliEdad=edad; 
    
 end //
-DELIMITER ;
+DELIMITER ;*/
 
 
-drop procedure SP_insert_cliente;
+# drop procedure SP_insert_cliente;
 
 DELIMITER //
 create procedure SP_insert_cliente (
@@ -92,26 +91,15 @@ begin
     
 end//
 DELIMITER ;
-
-/*in nombre varchar(30),
-	in apPat varchar(20),
-	in apMat varchar(20),
-	in fecNac date,
-    
-    in telefono char(10),
-    6643084027
-    in userName varchar(30),
-    in contrasenia varchar(30),
-    in correo varchar(30)*/
  
 
 call SP_insert_cliente ('Yoel','Mendez','Arriaga','1997-08-10',null,null,'123456','arriaga@gmail.com');
 call SP_insert_cliente ('Kevin','Ortiz','Rieta','2001-12-02','6649977543',null,'123456','rieta@gmail.com');
 call SP_insert_cliente ('Maria','Peña','Santos','1999-10-05',null,'santos_maria','123456','santosM@gmail.com');
 
-delete from usuario where usNum=8 or usNum=9 or usNum=17;
-delete from cliente where cliNum=14 or cliNum=15 or cliNum=17;
-delete from telef_clientes where tcNum = 4;
+#  delete from usuario where usNum=8 or usNum=9 or usNum=17;
+# delete from cliente where cliNum=14 or cliNum=15 or cliNum=17;
+# delete from telef_clientes where tcNum = 4;
 
 select * from usuario;
 select * from cliente;

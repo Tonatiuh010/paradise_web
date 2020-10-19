@@ -4,6 +4,18 @@ insert into genero values ('M', 'Masculino'),('F','Femenino');
 
 insert into tipo_us values ('CLI','Cliente'),('ADM','Administrador'),('AGT','Agente');
 
+insert into municipio values ('ESE','Ensenada'),('MXL','Mexicali'),('TIJ','Tijuana'),('ROS','Rosarito'),('TEC','Tecate');
+
+insert into espacio(espNombre) values
+('Salón'),('Pista de baile'),('Estacionamiento'),('Cocina para catering'),('Terraza'),('Jardín'),('Carpa'),('Piscina'),('Jacuzzi');
+
+insert into metodopag(pm_Metodo) values('Efectivo'),('Tarjeta bancaria'),('Paypal'),('Tranferencia bancaria');
+
+insert into tipolugar(tlNombre) values
+('Salón'),('Hacienda'),('Restaurante'),('Centro nocturno'),('Jardín'),('Quinta'),('Playa');
+
+
+########################################### AGENTES ###################################################################
 # call SP_insert_agente('Chapis','Pepogi','Ramirez','2000-12-23','F');
 
 call SP_insert_agente ('ANA CAROLINA','LOPEZ','MARTINEZ', '2000-12-23','F');
@@ -30,3 +42,23 @@ call SP_insert_agente ('ALEJANDRO','GUTIERREZ','PEREZ','1995-10-03','M');
 call SP_insert_agente ('CARMEN','MIRANDA','ROCHA','2000-12-23','F');
 
 select * from agente;
+
+########################################### CLIENTES ###################################################################
+# call SP_insert_cliente ('Maria','Peña','Santos','1999-10-05','6657700934','santos_maria','123456','santosM@gmail.com');
+
+call SP_insert_cliente ('MARTINA','ALTAMIRANO','CALDERON','1999-10-05','6647733123',null,'123456','m.altamiro@gmail.com');
+call SP_insert_cliente ('ZULEIMA GABRIELA','ORDOÑES','ALANIS','2000-11-12','6641234567','zuleima05','654321','zuleima@hotmail.com');
+call SP_insert_cliente ('MARISOL','SANCHEZ','PEREZ','1980-01-15','6650099724','marisolS','098765','marisolSP@gmail.com');
+call SP_insert_cliente ('MAGDALENA','GONZALEZ','RODRIGUEZ','1990-05-20',null,'Mgonzales','contrasenia','gonzalesMR@hotmail.com');
+call SP_insert_cliente ('GUADALUPE','RODRIGUEZ','BARTOLO','1990-05-20',null,null,'password','guadalupe@hotmail.com');
+call SP_insert_cliente ('YULETH ARELY','ORTIZ','RODRIGUEZ','1999-10-05','6647733553','Arely15','arely','arelyY@outlook.com');
+call SP_insert_cliente ('JUAN','ESPINOZA','RODRIGUEZ','2000-11-12','6649933123','juan_espinoza','correo','juan.ER@gmail.com');
+call SP_insert_cliente ('SALOME','RIVERA','VAZQUEZ','1980-01-15','6650011724',null,'salome','salome@gmail.com');
+call SP_insert_cliente ('EMMA PAULA','SOLIS','RAMIREZ','1990-05-20',null,'solis_emma','pelicula','emmaPSR@outlook.com');
+call SP_insert_cliente ('DANIEL','TINAJERO','TRISTAN','1980-01-15','6647733133','daniel01','basura','daniel@outlook.com');
+call SP_insert_cliente ('MARIA GUADALUPE','MORENO','CASTILLO','2000-11-12','6651199724',null,'guadalupe','mariaGMc@gmail.com');
+call SP_insert_cliente ('JOSE GUADALUPE','MEDINA','RODRIGUEZ','1999-10-05',null,'jose_guadalupe','constrasenia','joseGuadalupe@outloo.com');
+
+select * from cliente;
+select * from usuario;
+select * from telef_clientes;

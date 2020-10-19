@@ -160,7 +160,7 @@ create table usuario
 (		
 	usNum	int	auto_increment not null,
 	usNombre	varchar(30)	not null,
-	usContraseña	varchar(30)	not null,
+	usContrasenia	varchar(30)	not null,
     usCorreo varchar(30) not null,
 	FK_TipoUS	char(3)	null,
 	FK_Cliente	int	null,
@@ -173,13 +173,13 @@ create table usuario
     constraint FK_usuario_tipoUS foreign key (FK_TipoUS) references tipo_US(tuCod) on delete cascade
 );
 
-ALTER TABLE usuario CHANGE `usContraseña` `usContrasenia` varchar(30);
+# ALTER TABLE usuario CHANGE `usContraseña` `usContrasenia` varchar(30);
 
 create table lugar
 (
 	lugCod	char(5)	not null,   
 	lugNombre varchar(30) not null,	
-	lugDescripción text null,	
+	lugDescripcion text null,	
 	lugCosto decimal(6,2) null,
 	lugCapacidad int null,	
 	FK_TipoL int null not null,	                          
@@ -204,7 +204,7 @@ create table imagenes
 	img_Num	int	auto_increment not null,
 	img_Nombre	varchar(50)	not null,
 	img_Descripcion	text null,	
-	img_Imagen	blob not null,	
+	# img_Imagen blob not null,	
 	FK_Lugar char(5) not null,
     
     constraint PK_imagenes_Num primary key (img_Num),
