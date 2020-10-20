@@ -119,13 +119,6 @@
                 </section>            
             </section>
 
-            <!--<section class="modifyPanel" id="pnlModify" style="display:none">
-                <section class='searchForm' >
-                    <input type='search' placeholder='B&uacute;squeda de lugares. ' id="shcMod" >
-                    <button  onclick="buscarLugarM()">Buscar</button>
-                </section>
-            </section>-->
-
             <section id="listLugar" style="display:none; width:100%;"></section>
 
         </article>
@@ -211,8 +204,6 @@
 
             var ajax = new XMLHttpRequest();
 
-            //var nombre = document.getElementById("id_lugar").value;
-
             var searchForm = null;
 
             if (res == true) {
@@ -240,29 +231,6 @@
 
         }
 
-
-        //function buscarLugarM() {
-        //    document.getElementById("listLugar").innerHTML = "";
-
-
-        //    var ajax = new XMLHttpRequest();
-
-        //    var nombre = document.getElementById("shcMod").value;
-
-        //    ajax.onreadystatechange = function () {
-        //        if (ajax.readyState == 4 && ajax.status == 200) {
-        //            document.getElementById("listLugar").style.display = "block";
-        //            document.getElementById("listLugar").innerHTML = ajax.responseText;
-        //        }
-        //    };
-
-        //    ajax.open("GET", "../php/modifyLugares.php?bar=" + nombre, true);
-        //    ajax.send();
-
-        //}
-
-
-
         function modifyLugar(a) {
             turnOnPnlAdd();
             document.getElementById("btnModify").style.display = "block";
@@ -281,8 +249,6 @@
             document.getElementById("tbNum").value = a.numero;
             
         }
-
-        
 
     </script>
 

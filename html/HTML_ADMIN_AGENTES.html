@@ -82,13 +82,14 @@
             <section class="consultPanel" id="pnlConsult" style="display:Block">
                 <section class='searchForm'>
                     <input type='search' placeholder='Búsqueda de Agente.' id='id_Agente'>
-                    <input type='button' value='Buscar' onclick="buscarAgente()">
+                    <input type='button' style="display:block" id="shcS" value='Buscar' onclick="buscarAgente(true)">
+                    <input type='button' style="display:none" id="shcM" value='Buscar' onclick="buscarAgente(false)">
                 </section>
             </section>
 
             <section class="addPanel" id="pnlAdd" style="display:none">
                 <section class='registerSection' name='searchAdminForm'>
-                    <label id="lblMatricula" style="display:none"> Matrícula del Agente:</label> <input id="tbNum" style="display:none" type="text" disabled><br />
+                    <label id="lblMatricula" style="display:none"> Matrícula del Agente:</label> <input id="tbMatricula" style="display:none" type="text" disabled><br />
 
                     Nombre del Agente: <input type='text' id='txtNombreAgente' maxlength="30" autofocus required><br />
                     Apellido paterno del Agente: <input type='text' id='txtApPatAgente' maxlength="20" required><br />
@@ -103,23 +104,16 @@
                     
                     Fecha de Nacimiento: <input type='date' id="dateNac" required /><br />
 
-                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente()" /> <br />
+                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente(true)" /> <br />
 
-                    <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="updateAgente()" /> <br />                 
+                    <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarAgente(false)" /> <br />                 
 
                     <p id="msg">En proceso</p>
 
                 </section>
             </section>
 
-            <section class="modifyPanel" id="pnlModify" style="display:none">
-                <section class='searchForm'>
-
-                    <input type='search' placeholder='Búsqueda de Agentes. ' id="shcMod">
-                    <button onclick="buscarAgenteM()">Buscar</button>
-
-                </section>
-            </section>
+           
 
             <section id="listAgente" style="display:none; width:100%;"></section>
         </article>
@@ -134,8 +128,9 @@
             document.getElementById("listAgente").innerHTML = "";
             document.getElementById('pnlConsult').style.display = "block";
             document.getElementById('pnlAdd').style.display = "None";
-            document.getElementById('pnlModify').style.display = "None";
             document.getElementById("listAgente").style.display = "none";
+            document.getElementById('shcM').style.display = "none";
+            document.getElementById('shcS').style.display = "block";
 
         }
 
@@ -144,30 +139,48 @@
             document.getElementById("listAgente").innerHTML = "";
             document.getElementById('pnlConsult').style.display = "None";
             document.getElementById('pnlAdd').style.display = "block";
-            document.getElementById('pnlModify').style.display = "None";
             document.getElementById("listAgente").style.display = "none";
 
         }
 
         function turnOnPnlModify() {
             document.getElementById("listAgente").innerHTML = "";
-            document.getElementById('pnlConsult').style.display = "None";
+            document.getElementById('pnlConsult').style.display = "block";
             document.getElementById('pnlAdd').style.display = "None";
-            document.getElementById('pnlModify').style.display = "block";
             document.getElementById("listAgente").style.display = "none";
+            document.getElementById('shcM').style.display = "block";
+            document.getElementById('shcS').style.display = "none";
 
         }
 
-        function registrarAgente() {
+        function registrarAgente(res) {
             document.getElementById("listAgente").innerHTML = "";          
 
-            var agenteOb = {nombre : document.getElementById("txtNombreAgente").value,
-                apPat :document.getElementById("txtApPatAgente").value,
-                apMat : document.getElementById("txtApMatAgente").value,
-                genre: document.getElementById("genreBox").options[0].value,
-                date: document.getElementById("dateNac").value
-            };
-        
+            var agenteOb = null;
+
+            if (res == true) {
+
+                agenteOb = {
+                    nombre: document.getElementById("txtNombreAgente").value,
+                    apPat: document.getElementById("txtApPatAgente").value,
+                    apMat: document.getElementById("txtApMatAgente").value,
+                    genre: document.getElementById("genreBox").options[0].value,
+                    date: document.getElementById("dateNac").value,
+                    type: true
+                };
+            } else {
+
+                agenteOb = {
+                    matricula: document.getElementById('tbMatricula').value,
+                    nombre: document.getElementById("txtNombreAgente").value,
+                    apPat: document.getElementById("txtApPatAgente").value,
+                    apMat: document.getElementById("txtApMatAgente").value,
+                    genre: document.getElementById("genreBox").options[0].value,
+                    date: document.getElementById("dateNac").value,
+                    type: false
+                };
+
+            }
 
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange= function () {
@@ -176,97 +189,115 @@
                 }
             };
 
-            ajax.open("GET", "../php/sendAgente.php?b=" + JSON.stringify(agenteOb), true);
+            ajax.open("GET", "../php/registerUpdateAgente.php?b=" + JSON.stringify(agenteOb), true);
             ajax.send();
         }
 
 
-        function buscarAgente() {
+        function buscarAgente(res) {
             document.getElementById("listAgente").innerHTML = "";
-
-
             var ajax = new XMLHttpRequest();
 
-            var nombre= document.getElementById("id_agente").value;
+            var searchForm= null;
 
+            searchForm = {
+                nombre: document.getElementById("id_Agente").value,
+                type: res
+            };
+           
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("listLugar").style.display = "block";
-                    document.getElementById("listLugar").innerHTML = ajax.responseText;
+                    extractAgenteData(ajax.responseText);                                        
                 }
             };
 
-
-            ajax.open("GET", "../php/buscarLugares.php?bar=" + nombre, true);
+            ajax.open("GET", "../php/busquedaAgente.php?b=" + JSON.stringify(searchForm), true);
             ajax.send();
 
         }
 
 
-        function buscarAgenteM() {
-            document.getElementById("listLugar").innerHTML = "";
+        function extractAgenteData(ob) {
+
+            document.getElementById("listAgente").style.display = "block";
+
+            var x = 0;
+            var str = "";
+
+            var obAgente = JSON.parse(ob);
+            var arrayAgente = obAgente.agentesArray;
+
+            while (arrayAgente[x]) {               
+
+                str +=
+    "<table style='width:30%;margin-right:8%; border:2px solid;margin-bottom:3%;'>" +
+    "<tr>" +
+        "<td>Matricula: </td>" +
+            "<td>" + arrayAgente[x].matricula + " </td>" +
+        "</tr>" +
+
+        "<tr>" +
+            "<td>Nombre: </td>" +
+            "<td>" + arrayAgente[x].nombre + " </td>" +
+        "</tr>" +
+
+        "<tr>" +
+            "<td>Apellido Paterno: </td>" +
+            "<td>" + arrayAgente[x].apPat + " </td>" +
+        "</tr>" +
+
+        "<tr>" +
+            "<td>Apellido Materno: </td>" +
+            "<td>" + arrayAgente[x].apMat + " </td>" +
+        "</tr>" +
 
 
-            var ajax = new XMLHttpRequest();
+        "<tr>" +
+            "<td> Nacimiento: </td>" +
+            "<td>" + arrayAgente[x].nacimiento + " </td>" +
+        "</tr>" +
 
-            var nombre = document.getElementById("shcMod").value;
 
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("listLugar").style.display = "block";
-                    document.getElementById("listLugar").innerHTML = ajax.responseText;
+         "<tr>" +
+            "<td> Genero: </td>" +
+            "<td>" + arrayAgente[x].genero + " </td>" +
+        "</tr>" +
+    "</table >";
+
+                if (obAgente.type == false) {
+                    //str += "<button onclick='modifyAgente("+arrayAgente[x]+")'>click</button>";
+
+                    document.getElementById("listaAgente");
                 }
-            };
+
+                x += 1;
+            }
+
+            document.getElementById("listAgente").innerHTML = str;
+
+        }
+
+        function modifyAgente(a) {
+            turnOnPnlAdd();                        
+
+            document.getElementById('tbMatricula').value=a.matricula;
+           document.getElementById("txtNombreAgente").value=a.nombre;
+           document.getElementById("txtApPatAgente").value=a.apPat;
+           document.getElementById("txtApMatAgente").value=a.apMat;
+           //document.getElementById("genreBox").options[0];
+           //document.getElementById("dateNac").value=a.;
 
 
-            ajax.open("GET", "../php/modifyLugares.php?bar=" + nombre, true);
-            ajax.send();
+            document.getElementById("tbMatricula").style.display = "block";
+            document.getElementById("lblMatricula").style.display = "block";
+
+            document.getElementById("tbMatricula").value = a.numero;
 
         }
 
 
-
-        function modifyLugar(a) {
-            turnOnPnlAdd();
-            document.getElementById("btnModify").style.display = "block";
-            document.getElementById("btnSend").style.display = "none";
-
-
-
-            document.getElementById("txtNombreLugar").value=a.nombre;
-            document.getElementById("txtDescLugar").value = a.desc;
-            document.getElementById("txtCostoLugar").value = a.costo;
-            document.getElementById("txtCapacidadLugar").value = a.capacidad;
-
-
-            document.getElementById("tbNum").style.display = "block";
-
-            document.getElementById("tbNum").value = a.numero;
-
-        }
-
-        function updateLugar() {
-            document.getElementById("listLugar").innerHTML = "";
-
-            var numero = document.getElementById("tbNum").value;
-            var nombre = document.getElementById("txtNombreLugar").value;
-            var desc = document.getElementById("txtDescLugar").value;
-            var costo = document.getElementById("txtCostoLugar").value;
-           var capacidad = document.getElementById("txtCapacidadLugar").value;
-
-            var ajax = new XMLHttpRequest();
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("msg").innerHTML = ajax.responseText;
-                }
-            };
-
-            ajax.open("GET", "../php/updtLugares.php?nombre=" + nombre + "&desc=" + desc + "&costo=" + costo + "&capacidad=" + capacidad + "&num=" + numero, true);
-            ajax.send();
-
-            document.getElementById("tbNum").style.display = "none";
-
-        }
+       
+        
 
     </script>
 

@@ -14,7 +14,19 @@
 
     $ob_agente=json_decode($_GET['b']);
 
-    $sql="call SP_insert_agente('".$ob_agente->nombre."','".$ob_agente->apPat."','".$ob_agente->apMat."','".$ob_agente->date."','".$ob_agente->genre."');";
+    $sql=null;
+
+    if ($ob_agente->type==true){
+
+         $sql="call SP_insert_agente('".$ob_agente->nombre."','".$ob_agente->apPat."','".$ob_agente->apMat."','".$ob_agente->date."','".$ob_agente->genre."');";
+
+    } else {
+
+         $sql="call SP_update_agente('".$ob_agente->matricula."','".$ob_agente->nombre."','".$ob_agente->apPat."','".$ob_agente->apMat."','".$ob_agente->date."','".$ob_agente->genre."');";
+
+    }
+
+   
 
     if ($conn->query($sql)===TRUE){
         echo "Registrado!";
