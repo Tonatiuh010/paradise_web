@@ -29,7 +29,7 @@
    
 
     if ($conn->query($sql)===TRUE){
-        echo "Registrado!";
+        echo "Registrado";
     } else {
         echo "Error al momento de registrar:".$sql."-->".$conn->error;
     }
