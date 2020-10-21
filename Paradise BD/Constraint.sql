@@ -11,3 +11,9 @@ drop constraint UQ_cliNombre_Completo;
 
 alter table diclugar
 alter dlNumExterior set default 'n/a';
+
+alter table cliente
+ADD CONSTRAINT CK_cliente_edad CHECK (cliEdad>=18);
+
+alter table agente
+add constraint CK_agente_edad check(agEdad>=18);

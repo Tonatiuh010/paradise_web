@@ -25,7 +25,7 @@ create table proveedor
 	pro_Cod	char(5) not null,
 	pro_Nombre	varchar(50) not null,	
 	pro_Descripcion	text null,	
-	pro_Sitio	varchar(30) null,
+	pro_Sitio	varchar(60) null,
 	
     constraint PK_proveedor_cod primary key (pro_Cod)
 );
@@ -122,7 +122,7 @@ create table cliente
 	cliNombre	varchar(40)	not null,
 	cliApPat	varchar(20)	not null,
 	cliApMat	varchar(20)	null,
-	cliFecNac	date null,
+	cliFecNac	date not null,
 	cliEdad	tinyint	null,
     
     constraint PK_cliente_num primary key (cliNum)
@@ -183,7 +183,7 @@ create table lugar
 	lugCosto decimal(6,2) null,
 	lugCapacidad int null,	
 	FK_TipoL int null not null,	                          
-	FK_Direccion tinyint not null,	                   
+	FK_Direccion tinyint null,	                   
 	FK_Municipio char(3) not null,	                   
 	FK_Proveedor char(5) null,	                   
     
@@ -260,4 +260,40 @@ create table reservacion
     constraint FK_reservacion_cliente foreign key (FK_Cliente) references cliente(cliNum) on delete cascade,
     constraint FK_reservacion_agente foreign key (FK_Agente) references agente(agMatricula) on delete cascade
 );
+
+create table agentes_Baja
+(
+	abConsecutivo	int auto_increment not null,
+	abMatricula	char(7) not null,	
+	abNombre	varchar(40)	not null,
+	abApPat	varchar(20)	not null,
+	abApMat	varchar(20)	null,
+	abFecNac	date	not null,
+	abEdad	tinyint	null,
+	abCorreo	varchar(30) not null,	
+	abContrasenia	varchar(30)	not null,
+	FK_genero	char(1)	not null, 
+	FK_TipoUS	char(3)	not null,
+    
+    constraint PK_agBaja_consecutivo primary key (abConsecutivo),
+    constraint FK_agBaja_tipoUS foreign key (FK_TipoUS) references tipo_US(tuCod) on delete cascade,
+    constraint FK_agBaja_genero foreign key (FK_genero) references genero(genCod) on delete cascade
+);		
+
+create table clientes_Baja
+(		
+	cbNum	int	auto_increment not null,
+	cbNombre	varchar(40)	not null,
+	cbApPat	varchar(20)	not null,
+	cbApMat	varchar(20)	null,
+	cbFecNac	date not null,
+	cbEdad	tinyint	null,
+	cbCorreo	varchar(30) not null,	
+	cbContrasenia	varchar(30)	not null,
+	FK_TipoUS	char(3)	not null,
+    
+    constraint PK_cliBaja_num primary key (cbNum),
+    constraint FK_cliBaja_tipoUS foreign key (FK_TipoUS) references tipo_US(tuCod) on delete cascade
+);
+
 
