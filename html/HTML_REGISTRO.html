@@ -14,7 +14,7 @@
         <section class="pruebaMenu">
             <article class="pMT"><a href="../index.html" ;>INICIO</a></article>
             <article class="pMTx"><a href="construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
-            <article class="pMT3"><a href="construccion.html" ;>LUGARES Y SALONES</a></article>
+            <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
             <article class="pMTxt"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
         </section>
@@ -144,7 +144,7 @@
                         document.getElementById("inscrito").innerHTML = ajax.responseText;
                     }
                 };
-                ajax.open("GET", "config.php?nombre=" + nombre + "&apPat=" + apPat + "&apMat=" + apMat + "&fechaNac=" + fechaNac, true);
+                ajax.open("GET", "../php/insertarUser.php?txtNombre=" + txtNombre + "&txtApPat=" + txtApPat + "&txtApMat=" + txtApMat + "&txtFecNac=" + txtFecNac + "&txtTelefono=" + txtTelefono + "&txtUsuario=" + txtUsuario + "&txtCorreo=" + txtCorreo + "&txtPass=" + txtPass, true);
                 ajax.send();
             }
         }
@@ -155,7 +155,7 @@
         }
 
 
-        function cerrar()        {            document.getElementById("error").close();        }    </script>
+        function cerrar()        {            document.getElementById("error").close();            document.getElementById("error2").close();            document.getElementById("error2").close();        }    </script>
 
 
 

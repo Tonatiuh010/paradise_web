@@ -78,18 +78,38 @@ begin
 end//
 DELIMITER ;
 
+#drop procedure SP_insert_userCli;
+
 DELIMITER //
 create procedure SP_insert_userCli(
-	in cliente char(7),  #no.cliente
+	#in cliente char(7),  #no.cliente
     in userName varchar(30),
     in contrasenia varchar(30),
-    in correo varchar(30)
+    in correo varchar(30),
+    
+	in nombre varchar(30),
+	in apPat varchar(20),
+	in apMat varchar(20)
 )
 begin
-	insert into usuario (usNombre,usContrasenia,usCorreo,FK_TipoUS,FK_Agente) values
+	declare cliente char(7);
+    set cliente=(select cliNum from cliente where cliNombre=nombre and cliApPat=apPat and (cliApMat=apMat or cliApMat is null));
+	insert into usuario (usNombre,usContrasenia,usCorreo,usTipoUS,FK_cliente) values
 	(userName,contrasenia,correo,'Cliente',cliente);
 end//
 DELIMITER ;
+
+
+call SP_insert_userCli('guadalupe123','123456','guadalupe@gmail.com','GUADALUPE','MEDINA',null);
+call SP_insert_cliente ('GUADALUPE','MEDINA',null,'1999-10-05',null); 
+select * from cliente;
+select * from usuario;
+
+delete from cliente
+where cliNum=13;
+
+delete from usuario
+where usNum=2;
 
 ########################################### INSERTAR UN LUGAR ####################################################
 

@@ -155,7 +155,7 @@ create table usuario
 	usNombre	varchar(30)	null,
 	usContrasenia	varchar(30)	not null,
     usCorreo varchar(30) not null,
-	usTipoUS	char(3)	null,
+	usTipoUS	varchar(15)	null,
 	FK_cliente	int	null,
 	FK_agente	char(7)	null,
     
@@ -165,6 +165,9 @@ create table usuario
     constraint FK_usuario_cliente foreign key (FK_cliente) references cliente(cliNum) on delete cascade,
     constraint FK_usuario_agente foreign key (FK_agente) references agente(agMatricula) on delete cascade
 );
+
+#alter table usuario
+#modify column usTipoUS varchar(15);
 
 # ALTER TABLE usuario CHANGE `usContraseña` `usContrasenia` varchar(30);
 
