@@ -7,7 +7,10 @@ $PASS="";
 $BD="paradise";
 
 
-$mysqli= mysqli_connect("localhost","root","","paradise");
+ $servername="localhost";
+$username="root";
+$password="losseisbastardos12";
+$dbname="paradise";
 
 
    /* if (mysqli_connect_errno())

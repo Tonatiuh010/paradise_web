@@ -14,7 +14,7 @@ insert into espacio(espNombre) values
 insert into tipolugar(tlNombre) values
 ('Salón'),('Hacienda'),('Restaurante'),('Centro nocturno'),('Jardín'),('Quinta'),('Playa');
 
-select * from tipolugar;
+select * from espacio;
 
 
 ########################################### AGENTES ###################################################################
