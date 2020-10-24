@@ -125,6 +125,7 @@ ALTER TABLE lugar AUTO_INCREMENT = 0;
 alter table lugar
 modify column lugCosto decimal(12,2);
 
+ALTER TABLE usuario AUTO_INCREMENT = 0;
 
 
 

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../css/CSS_PERFIL_USUARIO.css" type="text/css">
+    <link rel="stylesheet" href="../css/CSS_CLIENTE_LUGARES.css" type="text/css">
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Paradise - Perfil</title>
 </head>
-<body>
+<body onload="lugaresList()">
     <nav class="NavOficial">
         <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
         <section class="pruebaMenu">
             <article class="pMT"><a href="../index.html" ;>INICIO</a></article>
             <article class="pMTx"><a href="construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
-            <article class="pMT3"><a href="construccion.html" ;>LUGARES Y SALONES</a></article>
+            <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
             <article class="pMTxt"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
         </section>
@@ -27,7 +27,47 @@
     </nav>
     <br />
 
+    <main>
+        <section class="secPrincipal">
+                La ultima promoción o novedad
+        </section>
+        <br />
 
+        <section class="lugLista">
+            <section class="filtros">
+                Esta es la sección de los filtros de busqueda
+            </section>
+            <section class="lugares" id="lugares">
+                Las lista de lugares
+            </section>
+        </section>
+
+        <script>
+
+            function lugaresList()
+            {
+                document.getElementById("lugares").innerHTML = "SI entrá a la función";
+
+
+                var ajax = new XMLHttpRequest();
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.status == 200 && ajax.readyState == 4)
+                    {
+                        console.log(ajax.responseText);
+                        document.getElementById('lugares').innerHTML = ajax.responseText;
+                    }
+                }
+
+                
+
+                ajax.open("GET","../php/listaLugare.php?", true);
+                ajax.send();
+            }
+
+        </script>
+
+    </main>
 
 </body>
 </html>

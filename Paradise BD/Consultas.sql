@@ -13,6 +13,14 @@ on lg_NumEspacio= espNum;
 
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
 
+
+
+select * from lugar;
+select * from diclugar;
+select * from espacio;
+
+insert into lugespacio(lg_NumEspacio,lg_NumLugar) values (1,2),(1,3),(1,4);
+
 select pro_Nombre as proveedor, pro_Descripcion as descripcion, pro_Sitio as sitio from proveedor;
 
 
@@ -39,3 +47,4 @@ select agMatricula matricula, agNombre nombre,agApPat apPat,agApMat apMat,agFecN
 
 create view VW_espacios_admim as 
 select espNombre nombre, espNum numero from espacio;
+
