@@ -1,0 +1,141 @@
+﻿<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Paradise - Agente</title>
+    <link rel="stylesheet" href="../css/cssBase.css" />
+
+    <script src="../js/dialog.js"></script>
+
+</head>
+
+
+<body>
+    <header>
+        <!--Encabezado-->
+        Titulo
+    </header>
+
+    <section class="sectionPrincipal">
+
+        <article id="barAgen">
+            <table class="upBar">
+
+                <tr>
+
+                    <td> <button onclick="turnOnPnlConsult()">Consultar</button> </td>                    
+                    
+
+                </tr>
+
+
+
+            </table>
+
+        </article>
+
+
+        <nav>
+            Lista de opciones (Puede estar escondida.) <br />
+
+
+            <ul>
+
+                <li>
+                    <a>Esquemas (Opción predefinida)</a>
+                </li>
+
+                <li>
+                    <a>Reservaciones</a>
+                </li>
+
+                <li>
+                    <a href="HTML_AGEN_....html">Clientes?!?!?!?!?!?</a>
+                </li>
+
+                <li>
+                    <a href="HTML_AGEN_LUGARES.html">Lugares</a>
+                   
+                </li>
+            </ul>
+        </nav>
+
+
+
+        <article id="artMain">
+
+
+            <section class="consultPanel" id="pnlConsult" style="display:Block">
+                <select id="tipoBusqueda">
+                    <option>
+                        Nombre
+                    </option>
+
+                    <option>
+                        Identificación
+                    </option>
+
+                    <option>
+                        Precio
+                    </option>
+
+                    <option>
+                        Capacidad
+                    </option>
+
+                </select>
+
+                <section class='searchForm'>                    
+                    <input type='search' placeholder='B&uacute;squeda de lugares.' id='id_lugar'>                    
+                    <input type='button' value='Buscar' onclick="buscarLugar()" id="btnS" style="display:block">
+
+                </section>
+            </section>            
+
+            <section id="listLugar" style="display:none; width:100%;"></section>
+
+        </article>
+
+    </section>
+
+
+    <script>
+
+
+        function turnOnPnlConsult() {
+
+            document.getElementById("listLugar").innerHTML = "";
+            document.getElementById('pnlConsult').style.display = "block";
+            
+        }
+        
+        
+        function buscarLugar() {
+            createDialog();
+            document.getElementById("listLugar").innerHTML = "";
+
+            var x=document.getElementById("tipoBusqueda").selectedIndex;                    
+
+            var ajax = new XMLHttpRequest();            
+
+            
+                searchForm = {
+                    search: document.getElementById("id_lugar").value,                   
+                };
+            
+
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("listLugar").style.display = "block";
+                    document.getElementById("listLugar").innerHTML = ajax.responseText;
+                }
+            };
+
+
+            ajax.open("GET", "../php/busquedaLugar.php?b=" +JSON.stringify(searchForm), true);
+            ajax.send();
+
+        }     
+
+    </script>
+</body>
+</html>

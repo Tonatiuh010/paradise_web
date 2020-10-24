@@ -3,20 +3,15 @@
     <meta charset="utf-8" />
     <title>Paradise - Administrador</title>
     <link rel="stylesheet" href="../css/cssBase.css" />
+
+    <script src="../js/dialog.js"></script>
 </head>
 
-<body>
+<body >
     <header>
-
         <!--Encabezado-->
         Agentes
-
     </header>
-
-
-
-
-
 
     <section class="sectionPrincipal">
 
@@ -154,6 +149,7 @@
         }
 
         function registrarAgente(res) {
+            createDialog();
             document.getElementById("listAgente").innerHTML = "";          
 
             var agenteOb = null;
@@ -187,7 +183,7 @@
 
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange= function () {
-                if (ajax.readyState== 4 && ajax.status==200){
+                if (ajax.readyState == 4 && ajax.status == 200) {                    
                     document.getElementById("msg").innerHTML = ajax.responseText;
                 }
             };
@@ -198,6 +194,7 @@
 
 
         function buscarAgente(res) {
+            createDialog();
             document.getElementById("listAgente").innerHTML = "";
             var ajax = new XMLHttpRequest();
 
@@ -210,6 +207,7 @@
            
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
+                    update_Bar(0);
                     extractAgenteData(ajax.responseText);                                        
                 }
             };
@@ -347,7 +345,7 @@
 
         }
 
-
+       
        
         
 

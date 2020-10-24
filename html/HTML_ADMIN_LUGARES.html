@@ -5,19 +5,17 @@
     <meta charset="utf-8" />
     <title>Paradise - Administrador</title>
     <link rel="stylesheet" href="../css/cssBase.css" />
+
+    <script src="../js/dialog.js"></script>
+    
 </head>
 
-<body>
-    <header>
 
+<body >
+    <header>
         <!--Encabezado-->
         Titulo
     </header>
-
- 
-
-
-
 
     <section class="sectionPrincipal">
     
@@ -158,6 +156,7 @@
         }
 
         function registrarLugar(res) {
+            createDialog();
             document.getElementById("listLugar").innerHTML = "";
 
             var lugarOb = null;
@@ -199,6 +198,7 @@
 
 
         function buscarLugar(res) {
+            createDialog();
             document.getElementById("listLugar").innerHTML = "";
 
 
@@ -251,6 +251,8 @@
         }
 
     </script>
+
+
 
 </body>
 </html>
