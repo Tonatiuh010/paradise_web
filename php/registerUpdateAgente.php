@@ -1,9 +1,5 @@
 <?php
-    $servername="localhost";
-    $username="root";
-    $password="losseisbastardos12";
-    $dbname="paradise";
-    // Credentials
+   include("config.php");
 
     $conn= new mysqli($servername	,$username	,$password	,$dbname);
 
