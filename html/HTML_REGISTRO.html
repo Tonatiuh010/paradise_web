@@ -7,6 +7,7 @@
     <title>Paradise - Registro</title>
 </head>
 <body>
+
     <nav>
         <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -24,7 +25,12 @@
         </section>
     </nav>
 
+
+                    
+
     <main>
+
+
         <section class="secS"></section>
             <section class="secMargin">
                 <br /><br />
@@ -38,51 +44,41 @@
                         <table class="registrar">
                             <tr>
                                 <th class="ins1"><label>Nombre: </label></th>
-                                <th class="ins2"><input class="formInput" name="cliNombre" type="text" maxlength="30" id="cliNombre" required /></th>
+                                <th class="ins2"><input class="formInput" name="txtNombre" type="text" maxlength="30" id="txtNombre" required /></th>
                             </tr>
                             <tr>
                                 <th class="ins1"><label>Apellido Paterno: </label></th>
-                                <th class="ins2"><input class="formInput" name="cliApPat" type="text" maxlength="30" id="cliApPat" required /></th>
+                                <th class="ins2"><input class="formInput" name="txtApPat" type="text" maxlength="30" id="txtApPat" required /></th>
                             </tr>
                             <tr>
                                 <th class="ins1"><label>Apellido Materno: </label></th>
-                                <th class="ins2"><input class="formInput" name="cliApMat" type="text" maxlength="30" id="cliApMat" /></th>
+                                <th class="ins2"><input class="formInput" name="txtApMat" type="text" maxlength="30" id="txtApMat" /></th>
+                            </tr>
+                            <tr>
+                                <th class="ins1"><label>Fecha de nacimiento:&nbsp;</label></th>
+                                <th class="ins2"><input class="formInput" name="txtFecNac" type="date" id="txtFecNac" required><br /></th>
                             </tr>
                             <tr>
                                 <th class="ins1"><label>Número de Teléfono: </label></th>
-                                <th class="ins2"><input class="formInput" name="tcTelefono" type="tel" id="tcTelefono" /></th>
+                                <th class="ins2"><input class="formInput" name="txtTelefono" type="tel" id="txtTelefono" /></th>
                             </tr>
-                            <scrip><!--Recordatorio que te deje agregar otra fila y columna--></scrip>
-                            <tr>
-                                <th class="ins1"><label>Correo Electrónico: </label></th>
-                                <th class="ins2"><input class="formInput" name="ccCorreo" type="email" maxlength="30" id="ccCorreo" required /></th>
-                            </tr>
-                            <scrip><!--Recordatorio que te deje agregar otra fila y columna--></scrip>
-                            <tr>
-                                <th class="ins1"><label>Fecha de nacimiento:&nbsp;</label></th>
-                                <th class="ins2"><input class="formInput" name="cliFecNac" type="date" id="cliFecNac" required><br /></th>
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Ciudad: </label></th>
-                                <th class="ins2">
-                                    <select name="ciudad" id="ciudad" required>
-                                        <option value="Tijuana">Tijuana</option>
-                                        <option value="Ensenada">Ensenada</option>
-                                        <option value="Rosarito">Rosarito</option>
-                                        <option value="Tecate">Tecate</option>
-                                        <option value="Mexicali">Mexicali</option>
-                                        <option value="Mexicali">Otra</option>
-                                    </select>
-                                </th>
-                            </tr>
+
                             <tr><th><br /><br /></th></tr>
                             <tr>
+                                <th class="ins1"><label>Correo Electrónico: </label></th>
+                                <th class="ins2"><input class="formInput" name="txtCorreo" type="email" maxlength="30" id="txtCorreo" required /></th>
+                            </tr>
+                                                        <tr>
+                                <th class="ins1"><label>Usuario:&nbsp;</label></th>
+                                <th class="ins2"><input class="formInput" name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required ><br /></th>
+                            </tr>
+                            <tr>
                                 <th class="ins1"><label>Contraseña:&nbsp;</label></th>
-                                <th class="ins2"><input class="formInput" name="contraseña" type="password" id="contraseña" required><br /></th>
+                                <th class="ins2"><input class="formInput" name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br /></th>
                             </tr>
                             <tr>
                                 <th class="ins1"><label>Confirmar Contraseña:&nbsp;</label></th>
-                                <th class="ins2"><input class="formInput" name="Confconstraseña" type="password" id="Confcontraseña" required><br /></th>
+                                <th class="ins2"><input class="formInput" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br /></th>
                             </tr>
                             <!--CONFIRMAR QUE LA CONTRAEÑA SEA IGUAL EN AMBOS INPUT-->
                             <tr>
@@ -101,39 +97,68 @@
                                 </th>
                             </tr>
                             <tr><th colspan="3">&nbsp;<br />&nbsp;</th></tr>
-                            <tr><th><input type="submit" name="submit" value="Inscribirme" class="botonR" onclick="registrarUS()"/><br />&nbsp;</th></tr>
+                            <!--<tr><th><input type="submit" name="submit" value="Inscribirme" class="botonR"/><br />&nbsp;</th></tr>-->
+                            <tr><th><input type="button" name="submit" value="Inscribirme" class="botonR" onclick="registrarUS()"/><br />&nbsp;</th></tr>
                             <tr><th colspan="3">&nbsp;<br />&nbsp;<br />&nbsp;</th></tr>
                         </table>
                     </form>
-                </section>  
+
+                     <dialog id="error"                              style="width:30%; height:10%; align-items:center; margin:auto;                              margin-top:-50%; background-color:rgb(3,95,108); color:white; text-align:center;                              padding:4%; font-family:Arial; font-size:larger;  ">                        <p>La contraseña no coincide</p><br />                         <input type="button"  onclick="cerrar()" value="Cerrar"/>                     </dialog>
+
+                </section> 
                 <section id="inscrito">
                 </section>             
             </section>
     </main>
 
     <script>
-        function registrarUS() {
+        function registrarUS()
+        {
+            txtNombre = document.getElementById('txtNombre').value;
+            txtApPat = document.getElementById('txtApPat').value;
+            txtApMat = document.getElementById('txtApMat').value;
+            txtFecNac = document.getElementById('txtFecNac').value;
+            txtTelefono = document.getElementById('txtTelefono').value;
+            txtUsuario = document.getElementById('txtUsuario').value;
+            txtCorreo = document.getElementById('txtCorreo').value;
 
 
-            nombre = document.getElementById("cliNombre").value;
-            apPat = document.getElementById("cliApPat").value;
-            apMat = document.getElementById("cliApMat").value;
-            fechaNac = document.getElementById("cliFecNac").value;
+            txtPass = document.getElementById('txtPass').value;
+            confipassword = document.getElementById('txtConfiPass').value;
 
-            telefono = document.getElementById("tcTelefono").value;
-            correo = document.getElementById("ccCorreo").value;
+            //document.getElementById('inscrito').innerHTML = 'Entró a la función';
+
+            console.log('Entró a la función');
 
 
-            var ajax = new XMLHttpRequest();
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("inscrito").innerHTML = ajax.responseText;
-                }
-            };
-            ajax.open("GET", "config.php?nombre=" + nombre + "&apPat=" + apPat + "&apMat=" + apMat + "&fechaNac=" + fechaNac, true);
-            ajax.send();
+            if (txtPass != confipassword) {
+                var dialogo = document.getElementById('error');
+                dialogo.showModal();
+                //document.getElementById("error").open();
+                //document.getElementById("error").innerHTML = 'Las contraseña no coincide';
+            } else
+            {
+                var ajax = new XMLHttpRequest();
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        document.getElementById("inscrito").innerHTML = ajax.responseText;
+                    }
+                };
+                ajax.open("GET", "config.php?nombre=" + nombre + "&apPat=" + apPat + "&apMat=" + apMat + "&fechaNac=" + fechaNac, true);
+                ajax.send();
+            }
         }
-    </script>
+
+        function confirmar()
+        {
+            document.getElementById('dialogo1').style.display = "none";
+        }
+
+
+        function cerrar()        {            document.getElementById("error").close();        }    </script>
+
+
+
 </body>
 </html>
 

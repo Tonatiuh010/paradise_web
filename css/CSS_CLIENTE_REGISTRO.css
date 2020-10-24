@@ -233,3 +233,25 @@ select
 button{
     cursor:pointer;
 }
+
+.dialogo {
+    display: inline-block;
+    text-align: center;
+    background-color: var(--color1);
+    color: white;
+    align-items:center;
+    align-content:center;
+    height:100px;
+    width:600px;
+    clear:both;
+}
+
+.error {
+    width:60%; 
+    height:40%; 
+    align-items:center; 
+    margin:auto; 
+    margin-top:-50%; 
+    background-color:rgb(3,95,108); 
+    color:white;
+}

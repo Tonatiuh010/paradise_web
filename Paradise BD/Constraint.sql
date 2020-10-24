@@ -17,3 +17,6 @@ ADD CONSTRAINT CK_cliente_edad CHECK (cliEdad>=18);
 
 alter table agente
 add constraint CK_agente_edad check(agEdad>=18);
+
+alter table agente
+add constraint CK_agente_genero check(agGenero = 'Masculino' or 'Femenino');

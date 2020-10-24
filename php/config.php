@@ -10,7 +10,7 @@ $BD="paradise";
 $mysqli= mysqli_connect("localhost","root","","paradise");
 
 
-    if (mysqli_connect_errno())
+   /* if (mysqli_connect_errno())
     {
         printf("Fallo la conexion: %s\n", mysqli_connect_error());
         exit();
@@ -26,7 +26,7 @@ $mysqli= mysqli_connect("localhost","root","","paradise");
             }
 
             mysqli_close($mysqli);
-    }
+    }*/
             
 
 ?>
