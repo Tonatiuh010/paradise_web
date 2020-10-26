@@ -222,18 +222,16 @@
 
             document.getElementById("listAgente").style.display = "block";
 
-            var x = 0;
-            var str = "";
+            var x = 0;           
 
             var obAgente = JSON.parse(ob);
             var arrayAgente = obAgente.agentesArray;
 
             var sectionAgentes = document.getElementById("listAgente");
+            //sectionAgentes.setAttribute("class","blabla");
 
             while (arrayAgente[x]) {               
                 //Se crea la tabla mediante elementos JS
-
-           
 
                 var table = document.createElement("TABLE");
 
@@ -241,7 +239,6 @@
                 table.style.marginRight = "8%";
                 table.style.border = "2px solid";
                 table.style.marginBottom = "3%";                
-
 
                 //Se crean las filas TR con TD ya predefinido por la columna. 
                 var tr1 = document.createElement("TR");                
@@ -306,13 +303,12 @@
                         return function () { modifyAgente(arrayAgente[_x]); }    //XD, no sé que hace.                    
                     }(x));
              
-
                     btn.innerHTML = "Click";                  
                     table.appendChild(btn);                    
                 }
 
                 sectionAgentes.appendChild(table);
-                x += 1;
+                x ++;
             }           
 
         }

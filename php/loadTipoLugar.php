@@ -10,7 +10,7 @@ if ($conn->connect_error){
     exit();
 }
 
-$sql="select * from VW_tipolugares_admin";
+$sql="select * from VW_espacios_admim;";
 $result=$conn->query($sql);
 
 if ($result->num_rows>0)

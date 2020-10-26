@@ -11,7 +11,8 @@
 </head>
 
 
-<body onload="loadOptionsEsp()">
+<body onload="loadOptionsEsp();
+              loadTiposLugar();">
     <header>
         <!--Encabezado-->
         Titulo
@@ -212,7 +213,8 @@
 
             var lugarOb = null;
 
-           
+            var CKS = document.getElementsByClassName("ckB");
+            
 
 
 
@@ -223,17 +225,28 @@
                 desc: document.getElementById("txtDescLugar").value,
                 costo: document.getElementById("txtCostoLugar").value,
                 capacidad: document.getElementById("txtCapacidadLugar").value,
+                estado: document.getElementById(),
                 direc: new function () {
-                     this.ob={
+                     this.obDirec={
                         calle : document.getElementById("txtCalleDirec").value,
                         numIn : document.getElementById("txtNumIntDirec").value,
                         numEx : document.getElementById("txtNumExtDirec").value,
                         cp: document.getElementById("txtCP").value
                      }
 
-                    if (this.ob.calle == "" || this.ob.numIn == "" || this.ob.cp == "") {                        
-                        this.ob = false;                                       
+                     if (this.obDirec.calle == "" || this.obDirec.numIn == "" || this.obDirec.cp == "") {
+                         this.obDirec = false;
                     }                   
+                },
+                espacios: new function(){
+                    var a=0;
+                    this.arrayId=[];
+                    while (CKS[a]) {                        
+                        if (CKS[a].checked == true) {
+                            this.arrayId.push(CKS[a].value);
+                        }
+                        a++;
+                    }                    
                 },
                 type : true};
         } else {
@@ -244,11 +257,21 @@
                 desc: document.getElementById("txtDescLugar").value,
                 costo: document.getElementById("txtCostoLugar").value,
                 capacidad: document.getElementById("txtCapacidadLugar").value,
+                //espacios: new function(){
+                //    var a=0;
+                //    this.values=[];
+                //    while (CKS[a]) {                        
+                //        if (CKS[a].checked == true) {
+                //            this.values.push(CKS[a].value);
+                //        }
+                //        a++;
+                //    }                    
+                //},
                 type : false
             };
         }
             
-        console.log(lugarOb.direc);
+        console.log(lugarOb);
 
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange= function () {
@@ -353,16 +376,37 @@
 
                 espSection.appendChild(lbl);
                 espSection.appendChild(ckBox);
-                y += 1;
+                y ++;
                 
-            }
-            
-            var CKS = document.getElementsByClassName("ckB");
-            console.log(CKS[0].value);
-            
-
+            }                                    
         }
 
+
+        function loadTiposLugar(){
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (ajax.status == 200 && ajax.readyState == 4) {
+                    fillOptionsPT(ajax.responseText);
+
+                }
+            }
+
+            ajax.open("get", "../php/loadTipolugar.php?", true);
+            ajax.send();
+        }
+
+        function fillOptionsPT(ob) {
+            var arrayTipoLugar = JSON.parse(ob);
+            
+            var x = 0;
+
+            while (arrayTipoLugar[x]) {                
+
+
+            }
+
+
+        }
     </script>
 
 

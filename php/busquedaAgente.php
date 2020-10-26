@@ -20,7 +20,7 @@ if ($result->num_rows>0)
     
     while ($row=$result->fetch_assoc()){
     
-        array_push( $ob_agente ,array( "nombre" => $row['nombre'], 
+        array_push( $ob_agente, array( "nombre" => $row['nombre'], 
                    "apPat"=>$row['apPat'], 
                    "apMat"=>$row['apMat'],
                    "nacimiento"=>$row['nacimiento'], 
@@ -29,8 +29,10 @@ if ($result->num_rows>0)
 
     }
 
-    $response=json_encode(array("type"=>$shc->type,
-               "agentesArray"=> $ob_agente));
+    $response=json_encode(array(
+                "type"=>$shc->type,
+               "agentesArray"=> $ob_agente
+                ));
         
         echo $response;
          

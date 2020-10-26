@@ -13,7 +13,17 @@ $ob_lugar=json_decode($_GET['b']);
 
 $sql=null;
 
-if (($ob_lugar->type)===true){
+
+
+if (($ob_lugar->type)==true){
+
+
+    $obDirec= $ob_lugar->direc->obDirec;
+    
+    if ($obDirec==false) {
+        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.");";//SQL Sentence
+    }
+
     $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.");";//SQL Sentence
 
 } else {
@@ -28,6 +38,7 @@ if ($conn->query($sql)===TRUE){
 
 } else {
     echo "Error al momento de registrar: ".$sql." ---> ".$conn->error;
+    
 }
 
 

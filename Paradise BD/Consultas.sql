@@ -48,3 +48,7 @@ select agMatricula matricula, agNombre nombre,agApPat apPat,agApMat apMat,agFecN
 create view VW_espacios_admim as 
 select espNombre nombre, espNum numero from espacio;
 
+##------------------------------------------ Tipos_Lugares -----------------------------------------
+
+create view VW_tipolugares_admin as
+select tlNum numero, tlNombre nombre from tipolugar;

@@ -185,7 +185,6 @@ create table lugar
     constraint FK_lugar_tipoL foreign key (FK_TipoL) references TipoLugar(tlNum) on delete cascade,
     constraint FK_lugar_municipio foreign key (FK_Municipio) references municipio(mun_Cod) on delete cascade,
     
-    
 	constraint CK_lugar_costo check(lugCosto>0),
 	constraint CK_lugar_capacidad check(lugCapacidad>0),
 	constraint UQ_lugar_nombre unique(lugNombre)
