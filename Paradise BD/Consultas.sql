@@ -1,16 +1,66 @@
-select * from agente where agMatricula like "a%" or agNombre like "a%" or agApPat like "a%";
+############################################# RESERVADO NO! TOCAR ##################################################
 
-select lugNombre as lugar, lugDescripcion as descripcion, lugCosto as costo, 
-lugCapacidad as capacidad, tl.tlNombre as tipo, 
-concat(dlCalle,' cp ',dlCP,' #',dlNumInterior,' ext.',dlNumExterior) as direccion,
-mun_nombre as municipio, espNombre as espacios
-from lugar as lug inner join tipolugar as tl
-on lug.FK_TipoL= tl.tlNum inner join diclugar as dicl
-on lug.FK_Direccion= dicl.dlNum inner join municipio as mun
-on FK_Municipio= mun_cod inner join lugespacio as luge
-on lug.lugCod= lg_CodLugar inner join espacio as esp
-on lg_NumEspacio= espNum;
+# select * from agente where agMatricula like "a%" or agNombre like "a%" or agApPat like "a%";
 
+#------------------------------------------------------------------------------------------------------------
+
+# Vista básica de lugares para el sitio
+create view vw_lugares_basic_list as  
+	select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad
+	from lugar
+	order by lugNombre;
+
+select * from vw_lugares_basic_list;
+#------------------------------------------------------------------------------------------------------------
+
+# SP vista completa de un lugar
+#drop procedure SP_lugares_complete_list;
+
+DELIMITER //
+create procedure SP_lugares_complete_list
+(
+	in numLug int
+)
+begin
+	declare numExt varchar(25);
+    set numExt=(select dlNumExterior from diclugar where dlNum=numLug);
+    
+    if (numExt is null) then 
+			select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
+			concat('Ubicado en ',dlCalle,' CP ',dlCP,' #',dlNumInterior,' ',mun_nombre) as Domicilio,
+			tlNombre as 'Tipo de Lugar', espNombre as Espacios
+			from lugar inner join diclugar
+			on dlNum = lugNum inner join municipio
+			on FK_Municipio=mun_cod inner join tipolugar
+			on FK_TipoL=tlNum inner join lugespacio
+			on lg_NumLugar=lugNum inner join espacio
+			on lg_NumEspacio=espNum
+			where lugNum=numLug;
+	else
+			select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
+					concat('Ubicado en ',dlCalle,' CP ',dlCP,' #',dlNumInterior,'-',dlNumExterior,' ',mun_nombre) as Domicilio,
+					tlNombre as 'Tipo de Lugar', espNombre as Espacios
+			from lugar inner join diclugar
+			on dlNum = lugNum inner join municipio
+			on FK_Municipio=mun_cod inner join tipolugar
+			on FK_TipoL=tlNum inner join lugespacio
+			on lg_NumLugar=lugNum inner join espacio
+			on lg_NumEspacio=espNum
+			where lugNum=numLug;
+	end if;
+end//
+DELIMITER ;
+
+call SP_lugares_complete_list (1);
+
+select * from lugespacio;
+select * from espacio;
+
+
+
+
+
+###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
 
 

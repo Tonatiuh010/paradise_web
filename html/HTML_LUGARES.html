@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../css/CSS_CLIENTE_LUGARES.css" type="text/css">
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Paradise - Perfil</title>
+    <title>Lugares y Salones - Paradise</title>
 </head>
 <body onload="lugaresList()">
     <nav class="NavOficial">
@@ -46,10 +46,10 @@
 
             function lugaresList()
             {
-                document.getElementById("lugares").innerHTML = "SI entrá a la función";
-
-
+                
                 var ajax = new XMLHttpRequest();
+
+                caso = 1;
 
                 ajax.onreadystatechange = function () {
                     if (ajax.status == 200 && ajax.readyState == 4)
@@ -61,8 +61,31 @@
 
                 
 
-                ajax.open("GET","../php/listaLugare.php?", true);
+                ajax.open("GET","../php/listaLugare.php?caso=" + caso, true);
                 ajax.send();
+            }
+
+            function mostrarLug(x)
+            {
+                document.getElementById("lugares").innerHTML = "";
+
+                var ajax = new XMLHttpRequest();
+                caso = 2;
+                num = x;
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.status == 200 && ajax.readyState == 4)
+                    {
+                        console.log(ajax.responseText);
+                        document.getElementById('lugares').innerHTML = ajax.responseText;
+                    }
+                }
+
+                
+
+                ajax.open("GET", "../php/listaLugare.php?caso=" + caso + "&num=" + num, true);
+                ajax.send();
+                
             }
 
         </script>

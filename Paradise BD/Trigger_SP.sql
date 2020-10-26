@@ -54,7 +54,7 @@ DELIMITER ;
 
 ########################################### INSERTAR A UN CLIENTE ##################################################
 
-drop procedure SP_insert_cliente;
+#drop procedure SP_insert_cliente;
 
 DELIMITER //
 create procedure SP_insert_cliente (
@@ -100,16 +100,18 @@ end//
 DELIMITER ;
 
 
-call SP_insert_userCli('guadalupe123','123456','guadalupe@gmail.com','GUADALUPE','MEDINA',null);
-call SP_insert_cliente ('GUADALUPE','MEDINA',null,'1999-10-05',null); 
-select * from cliente;
-select * from usuario;
+# call SP_insert_userCli('guadalupe123','123456','guadalupe@gmail.com','GUADALUPE','MEDINA',null);
+# call SP_insert_cliente ('GUADALUPE','MEDINA',null,'1999-10-05',null); 
+# select * from cliente;
+# select * from usuario;
 
-delete from cliente
-where cliNum=13;
+# delete from cliente
+# where cliNum=1;
 
-delete from usuario
-where usNum=2;
+# delete from usuario
+# where usNum=1;
+
+#ALTER TABLE cliente AUTO_INCREMENT = 0;
 
 ########################################### INSERTAR UN LUGAR ####################################################
 
