@@ -152,26 +152,62 @@ main {
     clear: both;
 }
 
-.lista 
-{
-    width:95%;
+.lista {
+    width: 95%;
     display: inline-block;
-
-/*    border-bottom-right-radius: 4%;*/
+    
+    /*    border-bottom-right-radius: 4%;*/
 }
 
-.tablaList 
-{
+.tablaList {
     /*background-color: white;*/
     border-radius: 6%;
-    padding: 2%;
     background-color: var(--pcolor1);
+    padding-top: 2%;
+    color: #323142;
+    font-family: Georgia;
+    padding-right:3%;
+    padding-left:2%;
 }
 
-.description 
-{
-    padding: 2%;
-    line-height: 1;
+.description {
     text-align: justify;
-    
+    line-height:1.5; 
+    font-size:small; 
+    background-color:white;
+    padding-top:1%;
+    padding-bottom:1%;
+    padding-left:2%;
+    padding-right:2%;
 }
+
+.adi {
+    background-color:white; 
+    line-height:2; 
+    text-align:left; 
+    font-size:small;"
+}
+
+.lugBoton {
+    background-color: var(--color1);
+    width: 60%;
+    height: 50px;
+    color: white;
+    border: none;
+    border-top-right-radius: 6%;
+    border-top-left-radius: 6%;
+    border-bottom-right-radius: 6%;
+    border-bottom-left-radius: 6%;
+    font-size:large;
+}
+
+.thBoton
+{
+    padding:1%;
+}
+
+.nombreLug {
+    background-color:white;
+    padding:1.5%;
+}
+

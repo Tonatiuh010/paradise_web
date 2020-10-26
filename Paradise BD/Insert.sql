@@ -7,7 +7,7 @@ use paradise;
 insert into municipio values ('ESE','Ensenada'),('MXL','Mexicali'),('TIJ','Tijuana'),('ROS','Rosarito'),('TEC','Tecate');
 
 insert into espacio(espNombre) values
-('Salón'),('Pista de baile'),('Estacionamiento'),('Cocina para catering'),('Terraza'),('Jardín'),('Carpa'),('Piscina'),('Jacuzzi');
+('Hotel'),('Kiosco'),('Salón'),('Pista de baile'),('Estacionamiento'),('Cocina para catering'),('Terraza'),('Jardín'),('Carpa'),('Piscina'),('Jacuzzi');
 
 # insert into metodopag(pm_Metodo) values('Efectivo'),('Tarjeta bancaria'),('Paypal'),('Tranferencia bancaria');
 
@@ -118,18 +118,30 @@ servicios de calidad les garantizará momentos inolvidables.',
 
 select * from lugar;
 select * from diclugar;
-delete from lugar
-where lugNum=1 or lugNum=2 or lugNum=3 or lugNum=4 or lugNum=5;
-ALTER TABLE lugar AUTO_INCREMENT = 0;
+# delete from lugar
+# where lugNum=1 or lugNum=2 or lugNum=3 or lugNum=4 or lugNum=5;
+# ALTER TABLE lugar AUTO_INCREMENT = 0;
 
-alter table lugar
-modify column lugCosto decimal(12,2);
+# alter table lugar
+# modify column lugCosto decimal(12,2);
 
-ALTER TABLE usuario AUTO_INCREMENT = 0;
+# ALTER TABLE usuario AUTO_INCREMENT = 0;
 
+########################################### LUGAR ESPACIO ######################################################
+insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
+# Lugar 1 Salón Toscano
+(2,1),(3,1),(4,1),
+# Lugar 2 Salón Casa Blanca
+(2,2),(3,2),(4,2),(5,2),
+# Lugar 3 Belio Restaurante
+(3,3),(4,3),(5,3),(6,3),
+# Lugar 4 Puerto Nuevo 'Playa'
+(10,4),(7,4),(3,4),(11,4),
+# Lugar 5 Jardín Maui
+(1,5),(11,5);
 
-
-
+select * from lugar;
+select * from espacio;
 
 
 
