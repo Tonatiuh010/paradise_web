@@ -4,6 +4,8 @@
 
 #------------------------------------------------------------------------------------------------------------
 
+use paradise;
+
 # Vista básica de lugares para el sitio
 create view vw_lugares_basic_list as  
 	select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad
@@ -102,3 +104,5 @@ select espNombre nombre, espNum numero from espacio;
 
 create view VW_tipolugares_admin as
 select tlNum numero, tlNombre nombre from tipolugar;
+
+select * from VW_tipoLugares_admin;
