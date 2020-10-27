@@ -11,7 +11,8 @@
 </head>
 
 
-<body onload="loadOptionsEsp();">
+
+<body onload="loading();">
     <header>
         <!--Encabezado-->
         Titulo
@@ -121,22 +122,25 @@
 
                         </select>
 
+                        <select id="CBtp" required>
+                        </select>
+
                         <section id="boxEsp"></section>
-                        <hr  />
+                        <hr />
                         <button onclick="document.getElementById('intPnlDirection').style.display = 'block';
                                         document.getElementById('btnDwn').style.display = 'none';
-                                        document.getElementById('btnUp').style.display = 'block';" 
+                                        document.getElementById('btnUp').style.display = 'block';"
                                 id="btnDwn">
                             down
-                             
+
                         </button> <!----Elemento tipo barra desplegable al momento del click desprender el resto del formulario.-->
 
 
                         <button onclick="document.getElementById('intPnlDirection').style.display = 'none';
                                         document.getElementById('btnDwn').style.display = 'block';
-                                        document.getElementById('btnUp').style.display = 'none';" 
-                                        style="display:none"
-                                        id="btnUp">
+                                        document.getElementById('btnUp').style.display = 'none';"
+                                style="display:none"
+                                id="btnUp">
                             up
 
                         </button>
@@ -144,21 +148,23 @@
                             Calle: <input type='text' id='txtCalleDirec'><br />
                             Número interior: <input type='text' id='txtNumIntDirec'><br />
                             Número Exterior: <input type='number' id="txtNumExtDirec" /><br />
-                            Código Postal: <input type='number' id="txtCP" /><br />                          
+                            Código Postal: <input type='number' id="txtCP" /><br />
                         </section>
 
-                        <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar(true)" /> <br />
-                        <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarLugar(false)" /> <br />
-                 
+                        <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar(true)" />
+                        <br />
+                        <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarLugar(false)" />
+                        <br />
 
 
-                   
 
-                   
 
-                    <p id="msg">En proceso</p>
 
-                </section>            
+
+
+                        <p id="msg">En proceso</p>
+
+</section>            
             </section>
 
             <section id="listLugar" style="display:none; width:100%;"></section>
@@ -170,7 +176,10 @@
 
     <script>
 
-        
+        function loading() {
+            loadOptionsEsp();
+            loadTiposLugar();
+        }
 
         function turnOnPnlConsult() {
             document.getElementById("listLugar").innerHTML = "";
@@ -214,9 +223,8 @@
             var lugarOb = null;
 
             var CKS = document.getElementsByClassName("ckB");
-            
-
-
+            var sctTP = document.getElementById("CBtp");
+            var sctCiudades = document.getElementById("CBCiudades");                       
 
         if (res==true){
 
@@ -225,7 +233,8 @@
                 desc: document.getElementById("txtDescLugar").value,
                 costo: document.getElementById("txtCostoLugar").value,
                 capacidad: document.getElementById("txtCapacidadLugar").value,
-                estado: document.getElementById(),
+                estado: sctCiudades.options[sctCiudades.selectedIndex].value,
+                tipoLugar: sctTP.options[sctTP.selectedIndex].value,
                 direc: new function () {
                      this.obDirec={
                         calle : document.getElementById("txtCalleDirec").value,
@@ -257,16 +266,18 @@
                 desc: document.getElementById("txtDescLugar").value,
                 costo: document.getElementById("txtCostoLugar").value,
                 capacidad: document.getElementById("txtCapacidadLugar").value,
-                //espacios: new function(){
-                //    var a=0;
-                //    this.values=[];
-                //    while (CKS[a]) {                        
-                //        if (CKS[a].checked == true) {
-                //            this.values.push(CKS[a].value);
-                //        }
-                //        a++;
-                //    }                    
-                //},
+                estado: sctCiudades.options[sctCiudades.selectedIndex].value,
+                tipoLugar: sctTP.options[sctTP.selectedIndex].value,
+                espacios: new function(){
+                    var a=0;
+                    this.arrayId=[];
+                    while (CKS[a]) {                        
+                        if (CKS[a].checked == true) {
+                            this.arrayId.push(CKS[a].value);
+                        }
+                        a++;
+                    }                    
+                },
                 type : false
             };
         }
@@ -365,7 +376,6 @@
            
 
             while (arrayEspacios[y]) {
-
                 var ckBox = document.createElement("input");
                 ckBox.setAttribute("type", "checkbox");
                 ckBox.setAttribute("class", "ckB");                
@@ -376,6 +386,7 @@
                 var lbl = document.createElement("Label");
                 lbl.innerHTML = arrayEspacios[y].nombre;
 
+              //Destino <------------ Objeto a agregar
                 espSection.appendChild(lbl);
                 espSection.appendChild(ckBox);
                 y ++;
@@ -388,27 +399,32 @@
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200 && ajax.readyState == 4) {
-                    fillOptionsPT(ajax.responseText);
-
+                    fillOptionsPT(ajax.responseText);                    
                 }
             }
 
             ajax.open("get", "../php/loadTipolugar.php?", true);
             ajax.send();
+            
         }
 
         function fillOptionsPT(ob) {
-            var arrayTipoLugar = JSON.parse(ob);
-            
-            var x = 0;
+            var arrayTipoLugar = JSON.parse(ob);            
+            var z = 0;            
+            var selectTP = document.getElementById("CBtp");
+        
+            while (arrayTipoLugar[z]) {                
 
-            while (arrayTipoLugar[x]) {                
+                var option = document.createElement("option");
+                option.value = arrayTipoLugar[z].num;
+                option.innerHTML = arrayTipoLugar[z].nombre;
 
-
+                selectTP.appendChild(option);
+                z++;
             }
-
-
         }
+
+        
     </script>
 
 
