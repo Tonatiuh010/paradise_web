@@ -1,7 +1,8 @@
 ############################################# RESERVADO NO! TOCAR ##################################################
 
 # select * from agente where agMatricula like "a%" or agNombre like "a%" or agApPat like "a%";
-
+select * from tipolugar;
+use paradise;
 #------------------------------------------------------------------------------------------------------------
 
 # Vista básica de lugares para el sitio
@@ -69,9 +70,6 @@ select * from lugar;
 select * from diclugar;
 select * from espacio;
 
-insert into lugespacio(lg_NumEspacio,lg_NumLugar) values (1,2),(1,3),(1,4);
-
-select pro_Nombre as proveedor, pro_Descripcion as descripcion, pro_Sitio as sitio from proveedor;
 
 
 ######################################### Vistas ####################################
@@ -82,8 +80,7 @@ select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCap
 from 
 lugar l join tipolugar tl on l.FK_TipoL=tl.tlNum
 join municipio m  on m.mun_cod=l.FK_Municipio
-join diclugar dl on dl.dlNum=l.lugNum
-;
+join diclugar dl on dl.dlNum=l.lugNum;
 
 select * from VW_lugar_admin;
 
@@ -98,7 +95,11 @@ select agMatricula matricula, agNombre nombre,agApPat apPat,agApMat apMat,agFecN
 create view VW_espacios_admim as 
 select espNombre nombre, espNum numero from espacio;
 
+select * from VW_espacios_admim;
+
 ##------------------------------------------ Tipos_Lugares -----------------------------------------
 
 create view VW_tipolugares_admin as
 select tlNum numero, tlNombre nombre from tipolugar;
+
+select * from VW_tipolugares_admin;
