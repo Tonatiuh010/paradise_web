@@ -6,7 +6,7 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Lugares y Salones - Paradise</title>
 </head>
-<body onload="lugaresList()">
+<body onload="lugaresList(); cargarOPE(); cargarOPTL();">
     <nav class="NavOficial">
         <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -35,7 +35,28 @@
 
         <section class="lugLista">
             <section class="filtros">
-                Esta es la sección de los filtros de busqueda
+                ¿Alguna idea en mente?
+                <form>
+                    <select name="ciudad" id="ciudad" required>
+                            <option value="TIJ">Tijuana</option>
+                            <option value="ESE">Ensenada</option>
+                            <option value="ROS">Rosarito</option>
+                            <option value="TEC">Tecate</option>
+                            <option value="MXL">Mexicali</option>
+                    </select>
+
+                        <select id="opsel">
+
+                        </select>
+
+                    <section id="espBox">
+
+                    </section>
+
+                    
+
+                    <input type="submit" onclick="searchSp()"/>
+                </form>
             </section>
             <section class="lugares" id="lugares">
                 Las lista de lugares
@@ -61,32 +82,118 @@
 
                 
 
-                ajax.open("GET","../php/listaLugare.php?caso=" + caso, true);
+                ajax.open("GET","../php/listaLugare.php?", true);
                 ajax.send();
             }
 
-            function mostrarLug(x)
+            
+            function cargarOPE()
             {
-                document.getElementById("lugares").innerHTML = "";
+
+                var ajax = new XMLHttpRequest();
+                caso = 1;
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.status == 200 && ajax.readyState == 4) {
+                        fillDataEsp(ajax.responseText);
+                    }
+                };
+
+                ajax.open("get", "../php/filtrosLug.php?caso=" + caso, true);
+                ajax.send();
+
+            }
+
+            function cargarOPTL()
+            {
 
                 var ajax = new XMLHttpRequest();
                 caso = 2;
-                num = x;
 
                 ajax.onreadystatechange = function () {
-                    if (ajax.status == 200 && ajax.readyState == 4)
-                    {
-                        console.log(ajax.responseText);
-                        document.getElementById('lugares').innerHTML = ajax.responseText;
+                    if (ajax.status == 200 && ajax.readyState == 4) {
+                        fillDataTl(ajax.responseText);
                     }
-                }
+                };
 
-                
-
-                ajax.open("GET", "../php/listaLugare.php?caso=" + caso + "&num=" + num, true);
+                ajax.open("get", "../php/filtrosLug.php?caso=" + 2, true);
                 ajax.send();
-                
+
             }
+
+            function fillDataEsp(ob)
+            {
+                var y=0;
+                var arrayEspacios = JSON.parse(ob);
+
+                var espSection = document.getElementById("espBox");
+
+               
+
+                var tabla = document.createElement("table");
+                tabla.className="tablaBox";
+
+                espSection.appendChild(tabla);
+                
+
+                while (arrayEspacios[y])
+                {
+
+                    var ckBox = document.createElement("input");
+                    ckBox.setAttribute("type", "checkbox");
+                    ckBox.setAttribute("class", "ckB");
+                    ckBox.style.marginRight = "50px";
+
+                    ckBox.value = arrayEspacios[y].num;
+
+                    var lbl = document.createElement("Label");
+                    lbl.innerHTML = arrayEspacios[y].nombre;
+
+                    var td = document.createElement("td");
+                    var tr = document.createElement("tr");
+
+                    td.appendChild(ckBox);
+                    td.appendChild(lbl);
+                    
+                    tr.appendChild(td);
+                    tabla.appendChild(tr);
+
+                    
+                    y++;
+                }
+            }
+
+            function fillDataTl(ob)
+            {
+                var y=0;
+                var arrayEspacios = JSON.parse(ob);
+
+                var tlSection = document.getElementById("opsel");
+
+                console.log(arrayEspacios);
+
+                while (arrayEspacios[y])
+                {
+
+                    var option = document.createElement("option");
+                    option.setAttribute("class", "opsel");
+                    option.style.marginRight = "50px";
+
+                    option.value = arrayEspacios[y].num;
+
+                    option.innerHTML = arrayEspacios[y].nombre;
+
+                    tlSection.appendChild(option);
+                    y++;
+                }
+            }
+
+
+
+
+
+            //$_SERVER['PHP_SELF'];
+
 
         </script>
 
