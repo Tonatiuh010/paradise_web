@@ -35,28 +35,45 @@
 
         <section class="lugLista">
             <section class="filtros">
-                ¿Alguna idea en mente?
-                <form>
-                    <select name="ciudad" id="ciudad" required>
-                            <option value="TIJ">Tijuana</option>
-                            <option value="ESE">Ensenada</option>
-                            <option value="ROS">Rosarito</option>
-                            <option value="TEC">Tecate</option>
-                            <option value="MXL">Mexicali</option>
-                    </select>
+                <br /><br /><h2>GENERA UNA BUSQUEDA</h2>
+                <br /><br />
+                      <form>
+                          <select name="ciudad" id="ciudad" required>
+                              <option value="TIJ">Tijuana</option>
+                              <option value="ESE">Ensenada</option>
+                              <option value="ROS">Rosarito</option>
+                              <option value="TEC">Tecate</option>
+                              <option value="MXL">Mexicali</option>
+                          </select>
+                          <br /><br />
+                          <select id="opsel">
+                          </select>
+                          <br /><br />
 
-                        <select id="opsel">
+                          <select class="precio" id="precio">
+                              <option value="na">---</option>
+                              <option value="order by Costo desc">Lo más Destacado</option>
+                              <option value="order by Costo asc">Lo más económico</option>
+                          </select>
+                          <br /><br />
 
-                        </select>
+                          <select class="cap" id="cap">
+                              <option value="na">---</option>
+                              <option value="and Capacidad<100">Menor de 100 personas</option>
+                              <option value="and Capacidad>=100 and Capacidad<=200">Entre 100 a 200 personas</option>
+                              <option value="and Capacidad>=200 and Capacidad<=300">Entre 200 a 300 personas</option>
+                              <option value="and Capacidad>=300 and Capacidad<=500">Entre 300 a 500 personas</option>
+                              <option value="and Capacidad>500">Más de 500 personas</option>
+                          </select>
+                          <br /><br />
 
-                    <section id="espBox">
+                          <section id="espBox">
+                          </section>
+                          <br /><br />
 
-                    </section>
 
-                    
-
-                    <input type="submit" onclick="searchSp()"/>
-                </form>
+                          <input type="button" value="BUSCAR" onclick="searchSp()" />
+                      </form>
             </section>
             <section class="lugares" id="lugares">
                 Las lista de lugares
@@ -75,7 +92,6 @@
                 ajax.onreadystatechange = function () {
                     if (ajax.status == 200 && ajax.readyState == 4)
                     {
-                        console.log(ajax.responseText);
                         document.getElementById('lugares').innerHTML = ajax.responseText;
                     }
                 }
@@ -116,7 +132,7 @@
                     }
                 };
 
-                ajax.open("get", "../php/filtrosLug.php?caso=" + 2, true);
+                ajax.open("get", "../php/filtrosLug.php?caso=" + caso, true);
                 ajax.send();
 
             }
@@ -170,7 +186,6 @@
 
                 var tlSection = document.getElementById("opsel");
 
-                console.log(arrayEspacios);
 
                 while (arrayEspacios[y])
                 {
@@ -188,7 +203,50 @@
                 }
             }
 
+            function searchSp()
+            {
+                espacios = document.getElementsByClassName("ckB");
 
+
+                objbuscar =
+                {
+                    ciudad: document.getElementById('ciudad').value,
+
+                    tipoL: document.getElementById('opsel').value,
+
+                    precios: document.getElementById('precio').value,
+
+                    capacidad: document.getElementById('cap').value,
+
+                    esp: new function ()
+                    {
+                        var a = 0;
+                        this.arrayId = [];
+                        while (espacios[a]) {
+                            if (espacios[a].checked == true) {
+                                this.arrayId.push(espacios[a].value);
+                            }
+                            a++;
+                        }
+                    }
+                };
+
+                var ajax = new XMLHttpRequest();
+
+                caso = 3;
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.status == 200 && ajax.readyState == 4) {
+                        document.getElementById('lugares').innerHTML = ajax.responseText;
+                    }
+                }
+
+
+
+                ajax.open("get", "../php/filtrosLug.php?caso=" + caso + "&objbuscar=" + JSON.stringify(objbuscar), true);
+                ajax.send();
+            }
+            
 
 
 
