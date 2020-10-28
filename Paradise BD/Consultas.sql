@@ -58,10 +58,33 @@ call SP_lugares_complete_list (1);
 
 select * from lugespacio;
 select * from espacio;
+#------------------------------------------------------------------------------------------------------------------
 
+#SP o vista para los filtros de busqueda
+#ESTO ES UNA PRUEBA, NO TOCAR!!!!!
 
+alter view vw_lugares_filtros_list as
+	select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
+	#--------- Estos campos se van a mandar a llamar cuando se seleccione la vista --------------------------------------#
+	tlNum as Categoria, espNum as Espacio, mun_cod as Municipio
+    #---------- Estos son campos que necesito unicamente para generar la busqueda ---------------------------------------#
+	from lugar inner join diclugar
+	on dlNum = lugNum inner join municipio
+	on FK_Municipio=mun_cod inner join tipolugar
+	on FK_TipoL=tlNum inner join lugespacio
+	on lg_NumLugar=lugNum inner join espacio
+	on lg_NumEspacio=espNum;
 
+    
 
+select Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list
+where Capacidad>200 and (Espacio=3 or Espacio=4 or Espacio=5 or Espacio=6)
+order by Costo asc;
+
+select 'No',Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list
+where Municipio='MXL' and Capacidad>=100 and Capacidad<=200;
+
+select Lugar, Descripcion, Costo, Capacidad, Espacio from vw_lugares_filtros_list;
 
 ###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
