@@ -7,7 +7,7 @@ $PASS="";
 $BD="paradise";
 
 
- $servername="localhost";
+$servername="localhost";
 $username="root";
 $password="losseisbastardos12";
 $dbname="paradise";

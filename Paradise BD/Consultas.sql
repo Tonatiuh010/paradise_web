@@ -76,15 +76,24 @@ select * from espacio;
 
 ######################################### Vistas ####################################
 
-
+drop view VW_lugar_admin ;
 create view VW_lugar_admin as 
-select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad 
+select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
 from 
-lugar l join tipolugar tl on l.FK_TipoL=tl.tlNum
-join municipio m  on m.mun_cod=l.FK_Municipio
-join diclugar dl on dl.dlNum=l.lugNum;
+lugar l left join tipolugar tl on l.FK_TipoL=tl.tlNum
+left join municipio m  on m.mun_cod=l.FK_Municipio
+left join diclugar dl on dl.dlNum=l.lugNum
+union all 
+select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
+from 
+lugar l right join tipolugar tl on l.FK_TipoL=tl.tlNum
+right join municipio m  on m.mun_cod=l.FK_Municipio
+right join diclugar dl on dl.dlNum=l.lugNum
+where dl.dlNum is null
+;
 
 select * from VW_lugar_admin;
+
 
 ##----------------------------------------- Lugar Admin -----------------------------------
 
@@ -104,4 +113,9 @@ select * from VW_espacios_admim;
 create view VW_tipolugares_admin as
 select tlNum numero, tlNombre nombre from tipolugar;
 select * from VW_tipolugares_admin;
+
+ 
+select * from lugar where FK_tipoL in (1,2,4,5);
+
+select * from VW_lugar_admin where nombre like '%';
 

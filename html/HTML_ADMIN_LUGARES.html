@@ -13,10 +13,8 @@
 
 
 <body onload="loading();">
-    <header>
-        <!--Encabezado-->
+    <header>      
         Titulo
-
     </header>
 
     <section class="sectionPrincipal">
@@ -223,6 +221,7 @@
             var lugarOb = null;
 
             var CKS = document.getElementsByClassName("ckB");
+
             var sctTP = document.getElementById("CBtp");
             var sctCiudades = document.getElementById("CBCiudades");                       
 
@@ -378,6 +377,7 @@
             while (arrayEspacios[y]) {
                 var ckBox = document.createElement("input");
                 ckBox.setAttribute("type", "checkbox");
+
                 ckBox.setAttribute("class", "ckB");                
                 ckBox.style.marginRight = "50px";
 

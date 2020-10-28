@@ -3,7 +3,7 @@
 include("config.php");
 
 
-$conn= new mysqli($servername	,$username	,$password	,$dbname);
+$conn= new mysqli($servername,$username,$password,$dbname);
 
 if ($conn->connect_error){
 	die("Conexión Fallida: ".$conn->connect_error);
@@ -16,8 +16,7 @@ $sql=null;
 
 
 if (($ob_lugar->type)==true){
-    $obDirec= $ob_lugar->direc->obDirec;
-    
+    $obDirec= $ob_lugar->direc->obDirec;    
     ////////////SP_insert_lugar(
     ////////////in nombre varchar(30),
     ////////////in descripcion text,
@@ -33,20 +32,27 @@ if (($ob_lugar->type)==true){
     ////////////in cp char(5)
     ////////////)
 
-
     if ($obDirec!=false) {
-        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",'".$ob_lugar->tipoLugar."','".$ob_lugar->estado."','".$obDirec->calle."');";//SQL Sentence
+        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",'".$ob_lugar->tipoLugar."','".$ob_lugar->estado."','".$obDirec->calle."','".$obDirec->numIn."','".$obDirec->numEx."','".$obDirec->cp."');";//SQL Sentence
     } else {
-        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.");";//SQL Sentence
+        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",'".$ob_lugar->tipoLugar."','".$ob_lugar->estado."',null,null,null,null);";//SQL Sentence
     }
-
-    
 
 } else {
     $sql="call SP_update_lugar(".$ob_lugar->numero.",'".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.");";//SQL Sentence
 
 }
 
+
+$obEspacios=$ob_lugar->espacios->arrayId;
+
+if (count($obEspacios)>0){
+    
+   for ($a=0;$a<count($obEspacios);$a++){
+        $sqlEsp="insert into";
+   }
+
+}
 
 if ($conn->query($sql)===TRUE){
 
