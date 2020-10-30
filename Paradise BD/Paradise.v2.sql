@@ -9,38 +9,6 @@ create table municipio
 	constraint PK_municipio_cod primary key (mun_cod)
 );
 
-
-/*
-create table proveedor
-(		
-	pro_Cod	char(5) not null,
-	pro_Nombre	varchar(50) not null,	
-	pro_Descripcion	text null,	
-	pro_Sitio	varchar(60) null,
-	
-    constraint PK_proveedor_cod primary key (pro_Cod)
-);
-
-create table correo_proveedor
-(		
-	cpNum int auto_increment not null,
-	cpCorreo varchar(40) not null,
-	FK_Proveedor char(5) not null,
-    
-    constraint PK_correoPro_num primary key (cpNum),
-    constraint FK_correoPro_proveedor foreign key (FK_Proveedor) references proveedor(pro_Cod) on delete cascade
-);
-		
-create table telef_proveedor
-(		
-	tpNum int auto_increment not null,	
-	tpTelefono char(10) not null,	
-	FK_Proveedor char(5) not null,
-	
-    constraint PK_telefonoPro_num primary key (tpNum),
-    constraint FK_telefonoPro_proveedor foreign key (FK_Proveedor) references proveedor(pro_Cod) on delete cascade
-);*/
-
 create table tipoLugar
 (		
 	tlNum	int	auto_increment not null,
@@ -65,13 +33,19 @@ create table espacio
     constraint PK_metodoPag_num primary key (mp_Num)
 );	*/
 
-/*create table genero
+create table usuario
 (		
-	genCod	char(1)	not null,
-	Nombre	varchar(15) not null,
-    
-    constraint PK_genero_cod primary key (genCod)
-);	*/
+	usNum	int	auto_increment not null,
+	usNombre	varchar(30)	null,
+	usContrasenia	varchar(30)	not null,
+    usCorreo varchar(50) not null,
+	usTipoUS	varchar(15)	null,
+
+    constraint PK_usuario_num primary key (usNum),
+    constraint UQ_usuario_correo unique (usCorreo),
+    constraint UQ_usuario_nombre unique (usNombre)
+
+);
 
 create table agente
 (		
@@ -82,8 +56,10 @@ create table agente
 	agFecNac date not null,	
 	agEdad tinyint,	
 	agGenero varchar(20) not null,
+    FK_usuario int not null,
     
-    constraint PK_agente_matricula primary key (agMatricula)
+    constraint PK_agente_matricula primary key (agMatricula),
+    constraint FK_agente_usuario foreign key (FK_usuario) references usuario(usNum) on delete cascade
 );
 
 
@@ -100,7 +76,7 @@ create table telef_agentes
 create table correo_agentes
 (		
 	caNum int auto_increment not null,
-	caCorreo varchar(40) not null,	
+	caCorreo varchar(50) not null,	
 	FK_agente char(7) not null,
     
     constraint PK_correoAg_num primary key (caNum),
@@ -116,29 +92,13 @@ create table cliente
 	cliFecNac	date not null,
 	cliEdad	tinyint	null,
     cliTelefono char(10) null,
+    FK_usuario int not null,
     
-    constraint PK_cliente_num primary key (cliNum)
+    constraint PK_cliente_num primary key (cliNum),
+    constraint FK_cliente_usuario foreign key (FK_usuario) references usuario(usNum) on delete cascade
 );
 
-/*create table correo_clientes
-(		
-	ccNum	int	auto_increment not null,
-	ccCorreo	varchar(40)	not null,
-	FK_cliente	int	not null,
-    
-    constraint PK_correoCli_num primary key (ccNum),
-    constraint FK_correoCli_cliente foreign key (FK_cliente) references cliente(cliNum) on delete cascade
-);*/
-		
-/*create table telef_clientes
-(		
-	tcNum	int	auto_increment not null,
-	tcTelefono	char(10) not null,
-	FK_cliente	int	not null,
 
-    constraint PK_telefCli_num primary key (tcNum),
-    constraint FK_telefCli_cliente foreign key (FK_cliente) references cliente(cliNum) on delete cascade
-);*/
 
 /*create table tipo_US
 (		
@@ -148,22 +108,6 @@ create table cliente
     constraint PK_tipoUS_cod primary key (tuCod)
 );*/
 
-create table usuario
-(		
-	usNum	int	auto_increment not null,
-	usNombre	varchar(30)	null,
-	usContrasenia	varchar(30)	not null,
-    usCorreo varchar(30) not null,
-	usTipoUS	varchar(15)	null,
-	FK_cliente	int	null,
-	FK_agente	char(7)	null,
-    
-    constraint PK_usuario_num primary key (usNum),
-    constraint UQ_usuario_correo unique (usCorreo),
-    constraint UQ_usuario_nombre unique (usNombre),
-    constraint FK_usuario_cliente foreign key (FK_cliente) references cliente(cliNum) on delete cascade,
-    constraint FK_usuario_agente foreign key (FK_agente) references agente(agMatricula) on delete cascade
-);
 
 #alter table usuario
 #modify column usTipoUS varchar(15);
@@ -178,16 +122,28 @@ create table lugar
 	lugCosto decimal(12,2) null,
 	lugCapacidad int null,	
 	FK_TipoL int null not null,	                                           
-	FK_Municipio char(3) not null,	                                     
     
 	constraint PK_lugar_num primary key (lugNum),
     constraint FK_lugar_tipoL foreign key (FK_TipoL) references TipoLugar(tlNum) on delete cascade,
-    constraint FK_lugar_municipio foreign key (FK_Municipio) references municipio(mun_Cod) on delete cascade,
     
 	constraint CK_lugar_costo check(lugCosto>0),
 	constraint CK_lugar_capacidad check(lugCapacidad>0),
 	constraint UQ_lugar_nombre unique(lugNombre)
 );
+
+create table dicLugar
+(
+	dlNum int primary key auto_increment,
+	dlCalle	varchar(40) not null,
+	dlNumInterior varchar(25) not null,	
+	dlNumExterior varchar(25) null,	
+	dlCP char(5) not null,
+    FK_Municipio char(3) not null,
+    
+    constraint PFK_dicLugar_num foreign key  (dlNum) references lugar(lugNum) on delete cascade,
+    constraint FK_lugar_municipio foreign key (FK_Municipio) references municipio(mun_Cod) on delete cascade
+);
+
 
 /*create table imagenes
 (		
@@ -215,11 +171,14 @@ alter table lugEspacio
 add constraint FK_lugEspacio
 primary key (lg_NumEspacio, lg_NumLugar);
 
-create table Post_Reservacion
+create table pre_Reservacion
 (		
 	prNum	int	auto_increment not null,
 	prFechaRegistro datetime not null,	
-	prFechaEsperada date not null,	
+	prFechaInic date not null,	
+	prFechaFin	date not null,
+	prStatus varchar(20) not null,	#Aquí se agregará un cosntraint para 'Activa', 'Proceso','Rechazada'
+    prNotas text null,
 	FK_Lugar int not null,
 	FK_Cliente int not null,
 	FK_Agente char(7) null,
@@ -232,37 +191,24 @@ create table Post_Reservacion
 		
 create table reservacion
 (		
-	resConsecutivo int auto_increment not null,
-	resNumPR int not null,	
-	resFechaProceso	datetime not null,	
-	resFechaInic date not null,	
-	resFechaFin	date not null,	
-	resTotalDias tinyint null,	
-	resTotPagar decimal(12,2) null,	
-	# FK_MetPago int null,
-	FK_lugar int not null,
-	FK_cliente int not null,
-	FK_agente char(7) null,
+	resNumPR int primary key not null ,	
+	resFecConfirmacion	datetime not null,		
+	resTotDias tinyint null,	
+	resTotPagar decimal(12,2) null,
     
-    constraint PK_reservacion_consec primary key (resConsecutivo),
-	# constraint FK_reservacion_metPago foreign key (FK_MetPago) references metodoPag(mp_Num) on delete cascade,
-    constraint FK_reservacion_lugar foreign key (FK_lugar) references lugar(lugNum) on delete cascade,
-    constraint FK_reservacion_cliente foreign key (FK_Cliente) references cliente(cliNum) on delete cascade,
-    constraint FK_reservacion_agente foreign key (FK_Agente) references agente(agMatricula) on delete cascade
+    constraint PFK_reservación_num foreign key (resNumPR) references pre_Reservacion(prNum) on delete cascade
 );
 
 /*alter table reservacion
 modify column resTotPagar decimal(12,2);*/
 
-create table dicLugar
+create table pre_res_Cancelada
 (
-	dlNum int auto_increment,
-	dlCalle	varchar(40) not null,
-	dlNumInterior varchar(25) not null,	
-	dlNumExterior varchar(25) null,	
-	dlCP char(5) not null,
+	prcNum	int	primary key not null,	#Primaria Foranea
+	prcFecCancel datetime not null,	
+    prcNotas text null,
     
-    constraint PFK_dicLugar_num foreign key  (dlNum) references lugar(lugNum) on delete cascade
+    constraint PFK_preResCan_lugar foreign key (prcNum) references pre_Reservacion(prNum) on delete cascade
 );
 
 /*create table agentes_Baja

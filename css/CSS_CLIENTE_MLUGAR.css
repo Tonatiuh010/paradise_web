@@ -121,9 +121,41 @@ main {
     background-color: white;
 }
 
-.lugar
+
+.imglug
 {
-    background-color:aqua;
+    background-color: var(--color1);
     width:100%;
-    height:30%;
+    height:40%;
+}
+.tipol
+{
+    text-align:justify;
+    padding-left:3%;
+    padding-right:3%;
+    line-height:1.5;
+    font-size:small;
+    padding-top:1%;
+    padding-bottom:1%;
+    color:darkslategrey;
+    font-family:Georgia;
+}
+
+.nombreLug {
+    font-size: larger;
+    font-family: Georgia;
+}
+
+.tablelug
+{
+    width:60%;
+    float:left;
+}
+
+.publicidad
+{
+    background-color: var(--pcolor1);
+    width:30%;
+    height:80%;
+    float:right;
 }

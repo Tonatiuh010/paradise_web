@@ -28,7 +28,14 @@
     <br />
          
     <main>
-        <section class="lugar" id="lugar">
+        <!--<section class="imglug">
+                
+        </section>-->
+        <section id="lugar">
+            <section class="imglug">
+                Inserte imagen del lugar aquí.
+                Ira con un carousel
+            </section>
             <?php
                 include('config.php');                              //Mandamos a llamar el php con las variables $HOST,$USER,$PASS,$BD que contienen las credenciales
                 $mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
@@ -52,23 +59,25 @@
                             echo $sql;
 
                             if ($resultado->num_rows>0) {
-                              echo '</br><section class="lista"><table class="tablaList" border="1">';
+                              echo '</br><section><table class="tablelug" >';
 
                                 if($tupla = $resultado->fetch_assoc())
                                 {
-                                    echo '<tr><th class="nombreLug"><h3>'.$tupla['Tipo de Lugar'].'<h3></th></tr>';
-                                    echo '<tr><th class="nombreLug"><h3>'.$tupla['Lugar'].'<h3></th></tr>';
-                                    echo '<tr><th class="nombreLug"><h3>'.$tupla['Descripcion'].'<h3></th></tr>';
-                                    echo '<tr><th class="nombreLug"><h3>'.$tupla['Costo'].'<h3></th></tr>';
-                                    echo '<tr><th class="nombreLug"><h3>'.$tupla['Capacidad'].'<h3></th></tr>';
-                                    echo '<tr><th class="nombreLug"><h3>'.$tupla['Domicilio'].'<h3></th></tr>';
+                                    echo '<tr><th class="tipol"><h3>'.$tupla['Tipo de Lugar'].'<h3></th></tr>';
+                                    echo '<tr><th class="nombreLug">'.$tupla['Lugar'].'</th></tr>';
+                                    echo '<tr><th class="tipol"><h3>'.$tupla['Descripcion'].'<h3></th></tr>';
+                                    echo '<tr><th class="tipol"><h3>A partir de $'.$tupla['Costo'].'<h3></th></tr>';
+                                    echo '<tr><th class="tipol"><h3>Máximo de '.$tupla['Capacidad'].' personas<h3></th></tr>';
+                                    echo '<tr><th class="tipol"><h3>'.$tupla['Domicilio'].'<h3></th></tr>';
                                 }
-
+                                    echo '<tr><th class="tipol"><h3>Cuenta con:<h3></th></tr>';
+                                    echo '<tr><th class="tipol">';
                                 while ($fila = $resultado->fetch_assoc()) {
 
-                                        echo '<tr><th class="nombreLug"><h3>'.$fila['Espacios'].'<h3></th></tr>';
+                                        echo '<li>'.$fila['Espacios'].'</li>';
                                 }
 
+                                        echo '</th></tr>';
                             echo '<table/></section></br>';
 
                             }else{
@@ -90,6 +99,9 @@
             die();
 
         ?>
+            <section class="publicidad">
+                Anuncio
+            </section>
         </section>
     </main>
 
