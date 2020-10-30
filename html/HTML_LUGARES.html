@@ -41,11 +41,12 @@
                           <hr /><br />
                           <h5>CIUDAD</h5>
                           <select name="ciudad" id="ciudad" class="filtro" required>
-                              <option value="TIJ">Tijuana</option>
-                              <option value="ESE">Ensenada</option>
-                              <option value="ROS">Rosarito</option>
-                              <option value="TEC">Tecate</option>
-                              <option value="MXL">Mexicali</option>
+                              <option value="na"></option>
+                              <option value="and Municipio='TIJ'">Tijuana</option>
+                              <option value="and Municipio='ESE'">Ensenada</option>
+                              <option value="and Municipio='ROS'">Rosarito</option>
+                              <option value="and Municipio='TEC'">Tecate</option>
+                              <option value="and Municipio='MXL'">Mexicali</option>
                           </select>
                           <hr />
                           <br /><br />
@@ -221,6 +222,7 @@
             {
                 espacios = document.getElementsByClassName("ckB");
 
+                console.log(document.getElementById('opsel').value);
 
                 objbuscar =
                 {
@@ -257,7 +259,7 @@
 
 
 
-                ajax.open("get", "../php/filtrosLug.php?caso=" + caso + "&objbuscar=" + JSON.stringify(objbuscar), true);
+                ajax.open("get", "../php/filtrosList.php?objbuscar=" + JSON.stringify(objbuscar), true);
                 ajax.send();
             }
             
