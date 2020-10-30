@@ -37,42 +37,56 @@
             <section class="filtros">
                 <br /><br /><h2>GENERA UNA BUSQUEDA</h2>
                 <br /><br />
-                      <form>
-                          <select name="ciudad" id="ciudad" required>
+                      <form class="colorf">
+                          <hr /><br />
+                          <h5>CIUDAD</h5>
+                          <select name="ciudad" id="ciudad" class="filtro" required>
                               <option value="TIJ">Tijuana</option>
                               <option value="ESE">Ensenada</option>
                               <option value="ROS">Rosarito</option>
                               <option value="TEC">Tecate</option>
                               <option value="MXL">Mexicali</option>
                           </select>
+                          <hr />
                           <br /><br />
-                          <select id="opsel">
+                          <hr /><br />
+                          <h5>LUGAR QUE ESTAS BUSCANDO</h5>
+                          <select id="opsel" class="filtro">
                           </select>
+                          <hr />
                           <br /><br />
-
-                          <select class="precio" id="precio">
-                              <option value="na">---</option>
+                          <hr /><br />
+                          <h5>PRESUPUESTO</h5>
+                          <select id="precio" class="filtro">
+                              <option value="na"></option>
                               <option value="order by Costo desc">Lo más Destacado</option>
                               <option value="order by Costo asc">Lo más económico</option>
                           </select>
+                          <hr />
                           <br /><br />
-
-                          <select class="cap" id="cap">
-                              <option value="na">---</option>
+                          <hr /><br />
+                          <h5>INVITADOS</h5>
+                          <select id="cap" class="filtro">
+                              <option value="na"></option>
                               <option value="and Capacidad<100">Menor de 100 personas</option>
                               <option value="and Capacidad>=100 and Capacidad<=200">Entre 100 a 200 personas</option>
                               <option value="and Capacidad>=200 and Capacidad<=300">Entre 200 a 300 personas</option>
                               <option value="and Capacidad>=300 and Capacidad<=500">Entre 300 a 500 personas</option>
                               <option value="and Capacidad>500">Más de 500 personas</option>
                           </select>
+                          <hr />
                           <br /><br />
-
+                          <hr /><br />
+                          <h5>ESPACIOS</h5><br />
                           <section id="espBox">
                           </section>
+                          <br />
+                          <hr />
                           <br /><br />
 
 
-                          <input type="button" value="BUSCAR" onclick="searchSp()" />
+
+                          <input type="button" value="BUSCAR" class="botonf" onclick="searchSp()" />
                       </form>
             </section>
             <section class="lugares" id="lugares">
@@ -191,7 +205,7 @@
                 {
 
                     var option = document.createElement("option");
-                    option.setAttribute("class", "opsel");
+                    //option.setAttribute("class", "opsel");
                     option.style.marginRight = "50px";
 
                     option.value = arrayEspacios[y].num;
