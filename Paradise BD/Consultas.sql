@@ -5,20 +5,26 @@ select * from tipolugar;
 use paradise;
 #------------------------------------------------------------------------------------------------------------
 
-use paradise;
+#Vista para extraer la información completa del lugar
 
-# Vista básica de lugares para el sitio
-create view vw_lugares_basic_list as  
-	select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad
-	from lugar
-	order by lugNombre;
+create view vw_lugar_complete_data as
+	select * from lugar left join tipolugar 
+	on FK_TipoL=tlNum left join diclugar 
+	on dlNum=lugNum left join municipio 
+	on mun_cod=FK_Municipio left join lugespacio 
+	on lg_NumLugar=lugNum left join espacio 
+	on lg_NumEspacio=espNum
+	union all 
+	select * from lugar right join tipolugar 
+	on FK_TipoL=tlNum right join diclugar 
+	on dlNum=lugNum right join municipio 
+	on mun_cod=FK_Municipio right join lugespacio 
+	on lg_NumLugar=lugNum right join espacio 
+	on lg_NumEspacio=espNum 
+	where dlNum is null
+#------------------------------------------------------------------------------------------------------------------
 
-select * from vw_lugares_basic_list;
-#------------------------------------------------------------------------------------------------------------
-
-# SP vista completa de un lugar
-#drop procedure SP_lugares_complete_list;
-
+#Procedimiento Almacenado para acceder a la vista "vw_lugar_complete_data"
 DELIMITER //
 create procedure SP_lugares_complete_list
 (
@@ -32,38 +38,38 @@ begin
 			select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
 			concat('Ubicado en ',dlCalle,' CP ',dlCP,' #',dlNumInterior,' ',mun_nombre) as Domicilio,
 			tlNombre as 'Tipo de Lugar', espNombre as Espacios
-			from lugar inner join diclugar
-			on dlNum = lugNum inner join municipio
-			on FK_Municipio=mun_cod inner join tipolugar
-			on FK_TipoL=tlNum inner join lugespacio
-			on lg_NumLugar=lugNum inner join espacio
-			on lg_NumEspacio=espNum
+			from vw_lugar_complete_data
 			where lugNum=numLug;
 	else
 			select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
 					concat('Ubicado en ',dlCalle,' CP ',dlCP,' #',dlNumInterior,'-',dlNumExterior,' ',mun_nombre) as Domicilio,
 					tlNombre as 'Tipo de Lugar', espNombre as Espacios
-			from lugar inner join diclugar
-			on dlNum = lugNum inner join municipio
-			on FK_Municipio=mun_cod inner join tipolugar
-			on FK_TipoL=tlNum inner join lugespacio
-			on lg_NumLugar=lugNum inner join espacio
-			on lg_NumEspacio=espNum
+			from vw_lugar_complete_data
 			where lugNum=numLug;
 	end if;
 end//
 DELIMITER ;
 
-call SP_lugares_complete_list (1);
+call SP_lugares_complete_list(1);
+
+#-----------------------------------------------------------------------------------------------------------------
+
+#Vista de lugares para una consulta básica
+create view vw_lugares_basic_list as
+	select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, 
+    lugCosto as Costo, lugCapacidad as Capacidad 
+    from lugar;
+
 
 select * from lugespacio;
 select * from espacio;
+select * from lugar;
 #------------------------------------------------------------------------------------------------------------------
 
 #SP o vista para los filtros de busqueda
 #ESTO ES UNA PRUEBA, NO TOCAR!!!!!
 
-alter view vw_lugares_filtros_list as
+create view vw_lugares_filtros_list as
 	select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
 	#--------- Estos campos se van a mandar a llamar cuando se seleccione la vista --------------------------------------#
 	tlNum as Categoria, espNum as Espacio, mun_cod as Municipio
