@@ -5,8 +5,7 @@ use paradise;
 create table municipio
 (	
 	mun_cod	char(3) not null,
-	mun_nombre	varchar(10)	not null,
-    
+	mun_nombre	varchar(10)	not null,    
 	constraint PK_municipio_cod primary key (mun_cod)
 );
 

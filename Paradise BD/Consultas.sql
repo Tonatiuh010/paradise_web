@@ -92,7 +92,7 @@ right join diclugar dl on dl.dlNum=l.lugNum
 where dl.dlNum is null
 ;
 
-select * from VW_lugar_admin;
+select * from VW_lugar_admin where nombre='Salón Toscano';
 
 
 ##----------------------------------------- Lugar Admin -----------------------------------
@@ -115,7 +115,26 @@ select tlNum numero, tlNombre nombre from tipolugar;
 select * from VW_tipolugares_admin;
 
  
-select * from lugar where FK_tipoL in (1,2,4,5);
+select * from lugar where FK_tipoL in (select tlNum from tipolugar);
 
 select * from VW_lugar_admin where nombre like '%';
 
+call SP_lugares_complete_list (9);
+
+##--------------------------------------------- EL basurero -----------------------------------------------
+
+
+
+
+DELIMITER //
+create procedure SP_lugares_complete_list_ts
+(
+	in numLug int
+)
+begin
+	select * from VW_lugar_admin where numero=numLug;
+end//
+DELIMITER ;
+
+
+call SP_lugares_complete_list_ts (9);
