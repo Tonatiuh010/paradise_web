@@ -27,11 +27,7 @@
                     <td> <button onclick="turnOnPnlConsult()">Consultar</button> </td>
                     <td>  <button onclick="turnOnPnlAdd()">Registrar</button>  </td>
                     <td>  <button onclick="turnOnPnlModify()">Modificar</button>  </td>
-
                 </tr>
-
-
-
             </table>
 
         </article>
@@ -75,7 +71,7 @@
 
 
 
-        <article id="artMain">
+        <section  id="artMain">
 
 
             <section class="consultPanel" id="pnlConsult" style="display:Block">
@@ -83,13 +79,14 @@
                     <input type='search' placeholder='B&uacute;squeda de lugares.'  id='id_lugar'>
                     <input type='button' value='Buscar' onclick="buscarLugar(true)" id="btnM" style="display:none">
                     <input type='button' value='Buscar' onclick="buscarLugar(false)" id="btnS" style="display:block">
-                </section>               
+                </section>     
+                
+                <section id="listLugar" style="display:none; width:100%;"></section>
+                          
             </section>
 
             <section class="addPanel" id="pnlAdd" style="display:none">
                 <section class='registerSection' name='searchAdminForm'>
-
-               
 
                         <label id="lblNum" style="display:none"> Número del Lugar:</label> <input id="tbNum" style="display:none" type="text" disabled><br />
                         Nombre del Lugar: <input type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
@@ -140,7 +137,6 @@
                                 style="display:none"
                                 id="btnUp">
                             up
-
                         </button>
                         <section style="display:none" id="intPnlDirection">
                             Calle: <input type='text' id='txtCalleDirec'><br />
@@ -154,20 +150,14 @@
                         <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarLugar(false)" />
                         <br />
 
-
-
-
-
-
-
                         <p id="msg">En proceso</p>
 
-</section>            
+                </section>            
             </section>
 
-            <section id="listLugar" style="display:none; width:100%;"></section>
+            
 
-        </article>
+        </section>
         
     </section>
     
@@ -214,8 +204,7 @@
             document.getElementById('btnUp').style.display = 'none';
         }
 
-        function registrarLugar(res) {
-            createDialog();
+        function registrarLugar(res) {          
             document.getElementById("listLugar").innerHTML = "";
 
             var lugarOb = null;
@@ -280,13 +269,13 @@
                 type : false
             };
         }
-            
-        console.log(lugarOb);
 
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange= function () {
-                if (ajax.readyState== 4 && ajax.status==200){
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    createDialog();
                     document.getElementById("msg").innerHTML = ajax.responseText;
+                    clearForm();
                 }
             };
 
@@ -316,13 +305,14 @@
                 searchForm = {
                     search: document.getElementById("id_lugar").value,
                     type: false
+
                 };
             }
             
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("listLugar").style.display = "block";
-                    document.getElementById("listLugar").innerHTML = ajax.responseText;
+            
+                    fillLugarShc(ajax.responseText);
                 }
             };
 
@@ -424,6 +414,124 @@
             }
         }
 
+
+        function clearForm() {
+
+            var t = 0;
+
+            var CKS = document.getElementsByClassName("ckB");
+            var sctTP = document.getElementById("CBtp");
+            var sctCiudades = document.getElementById("CBCiudades");
+
+            document.getElementById("txtNombreLugar").value= "";
+            document.getElementById("txtDescLugar").value = "";
+            document.getElementById("txtCostoLugar").value = "";
+            document.getElementById("txtCapacidadLugar").value = "";
+            document.getElementById("txtCalleDirec").value = "";
+            document.getElementById("txtNumIntDirec").value = "";
+            document.getElementById("txtNumExtDirec").value = "";
+            document.getElementById("txtCP").value = "";
+
+
+            sctCiudades.options.selectedIndex = 0;
+            sctTP.options.selectedIndex = 0;
+
+            document.getElementById('intPnlDirection').style.display = 'none';
+            document.getElementById('btnDwn').style.display = 'block';
+            document.getElementById('btnUp').style.display = 'none'
+
+            while (CKS[t]) {
+                CKS[t].checked = 0;
+                t++;
+            }
+
+        }
+
+
+        function fillLugarShc(ob) {
+
+            
+            var list = document.getElementById("listLugar");
+            list.style.display = "block";
+
+            var ob_Lugar = JSON.parse(ob)
+            var arrayLugar = ob_Lugar.obLugar;
+
+            var x = 0;
+        
+
+            while (arrayLugar[x]) {
+
+                var table = document.createElement("table");
+
+                table.style.width = "30%";
+                table.style.marginRight = "8%";
+                table.style.border = "2px solid";
+                table.style.marginBottom = "3%";
+
+                var tr1 = document.createElement("tr");
+                var tr2 = document.createElement("tr");
+                var tr3 = document.createElement("tr");
+                var tr4 = document.createElement("tr");
+                var tr5 = document.createElement("tr");
+                var tr6 = document.createElement("tr");
+
+
+                tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].numero + "</td> ";
+                tr2.innerHTML = "<td> Nombre </td> <td> " + arrayLugar[x].nombre + "</td> ";
+                tr3.innerHTML = "<td> Descripción </td> <td> " + arrayLugar[x].desc + "</td> ";
+                tr4.innerHTML = "<td> Costo </td> <td> " + arrayLugar[x].costo + "</td> ";
+                tr5.innerHTML = "<td> Capacidad </td> <td> " + arrayLugar[x].capacidad + "</td>  ";
+                tr6.innerHTML= "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar + "</td>";
+                
+                var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6];
+
+                
+                for (z = 0; z < 6;z++) {
+                    table.appendChild(arrayTr[z]);
+                }
+                
+                if (arrayLugar[x].calle != null || arrayLugar[x].numInt != null || arrayLugar[x].numExt != null || arrayLugar[x].CP != null) {
+
+                    var trC = document.createElement("tr");
+                    var trNI = document.createElement("tr");
+                    var trNE = document.createElement("tr");
+                    var trCP = document.createElement("tr");
+
+                    trC.innerHTML =" <td> Calle </td> <td> " + arrayLugar[x].calle + "</td>";
+                    trNI.innerHTML = "<td> No. Interno </td> <td> " + arrayLugar[x].numInt+ "</td>";
+                    trNE.innerHTML = "<td> Num. Ext </td> <td> " + arrayLugar[x].numExt + "</td> ";
+                    trCP.innerHTML = " <td> Código Postal </td> <td> " + arrayLugar[x].CP + "</td>  ";
+                  
+                    var arrayDir = [trC, trNI, trNE, trCP];
+
+                    for (y = 0; y < 4; y++) {
+                        table.appendChild(arrayDir[y]);
+                    }
+                }
+
+                if (ob_Lugar.type!=false){
+                    var btn = document.createElement("button");
+
+                    btn.addEventListener("click",function (_x) {
+                        return function () {
+                            modifyLugar(arrayLugar[_x]);
+                        }
+
+                    }(x));
+                    btn.innerHTML = "Editar";
+                    table.appendChild(btn);                    
+                }
+
+                list.appendChild(table);
+                x++;             
+            }
+
+            
+            
+           
+
+        }
         
     </script>
 

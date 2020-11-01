@@ -95,13 +95,9 @@ select Lugar, Descripcion, Costo, Capacidad, Espacio from vw_lugares_filtros_lis
 ###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
 
-
-
 select * from lugar;
 select * from diclugar;
 select * from espacio;
-
-
 
 ######################################### Vistas ####################################
 
@@ -110,14 +106,14 @@ create view VW_lugar_admin as
 select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
 from 
 lugar l left join tipolugar tl on l.FK_TipoL=tl.tlNum
-left join municipio m  on m.mun_cod=l.FK_Municipio
 left join diclugar dl on dl.dlNum=l.lugNum
+left join municipio m  on m.mun_cod=dl.FK_Municipio
 union all 
 select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
 from 
 lugar l right join tipolugar tl on l.FK_TipoL=tl.tlNum
-right join municipio m  on m.mun_cod=l.FK_Municipio
 right join diclugar dl on dl.dlNum=l.lugNum
+right join municipio m  on m.mun_cod=dl.FK_Municipio
 where dl.dlNum is null
 ;
 
@@ -137,33 +133,16 @@ select espNombre nombre, espNum numero from espacio;
 
 select * from VW_espacios_admim;
 
+##------------------------------------------Espacios X lugar ---------------------------------------
+
+select * from lugespacio order by lg_NumLugar;
+
 ##------------------------------------------ Tipos_Lugares -----------------------------------------
 
 create view VW_tipolugares_admin as
 select tlNum numero, tlNombre nombre from tipolugar;
 select * from VW_tipolugares_admin;
 
- 
-select * from lugar where FK_tipoL in (select tlNum from tipolugar);
-
-select * from VW_lugar_admin where nombre like '%';
-
-call SP_lugares_complete_list (9);
-
 ##--------------------------------------------- EL basurero -----------------------------------------------
 
 
-
-
-DELIMITER //
-create procedure SP_lugares_complete_list_ts
-(
-	in numLug int
-)
-begin
-	select * from VW_lugar_admin where numero=numLug;
-end//
-DELIMITER ;
-
-
-call SP_lugares_complete_list_ts (9);

@@ -54,9 +54,7 @@
                             $sql       = "call SP_lugares_complete_list (".$vnum.");";
                             $resultado = $mysqli->query($sql);
 
-                            //echo "Case number 2";
-
-                            echo $sql;
+                            //echo "Case number 2";                            
 
                             if ($resultado->num_rows>0) {
                               echo '</br><section><table class="tablelug" >';

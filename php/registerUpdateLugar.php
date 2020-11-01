@@ -1,5 +1,4 @@
 <?php
-
 include("config.php");
 
 
@@ -13,57 +12,49 @@ $ob_lugar=json_decode($_GET['b']);
 
 $sql=null;
 
-
-
 if (($ob_lugar->type)==true){
     $obDirec= $ob_lugar->direc->obDirec;    
-    ////////////SP_insert_lugar(
-    ////////////in nombre varchar(30),
-    ////////////in descripcion text,
-    ////////////in costo decimal(12,2),
-    ////////////in capacidad int,
-    ////////////in tipoLug int,
-    ////////////in municipio char(3),
-    ////////////# in proveedor char(5),
+    //out numLug int,    
+    //in nombre varchar(30),
+    //in descripcion text,
+    //in costo decimal(12,2),
+    //in capacidad int,
+    //in tipoLug int,
+    //# in proveedor char(5),
     
-    ////////////in calle varchar(40),
-    ////////////in numInt varchar(25),
-    ////////////in numExt varchar(25),
-    ////////////in cp char(5)
-    ////////////)
+    //in calle varchar(40),
+    //in numInt varchar(25),
+    //in numExt varchar(25),
+    //in cp char(5),
+    //in municipio char(3)
 
+    $conn->query("set @numLug=0;");
     if ($obDirec!=false) {
-        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",'".$ob_lugar->tipoLugar."','".$ob_lugar->estado."','".$obDirec->calle."','".$obDirec->numIn."','".$obDirec->numEx."','".$obDirec->cp."');";//SQL Sentence
+        $sql="call SP_insert_lugar(@numLug,'".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",".$ob_lugar->tipoLugar.",'".$obDirec->calle."','".$obDirec->numIn."','".$obDirec->numEx."','".$obDirec->cp."','".$ob_lugar->estado."');";//SQL Sentence
     } else {
-        $sql="call SP_insert_lugar('".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",'".$ob_lugar->tipoLugar."','".$ob_lugar->estado."',null,null,null,null);";//SQL Sentence
+        $sql="call SP_insert_lugar(@numLug,'".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.",".$ob_lugar->tipoLugar.",null,null,null,null,'".$ob_lugar->estado."');";//SQL Sentence
     }
 
+    
 } else {
     $sql="call SP_update_lugar(".$ob_lugar->numero.",'".$ob_lugar->nombre."','".$ob_lugar->desc."',".$ob_lugar->costo.",".$ob_lugar->capacidad.");";//SQL Sentence
 
 }
+    if ($conn->query($sql)===TRUE){
+        if (($ob_lugar->type)==true) {
+                $arrayEsp=$ob_lugar->espacios->arrayId;
 
-
-$obEspacios=$ob_lugar->espacios->arrayId;
-
-if (count($obEspacios)>0){
+                $resLug=$conn->query("select @numLug as num;");
     
-   for ($a=0;$a<count($obEspacios);$a++){
-        $sqlEsp="insert into";
-   }
-
-}
-
-if ($conn->query($sql)===TRUE){
-
-    echo "Registrado!";
-
+                $numLug=$resLug->fetch_assoc();
+       
+                for ($x=0; $x<count($arrayEsp);$x++){
+                     $sqlInsEspacios="call SP_insertar_EspLug(".$arrayEsp[$x].",".$numLug['num'].");";
+                     $conn->query($sqlInsEspacios);         
+                }
+            }
+            echo "Registrado";
 } else {
     echo "Error al momento de registrar: ".$sql." ---> ".$conn->error;
-    
 }
-
-
-
-
 ?>

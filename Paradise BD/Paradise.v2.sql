@@ -1,6 +1,6 @@
+drop database paradise;
 create database paradise;
 use paradise;
-
 
 create table municipio
 (	
