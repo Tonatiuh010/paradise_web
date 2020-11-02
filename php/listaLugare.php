@@ -2,13 +2,13 @@
 
 
 include('config.php');                              //Mandamos a llamar el php con las variables $HOST,$USER,$PASS,$BD que contienen las credenciales
-    $mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
-    //$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);  
+    //$mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
+    $mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);  
 
     if($mysqli)                                     //Intentamos conectar con Mysql
     {
-        $bd=mysqli_select_db($mysqli,$dbname);
-       // $bd=mysqli_select_db($mysqli,$BD);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
+        //$bd=mysqli_select_db($mysqli,$dbname);
+       $bd=mysqli_select_db($mysqli,$BD);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
         if($bd)                                     //Intentamos acceder a la BD
         {
                            // echo "Entro a la BD";

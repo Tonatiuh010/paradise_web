@@ -1,14 +1,15 @@
 <?php
 
 include('config.php');                              //Mandamos a llamar el php con las variables $HOST,$USER,$PASS,$BD que contienen las credenciales
- $mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
-    //$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD); 
+ //$mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
+$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD); 
+
 $vcase= $_GET['caso'];
 
     if($mysqli)                                     //Intentamos conectar con Mysql
     {
-        $bd=mysqli_select_db($mysqli,$dbname);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
-        //$bd=mysqli_select_db($mysqli,$BD);          
+        //$bd=mysqli_select_db($mysqli,$dbname);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
+        $bd=mysqli_select_db($mysqli,$BD);          
 
         if($bd)                                     //Intentamos acceder a la BD
         {

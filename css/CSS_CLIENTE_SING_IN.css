@@ -57,14 +57,6 @@ nav
     clear:both;
 }
 
-.icon_use
-{
-    float:left;
-    width:4%;
-    height:50%;
-    /*background-color:aqua;*/
-    clear:both;
-}
 
 .busqueda
 {
@@ -104,11 +96,11 @@ main
     font-size:97%;
 }
 
-.pMTxt
-{
-    width:16%;
-    float:right;
-    text-align:left;
+.pMTxt {
+    width: 16%;
+    float: right;
+    text-align: left;
+    padding-right:1%;
 }
 
 .pMT
@@ -137,11 +129,18 @@ main
     text-align:right;
 }
 
-.sign
-{
-    width:30%;
-    height:100%;
-    float:right;
+.pMTxt1 {
+    width: 16%;
+    float: right;
+    text-align: right;
+    margin-top:-1.5%;
+    padding-right:2.5%;
+}
+
+.sign {
+    width: 30%;
+    height: 100%;
+    float: right;
     background-color: var(--pcolor1);
 }
 
@@ -152,6 +151,20 @@ main
     display:inline-block;
     text-align:center;
     background-color:white;
+}
+
+dialog[open] {
+    /*position: center;*/
+    /* position: fixed;*/
+/*    padding-right: -10%;*/
+/*    padding-left: -10%;*/
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%;
+    height: 15%;
+    /*display: inline-block;*/
+    text-align: center;
+    background-color: white;
 }
 
 .signImg
@@ -230,3 +243,4 @@ p
     line-height:2.8;
     color:darkslategrey;
 }
+

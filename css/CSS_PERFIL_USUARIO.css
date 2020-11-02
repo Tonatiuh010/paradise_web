@@ -132,17 +132,22 @@ button{
 
 .secPrincipal
 {
-    width: 90%;
-    height: 80%;
+    width: 100%;
+    height: 90%;
     display:inline-block;
     text-align:center;
     /*border:groove;*/
     /*border-color: var(--pcolor5);*/
 }
 
-.perfil
-{
-    background-color: var(--pcolor3);
+.perfil {
+    background-color: hsl(0, 0%, 92%);
+    width: 25%;
+    height: 100%;
+    clear: both;
+    font-family: Georgia;
+    float: left;
+    /*    background-color: var(--pcolor3);
     width:30%;
     height:90%;
     clear:both;
@@ -151,14 +156,13 @@ button{
     border-bottom-left-radius: 4%;
     font-family:Georgia;
     font-size:large;
-    color:darkslategrey;
-
+    color:darkslategrey;*/
 }
 
 .acciones
 {
-    width:70%;
-    height:90%;
+    width:75%;
+    height:100%;
     float:right;
     background-color:white;
     /*background-color:#F5F5F5;*/
@@ -213,8 +217,8 @@ section a
     height:100%;
     float:right;
     /*background-color:lightpink;*/
-    border-top-right-radius: 4%;
-    border-bottom-right-radius: 4%;
+/*    border-top-right-radius: 4%;
+    border-bottom-right-radius: 4%;*/
     text-align:center;
     font-family:Georgia;
     background-color:white;
@@ -225,12 +229,21 @@ section h3
     font-family:Georgia;
 }
 
-.formRes
-{
+.formRes {
+    width: 70%;
+    text-align: center;
+    padding: 5%;
+    /*display:inline-block;*/
+}
+
+.tableRes {
+    font-family: Georgia;
+    /*margin:auto;*/
+    font-family: Georgia;
+    font-size: small;
+    width: 100%;
+    
     background-color: rgb(198,255,255);
-    width:70%;
-    text-align:center;
-    display:inline-block;
 }
 
 .botonR
@@ -258,14 +271,6 @@ section h3
 	font-size:120%;
 }
 
-.tableRes
-{
-    font-family:Georgia;
-    margin:auto;
-    font-family:Georgia;
-    font-size:small;
-    width:100%;
-}
 
 .ins1
 {

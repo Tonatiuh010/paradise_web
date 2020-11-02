@@ -143,13 +143,45 @@ function loadOptionsEsp() {
 
 }
 
+//function fillOptionsEsp(ob) {
+//    var y = 0;
+//    var arrayEspacios = JSON.parse(ob);
+
+//    var espSection = document.getElementById("boxEsp");
+
+
+
+//    while (arrayEspacios[y]) {
+//        var ckBox = document.createElement("input");
+//        ckBox.setAttribute("type", "checkbox");
+
+//        ckBox.setAttribute("class", "ckB");
+//        ckBox.style.marginRight = "50px";
+
+//        ckBox.value = arrayEspacios[y].num;
+
+//        var lbl = document.createElement("Label");
+//        lbl.innerHTML = arrayEspacios[y].nombre;
+
+//        Destino <------------ Objeto a agregar
+//        espSection.appendChild(lbl);
+//        espSection.appendChild(ckBox);
+//        y++;
+
+//    }
+//}
+
+
 function fillOptionsEsp(ob) {
     var y = 0;
     var arrayEspacios = JSON.parse(ob);
 
     var espSection = document.getElementById("boxEsp");
 
+    var tabla = document.createElement("table");
+    tabla.className = "tablaBox";
 
+    espSection.appendChild(tabla);
 
     while (arrayEspacios[y]) {
         var ckBox = document.createElement("input");
@@ -163,9 +195,17 @@ function fillOptionsEsp(ob) {
         var lbl = document.createElement("Label");
         lbl.innerHTML = arrayEspacios[y].nombre;
 
+        var td = document.createElement("td");
+        var tr = document.createElement("tr");
+
+        td.appendChild(ckBox);
+        td.appendChild(lbl);
         //Destino <------------ Objeto a agregar
-        espSection.appendChild(lbl);
-        espSection.appendChild(ckBox);
+
+        tr.appendChild(td);
+        tabla.appendChild(tr);
+        //espSection.appendChild(lbl);
+        //espSection.appendChild(ckBox);
         y++;
 
     }

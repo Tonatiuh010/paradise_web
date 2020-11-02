@@ -71,11 +71,49 @@ $mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);
             }
 
             }else{
-                echo "Error de BD, no se pudo consultar la base de datos\n";
-                echo "Error MySQL: " . mysql_error();
-                exit();
-            };
+                $errorCod=mysqli_errno($mysqli);
+
+                if ($errorCod==0){
+                    echo '<dialog open id="error2" 
+                              style="width:30%; height:10%; align-items:center; margin:auto; 
+                              background-color: hsl(0, 0%, 92%); color:black; text-align:center; 
+                              padding:4%; font-family:Arial; font-size:larger;  ">
+                              <p>UPS no se encontr&oacute; lo solictado, por favor intente de nuevo</p><br />
+                              <input type="button"  onclick="cerrar()" value="Cerrar" class="errorB"/>
+                          </dialog>';
 
 
+
+                     $sql       = "select * from vw_lugares_basic_list;";
+                    $resultado = $mysqli->query($sql);
+                    
+
+                    if ($resultado->num_rows>0) {
+
+                   
+
+                        while ($fila = $resultado->fetch_assoc()) {
+
+                        $vnumLugar = $fila['No'];
+                        $vnuevoURL= "'../php/PHP_MLUGAR.php?id=$vnumLugar'";
+
+                        echo '</br><section class="lista"><table class="tablaList">';
+                        echo '<tr><th rowspan="7" width="35%"><img src="../img/sinSalon.png" alt="Logotipo" width="100%" class="logoNav" /></th></tr>';
+                        echo '<tr><th rowspan="7"></th></tr>';
+                        echo '<tr><th class="nombreLug"><h3>'.$fila['Lugar'].'<h3></th></tr>';
+                        echo '<tr><th class="description">'.$fila['Descripcion'].'</th></tr>';
+                        echo '<tr><th class="adi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A partir de $'.$fila['Costo'].'
+                                </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apropiado para '.$fila['Capacidad'].' personas</th></tr>';
+                        //echo '<tr><th style="background-color:white;">'.$fila['lugCapacidad'].'</th></tr>';
+                        echo '<tr><th class="thBoton"><input type="button" class="lugBoton" onclick="location.href='.$vnuevoURL.'" value="Consultar Lugar"/></th></tr>';
+                        echo '<table/></section></br>';
+                
+                        //header('Location: ../html/HTML_MLUGAR.html?id='.$vnumLugar);
+                    }
+                }
+                
+            }
+
+            }
 
 ?>

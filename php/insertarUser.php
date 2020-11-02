@@ -69,7 +69,7 @@ include('config.php');                              //Mandamos a llamar el php c
                 {
                     echo '<dialog open id="error2" 
                               style="width:30%; height:10%; align-items:center; margin:auto; 
-                              margin-top:-50%; background-color:rgb(3,95,108); color:white; text-align:center; 
+                              margin-top:-50%; background-color: hsl(0, 0%, 92%); color:black; text-align:center; 
                               padding:4%; font-family:Arial; font-size:larger;  ">
                               <p>No se pudo registrar, utilice otro nombre de usuario o cambie su correo electr&oacute;nico </p><br />
                               <input type="button"  onclick="cerrar()" value="Cerrar" class="errorB"/>
