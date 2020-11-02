@@ -43,7 +43,7 @@ if ($result->num_rows>0){
         //}
 
     }
-        $response=json_encode(array("obLugar"=>$ob_lugar,"type"=>$shc->type));       
+        $response=json_encode($ob_lugar);       
         echo $response;
 } else {
     echo "No data founded</br>";
