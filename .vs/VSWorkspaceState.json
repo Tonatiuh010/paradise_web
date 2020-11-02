@@ -3,8 +3,9 @@
     "",
     "\\css",
     "\\html",
+    "\\js",
     "\\php"
   ],
-  "SelectedNode": "\\css\\CSS_CLIENTE_LUGARES.css",
+  "SelectedNode": "\\js\\adminLugar.js",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,249 @@
-﻿
+﻿:root {
+    /*PALETA DE COLORES PRINCIPAL DE PARADISE*/
+    --color1: rgb(3,95,108);
+    /*Azul fuerte*/
+    --color2: rgb(26,143,196);
+    /*Turquesa oscuro*/
+    --color3: rgb(124,233,254);
+    /*Azul cielo*/
+    --color4: rgb(151,251,197);
+    /*Aquamarine claro*/
+    --color5: rgb(81,237,198);
+    /*Aquamarine intenso*/
+    /*COLORES AUXILIARES DE LA PAGINA*/
+    --pcolor1: rgb(144,218,219);
+    /*azul-claro-gris*/
+    --pcolor2: rgb(0,156,140);
+    /*verde-oscuro-azul*/
+    --pcolor3: rgb(78,209,197);
+    /*turquesa-gris*/
+    --pcolor4: rgb(0,135,209);
+    /*azul-rey-claro*/
+    --pcolor5: rgb(170,255,255);
+    /*azul cielo más claro*/
+    --pcolor6: rgb(0,183,235);
+    /*azul cielo más intenso*/
+}
+
 * {
+    padding: 0;
+    margin: 0;
+}
+
+.NavOficial {
+    height: 8%;
+    padding: 2%;
+    background-color: white;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.Nav2do {
+    /*background-color: rgb(152,228,221);*/
+    background-color: var(--pcolor1);
+    height: 7%;
+    padding-top: 0.5%;
+    color: darkslategray;
+}
+
+.logoNav {
+    float: left;
+}
+
+.barraBusqueda {
+    font-family: Georgia;
+    float: right;
+    width: 40%;
+    height: 10%;
+    clear: both;
+}
+
+.busqueda {
+    width: 70%;
+    height: 550%;
+}
+
+.boton {
+    width: 28%;
+    height: 550%;
+    background-color: var(--pcolor1);
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.pruebaMenu {
+    width: 60%;
+    float: right;
+    font-family: Georgia;
+    font-size: 97%;
+}
+
+.pMTxt {
+    width: 16%;
+    float: right;
+    text-align: left;
+}
+
+.pMT {
+    width: 12%;
+    float: left;
+}
+
+.pMTx {
+    width: 20%;
+    float: left;
+}
+
+.pMT3 {
+    width: 25%;
+    float: left;
+    text-align: right;
+}
+
+.pMT2 {
+    width: 21%;
+    float: left;
+    text-align: right;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+main {
+    width: 100%;
+    height: 100%;
+    clear: both;
+    text-align: center;
+    /*background-color:#F5F5F5;*/
+    /*background-color: #FFFAFA;*/
+}
+
+hr {
+    height: 4px;
+    border-width: 0;
+    background-color: white;
+    width: 80%;
+    text-align: center;
+    display: inline-block;
+}
+
+.hotl {
+    width: 1px;
+    height: 50%;
+    background-color: lightslategray;
+}
+
+
+.principal
+{
+    clear:both;
+    width:100%;
+    height:100%;
+}
+
+.lateral {
+    font-family: Georgia;
+    line-height:1.5;
+    text-align:left;
+    background-color: rgb(171,255,255);
+    width:18%;
+    height:100%;
+    padding:3%;
+    color:darkslategray;
+    float:left;
+}
+
+li a {
+    text-decoration:none;
+    color:darkslategrey;
+}
+
+main nav button {
+    border: none;
+    background-color: var(--pcolor1);
+    font-family: 'Times New Roman';
+    cursor: pointer;
+    line-height: 1.5;
+    font-size:100%;
+}
+
+.sn {
+    width: 70%;
+    height: 100%;
+    padding: 3%;
+    float: right;
+    /*background-color: aquamarine;*/
+}
+
+.slides {
+    width: 100%;
+    /*height: 5%;*/
+    background-color:white;
+
+}
+
+.lugList {
+    width: 100%;
+    /*background-color: pink;*/
+    /*height: 100%;*/
+}
+
+.registerSection {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 8%;
+    padding-right: 8%;
+    font-family: Georgia;
+    line-height: 3;
+    text-align: left;
+    background-color: hsl(0, 0%, 92%);
+}
+
+.in{
+    float:right;
+    padding-right:40%;
+    background-color: var(--pcolor1);
+    border:none;
+    height:6%;
+}
+
+.select {
+    background-color: var(--pcolor1);
+    border:none;
+    width:15%;
+    height:5%;
+    text-align:center;
+}
+
+.tablaBox {
+    /*border-width:medium;*/
+    /*border-color:black;*/
+    /*background-color:aquamarine;*/
+    /*border:solid;*/
+    /*margin: 0 auto;*/
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.hr{
+    margin:1.5%;
+    width:95%;
+    /*padding:0.5%;*/
+}
+
+.botones{
+    width:20%;
+    height:5%;
+    background-color: var(--pcolor5);
+}
+
+/*----------------------- SECCIÓN TONATIUH ALIAS EL BASURERO -------------------------------------------------- */
+/** {
 box-sizing:border-box;}
 
 .slides{
@@ -63,15 +307,6 @@ article{
 }
 
 
-nav {
-    float:left;
-    width:15%;
-    border:3px solid;
-    border-color:black;
-    
-    
-}
-
 
 section:after{
     clear:both;
@@ -127,4 +362,4 @@ h1 {
     align-content:center;
     text-align:center;
     margin:auto 0;
-}
+}*/
