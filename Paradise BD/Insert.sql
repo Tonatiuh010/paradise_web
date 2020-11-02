@@ -158,6 +158,13 @@ máxima satisfacción. Con comodidad podrán recibir varios comensales sin probl
 Disfruten de la velada junto a sus seres queridos o amigos en las instalaciones que les ofrecen.',
 20000,400,3,null,null,null,null,null);
 
+call SP_insert_lugar ('La Casa del Tutuli',
+'La Casa del Tutuli es un restaurante que ofrece banquetes para todos sus eventos sociales importantes. 
+Los platillos que ofrecen van desde cortes finos hasta puerco a la vuelta y vuelta, con el cual además 
+de consentir el paladar de todos sus invitados, los sorprenderán con un atractivo visual. 17 años atendiendo 
+banquetes, los señalan como la mejor opción para darle a su evento el auténtico sabor campirano.',
+25000,200,3,null,null,null,null,null);
+
 select * from lugar;
 select * from diclugar;
 # delete from lugar
@@ -170,7 +177,7 @@ select * from diclugar;
 # ALTER TABLE usuario AUTO_INCREMENT = 0;
 
 ########################################### LUGAR ESPACIO ######################################################
-insert into lugespacio (lg_NumEspacio,lg_NumLugar) values 
+insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
 # Lugar 1 Salón Toscano
 (2,1),(3,1),(4,1),
 # Lugar 2 Salón Casa Blanca
@@ -182,7 +189,9 @@ insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
 # Lugar 5 Jardín Maui
 (1,5),(11,5),
 # Lugar 6 Cocina Rusa
-(4,6),(5,6),(8,6);
+(4,6),(5,6),(8,6),
+# Lugar 7 La casa del Tutuli
+(4,7),(6,7);
 
 select * from lugar;
 select * from espacio;

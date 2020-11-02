@@ -60,9 +60,9 @@
                             </tr>
                             <tr>
                                 <th class="ins1"><label>Número de Teléfono: </label></th>
-                                <th class="ins2"><input class="formInput" name="txtTelefono" type="tel" id="txtTelefono" /></th>
+                                <th class="ins2"><input class="formInput" name="txtTelefono" type="tel" id="txtTelefono" required /></th>
                             </tr>
-
+                            
                             <tr><th><br /><br /></th></tr>
                             <tr>
                                 <th class="ins1"><label>Correo Electrónico: </label></th>
@@ -103,7 +103,13 @@
                         </table>
                     </form>
 
-                     <dialog id="error"                              style="width:30%; height:10%; align-items:center; margin:auto;                              margin-top:-50%; background-color:rgb(3,95,108); color:white; text-align:center;                              padding:4%; font-family:Arial; font-size:larger;  ">                        <p>La contraseña no coincide</p><br />                         <input type="button"  onclick="cerrar()" value="Cerrar"/>                     </dialog>
+                     <dialog id="error" 
+                             style="width:30%; height:10%; align-items:center; margin:auto; 
+                             margin-top:-50%; background-color:rgb(3,95,108); color:white; text-align:center; 
+                             padding:4%; font-family:Arial; font-size:larger;  ">
+                        <p>La contraseña no coincide</p><br />
+                         <input type="button"  onclick="cerrar()" value="Cerrar"/>
+                     </dialog>
 
                 </section> 
                 <section id="inscrito">
@@ -155,7 +161,15 @@
         }
 
 
-        function cerrar()        {            document.getElementById("error").close();            document.getElementById("error2").close();            document.getElementById("error2").close();        }    </script>
+        function cerrar()
+        {
+            document.getElementById("error").close();
+            document.getElementById("error2").close();
+            document.getElementById("error2").close();
+        }
+
+    </script>
+
 
 
 
