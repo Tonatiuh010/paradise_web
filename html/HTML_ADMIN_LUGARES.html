@@ -24,9 +24,9 @@
         <article class="barAdmin">
           
 
-                    <span class="dot" onclick="turnOnPnlConsult()">Consultar</span> 
-                    <span class="dot" onclick="turnOnPnlAdd()">Registrar</span>  
-                    <span class="dot" onclick="turnOnPnlModify()">Modificar</span>  
+                    <button class="dot" onclick="currentSlides(1)">Consultar</button> 
+                    <button class="dot" onclick="currentSlides(2)">Registrar</button>  
+                    
           
 
         </article>
@@ -73,7 +73,7 @@
         <article  class="artMain">
 
 
-            <section class="slides" >
+            <section class="slides fade" >
                 <section class='searchForm'>
                     <input type='search' placeholder='B&uacute;squeda de lugares.'  id='id_lugar'>                    
                     <input type='button' value='Buscar' onclick="buscarLugar()" id="btnS" style="display:block">
@@ -83,7 +83,7 @@
                           
             </section>
 
-            <section class="slides" >
+            <section class="slides fade" >
                 <section class='registerSection' name='searchAdminForm'>
 
                         <label id="lblNum" style="display:none"> Número del Lugar:</label> <input id="tbNum" style="display:none" type="text" disabled><br />
@@ -189,7 +189,32 @@
             
         }
        
-        
+        var slide = 1;
+
+        showSlides(slide);
+
+        function plusSlides(n) {
+            showSlides(slide+=n);
+        }
+
+        function currentSlides(n) {
+            showSlides(slide = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slideArray = document.getElementsByClassName("slides");
+            var dotArray = document.getElementsByClassName("dot");           
+            
+
+            for (i = 0; i < slideArray.length;i++){
+                dotArray[i].className = dotArray[i].className.replace("active", "");
+
+                slideArray[slide - 1].style.display = "block";
+                dotArray[slide - 1].className += "active";
+            }
+        }
+
     </script>
 
 
