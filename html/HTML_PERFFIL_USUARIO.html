@@ -7,7 +7,7 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Paradise - Perfil</title>
 </head>
-<body>
+<body onload="sesion();">
     <nav class="NavOficial">
         <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -30,74 +30,28 @@
     <main>
         <nav>
             <section class="Nav2do">
-                <hr class="hotl"/>&nbsp;&nbsp;&nbsp;<a href="construccion.html">Inicio</a>&nbsp;&nbsp;&nbsp;<hr class="hotl"/>&nbsp;&nbsp;&nbsp;
-                <a href="construccion.html">Agentes</a>&nbsp;&nbsp;&nbsp;<hr class="hotl"/>&nbsp;&nbsp;&nbsp;<a href="construccion.html">Proveedores</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                <hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">Inicio</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                <a href="construccion.html">Agentes</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">Proveedores</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
                 <a href="construccion.html">Otros Servicios</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">Contacto</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />
             </section>
         </nav>
-        <br /><br /><br />
+
         <section class="secPrincipal">
             <section class="perfil">
                 <br />
-                <img src="../img/user_sin_foto.png" width="40%"/>
+                <img src="../img/user_sin_foto.png" width="40%" />
                 <br />
                 <i>Juanito Alcachofa</i>
                 <br /><br /><br />
                 <section class="Plateral">
-                    <hr /><br /><button class="button2" onclick="usarReservacion()">Reservación</button><br />
                     <hr /><br /><button class="button2" onclick="usarHistorial()">Historial</button><br />
                     <hr /><br /><button class="button2" onclick="usarConfiguracion()">Configuración</button>
                     <hr /><br /><button class="button2" onclick="">Cerrar Sesión</button><hr />
                 </section>
             </section>
+
             <section class="acciones">
-                <section class="reservacion" id="reservacion" style="display:none">
-                    <br />
-                    <h3>Haz tu reservación</h3>
-                    <br />
-                    <form class="formRes">
-                        <table class="tableRes">
-                            <tr>
-                                <th class="ins1"><label>Ciudad: </label></th>
-                                <th class="ins2">
-                                    <select name="ciudad" id="ciudad" class="formInput" required>
-                                        <option value="Tijuana">Tijuana</option>
-                                        <option value="Ensenada">Ensenada</option>
-                                        <option value="Rosarito">Rosarito</option>
-                                        <option value="Tecate">Tecate</option>
-                                        <option value="Mexicali">Mexicali</option>
-                                        <option value="Mexicali">Otra</option>
-                                    </select>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Lugar: </label></th>
-                                <th class="ins2"><input name="lugar" type="text" id="lugar" class="formInput"  required /></th>
-                                <!--AGREGAR UN SELECT QUE EXTRAIGA TODOS LOS LUGARES SEGUN LA CIUDAD QUE SELECCIONO EL CLIENTE-->
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Fecha a reservar: </label></th>
-                                <th class="ins2"><input name="fechaRes" type="date" id="fechaRes" class="formInput"  required /></th>
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Número de Teléfono: </label></th>
-                                <th class="ins2"><input class="formInput" name="tcTelefono" type="tel" id="tcTelefono" /></th>
-                                <!--AGREGAR UN SELECT CON LOS NUMEROS DE TELEFONO QUE EXTRAIGA DE LA BASE DE DATOS-->
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Correo Electrónico: </label></th>
-                                <th class="ins2"><input name="ccCorreo" type="email" maxlength="30" id="ccCorreo" class="formInput" required /></th>
-                                <!--AGREGAR UN SELECT CON LOS NUMEROS DE TELEFONO QUE EXTRAIGA DE LA BASE DE DATOS-->
-                            </tr>
-                            <tr>
-                                <th class="ins1"><label>Comentario: </label></th>
-                                <th class="ins2"><input name="comment" type="text" id="comment" class="formComment"  /></th>
-                            </tr>
-                            <tr><th><br /><br /></th></tr>
-                            <tr><th>&nbsp;&nbsp;<input type="submit" name="submit" value="Reservar" class="botonR" onclick="registrarUS()" /><br />&nbsp;</th></tr>
-                        </table>
-                    </form>
-                </section>
+                
 
                 <section class="historial" id="historial" style="display:none">
                     <br />
@@ -108,67 +62,100 @@
 
                 <section class="configuracion" id="configuracion" style="display:none">accion de configuracion</section>
             </section>
+
+
+
         </section>
+
     </main>
 
-    
-
-        <script>
-            function usarReservacion() {
-                document.getElementById('reservacion').style.display = "block";
-                document.getElementById('historial').style.display = "None";
-                document.getElementById('configuracion').style.display = "None";
-
-            }
 
 
-            function usarHistorial() {
-                document.getElementById('reservacion').style.display = "None";
-                document.getElementById('historial').style.display = "block";
-                document.getElementById('configuracion').style.display = "None";
+    <script>
 
-                document.getElementById("listaRes").innerHTML = "";
+        function usarHistorial() {
+            document.getElementById('reservacion').style.display = "None";
+            document.getElementById('historial').style.display = "block";
+            document.getElementById('configuracion').style.display = "None";
 
-                var ajax = new XMLHttpRequest();
+            document.getElementById("listaRes").innerHTML = "";
 
-                ajax.onreadystatechange = function () {
-                    if (ajax.readyState == 4 && ajax.status == 200) {
-                        document.getElementById("listaRes").style.display = "block";
-                        document.getElementById("listaRes").innerHTML = ajax.responseText;
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("listaRes").style.display = "block";
+                    document.getElementById("listaRes").innerHTML = ajax.responseText;
+                }
+            };
+
+
+            ajax.open("GET", "../php/showResPerUs.php?", true);
+            ajax.send();
+        }
+
+        function usarConfiguracion() {
+            document.getElementById('reservacion').style.display = "None";
+            document.getElementById('historial').style.display = "None";
+            document.getElementById('configuracion').style.display = "block";
+
+        }
+
+        function buscarRes() {
+            document.getElementById("listaRes").innerHTML = "";
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("listLugar").style.display = "block";
+                    document.getElementById("listLugar").innerHTML = ajax.responseText;
+                }
+            };
+
+
+            ajax.open("GET", "../php/buscarLugares.php?", true);
+            ajax.send();
+
+        }
+
+    </script>
+
+    <script>
+
+        function sesion() {
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+                if (ajax.status == 200 && ajax.readyState == 4) {
+
+
+                    var obj_user = JSON.parse(ajax.responseText); 
+                    var respuesta = obj_user.res;
+                    var usuario = obj_user.tipo;
+
+
+                    if (respuesta == true && usuario=='Cliente') {
+                        document.getElementById('login').style.display = "block";
+                        document.getElementById('log').style.display = "none";
+
+                        var type_user = ajax.responseText;
+                        console.log(type_user);
+
+                    } else {
+                        location.href = "../index.html";
                     }
-                };
 
 
-                ajax.open("GET", "../php/showResPerUs.php?", true);
-                ajax.send();
+                }
             }
 
-            function usarConfiguracion() {
-                document.getElementById('reservacion').style.display = "None";
-                document.getElementById('historial').style.display = "None";
-                document.getElementById('configuracion').style.display = "block";
+            ajax.open("GET", "php/sesion_verify.php?", true);
+            ajax.send();
+        }
 
-            }
-
-            function buscarRes() {
-                document.getElementById("listaRes").innerHTML = "";
-
-                var ajax = new XMLHttpRequest();
-
-                ajax.onreadystatechange = function () {
-                    if (ajax.readyState == 4 && ajax.status == 200) {
-                        document.getElementById("listLugar").style.display = "block";
-                        document.getElementById("listLugar").innerHTML = ajax.responseText;
-                    }
-                };
-
-
-                ajax.open("GET", "../php/buscarLugares.php?", true);
-                ajax.send();
-
-            }
-
-        </script>
+    </script>
 
 </body>
 </html>

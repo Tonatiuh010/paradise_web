@@ -38,13 +38,15 @@
             </section>
             <?php
                 include('config.php');                              //Mandamos a llamar el php con las variables $HOST,$USER,$PASS,$BD que contienen las credenciales
-                $mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);     //Creamos una variable con las credenciales
+                $mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
+                //$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);     //Creamos una variable con las credenciales
 
                 $vnum= $_GET['id'];
 
             if($mysqli)                                     //Intentamos conectar con Mysql
             {
-                $bd=mysqli_select_db($mysqli,$BD);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
+                //$bd=mysqli_select_db($mysqli,$BD);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
+                $bd=mysqli_select_db($mysqli,$dbname);                
                 if($bd)                                     //Intentamos acceder a la BD
                 {
                  
@@ -52,7 +54,7 @@
                             $sql       = "call SP_lugares_complete_list (".$vnum.");";
                             $resultado = $mysqli->query($sql);
 
-                            //echo "Case number 2";
+                            //echo "Case number 2";                            
 
                             if ($resultado->num_rows>0) {
                               echo '</br><section><table class="tablelug" >';

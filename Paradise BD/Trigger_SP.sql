@@ -143,6 +143,7 @@ select * from usuario;
 
 DELIMITER //
 create procedure SP_insert_lugar(
+	out numLug int,    
 	in nombre varchar(30),
     in descripcion text,
     in costo decimal(12,2),
@@ -156,8 +157,8 @@ create procedure SP_insert_lugar(
     in cp char(5),
 	in municipio char(3)
 )
-begin
-	
+begin	    
+    
     if (calle is not null and numInt is not null and cp is not null) then
 		
         insert into lugar(lugNombre,lugDescripcion,lugCosto,lugCapacidad,FK_TipoL) values
@@ -171,13 +172,28 @@ begin
         (nombre,descripcion,costo,capacidad,tipoLug);
     end if;
     
+    select lugNum from lugar order by lugNum desc limit 1 into numLug;
+   
+end//
+DELIMITER 
+
+##-------------------------------------------- Insert Espacios - Lugar ---------------------------------
+
+#drop procedure SP_insertar_EspLug;
+
+DELIMITER //
+create procedure SP_insertar_EspLug (
+	in numEsp int,
+    in numLug int
+)
+begin 
+	insert into lugespacio (lg_NumEspacio,lg_NumLugar) values (numEsp,numLug);
 end//
 DELIMITER ;
 
 ######################################### INICIO DE SESIÓN ###################################################
 
 #No ejecutar sin antes antes ejecutar la vista 'vw_primary_user' en la linea 94 en 'Consultas.sql'
-
 
 DELIMITER //
 create procedure sp_log_in

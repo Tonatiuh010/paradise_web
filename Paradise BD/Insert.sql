@@ -105,7 +105,7 @@ select * from usuario;
 
 ############################################ LUGAR #########################################################
 
-call SP_insert_lugar ('Salón Toscano',
+call SP_insert_lugar (@numLug,'Salón Toscano',
 'Se trata de un cómodo y cálido lugar en el que podrán compartir con sus familiares y 
 allegados. Allí les brindarán los servicios necesarios para que el evento sea 
 perfecto y para que no tengan que preocuparse por nada. Salón Toscano cuenta con 
@@ -114,7 +114,7 @@ deseen y desarrollar como mejor les parezca la celebración de su evento.
 El lugar dispone de Estacionamientos y vigilancia privada durante todo su evento.',
 2500.00,70,1,'Matamoros','7545','5','22245','TIJ');
 
-call SP_insert_lugar ('Salón Casa Blanca',
+call SP_insert_lugar (@numLug,'Salón Casa Blanca',
 'Un hermoso salón finamente decorado y con unas instalaciones de alta calidad que ahora les 
 abre sus puertas para que puedan celebrar su evento y que salga perfecto. Las instalaciones 
 de este salón son de excelente calidad y están muy bien acondicionadas para albergar toda 
@@ -123,7 +123,7 @@ Gracias a su gran extensión el Salón Casa Blanca puede albergar eventos de 100
 personas garantizando el confort en todo momento.',
 3500.00,500,1,'Juarez','40',null,'22289','ESE');
 
-call SP_insert_lugar ('Belio Restaurante',
+call SP_insert_lugar (@numLug,'Belio Restaurante',
 'Belio Restaurante es un lugar mágico para que ustedes celebren con el mar de fondo. La suave 
 brisa marítima será una invitada más a la fiesta y les acompañará durante toda la noche, desde 
 el atardecer en el mar hasta que salen los primeros rayos del sol después de la fiesta. Además 
@@ -133,14 +133,14 @@ el lugar cuenta con varios salones, terraza y un balcón que da directamente a l
 Además de la cocina para uso del catering del restaurante.',
 30000.00,200,3,'San Gabriel','8567',null,'22255','MXL');
 
-call SP_insert_lugar ('Puerto Nuevo',
+call SP_insert_lugar (@numLug,'Puerto Nuevo',
 'Puerto Nuevo Baja, Hotel y Villas es un precioso y exclusivo hotel a la orilla de la playa, 
 que cuenta con grandes vistas, el cual tiene la experiencia de ofrecer sus instalaciones y 
 servicios para su celebración, convirtiendo su evento en algo único e inolvidable. El resort 
 cuenta con 3 salones para eventos, 2 jardines para la ceremonia religiosa o civil, un bar, 
 spa y estacionamiento.',60061.00,600,7,'San Marcos','1234','18','22345','ESE');
 
-call SP_insert_lugar ('Jardín Maui',
+call SP_insert_lugar (@numLug,'Jardín Maui',
 'Por su ambiente encantador y por la elegancia de sus espacios, Jardín Maui es el lugar 
 ideal para sus eventos. En estas instalaciones podrán celebrar tanto un enlace al exterior 
 como en el interior. Por su parte, el equipo del salón pondrá a su disposición sus variados 
@@ -149,7 +149,7 @@ servicios de calidad les garantizará momentos inolvidables.',
 19000,200,5,'Av. Londres','1857',null,'22120','ESE');
 
 #---------------- insert de prueba sin domiclio ---------------------------------------------
-call SP_insert_lugar ('Cocina Rusa Familia Samarin',
+call SP_insert_lugar (@numLug,'Cocina Rusa Familia Samarin',
 'Cocina Rusa Familia Samarin se encuentra en la encantadora ciudad de Ensenada. Es un restaurante 
 con carácter, de impresionantes espacios y sabores y un estilo vibrante que cautivará a todos los 
 invitados. Se sentirán como en casa, ya que el objetivo del personal del lugar es conseguir su 

@@ -25,11 +25,12 @@ $vcorreo = $_GET['txtCorreo'];
 
 
 include('config.php');                              //Mandamos a llamar el php con las variables $HOST,$USER,$PASS,$BD que contienen las credenciales
-$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);     //Creamos una variable con las credenciales
-
+ $mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
+    //$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);  
     if($mysqli)                                     //Intentamos conectar con Mysql
     {
-        $bd=mysqli_select_db($mysqli,$BD);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
+        $bd=mysqli_select_db($mysqli,$bdname);          //Creamos una variable con la variable $BD que contiene el nombre de la bd
+        //$bd=mysqli_select_db($mysqli,$BD);
         if($bd)                                     //Intentamos acceder a la BD
         {
             
