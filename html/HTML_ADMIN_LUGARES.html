@@ -20,15 +20,12 @@
     <section class="sectionPrincipal">
     
         <article id="barAdmin">
-            <table class="upBar">
+          
 
-                <tr>
-
-                    <td> <button onclick="turnOnPnlConsult()">Consultar</button> </td>
-                    <td>  <button onclick="turnOnPnlAdd()">Registrar</button>  </td>
-                    <td>  <button onclick="turnOnPnlModify()">Modificar</button>  </td>
-                </tr>
-            </table>
+                    <span class="dot" onclick="turnOnPnlConsult()">Consultar</span> 
+                    <span class="dot" onclick="turnOnPnlAdd()">Registrar</span>  
+                    <span class="dot" onclick="turnOnPnlModify()">Modificar</span>  
+          
 
         </article>
 
@@ -71,10 +68,10 @@
 
 
 
-        <section  id="artMain">
+        <section  class="artMain">
 
 
-            <section class="consultPanel" id="pnlConsult" style="display:Block">
+            <section class="slides" >
                 <section class='searchForm'>
                     <input type='search' placeholder='B&uacute;squeda de lugares.'  id='id_lugar'>
                     <input type='button' value='Buscar' onclick="buscarLugar(true)" id="btnM" style="display:none">
@@ -85,7 +82,7 @@
                           
             </section>
 
-            <section class="addPanel" id="pnlAdd" style="display:none">
+            <section class="slides" >
                 <section class='registerSection' name='searchAdminForm'>
 
                         <label id="lblNum" style="display:none"> Número del Lugar:</label> <input id="tbNum" style="display:none" type="text" disabled><br />
