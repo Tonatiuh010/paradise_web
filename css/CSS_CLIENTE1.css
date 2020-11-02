@@ -189,11 +189,11 @@ footer
     font-size:97%;
 }
 
-.pMTxt
-{
-    width:16%;
-    float:right;
-    text-align:left;
+.pMTxt {
+    width: 16%;
+    float: right;
+    text-align: left;
+    padding-right: 1%;
 }
 
 .pMT
@@ -220,6 +220,14 @@ footer
     width:21%;
     float:left;
     text-align:right;
+}
+
+.pMTxt1 {
+    width: 16%;
+    float: right;
+    text-align: right;
+    margin-top: -1.5%;
+    padding-right: 2.5%;
 }
 
 button{

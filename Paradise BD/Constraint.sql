@@ -26,3 +26,12 @@ add constraint CK_agente_genero check(agGenero = 'Masculino' or agGenero= 'Femen
 
 alter table usuario
 add constraint CK_usuario_tipoUS check(usTipoUS = 'Agente' or usTipoUS = 'Cliente' or usTipoUS = 'Administrador');
+
+#Ejecutar sin falta
+
+alter table cliente
+add constraint UQ_foreign_userCli unique (FK_usuario);
+
+alter table agente
+add constraint UQ_foreign_userAg unique (FK_usuario);
+

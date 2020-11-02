@@ -174,6 +174,31 @@ begin
 end//
 DELIMITER ;
 
+######################################### INICIO DE SESIÓN ###################################################
 
+#No ejecutar sin antes antes ejecutar la vista 'vw_primary_user' en la linea 94 en 'Consultas.sql'
+
+
+DELIMITER //
+create procedure sp_log_in
+(
+	in usern varchar(60),
+    in passwd varchar(30)
+)
+begin
+	set @tipoU=(select tipo from vw_primary_user
+				where contrasenia = passwd  and (correo=usern or username=usern));
+                
+	if(@tipoU='Cliente') then
+		select numc as id, numU, tipo from vw_primary_user
+		where contrasenia = passwd  and (correo=usern or username=usern);
+	else
+		select mat as id, numU, tipo from vw_primary_user
+		where contrasenia = passwd  and (correo=usern or username=usern);
+	end if;
+end// 
+DELIMITER ;
+
+# call sp_log_in ('usuario26','guadalupe');
 
 

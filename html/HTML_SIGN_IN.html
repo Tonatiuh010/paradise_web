@@ -15,7 +15,12 @@
             <article class="pMTx"><a href="construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-            <article class="pMTxt"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+            <article class="pMTxt" id="sesion"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+
+            <article class="pMTxt1" id="sesion" style="display:none;"><a href="HTML_SIGN_IN.html";>
+                <img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="../img/log_out.png" width="25%;" /></a></article>
+
         </section>
         <br />
         <section class="barraBusqueda">
@@ -29,20 +34,25 @@
 
     </nav>
     <main>
+                <dialog id="errorLog" close>
+                    Sesión iniciada <br />
+                    <a href="../index.html" ;> Continuar </a>
+                </dialog>
         <br />
         <section class="signImg">
             <section class="sign">
                 <br />
+
                 <section class="signIn">
                     <br />
                     <img src="../img/logoOficial.png" alt="Logotipo" width="90%" />
-                    <form class="uspss">
+                    <form class="uspss"> <!--action="../php/conectividad.php" method="get"-->
                         <br /><label>Correo o nombre de usuario: </label><br /><br />
-                        <input  class="formInput" name="cliNombre" type="text" maxlength="30" id="User" required/>
+                        <input  class="formInput" name="cliNombre" id="User" type="text" maxlength="30" required/>
                         <br /><br /><label>Contraseña:</label><br /><br />
-                        <input class="formInput" name="cliNombre" type="password" maxlength="30" id="Password" required/>
+                        <input class="formInput" name="password" id="Password" type="password" maxlength="30" required/>
                         <br /><br /><br />
-                        <button type="button" id="signIn" class="botonR" onclick="inicio_sesion()">Acceder</button>
+                        <button type="button" id="signIn" class="botonR" onclick="inicio_sesion()">Acceder</button>  <!--onclick="inicio_sesion()-->
                         <br /><br /><a href="construccion.html";>¿Olvidaste tu contraseña?</a>
                         <br /><br /><hr /><p>Crear cuenta</p>
                         <a href="HTML_REGISTRO.html"><section id="newUS" class="secbotonR">Crear cuenta</section></a>
@@ -51,7 +61,7 @@
                     </form>
                 </section>
             </section>
-        </section>
+        </section> 
     </main>
     <script>
         function inicio_sesion()
@@ -62,20 +72,47 @@
 
 
             var ajax = new XMLHttpRequest();
+            var dialogo = document.getElementById('errorLog');
+
+
             ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
+                if (ajax.status == 200 && ajax.readyState == 4)
+                {
                     var respuesta = ajax.responseText;
-                    if(respuesta==true)
-                    {
-                        location.href = "HTML_PRINCIPAL.html";
+                   if (respuesta == true) {
+                        location.href = "../index.html";
+                       
+                       //dialogo.showModal();
+                       //document.getElementById('errorLog').style.display = "block";
                     } else {
-                        document.getElementById("prueba").innerHTML = "No se pudo conectar";
+                        //document.getElementById('errorLog').innerHTML = ajax.responseText;
+                        //document.getElementById('errorLog').style.display = "block";
+                        document.getElementById('errorLog').innerHTML = '';
+                        document.getElementById('errorLog').innerHTML = ajax.responseText;
+
+                        dialogo.showModal();
                     }
+
+                    
                 }
-            };
+            }
+
             ajax.open("GET", "../php/conectividad.php?user=" + user + "&passwd=" + passwd, true);
             ajax.send();
 
+            //var ajax = new XMLHttpRequest();
+            //ajax.onreadystatechange = function () {
+            //    if (ajax.readyState == 4 && ajax.status == 200) {
+            //        var respuesta = ajax.responseText;
+            //        if(respuesta==true)
+            //        {
+            //            location.href = "../index.html";
+            //        } else {
+            //            document.getElementById("prueba").innerHTML = "No se pudo conectar";
+            //        }
+            //    }
+            //};
+            
         }
 
         function showIcon()
@@ -83,6 +120,11 @@
             document.getElementById('icon').style.display = "block";
         }
 
+        function cerrar()
+        {
+            document.getElementById("errorLog").close();
+
+        }
 
 
     </script>

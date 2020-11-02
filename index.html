@@ -5,7 +5,7 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Paradise Prueba 1</title>
 </head>
-<body>
+<body onload="sesion();">    <!--location.reload()   esta función recarga la pagina-->
         <nav>
             <img src="img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -14,7 +14,12 @@
                 <article class="pMTx"><a href="./html/construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
                 <article class="pMT3"><a href="./html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
                 <article class="pMT2"><a href="./html/construccion.html" ;>PROMOCIONES</a></article>
-                <article class="pMTxt"><a href="./html/HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+                <article class="pMTxt" id="log"><a href="./html/HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+
+                <article class="pMTxt1" id="login" style="display:none;">
+                <a href="./html/construccion.html";><img src="img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="./php/salir.php";><img src="img/log_out.png" width="25%;" /></a></article>
+
             </section>
             <br />
             <section class="barraBusqueda">
@@ -22,17 +27,6 @@
                 <button type="button" id="search" class="boton">Buscar</button>
             </section>
             
-            <!--<section  class="menu">
-                <table>
-                    <tr class="textmMnu">
-                        <th class="menuText">INICIO</th>
-                        <th >¿QUIÉNES SOMOS?</th>
-                        <th >LUGARES Y SALONES</th>
-                        <th class="menuText">PROMOCIONES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>INICIAR SESION</th>
-                    </tr>
-                </table>
-            </section>-->
             <br />
 
         </nav>
@@ -73,6 +67,31 @@
 
         <footer></footer>
     </main>
+
+    <script>
+
+        function sesion() {
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+                if (ajax.status == 200 && ajax.readyState == 4)
+                {
+                    var respuesta = ajax.responseText;
+                    if (respuesta == true) {
+                        document.getElementById('login').style.display = "block";
+                        document.getElementById('log').style.display = "none";
+                    }
+
+                    
+                }
+            }
+
+            ajax.open("GET", "php/sesion_verify.php?", true);
+            ajax.send();
+        }
+
+    </script>
 
 </body>
 </html>

@@ -67,7 +67,6 @@ select * from lugar;
 #------------------------------------------------------------------------------------------------------------------
 
 #SP o vista para los filtros de busqueda
-#ESTO ES UNA PRUEBA, NO TOCAR!!!!!
 
 alter view vw_lugares_filtros_list as
 	select lugNum as num, lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
@@ -86,6 +85,28 @@ select num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list
 where Municipio='MXL' and Capacidad>=100 and Capacidad<=200;
 
 select num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where Categoria='3' ;
+
+#----------------------------------------------------------------------------------------------------------------
+select * from cliente;
+select * from agente;
+
+# Vista para obtener las llaves primarias y tipo de usuario de los diferentes usuarios
+create view vw_primary_user as
+	select cliNum as numC, usNum as numU, usTipoUS as tipo, agMatricula as mat, usNombre as username, usContrasenia as contrasenia, usCorreo as correo
+	from cliente as cli right join usuario as us
+	on cli.FK_usuario=us.usNum right join agente as ag
+	on ag.FK_usuario=us.usNum 
+	union all
+	select cliNum as numC, usNum as numU, usTipoUS as tipo, agMatricula as mat, usNombre as username, usContrasenia as contrasenia, usCorreo as correo
+	from cliente as cli left join usuario as us
+	on cli.FK_usuario=us.usNum left join agente as ag
+	on ag.FK_usuario=us.usNum 
+	where cliNum is null or agMatricula is null;
+    
+
+    select * from usuario;
+
+
 
 ###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
