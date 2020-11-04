@@ -223,6 +223,7 @@ select * from espacio;
 
 
 
+
 /*########################################### Proveedores ###########################################################################
 
 call SP_insert_proveedor('Palacios Diseño',' Palacios Diseño y Decoración cuenta con 55 años de experiencia en el 

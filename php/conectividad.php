@@ -21,7 +21,7 @@ $mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);     //Creamos una variable con l
                             session_start();
                         // Guardar datos de sesión
 
-                        $_SESSION["id"] = $fila['id'];
+                        $_SESSION['id'] = $fila['id'];
                         $_SESSION['user'] = $fila['numU'];
                         $_SESSION['type'] = $fila['tipo'];
                         
