@@ -38,8 +38,8 @@
             </section>
             <?php
                 include('config.php');                              //Mandamos a llamar el php con las variables $HOST,$USER,$PASS,$BD que contienen las credenciales
-                $mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
-                //$mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);     //Creamos una variable con las credenciales
+                //$mysqli=@mysqli_connect($servername	,$username	,$password	,$dbname);
+                $mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);     //Creamos una variable con las credenciales
 
                 $vnum= $_GET['id'];
 

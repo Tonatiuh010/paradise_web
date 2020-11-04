@@ -35,6 +35,8 @@ include('config.php');                              //Mandamos a llamar el php c
                         //echo '<tr><th style="background-color:white;">'.$fila['lugCapacidad'].'</th></tr>';
                         echo '<tr><th class="thBoton"><input type="button" class="lugBoton" onclick="location.href='.$vnuevoURL.'" value="Consultar Lugar"/></th></tr>';
                         echo '<table/></section></br>';
+
+                        
                 
                         //header('Location: ../html/HTML_MLUGAR.html?id='.$vnumLugar);
                     }
