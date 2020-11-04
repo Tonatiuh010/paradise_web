@@ -3,15 +3,19 @@
 session_start();
 //verificar si la sesion ya tiene variables, 
 //es decir, si está activa o no
-if($_SESSION["id"] !='' && $_SESSION['user'] !='' && $_SESSION['type'] !='' )
+//($_SESSION['id'] !='' && $_SESSION['user'] !='' && $_SESSION['type'] !='' ) no sirve
+
+
+if($_SESSION != null)
 {   
-    $ob_user=array('res'=>true,'tipo'=>$_SESSION['type']);
+    $ob_user=array('res'=>true,'tipo'=>$_SESSION['type'],'user'=>$_SESSION['id']);
     echo json_encode($ob_user);
 
 }else
 {   
     session_destroy();
-    $ob_user=array('res'=>false);
+    //header("Location:../index.html");
+    $ob_user=array('res'=>false,'tipo'=>'','user'=>'');
     echo json_encode($ob_user);
 }
 

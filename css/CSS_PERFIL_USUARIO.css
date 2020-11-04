@@ -126,6 +126,14 @@ nav a
     text-align:right;
 }
 
+.pMTxt1 {
+    width: 16%;
+    float: right;
+    text-align: right;
+    margin-top: -1.5%;
+    padding-right: 2.5%;
+}
+
 button{
     cursor:pointer;
 }
@@ -329,4 +337,20 @@ section h3
     color: darkslategrey;
     width:90%;
 
+}
+
+
+dialog[open] {
+    width:30%; 
+    height:10%; 
+    align-items:center; 
+    margin:auto; 
+    margin-top:-50%;
+    background-color: rgb(3,95,108);
+    color: white;
+    text-align: center;
+    padding: 4%;
+    font-family: Arial;
+    font-size: larger;
+    
 }

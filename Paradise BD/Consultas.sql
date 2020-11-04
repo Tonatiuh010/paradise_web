@@ -107,15 +107,72 @@ create view vw_primary_user as
     select * from usuario;
     
 #-----------------------------------------------------------------------------------------------------------------
-select * from pre_reservacion;
-prFechaRegistro
-prStatus
-FK_Cliente
+alter view vw_cliente_perfil as	
+    select cliNum as num, concat(cliNombre,' ',cliApPat,' ',cliApMat) as Nombre, 
+	cliFecNac as FN, cliEdad as Edad, cliTelefono as Telefono, 
+	usNombre as usuario, char_length(usContrasenia) as Contrasenia, usCorreo as Email
+	from cliente inner join usuario
+	on FK_usuario=usNum; 
 
-prFechaInic
-prFechaFin
-FK_Lugar
+DELIMITER //
+create procedure sp_perfil_cliente
+(
+	in id int
+)
+begin
+	select * from vw_cliente_perfil
+    where num=id;
+end//
+DELIMITER ;
 
+
+select * from cliente;
+select * from usuario;
+select * from vw_cliente_perfil;
+
+call sp_perfil_cliente (10);
+#-----------------------------------------------------------------------------------------------------------------
+#drop procedure sp_update_perfilCli;
+
+DELIMITER //
+create procedure sp_update_perfilCli
+(
+	in campo varchar(20),
+	in cambio varchar(20),
+    in cliente int
+)
+begin
+	case
+	  when campo='user' then
+			UPDATE cliente INNER JOIN usuario
+			ON FK_usuario = usNum 
+			SET usNombre = cambio
+			where cliNum=cliente;
+	  when campo='password' then
+			UPDATE cliente INNER JOIN usuario
+			ON FK_usuario = usNum 
+			SET usContrasenia = cambio
+			where cliNum=cliente;
+	  when campo='telefono' then
+			UPDATE cliente
+			SET cliTelefono = cambio
+			where cliNum=cliente;
+	end case;
+    
+end//
+DELIMITER ;
+
+call sp_update_perfilCli('user','MagdalenaTV',5);
+
+/*
+UPDATE cliente INNER JOIN usuario
+ON FK_usuario = usNum 
+SET usNombre = 'pancrasio'
+where cliNum=2;
+*/
+
+select * from usuario;
+select * from cliente;
 
 ###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
@@ -123,6 +180,7 @@ FK_Lugar
 select * from lugar;
 select * from diclugar;
 select * from espacio;
+
 
 ######################################### Vistas ####################################
 
