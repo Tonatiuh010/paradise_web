@@ -92,13 +92,13 @@ function buscarLugar() {
 
     
         searchForm = {
-            search: document.getElementById("id_lugar").value
+            search: document.getElementById("shcId").value
             
         };
     
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-
+            //console.log(ajax.responseText);
             fillLugarShc(ajax.responseText);
         }
     };
@@ -110,7 +110,7 @@ function buscarLugar() {
 }
 
 function modifyLugar(a) {
-    turnOnPnlAdd();
+    showSlides(1);
     document.getElementById("btnModify").style.display = "block";
     document.getElementById("btnSend").style.display = "none";
 
@@ -143,33 +143,6 @@ function loadOptionsEsp() {
 
 }
 
-//function fillOptionsEsp(ob) {
-//    var y = 0;
-//    var arrayEspacios = JSON.parse(ob);
-
-//    var espSection = document.getElementById("boxEsp");
-
-
-
-//    while (arrayEspacios[y]) {
-//        var ckBox = document.createElement("input");
-//        ckBox.setAttribute("type", "checkbox");
-
-//        ckBox.setAttribute("class", "ckB");
-//        ckBox.style.marginRight = "50px";
-
-//        ckBox.value = arrayEspacios[y].num;
-
-//        var lbl = document.createElement("Label");
-//        lbl.innerHTML = arrayEspacios[y].nombre;
-
-//        Destino <------------ Objeto a agregar
-//        espSection.appendChild(lbl);
-//        espSection.appendChild(ckBox);
-//        y++;
-
-//    }
-//}
 
 
 function fillOptionsEsp(ob) {
@@ -282,6 +255,8 @@ function fillLugarShc(ob) {
     list.style.display = "block"; 
     var arrayLugar = JSON.parse(ob);
 
+    console.log(arrayLugar);
+
     var x = 0;
 
 
@@ -289,7 +264,7 @@ function fillLugarShc(ob) {
 
         var table = document.createElement("table");
 
-        table.style.width = "30%";
+        table.style.width = "80%";
         table.style.marginRight = "8%";
         table.style.border = "2px solid";
         table.style.marginBottom = "3%";
@@ -300,7 +275,7 @@ function fillLugarShc(ob) {
         var tr4 = document.createElement("tr");
         var tr5 = document.createElement("tr");
         var tr6 = document.createElement("tr");
-
+        var tr7 = document.createElement("tr");
 
         tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].numero + "</td> ";
         tr2.innerHTML = "<td> Nombre </td> <td> " + arrayLugar[x].nombre + "</td> ";
@@ -309,10 +284,32 @@ function fillLugarShc(ob) {
         tr5.innerHTML = "<td> Capacidad </td> <td> " + arrayLugar[x].capacidad + "</td>  ";
         tr6.innerHTML = "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar + "</td>";
 
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6];
+        var str = "";
+      
+        for (var i = 0; i < arrayLugar[x].espacios.length; i++) {
+
+            if (i!=arrayLugar[x].espacios.length-1)
+                str += arrayLugar[x].espacios[i].nombre + ", ";
+            else {
+                str += arrayLugar[x].espacios[i].nombre;
+
+            }
 
 
-        for (z = 0; z < 6; z++) {
+            console.log(i+ " "+ str);
+
+
+        }
+
+        tr7.innerHTML = "<td> Espacios </td> <td> " + str + "</td>";
+
+
+        
+
+        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6,tr7];
+
+
+        for (z = 0; z < 7; z++) {
             table.appendChild(arrayTr[z]);
         }
 

@@ -160,8 +160,12 @@ select * from VW_espacios_admim;
 
 ##------------------------------------------Espacios X lugar ---------------------------------------
 
-select * from lugespacio order by lg_NumLugar;
+drop view VW_lugEspacios ;
+create view VW_lugEspacios as
+select lg_numEspacio numEsp, lg_NumLugar numLugar,espNombre nombre from lugespacio join espacio 
+	on lg_NumEspacio=espNum order by lg_NumLugar;
 
+select * from vw_lugEspacios;
 ##------------------------------------------ Tipos_Lugares -----------------------------------------
 
 create view VW_tipolugares_admin as

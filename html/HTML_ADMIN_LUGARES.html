@@ -40,15 +40,13 @@
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
         <nav>
             <section class="Nav2do">
-                <hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">
-                    Inicio</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+               
+                &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+<!--Tus botones-->  <button class="dot" onclick="showSlides(1)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
                     
-<!--Tus botones-->  <button class="dot" onclick="currentSlides(2)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                    <button class="dot" onclick="currentSlides(1)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
                 
-                                   <a href="construccion.html">
-                    Otros Servicios</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">
-                    Contacto</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />
+                   
             </section>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
@@ -86,8 +84,15 @@
         </section>
 
         <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco-->
-            <section class="slides fade" style="display:none;" >                
-                <section  class="lugList"  id="listLugar" style="display:none;"></section>                          
+
+            <section class="slides fade"  >    
+
+                <section class="shcAdmin">
+                    <input type="search" id="shcId" class="busqueda" placeholder="¿Qué estás buscando?" />
+                    <button type="button" id="search" class="boton" onclick="buscarLugar()">Buscar</button>
+                </section>    
+                        
+                <section id="listLugar"></section>                          
             </section>
 
             <section class="slides fade" >
@@ -182,57 +187,27 @@
 
     <script>
 
+        
         function loading() {
             loadOptionsEsp();
             loadTiposLugar();
+            showSlides(1);
         }
 
-        function turnOnPnlConsult() {
-            document.getElementById("listLugar").innerHTML = "";
-            document.getElementById('pnlConsult').style.display = "block";
-            document.getElementById('pnlAdd').style.display = "None";         
-            document.getElementById("listLugar").style.display = "none";
-
-            document.getElementById('btnM').style.display = "none";
-            document.getElementById('btnS').style.display = "block";
-        }
-
-
-        function turnOnPnlAdd() {
-            document.getElementById("listLugar").innerHTML = "";
-            document.getElementById('pnlConsult').style.display = "None";
-            document.getElementById('pnlAdd').style.display = "block";           
-            document.getElementById("listLugar").style.display = "none";
-            document.getElementById('intPnlDirection').style.display = 'none';
-            document.getElementById('btnDwn').style.display = 'block';
-            document.getElementById('btnUp').style.display = 'none';
-            
-        }
-       
-        var slide = 1;
-
-        showSlides(slide);
-
-        function plusSlides(n) {
-            showSlides(slide+=n);
-        }
-
-        function currentSlides(n) {
-            showSlides(slide = n);
-        }
+        
 
         function showSlides(n) {
-            var i;
-            var slideArray = document.getElementsByClassName("slides");
-            var dotArray = document.getElementsByClassName("dot");           
+
             
+            var i;
+            var slideArray = document.getElementsByClassName("slides");      
+                    
 
-            for (i = 0; i < slideArray.length;i++){
-                dotArray[i].className = dotArray[i].className.replace("active", "");
-
-                slideArray[slide - 1].style.display = "block";
-                dotArray[slide - 1].className += "active";
+            for (i = 0; i < slideArray.length;i++){               
+                slideArray[i].style.display = "none";                
             }
+
+            slideArray[n].style.display = "block";
         }
 
     </script>

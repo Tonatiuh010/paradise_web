@@ -4,8 +4,7 @@ var bar;
 
 function createDialog() {
 
-    dialog = document.createElement("DIALOG");
-    dialog.setAttribute("class", "dialog");
+    dialog = document.createElement("DIALOG");   
     dialog.style.width = "30%";
     dialog.style.height = "10%";    
     
@@ -32,6 +31,7 @@ var theCanvas = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
+
 
 
 function action() {    

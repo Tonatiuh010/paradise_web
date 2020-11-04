@@ -18,6 +18,18 @@ if ($result->num_rows>0){
 
     while ($row=$result->fetch_assoc()){
 
+     $sqlEspacios="select * from vw_lugEspacios where numLugar = ".$row['numero'].";";
+        $resultEsp=$conn->query($sqlEspacios);
+
+        $obEsp=array();
+
+        if ($resultEsp->num_rows>0){
+            while ($rowsEsp=$resultEsp->fetch_assoc()){
+                array_push($obEsp, array("nombre"=>$rowsEsp['nombre'],
+                                          "num"=>$rowsEsp['numEsp']));
+            }
+        }
+
    array_push( $ob_lugar ,array(
                 "nombre"=>$row['nombre'], 
                "desc"=>$row['_desc'], 
@@ -28,21 +40,13 @@ if ($result->num_rows>0){
                 "calle"=>$row['calle'],
                 "numInt"=>$row['numInterior'],
                 "numExt"=>$row['numExterior'],
-                "CP"=>$row['CP']));     
-
-
-    
-    
-        //$sqlEspacios="select * from VW_lugar_admin where num like '".$shc->search."%';";
-        //$resultEsp=$conn->query($sqlEspacios);
-
-        //if ($resultEspacios->num_rows>0){
-        //    while ($rowsEsp=$resultEspacios->fetch_assoc()){
-                
-        //    }
-        //}
+                "CP"=>$row['CP'],
+                "espacios"=>$obEsp));            
 
     }
+
+    
+
         $response=json_encode($ob_lugar);       
         echo $response;
 } else {
