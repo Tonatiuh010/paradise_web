@@ -1,0 +1,96 @@
+﻿
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/CSS_CLIENTE_QUIENES.css" type="text/css">
+    <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Quienes Somos - Paradise</title>
+</head>
+<body onload="sesion();">
+    <nav class="NavOficial">
+        <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
+
+        <section class="pruebaMenu">
+            <article class="pMT"><a href="../index.html" ;>INICIO</a></article>
+            <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
+            <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
+            <article class="pMTxt"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+
+            <article class="pMTxt1" id="login" style="display:none;">
+                <a href="construccion.html" ;><img src="img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="../php/salir.php" ;><img src="img/log_out.png" width="25%;" /></a>
+            </article>
+
+        </section>
+        <br />
+        <section class="barraBusqueda">
+            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="search" class="boton">Buscar</button>
+        </section>
+
+    </nav>
+    <br />
+    <main>
+        <section class="presentacion">
+            <img src="../img/quienes/wedding2.jpg" alt="Evento" class="anunP" />
+            <section class="pres">
+                <h1>PARADISE</h1>
+                <p>
+                    Somos una empresa que tiene más de 5 años de experiencia en la renta lugares y salones
+                    para eventos ya sea familiares, laborales, sociales, etc. Garantazimos un ambiente de
+                    calidad además, contamos con diferentes servicios como son: banquetes, arreglos florales
+                    equipos de música, entre otras cosas, que asegurarán el éxito en sus eventos.
+                </p>
+            </section>
+        </section>
+        <br /><br />
+        <section>
+            <img src="../img/collague1.png" width="100%" />
+            <section class="cita">
+                BODAS&nbsp;&nbsp;&nbsp;&nbsp;
+                BANQUETES&nbsp;&nbsp;&nbsp;&nbsp;
+                XV AÑOS&nbsp;&nbsp;&nbsp;&nbsp;
+                FIESTAS&nbsp;&nbsp;&nbsp;&nbsp;
+                REUNIONES&nbsp;&nbsp;&nbsp;&nbsp;
+                GRADUACIONES&nbsp;&nbsp;&nbsp;&nbsp;
+                MOMENTOS&nbsp;&nbsp;&nbsp;&nbsp;
+                PARADISE&nbsp;&nbsp;&nbsp;&nbsp;
+            </section>
+        </section>
+
+        <footer>
+            PARADISE Company S.A. de C.V.
+        </footer>
+
+    </main>
+
+
+
+    <script>
+
+        function sesion() {
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+                if (ajax.status == 200 && ajax.readyState == 4) {
+                    var obj_user = JSON.parse(ajax.responseText);
+                    var respuesta = obj_user.res;
+
+                    if (respuesta == true) {
+                        document.getElementById('login').style.display = "block";
+                        document.getElementById('log').style.display = "none";
+                    }
+
+
+                }
+            }
+
+            ajax.open("GET", "php/sesion_verify.php?", true);
+            ajax.send();
+        }
+
+    </script>
+</body>
+</html>
