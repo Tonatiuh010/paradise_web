@@ -186,13 +186,37 @@ select * from espacio;
 
 drop view VW_lugar_admin ;
 create view VW_lugar_admin as 
-select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
+select lugNum numero,
+lugNombre nombre,
+lugDescripcion _desc,
+lugCosto costo,
+lugCapacidad capacidad,
+tlNombre tipoLugar,
+tlNum tipoLugar_numero,
+dlCalle calle,
+dlNumInterior numInterior, 
+dlNumExterior numExterior,
+dlCP CP,
+mun_cod municipio_codigo,
+mun_nombre municipio
 from 
 lugar l left join tipolugar tl on l.FK_TipoL=tl.tlNum
 left join diclugar dl on dl.dlNum=l.lugNum
 left join municipio m  on m.mun_cod=dl.FK_Municipio
 union all 
-select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
+select lugNum numero,
+lugNombre nombre,
+lugDescripcion _desc,
+lugCosto costo,
+lugCapacidad capacidad,
+tlNombre tipoLugar,
+tlNum tipoLugar_numero,
+dlCalle calle,
+dlNumInterior numInterior, 
+dlNumExterior numExterior,
+dlCP CP,
+mun_cod municipio_codigo,
+mun_nombre municipio
 from 
 lugar l right join tipolugar tl on l.FK_TipoL=tl.tlNum
 right join diclugar dl on dl.dlNum=l.lugNum
