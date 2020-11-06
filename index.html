@@ -5,67 +5,119 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Paradise Prueba 1</title>
 </head>
-<body onload="sesion();">    <!--location.reload()   esta función recarga la pagina-->
-        <nav>
-            <img src="img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
+<body onload="sesion();">
+    <!--location.reload()   esta función recarga la pagina-->
+    <nav>
+        <img src="img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
-            <section class="pruebaMenu">
-                <article class="pMT"><a href="index.html" ;>INICIO</a></article>
-                <article class="pMTx"><a href="./html/construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
-                <article class="pMT3"><a href="./html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
-                <article class="pMT2"><a href="./html/construccion.html" ;>PROMOCIONES</a></article>
-                <article class="pMTxt" id="log"><a href="./html/HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+        <section class="pruebaMenu">
+            <article class="pMT"><a href="index.html" ;>INICIO</a></article>
+            <article class="pMTx"><a href="./html/HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article class="pMT3"><a href="./html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
+            <article class="pMT2"><a href="./html/construccion.html" ;>PROMOCIONES</a></article>
+            <article class="pMTxt" id="log"><a href="./html/HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
 
-                <article class="pMTxt1" id="login" style="display:none;">
-                <a href="./html/construccion.html";><img src="img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                <a href="./php/salir.php";><img src="img/log_out.png" width="25%;" /></a></article>
+            <article class="pMTxt1" id="login" style="display:none;">
+                <a href="./html/construccion.html" ;><img src="img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="./php/salir.php" ;><img src="img/log_out.png" width="25%;" /></a>
+            </article>
 
-            </section>
-            <br />
-            <section class="barraBusqueda">
-                <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-                <button type="button" id="search" class="boton">Buscar</button>
-            </section>
-            
-            <br />
+        </section>
+        <br />
+        <section class="barraBusqueda">
+            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="search" class="boton">Buscar</button>
+        </section>
 
-        </nav>
+        <br />
+
+    </nav>
 
 
 
     <main>
         <section class="secPrincipal">
-            <section class="sec2Principal">
-                La ultima promoción o novedad
+            
+
+            <section class="slide fade" style="background-image: url(img/index/anuncio1.jpg);">
+                <section class="sec2Principal">
+                    <h1>Ahora contamos con Espacios al aire libre</h1>
+                    <a href="./html/construccion.html">¡Realiza tu reservación!</a>
+                </section>
             </section>
-        </section>
-        <br /><br />
-		
-        <section class="info1">
-            información de la empresa
-        </section>
-        <section class="info2">
-            información de la empresa
+
+            <section class="slide fade" style="background-image: url(img/index/anuncio2.jpg);">
+                <section class="sec2Principal">
+                    <br />
+                    <h1>¿Buscas un gran banquete?</h1>
+                    <a href="./html/construccion.html">¡CONTACTANOS!</a>
+                </section>
+            </section>
+
+            <section class="slide fade" style="background-image: url(img/index/anuncio3.jpg);">
+                <section class="sec2Principal">
+                    <h1>Los mejores arreglos de flores de la temporada</h1>
+                    <a href="./html/construccion.html">¡Consulta Ahora!</a>
+                </section>
+            </section>
+
+            <img src="img/index/left.png" class="prev" onclick="plusSlides(-1)">
+            <img src="img/index/right.png" class="next" onclick="plusSlides(1)">
+
         </section>
 
-		<section class="sp">
-		</section>
+        <form style="text-align:center">
+            <input type="radio" class="dot" onclick="curretSlides(1)" />
+            <input type="radio" class="dot" onclick="curretSlides(2)" />
+            <input type="radio" class="dot" onclick="curretSlides(3)" />
+        </form>
+        <br /><br />
+
+        <section class="info">
+            <section class="info1">
+                <p>
+                    PARADISE es una agencia en la cual puedes reservar algun lugar:
+                    salón, jardín, cabaña, quinta, un lugar en la playa, etc; para
+                    tus eventos familiares, laborales, entre otros.
+                </p>
+            </section>
+                  
+            <section class="info2">
+                <p>
+                    PARADISE se encarga de ofrecer la mejor calidad en sus servicios,
+                    además de contar con una amplia gama de lugares a consultar para 
+                    festejar en un ambiente agradable.
+                </p>
+            </section>
+        </section>
+
+
+        <section class="sp">
+        </section>
 
 
         <aside class="publicidad">
-            Publicidad
+            <p style="margin-top: 0.5%;">P U B L I C I D A D</p>
+            <a href="https://www.bodas.com.mx/"><img src="img/index/publicidad1.jpg" alt="bodas.mx" class="imgp" style="float:left"/></a>
+            <a href="https://www.booking.com/"><img src="img/index/publicidad2.jpg" alt="booking.com" class="imgp" style="float:right"/></a>
         </aside>
         <br /><br /><br />
-        <section class="agencias">
-
+        <section class="fotografias">
+            <br />
+            <p> T O S C A N O  &nbsp;&nbsp;&nbsp;&nbsp;  P I C T U R E S </p>
+            <img src="img/index/anuncio4.jpg" alt="bodas.mx" class="imgf" style="float:left" />
+            <img src="img/index/anuncio5.jpg" alt="bodas.mx" class="imgf" style="float:left" />
+            <img src="img/index/anuncio6.jpeg" alt="bodas.mx" class="imgf" style="float:right" />
         </section>
 
-        <br /><br />
-        <section class="submenu">
-
-        </section>
-
-        <footer></footer>
+        
+        <!--<section class="submenu"></section>-->
+        <br />
+        <footer>
+            PARADISE Company S.A. de C.V.
+            <br />
+            Tel. 6648899123
+        </footer>
     </main>
 
     <script>
@@ -75,9 +127,8 @@
             var ajax = new XMLHttpRequest();
 
             ajax.onreadystatechange = function () {
-                if (ajax.status == 200 && ajax.readyState == 4)
-                {
-                    var obj_user = JSON.parse(ajax.responseText); 
+                if (ajax.status == 200 && ajax.readyState == 4) {
+                    var obj_user = JSON.parse(ajax.responseText);
                     var respuesta = obj_user.res;
 
                     if (respuesta == true) {
@@ -85,13 +136,56 @@
                         document.getElementById('log').style.display = "none";
                     }
 
-                    
+
                 }
             }
 
             ajax.open("GET", "php/sesion_verify.php?", true);
             ajax.send();
         }
+
+    </script>
+
+    <script> //Carrusel
+        var slideIndex = 1;
+
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function curretSlides(n) {
+            showSlides(slideIndex = n)
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName('slide');
+            var dots = document.getElementsByClassName('dot');
+
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].checked = false;
+            }
+
+            slides[slideIndex - 1].style.display = 'block';
+            dots[slideIndex - 1].checked = true;
+
+
+        }
+
 
     </script>
 

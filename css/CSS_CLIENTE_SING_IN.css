@@ -144,13 +144,18 @@ main
     background-color: var(--pcolor1);
 }
 
-.signIn
-{
-    width:94%;
-    height:95%;
-    display:inline-block;
-    text-align:center;
-    background-color:white;
+.imgback{
+    width:70%;
+    height:100%;
+    float:left;
+}
+
+.signIn {
+    width: 94%;
+    height: 95%;
+    display: inline-block;
+    text-align: center;
+    background-color: white;
 }
 
 dialog[open] {
