@@ -88,23 +88,18 @@ function buscarLugar() {
 
     var ajax = new XMLHttpRequest();
 
-    var searchForm = null;
-
-    
-        searchForm = {
-            search: document.getElementById("shcId").value
-            
-        };
-    
+    var shc=document.getElementById("shcId").value
+      
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
             //console.log(ajax.responseText);
+           
             fillLugarShc(ajax.responseText);
         }
     };
 
 
-    ajax.open("GET", "../php/busquedaLugar.php?b=" + JSON.stringify(searchForm), true);
+    ajax.open("GET", "../php/test.php?b=" + shc, true);
     ajax.send();
 
 }
@@ -276,13 +271,15 @@ function fillLugarShc(ob) {
         var tr5 = document.createElement("tr");
         var tr6 = document.createElement("tr");
         var tr7 = document.createElement("tr");
+        var tr8 = document.createElement("tr");
 
-        tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].numero + "</td> ";
+        tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].num + "</td> ";
         tr2.innerHTML = "<td> Nombre </td> <td> " + arrayLugar[x].nombre + "</td> ";
         tr3.innerHTML = "<td> Descripción </td> <td> " + arrayLugar[x].desc + "</td> ";
         tr4.innerHTML = "<td> Costo </td> <td> " + arrayLugar[x].costo + "</td> ";
         tr5.innerHTML = "<td> Capacidad </td> <td> " + arrayLugar[x].capacidad + "</td>  ";
-        tr6.innerHTML = "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar + "</td>";
+        tr6.innerHTML = "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar.nombre + "</td>";
+        
 
         var str = "";
       
@@ -294,22 +291,18 @@ function fillLugarShc(ob) {
                 str += arrayLugar[x].espacios[i].nombre;
 
             }
-
-
-            console.log(i+ " "+ str);
-
-
         }
 
         tr7.innerHTML = "<td> Espacios </td> <td> " + str + "</td>";
 
+        tr8.innerHTML = "<td> Espacios </td> <td> " + arrayLugar[x].direccion.municipio.nombre + "</td>";
 
         
 
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6,tr7];
+        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6,tr7,tr8];
 
 
-        for (z = 0; z < 7; z++) {
+        for (z = 0; z < 8; z++) {
             table.appendChild(arrayTr[z]);
         }
 

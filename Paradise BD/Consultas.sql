@@ -233,7 +233,7 @@ drop view VW_agente_admin ;
 create view VW_agente_admin as 
 select agMatricula matricula, agNombre nombre,agApPat apPat,agApMat apMat,agFecNac/*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/ nacimiento, g.genNombre genero from agente ag join genero g on ag.FK_genero=g.genCod;
 
-##------------------------------------------ Espacio -----------------------------------------
+##------------------------------------------ Espacio -----------------------------------------------
 
 create view VW_espacios_admim as 
 select espNombre nombre, espNum numero from espacio;
@@ -245,7 +245,7 @@ select * from VW_espacios_admim;
 drop view VW_lugEspacios ;
 create view VW_lugEspacios as
 select lg_numEspacio numEsp, lg_NumLugar numLugar,espNombre nombre from lugespacio join espacio 
-	on lg_NumEspacio=espNum order by lg_NumLugar;
+on lg_NumEspacio=espNum order by lg_NumLugar;
 
 select * from vw_lugEspacios;
 ##------------------------------------------ Tipos_Lugares -----------------------------------------

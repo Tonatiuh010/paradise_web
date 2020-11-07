@@ -1,7 +1,8 @@
 <?php  
-    require_once("mysql/connection.php");
+    require_once("php/../mysql/connection.php");
     require_once("tipoLugar.php");
     require_once("direccion.php");
+    require_once("espacios.php");
 
     
 
@@ -13,6 +14,8 @@
         private $costo;
         private $capacidad;
 
+
+        private $espacio;
         private $tipoLugar; 
         private $direccion; 
 
@@ -40,6 +43,10 @@
        public function getDir(){return $this->direccion;}
        public function setDir($var){$this->direccion=$var;}                    
 
+
+       public function getEsp(){return $this->espacio;}
+       public function setEsp($var){$this->espacio=$var;}                    
+
        public function __construct() {
 
                $args=func_get_args();//Te devulve parámetros
@@ -50,6 +57,8 @@
                     $this->desc='';
                     $this->costo=0.00;
                     $this->capacidad='';
+
+                    $this->espacio=new espacios();
                     $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
                     $this->direccion=new direccion();
               }
@@ -57,7 +66,8 @@
               //Constructor con un único parámetro. 
               //Usado para buscar y extraer datos en una única instancia.
               
-               if (func_num_args()==1){                    
+               if (func_num_args()==1){   
+                 
                   $sql="select * from VW_lugar_admin where nombre like s;";
 
                   $conn=mysqlConnection::getConnection();
@@ -90,6 +100,9 @@
                             $this->desc=$desc;
                             $this->costo=$costo;
                             $this->capacidad=$capacidad;
+
+                            $this->espacio=new espacios();
+                            $this->espacio->getAllEspaciosByLugar($numero);
                             $this->tipoLugar= new tipoLugar($tipoLugarNumero,$tipoLugar);
                             $this->direccion=new direccion($numero,$calle,$numInterior,$numExterior,$CP,$municipioCod,$municipioNombre);
                         }           
@@ -108,14 +121,17 @@
                               "costo"=>$this->costo,
                               "capacidad"=>$this->capacidad,
                               "tipoLugar"=> json_decode($this->tipoLugar->getJsonObject()),
-                              "direccion"=> json_decode($this->direccion->getJsonObject())
+                              "direccion"=> json_decode($this->direccion->getJsonObject()),
+                              "espacios"=> json_decode($this->espacio->getAllEspaciosByLugar($this->num))
                             )
                     );                
               }
         
         public function getAllLugares($args){
             $sql="select * from VW_lugar_admin where nombre like ?;";
-            $var ='%'.$args.'%';
+            $var =$args.'%';
+
+            
             
                   $conn=mysqlConnection::getConnection();
                   $command=$conn->prepare($sql);
@@ -162,6 +178,7 @@
                                 $this->desc=$desc;
                                 $this->costo=$costo;
                                 $this->capacidad=$capacidad;
+                                $this->espacio=new espacios();                                
                                 $this->tipoLugar= new tipoLugar($tipoLugarNumero,$tipoLugar);
                                 $this->direccion=new direccion($numero,$calle,$numInterior,$numExterior,$CP,$municipioCod,$municipioNombre);     
 
@@ -170,7 +187,7 @@
 
                 mysqli_stmt_close($command);
                 $conn->close();         
-                 return $list;
+                 return json_encode($list);
               } 
                 
 

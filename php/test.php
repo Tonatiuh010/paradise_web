@@ -1,10 +1,16 @@
 <?php
-    require_once("lugar.php");
+    require_once("classes/lugar.php");
 
-    $obj=new lugar();
+    
 
-    echo '<pre>';
-    var_dump($obj->getAllLugares('S'));
-    echo '</pre>';
+    if (isset($_GET['b'])){
+
+    
+    $obj=new lugar();        
+    echo $obj->getAllLugares($_GET['b']);
+
+   }
+
+   
 
 ?>

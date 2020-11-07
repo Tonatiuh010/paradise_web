@@ -6,8 +6,8 @@ require_once("mysql/connection.php");
         private $codigo;
         private $nombre;
     
-       public function getNum(){return $this->num;}
-       public function setNum($var){$this->num=$var;}
+       public function getCodigo(){return $this->codigo;}
+       public function setCodigo($var){$this->codigo=$var;}
 
        public function getNombre(){return $this->nombre;}
        public function setNombre($var){$this->nombre=$var;}
@@ -18,8 +18,7 @@ require_once("mysql/connection.php");
 
                if (func_num_args()==0){
                     $this->codigo='';                            
-                    $this->nombre='';
-                                           
+                    $this->nombre='';                                           
               }
 
               // Posible constructor para hacer búsqueda.
