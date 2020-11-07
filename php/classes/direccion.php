@@ -4,7 +4,7 @@ require_once("mysql/connection.php");
 require_once("municipio.php");
 
     class direccion extends municipio {
-        private $num;
+        private $num; // <---- Pensar acerca de este atributo
         private $calle;
         private $numInterior;
         private $numExterior;
@@ -27,6 +27,12 @@ require_once("municipio.php");
        public function getCP(){return $this->CP;}
        public function setCP($var){$this->CP=$var;}
 
+       public function getMunicipioNombre(){return parent::getNombre();}
+       public function setMunicipioNombre($var){ parent::setNombre($var);}
+
+       public function getMunicipioCodigo(){return parent::getNombre();}
+       public function setMunicipioCodigo($var){ parent::setNombre($var);}
+
         public function __construct() {
             $args=func_get_args();
 
@@ -43,6 +49,16 @@ require_once("municipio.php");
               if (func_num_args()==1){                    
                     $this->nombre=$args[0];                                       
               }
+
+              // Constructor en caso de necesitar la clase sin número
+              if (func_num_args()==6){  
+                                                                         
+                    $this->calle=$args[0];
+                    $this->numInterior=$args[1];
+                    $this->numExterior=$args[2];
+                    $this->CP=$args[3];
+                    parent::__construct($args[4],$args[5]);       
+              }      
 
               if (func_num_args()==7){  
                     $this->num=$args[0];                                                     

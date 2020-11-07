@@ -109,9 +109,49 @@
 
                 mysqli_stmt_close($command);
                 $connection->close();         
-              } 
+              }
+
+              // Función en dado caso de que cada una de las 
+              // variables sea añadida.
+              
+              //constructor Insert No se necesita el parámetro número
+              if (func_num_agrs()==13){                    
+                    $this->nombre=$args[0];
+                    $this->desc=$args[1];
+                    $this->costo=$args[2];
+                    $this->capacidad=$args[3];
+
+
+                    // Pensar acerca de estos atributos
+                    $this->espacio=$args[4]; // Se debe de manejar como un Objeto en arreglos!
+
+                    $this->tipoLugar= new tipoLugar($args[5],$args[6]);//Creo una nueva instancia.
+                    $this->direccion=new direccion($args[7],$args[8],$args[9],$args[10],$args[11],$args[12]);
+              }
+
+                 
         }
 
+
+        public function insertLugar (){
+            $conn=mysqlConnection::getConnection();
+            $conn->query("set @numLug=0;");
+
+            $sql="call SP_insert_lugar(@numLug,?,?,?,?,?,?,?,?,?,?);";//SQL Sentence
+
+                  $command=$conn->prepare($sql);
+                  $command->bind_param('ssdiisssss',
+                        $this->nombre,
+                        $this->desc,
+                        $this->costo,
+                        $this->tipoLugar->getNombre(),
+                        $this->direccion->getCalle(),
+                        $this->direccion->getNI(),
+                        $this->direccion->getNE(),
+                        $this->direccion->getCP(),
+                        $this->);
+           //'".$obDirec->numIn."','".$obDirec->numEx."','".$obDirec->cp."','".$ob_lugar->estado."'
+        }
 
         public function getJsonObject(){
                     return json_encode(
@@ -130,9 +170,6 @@
         public function getAllLugares($args){
             $sql="select * from VW_lugar_admin where nombre like ?;";
             $var =$args.'%';
-
-            
-            
                   $conn=mysqlConnection::getConnection();
                   $command=$conn->prepare($sql);
                   $command->bind_param('s',$var);
