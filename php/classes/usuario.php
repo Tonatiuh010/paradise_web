@@ -56,7 +56,7 @@
 
             return json_encode(
                 array(
-                        'num'=>$this->codigo,                            
+                        'num'=>$this->num,                            
                         'nombre'=>$this->nombre,
                         'contrasenia'=>$this->contrasenia,
                         'correo'=>$this->correo,

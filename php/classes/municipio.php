@@ -18,8 +18,7 @@ require_once("mysql/connection.php");
 
                if (func_num_args()==0){
                     $this->codigo='';                            
-                    $this->nombre='';
-                                           
+                    $this->nombre='';                                           
               }
 
               // Posible constructor para hacer búsqueda.
