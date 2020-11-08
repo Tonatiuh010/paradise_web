@@ -30,8 +30,8 @@ require_once("municipio.php");
        public function getMunicipioNombre(){return parent::getNombre();}
        public function setMunicipioNombre($var){ parent::setNombre($var);}
 
-       public function getMunicipioCodigo(){return parent::getNombre();}
-       public function setMunicipioCodigo($var){ parent::setNombre($var);}
+       public function getMunicipioCodigo(){return parent::getCodigo();}
+       public function setMunicipioCodigo($var){ parent::setCodigo($var);}
 
         public function __construct() {
             $args=func_get_args();
@@ -49,16 +49,22 @@ require_once("municipio.php");
               if (func_num_args()==1){                    
                     $this->nombre=$args[0];                                       
               }
-
-              // Constructor en caso de necesitar la clase sin número
-              if (func_num_args()==6){  
-                                                                         
+                // Constructor en caso de necesitar la clase sin número
+               if (func_num_args()==4){                                                                           
                     $this->calle=$args[0];
                     $this->numInterior=$args[1];
                     $this->numExterior=$args[2];
-                    $this->CP=$args[3];
-                    parent::__construct($args[4],$args[5]);       
+                    $this->CP=$args[3];                   
               }      
+
+            
+              //if (func_num_args()==6){                                                                           
+              //      $this->calle=$args[0];
+              //      $this->numInterior=$args[1];
+              //      $this->numExterior=$args[2];
+              //      $this->CP=$args[3];
+              //      parent::__construct($args[4],$args[5]);       
+              //}      
 
               if (func_num_args()==7){  
                     $this->num=$args[0];                                                     
@@ -72,7 +78,6 @@ require_once("municipio.php");
 
 
         public function getJsonObject(){
-
             return json_encode(
                 array('num'=>$this->num,                            
                     'calle'=>$this->calle,
@@ -84,8 +89,4 @@ require_once("municipio.php");
         }
 
     }
-    
-    
-    
-    
 ?> 

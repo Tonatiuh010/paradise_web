@@ -224,7 +224,7 @@ right join municipio m  on m.mun_cod=dl.FK_Municipio
 where dl.dlNum is null
 ;
 
-select * from VW_lugar_admin where nombre='Salón Toscano';
+
 
 
 ##----------------------------------------- Lugar Admin -----------------------------------

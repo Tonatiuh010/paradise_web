@@ -108,14 +108,10 @@
                         }           
 
                 mysqli_stmt_close($command);
-                $connection->close();         
+                $conn->close();         
               }
 
-              // Función en dado caso de que cada una de las 
-              // variables sea añadida.
-              
-              //constructor Insert No se necesita el parámetro número
-              if (func_num_agrs()==13){                    
+              if (func_num_args()==6){                    
                     $this->nombre=$args[0];
                     $this->desc=$args[1];
                     $this->costo=$args[2];
@@ -124,9 +120,27 @@
 
                     // Pensar acerca de estos atributos
                     $this->espacio=$args[4]; // Se debe de manejar como un Objeto en arreglos!
+                    $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
+                    $this->tipoLugar->setNum($args[5]);                    
+              }
 
-                    $this->tipoLugar= new tipoLugar($args[5],$args[6]);//Creo una nueva instancia.
-                    $this->direccion=new direccion($args[7],$args[8],$args[9],$args[10],$args[11],$args[12]);
+              // Función en dado caso de que cada una de las 
+              // variables sea añadida.
+              
+              //constructor Insert No se necesita el parámetro número
+              if (func_num_args()==11){                    
+                    $this->nombre=$args[0];
+                    $this->desc=$args[1];
+                    $this->costo=$args[2];
+                    $this->capacidad=$args[3];
+
+
+                    // Pensar acerca de estos atributos
+                    $this->espacio=$args[4]; // Se debe de manejar como un Objeto en arreglos!
+                    $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
+                    $this->tipoLugar->setNum($args[5]);
+                    $this->direccion=new direccion($args[6],$args[7],$args[8],$args[9]);
+                    $this->direccion->setMunicipioCodigo($args[10]);
               }
 
                  
@@ -138,19 +152,97 @@
             $conn->query("set @numLug=0;");
 
             $sql="call SP_insert_lugar(@numLug,?,?,?,?,?,?,?,?,?,?);";//SQL Sentence
+            $command=$conn->prepare($sql);
 
-                  $command=$conn->prepare($sql);
+                  $tl=$this->tipoLugar->getNum();
+                  $calle=$this->direccion->getCalle();
+                  $ni=$this->direccion->getNI();
+                  $ne=$this->direccion->getNE();
+                  $cp=$this->direccion->getCP();
+                  $mc=$this->direccion->getMunicipioCodigo();
+
                   $command->bind_param('ssdiisssss',
                         $this->nombre,
                         $this->desc,
                         $this->costo,
-                        $this->tipoLugar->getNombre(),
-                        $this->direccion->getCalle(),
-                        $this->direccion->getNI(),
-                        $this->direccion->getNE(),
-                        $this->direccion->getCP(),
-                        $this->);
-           //'".$obDirec->numIn."','".$obDirec->numEx."','".$obDirec->cp."','".$ob_lugar->estado."'
+                        $this->capacidad,
+                        $tl,
+                        $calle,
+                        $ni,
+                        $ne,
+                        $cp,
+                        $mc);
+            
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    echo "Error ---> ".$command->error;
+                    
+
+                  } else {
+                    
+                    $espaciosArray=$this->espacio->arrayId;
+                    $this->espacio=new espacios();
+                    $resLug=$conn->query("select @numLug as num;");    
+                    $numLug=$resLug->fetch_assoc();
+                    echo $numLug['num'];
+                    for ($a=0;$a<count($espaciosArray);$a++){
+                        $this->espacio->insertEspaciosLugar($espaciosArray[$a],$numLug['num']);
+                    }
+
+                    
+                    echo "Registrado";
+                    
+                  }
+
+
+            mysqli_stmt_close($command);
+            $conn->close();         
+           
+        }
+
+
+         public function insertLugarSinDireccion (){
+            $conn=mysqlConnection::getConnection();
+            $conn->query("set @numLug=0;");
+
+            $sql="call SP_insert_lugar(@numLug,?,?,?,?,?,null,null,null,null,null);";//SQL Sentence
+            $command=$conn->prepare($sql);
+
+                  $tl=$this->tipoLugar->getNum();                  
+
+                  $command->bind_param('ssdii',
+                        $this->nombre,
+                        $this->desc,
+                        $this->costo,
+                        $this->capacidad,
+                        $tl);
+            
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    echo "Error ---> ".$command->error;
+
+                  } else {
+                  
+                    $espaciosArray=$this->espacio->arrayId;
+                    $this->espacio=new espacios();
+                    $resLug=$conn->query("select @numLug as num;");    
+                    $numLug=$resLug->fetch_assoc();
+                    
+                    for ($a=0;$a<count($espaciosArray);$a++){
+                        $this->espacio->insertEspaciosLugar($espaciosArray[$a],$numLug['num']);
+                    }
+
+                    
+                    echo "Registrado";
+                   
+                  }
+
+
+            mysqli_stmt_close($command);
+            $conn->close();         
+           
         }
 
         public function getJsonObject(){

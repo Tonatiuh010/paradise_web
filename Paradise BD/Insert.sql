@@ -267,3 +267,5 @@ select * from proveedor;*/
 /*alter table proveedor
 modify column pro_Sitio varchar(60);*/
 
+
+

@@ -75,7 +75,7 @@
     };
 
     //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
-    ajax.open("GET", "../php/registerUpdateLugar.php?b=" + JSON.stringify(lugarOb), true);
+    ajax.open("GET", "../php/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
     ajax.send();
 }
 
@@ -99,7 +99,7 @@ function buscarLugar() {
     };
 
 
-    ajax.open("GET", "../php/test.php?b=" + shc, true);
+    ajax.open("GET", "../php/buscarLugar.php?b=" + shc, true);
     ajax.send();
 
 }
@@ -123,6 +123,60 @@ function modifyLugar(a) {
 
 }
 
+function loadOptions() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.status == 200 && ajax.readyState == 4) {
+            fillOptions(ajax.responseText);
+        }
+    };
+
+    ajax.open("get", "../php/loadElements.php?", true);
+    ajax.send();
+}
+
+
+function fillOptions(ob) {
+
+    var y = 0;
+    var arrayEspacios = JSON.parse(ob);
+
+    var espSection = document.getElementById("boxEsp");
+
+    var tabla = document.createElement("table");
+    tabla.className = "tablaBox";
+
+    espSection.appendChild(tabla);
+
+    while (arrayEspacios[y]) {
+        var ckBox = document.createElement("input");
+        ckBox.setAttribute("type", "checkbox");
+
+        ckBox.setAttribute("class", "ckB");
+        ckBox.style.marginRight = "50px";
+
+        ckBox.value = arrayEspacios[y].num;
+
+        var lbl = document.createElement("Label");
+        lbl.innerHTML = arrayEspacios[y].nombre;
+
+        var td = document.createElement("td");
+        var tr = document.createElement("tr");
+
+        td.appendChild(ckBox);
+        td.appendChild(lbl);
+        //Destino <------------ Objeto a agregar
+
+        tr.appendChild(td);
+        tabla.appendChild(tr);
+        //espSection.appendChild(lbl);
+        //espSection.appendChild(ckBox);
+        y++;
+
+    }
+
+}
 function loadOptionsEsp() {
 
     var ajax = new XMLHttpRequest();
