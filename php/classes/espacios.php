@@ -71,7 +71,7 @@
             $conn=mysqlConnection::getConnection();
 
               $command=$conn->prepare($sql);              
-              $command->bind_result($num,$nombre);
+              $command->bind_result($nombre,$num);
 
               $command->execute();
 

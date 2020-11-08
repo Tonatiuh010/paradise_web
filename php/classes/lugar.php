@@ -245,6 +245,11 @@
            
         }
 
+
+        public function updateLugar (){
+            
+        }
+
         public function getJsonObject(){
                     return json_encode(
                         array("num"=>$this->num,

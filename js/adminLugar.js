@@ -109,8 +109,6 @@ function modifyLugar(a) {
     document.getElementById("btnModify").style.display = "block";
     document.getElementById("btnSend").style.display = "none";
 
-
-
     document.getElementById("txtNombreLugar").value = a.nombre;
     document.getElementById("txtDescLugar").value = a.desc;
     document.getElementById("txtCostoLugar").value = a.costo;
@@ -119,7 +117,7 @@ function modifyLugar(a) {
 
     document.getElementById("tbNum").style.display = "block";
     document.getElementById("lblNum").style.display = "block";
-    document.getElementById("tbNum").value = a.numero;
+    document.getElementById("tbNum").value = a.num;
 
 }
 
@@ -140,7 +138,9 @@ function loadOptions() {
 function fillOptions(ob) {
 
     var y = 0;
-    var arrayEspacios = JSON.parse(ob);
+    var obj = JSON.parse(ob);
+
+    var arrayEspacios = obj.espacios;
 
     var espSection = document.getElementById("boxEsp");
 
@@ -176,93 +176,23 @@ function fillOptions(ob) {
 
     }
 
-}
-function loadOptionsEsp() {
 
-    var ajax = new XMLHttpRequest();
 
-    ajax.onreadystatechange = function () {
-        if (ajax.status == 200 && ajax.readyState == 4) {
-            fillOptionsEsp(ajax.responseText);
+    var arrayTipoLugar = obj.tipoLugar;
+        var z = 0;
+        var selectTP = document.getElementById("CBtp");
+
+        while (arrayTipoLugar[z]) {
+
+            var option = document.createElement("option");
+            option.value = arrayTipoLugar[z].num;
+            option.innerHTML = arrayTipoLugar[z].nombre;
+
+            selectTP.appendChild(option);
+            z++;
         }
-    };
-
-    ajax.open("get", "../php/loadEspacios.php?", true);
-    ajax.send();
 
 }
-
-
-
-function fillOptionsEsp(ob) {
-    var y = 0;
-    var arrayEspacios = JSON.parse(ob);
-
-    var espSection = document.getElementById("boxEsp");
-
-    var tabla = document.createElement("table");
-    tabla.className = "tablaBox";
-
-    espSection.appendChild(tabla);
-
-    while (arrayEspacios[y]) {
-        var ckBox = document.createElement("input");
-        ckBox.setAttribute("type", "checkbox");
-
-        ckBox.setAttribute("class", "ckB");
-        ckBox.style.marginRight = "50px";
-
-        ckBox.value = arrayEspacios[y].num;
-
-        var lbl = document.createElement("Label");
-        lbl.innerHTML = arrayEspacios[y].nombre;
-
-        var td = document.createElement("td");
-        var tr = document.createElement("tr");
-
-        td.appendChild(ckBox);
-        td.appendChild(lbl);
-        //Destino <------------ Objeto a agregar
-
-        tr.appendChild(td);
-        tabla.appendChild(tr);
-        //espSection.appendChild(lbl);
-        //espSection.appendChild(ckBox);
-        y++;
-
-    }
-}
-
-
-function loadTiposLugar() {
-    var ajax = new XMLHttpRequest();
-    ajax.onreadystatechange = function () {
-        if (ajax.status == 200 && ajax.readyState == 4) {
-            fillOptionsPT(ajax.responseText);
-        }
-    }
-
-    ajax.open("get", "../php/loadTipolugar.php?", true);
-    ajax.send();
-
-}
-
-function fillOptionsPT(ob) {
-    var arrayTipoLugar = JSON.parse(ob);
-    var z = 0;
-    var selectTP = document.getElementById("CBtp");
-
-    while (arrayTipoLugar[z]) {
-
-        var option = document.createElement("option");
-        option.value = arrayTipoLugar[z].num;
-        option.innerHTML = arrayTipoLugar[z].nombre;
-
-        selectTP.appendChild(option);
-        z++;
-    }
-}
-
 
 function clearForm() {
 
