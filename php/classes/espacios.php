@@ -1,5 +1,5 @@
 <?php
-    require_once("mysql/connection.php");
+    require_once("php/../mysql/connection.php");
 
     class espacios {
 
@@ -37,6 +37,25 @@
                      
         }
 
+
+        public function insertEspaciosLugar($numEspacios,$numLugar){
+                $sql='call SP_insertar_EspLug(?,?);';
+                $conn=mysqlConnection::getConnection();
+                $command=$conn->prepare($sql);
+
+                $command->bind_param('ii',$numEspacios,$numLugar);
+             
+                $command->execute();
+
+                if ($command->error!=""){
+                    echo 'Error: '.$command->error;
+                }
+
+                mysqli_stmt_close($command);
+                $conn->close();         
+
+        }
+
         public function getJsonObject(){
 
             return json_encode(
@@ -46,6 +65,27 @@
 
         }
 
+        public function getAllEspacios(){
+        
+              $sql="select * from VW_espacios_admim;";  
+            $conn=mysqlConnection::getConnection();
+
+              $command=$conn->prepare($sql);              
+              $command->bind_result($num,$nombre);
+
+              $command->execute();
+
+              $list=array();
+              while ($command->fetch()){
+                $this->num=$num;
+                $this->nombre=$nombre;
+
+                array_push($list,json_decode(self::getJsonObject()));
+                }
+                mysqli_stmt_close($command);
+                $conn->close(); 
+                return json_encode($list);
+        }            
 
         public function getAllEspaciosByLugar($n){
         

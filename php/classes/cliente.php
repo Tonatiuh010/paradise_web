@@ -61,6 +61,15 @@ require_once("usuario.php");
                         parent::__construct($args[7],$args[8],$args[9],$args[10],$args[11]);       
                   }   
 
+                  if (func_num_args()==8){                           
+                        $this->nombre=$args[0];
+                        $this->paterno=$args[1];
+                        $this->materno=$args[2];
+                        $this->nacimiento=$args[3]; 
+                        $this->telefono=$args[4];
+                        parent::__construct($args[5],$args[6],$args[7]);       
+                  }   
+
                   // Posible constructor para hacer búsqueda.
                   if (func_num_args()==1){                    
                       $sql="select * from vw_cliente_perfil where num= ?;";
@@ -148,6 +157,47 @@ require_once("usuario.php");
                 return json_encode($list);
         }
 
+        public function insertarCli(){
+            $conn=mysqlConnection::getConnection();
+            $verificar= parent:: insertUserCli();
+            $correo= parent:: getCorreo();
+
+            if($verificar==false){
+                echo 'Cuenta de usuario ya existe verifique su nombre de usuario o su correo';
+            }else{
+                $sql="call SP_insert_cliente (?,?,?,?,?,?);";//SQL Sentence
+                $command=$conn->prepare($sql);
+                  
+                
+
+                  $command->bind_param('ssssss',
+                        $this->nombre,
+                        $this->paterno,
+                        $this->materno,
+                        $this->nacimiento,
+                        $this->telefono,
+                        $correo);
+
+            
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    echo "Error ---> ".$command->error;
+                    
+
+                  } else {
+
+                    echo "Registrado";
+                   
+                    
+                  }
+            }
+
+            
+
+            mysqli_stmt_close($command);
+            $conn->close();
+        }
 
         public function getJsonObject(){
 

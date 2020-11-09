@@ -178,7 +178,7 @@
                 document.getElementById('mensaje').innerHTML = 'Favor de colocar su fecha de nacimiento';}
 
             if (isNaN(dato3))   // == false
-            {} else {
+            {
                 confirmar = false;
                 document.getElementById('mensaje').innerHTML = '';
                 document.getElementById('mensaje').innerHTML = 'Favor de no colocar numeros en el campo apellido materno ';} 
@@ -196,38 +196,43 @@
                 document.getElementById('mensaje').innerHTML = 'Favor de llenar el campo nombre (sin ingresar números)';}
             
 
-            if (confirmar == false) {
-                dialogo.showModal();
-            } else {
-                registrarUS()
-            }
+            if (confirmar == false) {                       //En esta sección verificamos que todos los datos se encuentren correctos
+                dialogo.showModal();                        //si encuentra un solo error, despliega un dialogo con el mensaje de error
+            } else {                                                                    
+                registrarUS(dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8);    
+            }   //Una vez que todo esta verificado y correcto, enviamos los parametros a la función
             
                 
 
             
         }
 
-        function registrarUS(nombre, paterno,materno,nacimiento,telefono,correo,usuario,contrasenia)
+        function registrarUS(d1,d2,d3,d4,d5,d6,d7,d8)
         {
-            //txtNombre = document.getElementById('txtNombre').value;
-            //txtApPat = document.getElementById('txtApPat').value;
-            //txtApMat = document.getElementById('txtApMat').value;
-            //txtFecNac = document.getElementById('txtFecNac').value;
-            //txtTelefono = document.getElementById('txtTelefono').value;
-            //txtUsuario = document.getElementById('txtUsuario').value;
-            //txtCorreo = document.getElementById('txtCorreo').value;
+            var dialogo = document.getElementById('error');
 
-            ////document.getElementById('inscrito').innerHTML = 'Entró a la función';
-
-            ////console.log('Entró a la función');
+            //Generamos un objeto con los datos proporcionados por el usuario
+            
+            newUserObj = {
+                nombre: d1,
+                paterno: d2,
+                materno: d3,
+                nacimiento: d4,
+                telefono: d5,
+                correo: d6,
+                usuario: d7,
+                contrasenia: d8
+            }
 
                 var ajax = new XMLHttpRequest();
                 ajax.onreadystatechange = function () {
                     if (ajax.readyState == 4 && ajax.status == 200) {
-                        document.getElementById("inscrito").innerHTML = ajax.responseText;
+                        document.getElementById('mensaje').innerHTML = '';
+                        document.getElementById('mensaje').innerHTML = ajax.responseText;
+                         dialogo.showModal();
                     }
             };
-            ajax.open("GET", "../php/insertarUser.php?nombre=" + nombre + "&paterno=" + paterno + "&materno=" + materno + "&nacimiento=" + nacimiento + "&telefono=" + telefono + "&correo=" + correo + "&usuario=" + usuario + "&contrasenia=" + contrasenia, true);
+            ajax.open("GET", "../php/registrarUser.php?obj=" + JSON.stringify(newUserObj), true);
                 ajax.send();
             
         }

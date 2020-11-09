@@ -3,8 +3,8 @@
 require_once("mysql/connection.php");
 
     abstract class municipio {
-        private $codigo;
-        private $nombre;
+        protected $codigo;
+        protected $nombre;
     
        public function getCodigo(){return $this->codigo;}
        public function setCodigo($var){$this->codigo=$var;}

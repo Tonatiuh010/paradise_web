@@ -170,6 +170,9 @@ on prNum=resNumPR;
 select * from vw_reservacion_completa;
 select * from pre_reservacion;
 
+select * from usuario;
+select * from cliente;
+
 ###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";
 
@@ -220,7 +223,7 @@ right join municipio m  on m.mun_cod=dl.FK_Municipio
 where dl.dlNum is null
 ;
 
-select * from VW_lugar_admin where nombre='Salón Toscano';
+
 
 
 ##----------------------------------------- Lugar Admin -----------------------------------

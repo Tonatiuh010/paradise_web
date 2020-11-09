@@ -42,6 +42,12 @@
                     $this->contrasenia=$args[2];  
                     $this->correo=$args[3];    
                     $this->tipo=$args[4];                          
+              }
+            
+              if (func_num_args()==3){                             
+                    $this->nombre=$args[0];
+                    $this->contrasenia=$args[1];  
+                    $this->correo=$args[2];                             
               }         
 
               // Posible constructor para hacer búsqueda.
@@ -50,6 +56,35 @@
               }
   
             }
+
+        public function insertUserCli(){
+            $conn=mysqlConnection::getConnection();
+
+            $sql="call SP_insert_userCli (?,?,?);";//SQL Sentence
+            $command=$conn->prepare($sql);
+                  
+
+                  $command->bind_param('sss',
+                        $this->nombre,
+                        $this->contrasenia,
+                        $this->correo,);
+            
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    //$mensaje= "Error ---> ".$command->error;
+                    return false;
+
+                  } else {
+
+                    //$mensaje= "Registrado";
+                    return true;
+                    
+                  }
+
+            mysqli_stmt_close($command);
+            $conn->close();
+        }
 
 
         public function getJsonObject(){

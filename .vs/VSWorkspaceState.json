@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\html",
+    "\\js",
     "\\php",
-    "\\php\\basurero.com",
-    "\\php\\classes"
+    "\\php\\classes",
+    "\\php\\mysql"
   ],
-  "SelectedNode": "\\php\\basurero.com\\insertarUser.php",
+  "SelectedNode": "\\php\\classes\\cliente.php",
   "PreviewInSolutionExplorer": false
 }

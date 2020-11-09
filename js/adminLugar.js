@@ -75,7 +75,7 @@
     };
 
     //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
-    ajax.open("GET", "../php/registerUpdateLugar.php?b=" + JSON.stringify(lugarOb), true);
+    ajax.open("GET", "../php/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
     ajax.send();
 }
 
@@ -99,7 +99,7 @@ function buscarLugar() {
     };
 
 
-    ajax.open("GET", "../php/test.php?b=" + shc, true);
+    ajax.open("GET", "../php/buscarLugar.php?b=" + shc, true);
     ajax.send();
 
 }
@@ -123,6 +123,60 @@ function modifyLugar(a) {
 
 }
 
+function loadOptions() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.status == 200 && ajax.readyState == 4) {
+            fillOptions(ajax.responseText);
+        }
+    };
+
+    ajax.open("get", "../php/loadElements.php?", true);
+    ajax.send();
+}
+
+
+function fillOptions(ob) {
+
+    var y = 0;
+    var arrayEspacios = JSON.parse(ob);
+
+    var espSection = document.getElementById("boxEsp");
+
+    var tabla = document.createElement("table");
+    tabla.className = "tablaBox";
+
+    espSection.appendChild(tabla);
+
+    while (arrayEspacios[y]) {
+        var ckBox = document.createElement("input");
+        ckBox.setAttribute("type", "checkbox");
+
+        ckBox.setAttribute("class", "ckB");
+        ckBox.style.marginRight = "50px";
+
+        ckBox.value = arrayEspacios[y].num;
+
+        var lbl = document.createElement("Label");
+        lbl.innerHTML = arrayEspacios[y].nombre;
+
+        var td = document.createElement("td");
+        var tr = document.createElement("tr");
+
+        td.appendChild(ckBox);
+        td.appendChild(lbl);
+        //Destino <------------ Objeto a agregar
+
+        tr.appendChild(td);
+        tabla.appendChild(tr);
+        //espSection.appendChild(lbl);
+        //espSection.appendChild(ckBox);
+        y++;
+
+    }
+
+}
 function loadOptionsEsp() {
 
     var ajax = new XMLHttpRequest();
@@ -271,7 +325,7 @@ function fillLugarShc(ob) {
         var tr5 = document.createElement("tr");
         var tr6 = document.createElement("tr");
         var tr7 = document.createElement("tr");
-        var tr8 = document.createElement("tr");
+        
 
         tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].num + "</td> ";
         tr2.innerHTML = "<td> Nombre </td> <td> " + arrayLugar[x].nombre + "</td> ";
@@ -293,34 +347,36 @@ function fillLugarShc(ob) {
             }
         }
 
-        tr7.innerHTML = "<td> Espacios </td> <td> " + str + "</td>";
-
-        tr8.innerHTML = "<td> Espacios </td> <td> " + arrayLugar[x].direccion.municipio.nombre + "</td>";
-
+        tr7.innerHTML = "<td> Espacios </td> <td> " + str + "</td>";        
         
 
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6,tr7,tr8];
+        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6,tr7];
 
 
-        for (z = 0; z < 8; z++) {
+        for (z = 0; z < 7; z++) {
             table.appendChild(arrayTr[z]);
         }
 
-        if (arrayLugar[x].calle != null || arrayLugar[x].numInt != null || arrayLugar[x].numExt != null || arrayLugar[x].CP != null) {
+
+        var arrayDirec = arrayLugar[x].direccion;
+
+        if (arrayDirec.calle != null || arrayDirec.NI != null || arrayDirec.NE != null || arrayDirec.CP != null) {
 
             var trC = document.createElement("tr");
             var trNI = document.createElement("tr");
             var trNE = document.createElement("tr");
             var trCP = document.createElement("tr");
+            var trMun = document.createElement("tr");
 
-            trC.innerHTML = " <td> Calle </td> <td> " + arrayLugar[x].calle + "</td>";
-            trNI.innerHTML = "<td> No. Interno </td> <td> " + arrayLugar[x].numInt + "</td>";
-            trNE.innerHTML = "<td> Num. Ext </td> <td> " + arrayLugar[x].numExt + "</td> ";
-            trCP.innerHTML = " <td> Código Postal </td> <td> " + arrayLugar[x].CP + "</td>  ";
+            trC.innerHTML = " <td> Calle </td> <td> " + arrayDirec.calle + "</td>";
+            trNI.innerHTML = "<td> No. Interno </td> <td> " + arrayDirec.NI + "</td>";
+            trNE.innerHTML = "<td> Num. Ext </td> <td> " + arrayDirec.NE+ "</td> ";
+            trCP.innerHTML = " <td> Código Postal </td> <td> " + arrayDirec.CP + "</td>  ";
+            trMun.innerHTML = " <td> Municipio </td> <td> " + arrayDirec.municipio.nombre + "</td>  ";
 
-            var arrayDir = [trC, trNI, trNE, trCP];
+            var arrayDir = [trC, trNI, trNE, trCP,trMun];
 
-            for (y = 0; y < 4; y++) {
+            for (y = 0; y < 5; y++) {
                 table.appendChild(arrayDir[y]);
             }
         }

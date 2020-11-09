@@ -7,4 +7,5 @@
     $obj=new pre_reservacion();        
     echo $obj->getAllPreReservaciones(1);
 
+    //echo $_GET['obj'];
 ?>
