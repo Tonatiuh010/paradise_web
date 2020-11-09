@@ -67,7 +67,17 @@ require_once("agTelefono.php");
                         $this->genero=$args[6];
                         $this->telefono=$args[7];
                         parent::__construct($args[8],$args[9],$args[10],$args[11],$args[12]);       
-                  }   
+                  }
+
+                  if (func_num_args()==9){                           
+                        $this->nombre=$args[0];
+                        $this->paterno=$args[1];
+                        $this->materno=$args[2];
+                        $this->nacimiento=$args[3];
+                        $this->genero=$args[4]; 
+                        $this->telefono=$args[5];
+                        parent::__construct($args[6],$args[7],$args[8]);       
+                  }        
 
                   // Posible constructor para hacer búsqueda.
                   if (func_num_args()==1){                    
@@ -162,6 +172,72 @@ require_once("agTelefono.php");
                 $conn->close(); 
                 return json_encode($list);
         }
+
+        public function insertarAgente(){
+            $conn=mysqlConnection::getConnection();
+            $verificar= parent:: insertUserAgente();
+            $correo= parent:: getCorreo();
+
+            if($verificar==false){
+                echo 'Cuenta de usuario ya existe verifique su nombre de usuario o su correo';
+            }else{
+                  
+                $tel=$this->telefono;
+                //echo $tel;
+                //echo $correo;
+
+                if($tel==''){
+                    $sql="call SP_insert_agente (?,?,?,?,?,?,null);";//SQL Sentence
+                    $command=$conn->prepare($sql);
+                    $command->bind_param('ssssss',
+                            $this->nombre,
+                            $this->paterno,
+                            $this->materno,
+                            $this->nacimiento,
+                            $this->genero,
+                            $correo);
+            
+                      $command->execute();
+
+                      if ($command->error!=""){
+                        echo "Error ---> ".$command->error;
+                    
+
+                      } else {
+
+                        echo "Registrado";
+                      }
+                    
+                }else{
+                    $sql="call SP_insert_agente (?,?,?,?,?,?,?);";//SQL Sentence
+                    $command=$conn->prepare($sql);
+
+                    $command->bind_param('sssssss',
+                            $this->nombre,
+                            $this->paterno,
+                            $this->materno,
+                            $this->nacimiento,
+                            $this->genero,
+                            $correo,
+                            $this->telefono
+                            );
+            
+                        $command->execute();
+
+                        if ($command->error!=""){
+                        echo "Error ---> ".$command->error;
+                    
+
+                        } else {
+
+                        echo "Registrado";
+                        }
+                
+			  }
+
+                  
+			}
+		}
 
         public function getJsonObject(){
 

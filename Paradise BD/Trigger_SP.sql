@@ -3,6 +3,7 @@ use paradise;
 
 ############################################ INSERTAR A UN AGENTE ##################################################
 
+#----- TRIGGER DE VERIFICACION -------------------------- #
 DELIMITER //
 create trigger DIS_AGENTE_INSERT before insert on agente
 for each row 
@@ -74,6 +75,7 @@ select * from usuario;
 
 ########################################### INSERTAR A UN CLIENTE ##################################################
 
+#----- TRIGGER DE VERIFICACION -------------------------- #
 DELIMITER //
 create trigger DIS_CLIENTE_INSERT before insert on cliente
 for each row 

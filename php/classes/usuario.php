@@ -86,6 +86,33 @@
             $conn->close();
         }
 
+        public function insertUserAgente(){
+            $conn=mysqlConnection::getConnection();
+            $sql="call SP_insert_userAg (?,?,?);";//SQL Sentence
+            $command=$conn->prepare($sql);
+                  
+
+                  $command->bind_param('sss',
+                        $this->nombre,
+                        $this->contrasenia,
+                        $this->correo,);
+            
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    //$mensaje= "Error ---> ".$command->error;
+                    return false;
+
+                  } else {
+
+                    //$mensaje= "Registrado";
+                    return true;
+                    
+                  }
+
+            mysqli_stmt_close($command);
+            $conn->close();
+        }
 
         public function getJsonObject(){
 

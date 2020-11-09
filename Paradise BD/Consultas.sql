@@ -170,8 +170,16 @@ on prNum=resNumPR;
 select * from vw_reservacion_completa;
 select * from pre_reservacion;
 
+
 select * from usuario;
+select * from agente;
 select * from cliente;
+
+delete from usuario
+where usNum=47;
+
+alter table cliente
+AUTO_INCREMENT = 0;
 
 ###########################################  FIN DEL RESERVADO #####################################################
 # where lugNombre like "a%" or lugDescripcion like "a%" or FK_Municipio like "a%" or FK_Direccion like "a%";

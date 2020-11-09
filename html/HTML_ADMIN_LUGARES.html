@@ -52,8 +52,11 @@
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
     <section class="principal">
+        
         <section class="lateral">
              <!--Lista de opciones (Puede estar escondida.) <br />-->
+            <!--<button type="button" onclick="abrir()">Abrir</button>--> <!--quitar esto de aqui-->
+
             <ul>
 
                 <li>
@@ -179,6 +182,28 @@
         </section>
 
     </section>
+
+        <!--------------------------------------DIALOGO MODIFICALO SI GUSTAS------------------------------------------------------------------>
+        <dialog id="update">
+            <form>
+                <label>Número de Lugar:</label> 
+                    <input type='text'  class="dlabel" id='txtNombreLugar' required disabled><br /><br />
+                <label>Nombre del Lugar:</label> 
+                    <input type='text'  class="dlabel" id='txtNombreLugar' required disabled><br /><br />
+
+                <label>Costo del Lugar:</label> 
+                    <input type='text'  class="dlabel" id="txtCostoLugar"  /><br /><br />
+                <label>Capacidad del Lugar:</label> 
+                    <input type='text'  class="dlabel" id="txtCapacidadLugar" required /><br /><br />
+
+                <section id="boxEsp"></section>
+
+                <button type="button"  class="botond" onclick="cerrar()">Enviar</button>
+                <button type="button"  class="botonc" onclick="cerrar()">Cancelar</button>
+                <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
+            </form>
+        </dialog>
+        <!--------------------------------------------------------------------------------------------------------------------------------------->
     
     </main>
 
@@ -190,7 +215,12 @@
         
         function loading() {
             loadOptions();
-            
+            var dialogo = document.getElementById('update');
+            var box = document.getElementById('boxEsp');
+            var clon = box.cloneNode(true);
+            clon.setAttribute("id", "boxEspD");
+            dialogo.appendChild(clon);
+            console.log(box.innerText);
             showSlides(1);
         }
 
@@ -208,6 +238,18 @@
             }
 
             slideArray[n].style.display = "block";
+        }
+
+
+
+
+        function abrir() {
+            var dialogo = document.getElementById('update');
+            dialogo.showModal();
+        }
+
+        function cerrar() {
+            document.getElementById('update').close();
         }
 
     </script>
