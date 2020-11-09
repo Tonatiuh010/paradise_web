@@ -1,0 +1,8 @@
+﻿{
+  "mysqlCrendentials" :{
+    "server" : "localhost",
+    "user" : "root",
+    "pass" : "losseisbastardos12",
+    "db" : "paradise"
+  }
+}

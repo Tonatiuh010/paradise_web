@@ -186,13 +186,37 @@ select * from espacio;
 
 drop view VW_lugar_admin ;
 create view VW_lugar_admin as 
-select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
+select lugNum numero,
+lugNombre nombre,
+lugDescripcion _desc,
+lugCosto costo,
+lugCapacidad capacidad,
+tlNombre tipoLugar,
+tlNum tipoLugar_numero,
+dlCalle calle,
+dlNumInterior numInterior, 
+dlNumExterior numExterior,
+dlCP CP,
+mun_cod municipio_codigo,
+mun_nombre municipio
 from 
 lugar l left join tipolugar tl on l.FK_TipoL=tl.tlNum
 left join diclugar dl on dl.dlNum=l.lugNum
 left join municipio m  on m.mun_cod=dl.FK_Municipio
 union all 
-select lugNum numero,lugNombre nombre,lugDescripcion _desc,lugCosto costo,lugCapacidad capacidad,tlNombre tipoLugar,dlCalle calle,dlNumInterior numInterior, dlNumExterior numExterior,dlCP CP
+select lugNum numero,
+lugNombre nombre,
+lugDescripcion _desc,
+lugCosto costo,
+lugCapacidad capacidad,
+tlNombre tipoLugar,
+tlNum tipoLugar_numero,
+dlCalle calle,
+dlNumInterior numInterior, 
+dlNumExterior numExterior,
+dlCP CP,
+mun_cod municipio_codigo,
+mun_nombre municipio
 from 
 lugar l right join tipolugar tl on l.FK_TipoL=tl.tlNum
 right join diclugar dl on dl.dlNum=l.lugNum
@@ -200,7 +224,7 @@ right join municipio m  on m.mun_cod=dl.FK_Municipio
 where dl.dlNum is null
 ;
 
-select * from VW_lugar_admin where nombre='Salón Toscano';
+
 
 
 ##----------------------------------------- Lugar Admin -----------------------------------
@@ -209,7 +233,7 @@ drop view VW_agente_admin ;
 create view VW_agente_admin as 
 select agMatricula matricula, agNombre nombre,agApPat apPat,agApMat apMat,agFecNac/*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/ nacimiento, g.genNombre genero from agente ag join genero g on ag.FK_genero=g.genCod;
 
-##------------------------------------------ Espacio -----------------------------------------
+##------------------------------------------ Espacio -----------------------------------------------
 
 create view VW_espacios_admim as 
 select espNombre nombre, espNum numero from espacio;
@@ -221,7 +245,7 @@ select * from VW_espacios_admim;
 drop view VW_lugEspacios ;
 create view VW_lugEspacios as
 select lg_numEspacio numEsp, lg_NumLugar numLugar,espNombre nombre from lugespacio join espacio 
-	on lg_NumEspacio=espNum order by lg_NumLugar;
+on lg_NumEspacio=espNum order by lg_NumLugar;
 
 select * from vw_lugEspacios;
 ##------------------------------------------ Tipos_Lugares -----------------------------------------

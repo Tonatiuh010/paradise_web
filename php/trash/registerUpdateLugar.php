@@ -50,7 +50,7 @@ if (($ob_lugar->type)==true){
        
                 for ($x=0; $x<count($arrayEsp);$x++){
                      $sqlInsEspacios="call SP_insertar_EspLug(".$arrayEsp[$x].",".$numLug['num'].");";
-                     $conn->query($sqlInsEspacios);         
+                     $conn->query($sqlInsEspacios);
                 }
             }
             echo "Registrado";

@@ -138,8 +138,7 @@ create table dicLugar
 	dlNumInterior varchar(25) not null,	
 	dlNumExterior varchar(25) null,	
 	dlCP char(5) not null,
-    FK_Municipio char(3) not null,
-    
+    FK_Municipio char(3) not null,    
     constraint PFK_dicLugar_num foreign key  (dlNum) references lugar(lugNum) on delete cascade,
     constraint FK_lugar_municipio foreign key (FK_Municipio) references municipio(mun_Cod) on delete cascade
 );
