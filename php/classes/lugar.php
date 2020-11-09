@@ -68,13 +68,13 @@
               
                if (func_num_args()==1){   
                  
-                  $sql="select * from VW_lugar_admin where nombre like s;";
+                  $sql="select * from VW_lugar_admin where numero=?;";
 
                   $conn=mysqlConnection::getConnection();
 
                   $command=$conn->prepare($sql);
 
-                  $command->bind_param('s',$args[0]);
+                  $command->bind_param('i',$args[0]);
 
                   $command->bind_result(
                         $numero,
@@ -107,9 +107,10 @@
                             $this->direccion=new direccion($numero,$calle,$numInterior,$numExterior,$CP,$municipioCod,$municipioNombre);
                         }           
 
-                mysqli_stmt_close($command);
-                $conn->close();         
-              }
+                    mysqli_stmt_close($command);
+                    $conn->close();         
+               } 
+
 
               if (func_num_args()==6){                    
                     $this->nombre=$args[0];

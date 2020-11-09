@@ -108,9 +108,9 @@ create view vw_primary_user as
     
 #-----------------------------------------------------------------------------------------------------------------
 alter view vw_cliente_perfil as	
-    select cliNum as num, concat(cliNombre,' ',cliApPat,' ',cliApMat) as Nombre, 
-	cliFecNac as FN, cliEdad as Edad, cliTelefono as Telefono, 
-	usNombre as usuario, char_length(usContrasenia) as Contrasenia, usCorreo as Email
+    select cliNum as num, cliNombre as nombre, cliApPat as paterno, cliApMat as materno,  
+	cliFecNac as nacimiento, cliEdad as edad, cliTelefono as telefono, usNum as num_us,
+	usNombre as usuario, usContrasenia as contrasenia, usCorreo as email, usTipoUS as tipo
 	from cliente inner join usuario
 	on FK_usuario=usNum; 
 
@@ -134,35 +134,7 @@ call sp_perfil_cliente (10);
 #-----------------------------------------------------------------------------------------------------------------
 #drop procedure sp_update_perfilCli;
 
-DELIMITER //
-create procedure sp_update_perfilCli
-(
-	in campo varchar(20),
-	in cambio varchar(20),
-    in cliente int
-)
-begin
-	case
-	  when campo='user' then
-			UPDATE cliente INNER JOIN usuario
-			ON FK_usuario = usNum 
-			SET usNombre = cambio
-			where cliNum=cliente;
-	  when campo='password' then
-			UPDATE cliente INNER JOIN usuario
-			ON FK_usuario = usNum 
-			SET usContrasenia = cambio
-			where cliNum=cliente;
-	  when campo='telefono' then
-			UPDATE cliente
-			SET cliTelefono = cambio
-			where cliNum=cliente;
-	end case;
-    
-end//
-DELIMITER ;
 
-call sp_update_perfilCli('user','MagdalenaTV',5);
 
 /*
 UPDATE cliente INNER JOIN usuario
@@ -170,6 +142,33 @@ ON FK_usuario = usNum
 SET usNombre = 'pancrasio'
 where cliNum=2;
 */
+
+select * from usuario;
+select * from cliente;
+
+#-----------------------------------------------------------------------------------------------------------------
+select * from telef_agentes;
+
+create view vw_agente_telefonos as
+select tgNum as num, tgTelefono as telefono, FK_agente as agente from telef_agentes;
+
+select num, telefono from vw_agente_telefonos where agente=?;
+
+#-----------------------------------------------------------------------------------------------------------------
+#--->POST_RESERVACION
+
+/*insert pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,prNotas,FK_Lugar,FK_cliente) values
+('2020-11-07 15:22:10','2020-12-20','2020-12-23','Proceso','Aun sin autorizar',4,10);*/
+
+alter view vw_reservacion_completa as
+select prNum as num, prFechaRegistro as registro, prFechaInic as inicio, prFechaFin as termino,
+prStatus as estado, prNotas as notas, FK_Lugar as lugar, FK_Cliente as cliente, FK_Agente as agente,
+resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total 
+from pre_reservacion inner join reservacion
+on prNum=resNumPR;
+
+select * from vw_reservacion_completa;
+select * from pre_reservacion;
 
 select * from usuario;
 select * from cliente;
@@ -228,10 +227,21 @@ where dl.dlNum is null
 
 
 ##----------------------------------------- Lugar Admin -----------------------------------
+/*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/
 
 drop view VW_agente_admin ;
-create view VW_agente_admin as 
-select agMatricula matricula, agNombre nombre,agApPat apPat,agApMat apMat,agFecNac/*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/ nacimiento, g.genNombre genero from agente ag join genero g on ag.FK_genero=g.genCod;
+
+alter view VW_agente_admin as 
+select agMatricula as matricula, agNombre as nombre,agApPat as paterno,agApMat as materno,agFecNac as
+nacimiento,agEdad as edad, agGenero as genero, usNum as num, usNombre as usuario, 
+usContrasenia as contrasenia, usCorreo as correo, usTipoUS as tipo
+from agente inner join usuario
+on FK_usuario=usNum;
+
+select * from agente;
+select * from usuario;
+
+insert into telef_agentes(tgTelefono,FK_agente) values('6647799903','VAC0FZA') ;
 
 ##------------------------------------------ Espacio -----------------------------------------------
 

@@ -159,7 +159,7 @@ create procedure SP_insert_lugar(
 )
 begin	    
     
-    if (calle is not null and numInt is not null and cp is not null) then
+    if (calle is not null and numInt is not null and cp is not null and municipio is not null) then
 		
         insert into lugar(lugNombre,lugDescripcion,lugCosto,lugCapacidad,FK_TipoL) values
         (nombre,descripcion,costo,capacidad,tipoLug);
@@ -217,4 +217,64 @@ DELIMITER ;
 
 # call sp_log_in ('usuario26','guadalupe');
 
+#################################### ACTUALIZAR A UN CLIENTE ################################################
+DELIMITER //
+create procedure sp_update_perfilCli
+(
+	in campo varchar(20),
+	in cambio varchar(20),
+    in cliente int
+)
+begin
+	case
+	  when campo='user' then
+			UPDATE cliente INNER JOIN usuario
+			ON FK_usuario = usNum 
+			SET usNombre = cambio
+			where cliNum=cliente;
+	  when campo='password' then
+			UPDATE cliente INNER JOIN usuario
+			ON FK_usuario = usNum 
+			SET usContrasenia = cambio
+			where cliNum=cliente;
+	  when campo='telefono' then
+			UPDATE cliente
+			SET cliTelefono = cambio
+			where cliNum=cliente;
+	end case;
+    
+end//
+DELIMITER ;
 
+#call sp_update_perfilCli('user','MagdalenaTV',5);
+
+####################################### CALCULAR DIAS DE RESERVACIÓN ###########################################
+drop trigger DIS_RESERVACION_DIAS;
+
+DELIMITER //
+create trigger DIS_RESERVACION_DIAS before insert on reservacion 
+for each row 
+begin 
+	declare dias int;
+    declare total decimal(12,2);
+	set dias=(SELECT DATEDIFF((select prFechaFin from pre_reservacion where prNum=new.resNumPR),
+								(select prFechaInic from pre_reservacion where prNum=new.resNumPR)));
+    set total=((select lugCosto from pre_reservacion inner join lugar 
+				on FK_Lugar=lugNum where prNum=new.resNumPR) * dias);  
+                                
+    set new.resTotDias = dias;
+    set new.resTotPagar = total;
+    set new.resFecConfirmacion = (SELECT NOW());
+    
+end //
+DELIMITER ;
+
+insert reservacion(resNumPR) values(1);
+
+select * from reservacion;
+select * from lugar;
+select * from pre_reservacion;
+
+
+delete from reservacion
+where resNumPR=1;
