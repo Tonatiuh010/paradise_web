@@ -265,16 +265,44 @@ begin
     set new.resTotDias = dias;
     set new.resTotPagar = total;
     set new.resFecConfirmacion = (SELECT NOW());
-    
 end //
 DELIMITER ;
 
-insert reservacion(resNumPR) values(1);
+############################################### Insert Espacios #####################################
+#drop procedure SP_insert_espacios
+DELIMITER //
+create procedure SP_insert_espacios 
+(
+	in nombre varchar(20)
+)
+begin
+		insert into espacio (espNombre) values (nombre);
+end //
+DELIMITER ;
+
+
+
+
+#call SP_insert_espacios ('Test');
+#insert reservacion(resNumPR) values(1);
+
+
+############################################### Insert Tipo Lugar #####################################
+#drop procedure SP_insert_TL
+DELIMITER //
+create procedure SP_insert_TL
+(
+	in nombre varchar(30)
+)
+begin
+		insert into tipolugar (tlNombre) values (nombre);
+end //
+DELIMITER ;
 
 select * from reservacion;
 select * from lugar;
 select * from pre_reservacion;
-
+select * from espacio;
 
 delete from reservacion
 where resNumPR=1;

@@ -4,7 +4,7 @@
     require_once("agente.php");
     require_once("cliente.php");
     require_once("reservacion.php");
-    require_once("php/../mysql/connection.php");
+    require_once("../mysql/connection.php");
 
 
     class pre_reservacion extends reservacion{

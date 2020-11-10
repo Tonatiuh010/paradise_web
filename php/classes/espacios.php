@@ -1,5 +1,5 @@
 <?php
-    require_once("php/../mysql/connection.php");
+    require_once("../mysql/connection.php");
 
     class espacios {
 
@@ -37,6 +37,25 @@
                      
         }
 
+
+        public function insertEspacios(){
+            $sql="call SP_insert_espacios (?);";
+
+            $conn=mysqlConnection::getConnection();
+
+            $command=$conn->prepare($sql);
+            $command->bind_param('s',$this->nombre);
+            $command->execute();
+
+            if ($command->error!=""){
+                    echo 'Error: '.$command->error;
+             } else {
+                    echo 'registrado';
+             }
+
+                mysqli_stmt_close($command);
+                $conn->close();        
+        }
 
         public function insertEspaciosLugar($numEspacios,$numLugar){
                 $sql='call SP_insertar_EspLug(?,?);';

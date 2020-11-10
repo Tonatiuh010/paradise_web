@@ -1,6 +1,6 @@
 <?php
  
-require_once("classes/lugar.php");
+require_once("../classes/lugar.php");
 
     $ob_lugar= json_decode($_GET['b']);
     $obDirec= $ob_lugar->direc->obDirec;  

@@ -1,6 +1,6 @@
 <?php 
 
-require_once("mysql/connection.php");
+require_once("../mysql/connection.php");
 require_once("municipio.php");
 
     class direccion extends municipio {

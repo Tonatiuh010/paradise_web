@@ -1,5 +1,5 @@
 <?php
-    require_once("classes/lugar.php");
+    require_once("../classes/lugar.php");
 
     
 
