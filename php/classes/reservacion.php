@@ -1,6 +1,6 @@
 <?php
 
-require_once("php/../mysql/connection.php");
+require_once("../mysql/connection.php");
 
     abstract class reservacion{
         

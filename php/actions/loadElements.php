@@ -1,7 +1,7 @@
 <?php
     
-    require_once("classes/espacios.php");
-    require_once("classes/tipoLugar.php");
+    require_once("../classes/espacios.php");
+    require_once("../classes/tipoLugar.php");
 
 
     $espacios=new espacios();

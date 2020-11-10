@@ -74,9 +74,11 @@
                 <li>
                     <a href="HTML_ADMIN_LUGARES.html">Lugares</a>
 
-                    <ol>
-                        > Municipios
-                    </ol>
+                    <a href="HTML_ADMIN_HERRAMIENTAS.html">
+                        <ol>
+                            > Herramientas del Lugar
+                        </ol>
+                    </a>                    
                 </li>
 
                 <li>
@@ -101,7 +103,7 @@
             <section class="slides fade" >
                 <section class='registerSection' name='searchAdminForm'>
 
-                        <label id="lblNum" style="display:none">Número del Lugar:</label> <input id="tbNum" style="display:none" type="text" disabled><br />
+                      
 
                         <label>Nombre del Lugar:</label> 
                             <input class="in" type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
@@ -213,14 +215,11 @@
     <script>
 
         
+
         function loading() {
-            loadOptions();
-            var dialogo = document.getElementById('update');
-            var box = document.getElementById('boxEsp');
-            var clon = box.cloneNode(true);
-            clon.setAttribute("id", "boxEspD");
-            dialogo.appendChild(clon);
-            console.log(box.innerText);
+            
+            loadOptions();           
+
             showSlides(1);
         }
 

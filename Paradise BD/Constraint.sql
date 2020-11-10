@@ -36,4 +36,13 @@ alter table agente
 add constraint UQ_foreign_userAg unique (FK_usuario);
 
 
+<<<<<<< HEAD
+=======
+alter table espacio
+add constraint UQ_espacio_nombre unique (espNombre);
+
+alter table tipolugar
+add constraint UQ_tipoLugar_nombre unique (tlNombre);
+
+>>>>>>> bcde3b30a3255238b04de5f50703b37ee5dea1a4
 

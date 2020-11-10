@@ -1,5 +1,5 @@
 <?php
-    require_once("php/../mysql/connection.php");
+    require_once("../mysql/connection.php");
 
     class tipoLugar {
 
@@ -33,6 +33,28 @@
                      
         }
 
+
+        //call  SP_insert_espacios ('Test')
+
+         public function insertTL(){
+            $sql="call SP_insert_TL (?);";
+
+            $conn=mysqlConnection::getConnection();
+
+            $command=$conn->prepare($sql);
+            $command->bind_param('s',$this->nombre);
+            $command->execute();
+
+             if ($command->error!=""){
+                    echo 'Error: '.$command->error;
+             } else {
+                    echo 'registrado';
+             }
+
+                mysqli_stmt_close($command);
+                $conn->close();        
+        }
+      
 
          public function getAllTipoLugar(){
         
