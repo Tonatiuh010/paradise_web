@@ -6,6 +6,40 @@
 </head>
 <body>
     No hay nada aquí, a la siguiente vuelta :(
-    
+    <p id="mensaje"></p>
+    <input type="button" name="submit" value="Inscribirme" class="botonR" onclick="mandar()"/><br />
+
+    <script>
+        function mandar()
+        {
+            var dialogo = document.getElementById('error');
+
+            //Generamos un objeto con los datos proporcionados por el usuario
+            
+            newUserObj = {
+                nombre: 'Pepe1',
+                paterno: 'Morticio2',
+                materno: 'Arduino3',
+                nacimiento: '1939-07-12',
+                genero: 'Masculino',
+                telefono: '',
+                correo: 'prueba@gmail.com',
+                usuario: 'basurero123',
+                contrasenia: 'basurero156'
+            }
+
+                var ajax = new XMLHttpRequest();
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        document.getElementById('mensaje').innerHTML = '';
+                        document.getElementById('mensaje').innerHTML = ajax.responseText;
+                         //dialogo.showModal();
+                    }
+            };
+            ajax.open("GET", "../php/registrarUser.php?obj=" + JSON.stringify(newUserObj), true);
+                ajax.send();
+            
+        }
+    </script>
 </body>
 </html>
