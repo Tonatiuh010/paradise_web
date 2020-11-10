@@ -232,7 +232,7 @@ where dl.dlNum is null
 ;
 
 
-
+select * from VW_lugar_admin;
 
 ##----------------------------------------- Lugar Admin -----------------------------------
 /*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/

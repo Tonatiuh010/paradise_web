@@ -35,3 +35,11 @@ add constraint UQ_foreign_userCli unique (FK_usuario);
 alter table agente
 add constraint UQ_foreign_userAg unique (FK_usuario);
 
+
+alter table espacio
+add constraint UQ_espacio_nombre unique (espNombre);
+
+alter table tipolugar
+add constraint UQ_tipoLugar_nombre unique (tlNombre);
+
+

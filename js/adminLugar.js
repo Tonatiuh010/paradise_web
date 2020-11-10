@@ -75,7 +75,7 @@
     };
 
     //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
-    ajax.open("GET", "../php/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
+    ajax.open("GET", "../php/actions/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
     ajax.send();
 }
 
@@ -99,13 +99,13 @@ function buscarLugar() {
     };
 
 
-    ajax.open("GET", "../php/buscarLugar.php?b=" + shc, true);
+    ajax.open("GET", "../php/actions/buscarLugar.php?b=" + shc, true);
     ajax.send();
 
 }
 
 function modifyLugar(a) {
-    showSlides(1);
+   //Llamar a diálogo
     document.getElementById("btnModify").style.display = "block";
     document.getElementById("btnSend").style.display = "none";
 
@@ -115,9 +115,7 @@ function modifyLugar(a) {
     document.getElementById("txtCapacidadLugar").value = a.capacidad;
 
 
-    document.getElementById("tbNum").style.display = "block";
-    document.getElementById("lblNum").style.display = "block";
-    document.getElementById("tbNum").value = a.num;
+   
 
 }
 
@@ -130,7 +128,7 @@ function loadOptions() {
         }
     };
 
-    ajax.open("get", "../php/loadElements.php?", true);
+    ajax.open("get", "../php/actions/loadElements.php?", true);
     ajax.send();
 }
 
@@ -233,8 +231,6 @@ function fillLugarShc(ob) {
     var list = document.getElementById("listLugar");
     list.style.display = "block"; 
     var arrayLugar = JSON.parse(ob);
-
-    console.log(arrayLugar);
 
     var x = 0;
 

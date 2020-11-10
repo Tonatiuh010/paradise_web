@@ -1,5 +1,5 @@
 <?php
-    require_once("mysql/connection.php");
+    require_once("../mysql/connection.php");
 
 
     class agTelefono{

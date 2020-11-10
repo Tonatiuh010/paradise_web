@@ -67,10 +67,44 @@
     clear: both;
 }
 
-#listLugar {
+#listMunicipio {
     width:100%;
     height: auto 80%;
-    margin-top:-15%;
+    margin:auto 0;    
+    float:inherit;
+     clear: both;
+    background-color: pink;
+    
+}
+
+#listLugar{
+    width:100%;
+    height: auto 80%;
+    margin:auto 0;
+ 
+    float:inherit;
+     clear: both;
+    background-color: pink;
+    
+}
+
+#listEspacios{
+    width:100%;
+    height: auto 80%;
+    margin:auto 0;
+ 
+    float:inherit;
+     clear: both;
+    background-color: pink;
+    
+}
+
+
+#listTL{
+    width:100%;
+    height: auto 80%;
+    margin:auto 0;
+ 
     float:inherit;
      clear: both;
     background-color: pink;
