@@ -143,6 +143,7 @@ main {
     width: 70%;
     /*height: 100%;*/
     float:right;
+    background-color:white;
     /*background-color: var(--pcolor1);*/
 }
 
@@ -154,52 +155,74 @@ main {
 }
 
 .lista {
-    width: 95%;
+    width: 70%;
+    float: right;
     display: inline-block;
-    
-    /*    border-bottom-right-radius: 4%;*/
+    background-color: var(--pcolor1);
+    border-radius: 4%;
 }
 
-.tablaList {
-    /*background-color: white;*/
-    border-radius: 6%;
-    background-color: var(--pcolor1);
-    padding-top: 2%;
-    color: #323142;
-    font-family: Georgia;
-    padding-right:3%;
-    padding-left:2%;
+.espacio{
+    height:5%;
+    width:100%;
 }
 
 .description {
     text-align: justify;
-    line-height:1.5; 
-    font-size:small; 
-    background-color:white;
-    padding-top:1%;
-    padding-bottom:1%;
-    padding-left:2%;
-    padding-right:2%;
+    line-height: 1.5;
+    background-color: white;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 90%;
+    display: inline-block;
+    font-family:Georgia;
+    font-size:small;
 }
 
-.adi {
-    background-color:white; 
-    line-height:2; 
-    text-align:left; 
-    font-size:small;"
+.costo {
+    background-color: white;
+    line-height: 2;
+    text-align: left;
+    font-size:90%;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 90%;
+    display: inline-block;
+    font-family:Georgia;
+}
+
+.capacidad {
+    background-color: white;
+    line-height: 2;
+    text-align: left;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 90%;
+    width: 90%;
+    display: inline-block;
+    font-family: Georgia;
+}
+
+.complete_section {
+    width: 95%;
+    display: inline-block;
+    background-color: var(--pcolor1);
+    border-radius: 4%;
 }
 
 .lugBoton {
     background-color: var(--color1);
-    width: 60%;
+    width: 94%;
     height: 50px;
     color: white;
     border: none;
-    border-top-right-radius: 6%;
-    border-top-left-radius: 6%;
-    border-bottom-right-radius: 6%;
-    border-bottom-left-radius: 6%;
-    font-size:large;
+   /* border-top-right-radius: 6%;
+    border-top-left-radius: 6%;*/
+/*    border-bottom-right-radius: 3%;
+    border-bottom-left-radius: 3%;*/
+    font-size: large;
 }
 
 .thBoton
@@ -208,13 +231,27 @@ main {
 }
 
 .nombreLug {
-    background-color:white;
-    padding:1.5%;
+    background-color: white;
+    padding: 2%;
+    width: 90%;
+    display: inline-block;
+    font-family: Georgia;
+    font-size: x-large;
+/*    border-top-right-radius: 2%;
+    border-top-left-radius: 2%;*/
 }
 
-.opsel
-{
-    background-color:antiquewhite;
+
+.lugImg {
+    width: 28%;
+    float:left;
+    padding-top:2%;
+    padding-left:2%;
+    border-radius:3%;
+}
+
+.opsel {
+    background-color: antiquewhite;
 }
 
 .tablaBox
@@ -265,3 +302,6 @@ h5 {
     height:5%;
     border:none;
 }
+
+
+

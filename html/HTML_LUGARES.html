@@ -6,7 +6,7 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Lugares y Salones - Paradise</title>
 </head>
-<body onload="lugaresList(); cargarOPE(); cargarOPTL();">
+<body onload="lugares(); cargarOPE();">
     <nav class="NavOficial">
         <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -79,8 +79,7 @@
                           <br /><br />
                           <hr /><br />
                           <h5>ESPACIOS</h5><br />
-                          <section id="espBox">
-                          </section>
+                          <section id="espBox"></section>
                           <br />
                           <hr />
                           <br /><br />
@@ -90,32 +89,103 @@
                           <input type="button" value="BUSCAR" class="botonf" onclick="searchSp()" />
                       </form>
             </section>
-            <section class="lugares" id="lugares">
-                Las lista de lugares
-            </section>
+            <section class="lugares" id="lugares"></section>
         </section>
 
         <script>
 
-            function lugaresList()
+            function lugares()
             {
                 
                 var ajax = new XMLHttpRequest();
 
                 caso = 1;
+                lista = '';
 
                 ajax.onreadystatechange = function () {
                     if (ajax.status == 200 && ajax.readyState == 4)
                     {
-                        document.getElementById('lugares').innerHTML = ajax.responseText;
+                        //document.getElementById('lugares').innerHTML = ajax.responseText;
+                        lugaresList(ajax.responseText);
                     }
                 }
 
-                
-
-                ajax.open("GET","../php/listaLugare.php?", true);
+                ajax.open("GET", "../php/show_search_lugares.php?caso=" + caso + "&lista=" + lista, true);
                 ajax.send();
             }
+
+            function lugaresList(ls) {
+                var y=0;
+                var arrayLugares = JSON.parse(ls);
+
+                var lugares = document.getElementById("lugares");
+               
+                
+
+                while (arrayLugares[y])
+                {
+                    var lugAg = document.createElement('section');
+                    lugAg.setAttribute("class", "complete_section")
+
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'lugImg');
+                    img.setAttribute('src', '../img/index/anuncio6.jpeg');
+
+                    var lugSec = document.createElement("section");
+                    lugSec.setAttribute("class", "lista")
+
+                    var lb5 = document.createElement("Section");
+                    lb5.setAttribute("class", "espacio");
+
+                    var lb6 = document.createElement("Section");
+                    lb6.setAttribute("class", "espacio");
+
+                    var lb1 = document.createElement("Section");
+                    lb1.setAttribute("class", "nombreLug");
+                    lb1.innerHTML = arrayLugares[y].nombre;
+
+                    var lb2 = document.createElement("Section");
+                    lb2.setAttribute("class", "description");
+                    lb2.innerHTML = arrayLugares[y].desc;
+
+                    var lb3 = document.createElement("Section");
+                    lb3.setAttribute("class", "costo");
+                    lb3.innerHTML = 'A partir de $' + arrayLugares[y].costo;
+
+                    var lb4 = document.createElement("Section");
+                    lb4.setAttribute("class", "capacidad");
+                    lb4.innerHTML = 'Apropiado para '+ arrayLugares[y].capacidad + ' personas';
+
+                    var bt = document.createElement("button");
+                    bt.setAttribute("class", "lugBoton");
+                    bt.addEventListener('click', function (_y) {
+                        return function () {
+                            location.href = '../php/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
+                            console.log(_y);}}(y));
+                    bt.innerHTML = 'Consultar Lugar';
+
+                    var br = document.createElement('br');
+
+                    
+                    lugares.appendChild(lb5);
+                    lugares.appendChild(lugAg);
+                    lugAg.appendChild(lugSec);
+                    lugAg.appendChild(img);
+                    lugSec.appendChild(br);
+                    lugSec.appendChild(lb1);
+                    lugSec.appendChild(lb2);
+                    lugSec.appendChild(lb3);
+                    lugSec.appendChild(lb4);
+                    lugSec.appendChild(bt);
+
+                    lugSec.appendChild(lb6);
+
+
+                    y++;
+                }
+
+            }
+
 
             
             function cargarOPE()
@@ -126,36 +196,38 @@
 
                 ajax.onreadystatechange = function () {
                     if (ajax.status == 200 && ajax.readyState == 4) {
-                        fillDataEsp(ajax.responseText);
+                        fillData(ajax.responseText);
                     }
                 };
 
-                ajax.open("get", "../php/filtrosLug.php?caso=" + caso, true);
+                ajax.open("get", "../php/loadElements.php?", true);
                 ajax.send();
 
             }
 
-            function cargarOPTL()
+            //function cargarOPTL()
+            //{
+
+            //    var ajax = new XMLHttpRequest();
+            //    caso = 2;
+
+            //    ajax.onreadystatechange = function () {
+            //        if (ajax.status == 200 && ajax.readyState == 4) {
+            //            fillDataTl(ajax.responseText);
+            //        }
+            //    };
+
+            //    ajax.open("get", "../php/filtrosLug.php?caso=" + caso, true);
+            //    ajax.send();
+
+            //}
+
+            function fillData(ob)
             {
-
-                var ajax = new XMLHttpRequest();
-                caso = 2;
-
-                ajax.onreadystatechange = function () {
-                    if (ajax.status == 200 && ajax.readyState == 4) {
-                        fillDataTl(ajax.responseText);
-                    }
-                };
-
-                ajax.open("get", "../php/filtrosLug.php?caso=" + caso, true);
-                ajax.send();
-
-            }
-
-            function fillDataEsp(ob)
-            {
-                var y=0;
-                var arrayEspacios = JSON.parse(ob);
+                var y = 0;
+                var obj = JSON.parse(ob);
+                var arrayEspacios = obj.espacios;
+                var arrayTipo = obj.tipoLugar;
 
                 var espSection = document.getElementById("espBox");
 
@@ -192,6 +264,26 @@
                     
                     y++;
                 }
+
+                var x=0;
+                var tlSection = document.getElementById("opsel");
+
+
+                while (arrayTipo[x])
+                {
+
+                    var option = document.createElement("option");
+                    //option.setAttribute("class", "opsel");
+                    option.style.marginRight = "50px";
+
+                    option.value = arrayTipo[x].num;
+
+                    option.innerHTML = arrayTipo[x].nombre;
+
+                    tlSection.appendChild(option);
+                    x++;
+                }
+
             }
 
             function fillDataTl(ob)

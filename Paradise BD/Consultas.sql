@@ -60,6 +60,7 @@ create view vw_lugares_basic_list as
     lugCosto as Costo, lugCapacidad as Capacidad 
     from lugar;
 
+select * from vw_lugares_basic_list;
 
 select * from lugespacio;
 select * from espacio;
