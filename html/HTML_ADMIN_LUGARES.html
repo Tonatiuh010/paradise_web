@@ -108,9 +108,9 @@
                         <label>Nombre del Lugar:</label> 
                             <input class="in" type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
                         <label>Costo del Lugar:</label> 
-                            <input class="in" type='text' id="txtCostoLugar"  /><br />
+                            <input class="in" type='number' id="txtCostoLugar"  /><br />
                         <label>Capacidad del Lugar:</label> 
-                            <input class="in" type='text' id="txtCapacidadLugar" required /><br />
+                            <input class="in" type='number' id="txtCapacidadLugar" required /><br />
                         <label>Descripción del Lugar:</label> 
                             <input class="in" type='text' id="txtDescLugar" maxlength="120" />
                         <br />
@@ -189,18 +189,21 @@
         <dialog id="update">
             <form>
                 <label>Número de Lugar:</label> 
-                    <input type='text'  class="dlabel" id='txtNombreLugar' required disabled><br /><br />
+                    <input type='text'  class="dlabel" id='lblNum' required disabled><br /><br />
                 <label>Nombre del Lugar:</label> 
-                    <input type='text'  class="dlabel" id='txtNombreLugar' required disabled><br /><br />
+                    <input type='text'  class="dlabel" id='lblNombre' required disabled><br /><br />
 
                 <label>Costo del Lugar:</label> 
-                    <input type='text'  class="dlabel" id="txtCostoLugar"  /><br /><br />
+                    <input type='number'  class="dlabel" id="txtCostoLugarD"  /><br /><br />
                 <label>Capacidad del Lugar:</label> 
-                    <input type='text'  class="dlabel" id="txtCapacidadLugar" required /><br /><br />
+                    <input type='number'  class="dlabel" id="txtCapacidadLugarD" required /><br /><br />
 
-                <section id="boxEsp"></section>
+                <section id="dialogEsp"></section>
 
-                <button type="button"  class="botond" onclick="cerrar()">Enviar</button>
+                <p id="msgD"></p>
+
+
+                <button type="button"  class="botond" onclick="updateLugar()">Enviar</button>
                 <button type="button"  class="botonc" onclick="cerrar()">Cancelar</button>
                 <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
             </form>
@@ -237,19 +240,7 @@
             }
 
             slideArray[n].style.display = "block";
-        }
-
-
-
-
-        function abrir() {
-            var dialogo = document.getElementById('update');
-            dialogo.showModal();
-        }
-
-        function cerrar() {
-            document.getElementById('update').close();
-        }
+        }        
 
     </script>
 

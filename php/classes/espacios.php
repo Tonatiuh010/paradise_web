@@ -75,6 +75,24 @@
 
         }
 
+
+         public function deleteEspaciosLugar($numEspacios,$numLugar){
+                $sql='call SP_delete_EspLug(?,?);';
+                $conn=mysqlConnection::getConnection();
+                $command=$conn->prepare($sql);
+
+                $command->bind_param('ii',$numEspacios,$numLugar);
+             
+                $command->execute();
+
+                if ($command->error!=""){
+                    echo 'Error: '.$command->error;
+                }
+
+                mysqli_stmt_close($command);
+                $conn->close();         
+        }
+
         public function getJsonObject(){
 
             return json_encode(

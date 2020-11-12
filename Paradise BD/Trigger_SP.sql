@@ -179,6 +179,23 @@ begin
 end//
 DELIMITER 
 
+########################################### Actualizar UN LUGAR ####################################################
+#drop procedure SP_update_lugar
+DELIMITER //
+create procedure SP_update_lugar 
+(
+in num int,
+in costo decimal(12,2),
+in capacidad int
+)
+begin
+	update lugar set lugCosto=costo, lugCapacidad=capacidad where lugNum=num;
+end //
+DELIMITER ;
+
+
+#call SP_update_lugar(1,20899,300);
+
 ##-------------------------------------------- Insert Espacios - Lugar ---------------------------------
 
 #drop procedure SP_insertar_EspLug;
@@ -192,6 +209,21 @@ begin
 	insert into lugespacio (lg_NumEspacio,lg_NumLugar) values (numEsp,numLug);
 end//
 DELIMITER ;
+
+##-------------------------------------------- Delete Espacios - Lugar ---------------------------------
+
+#drop procedure SP_delete_EspLug;
+
+DELIMITER //
+create procedure SP_delete_EspLug (
+	in numEsp int,
+    in numLug int
+)
+begin 
+	delete from lugespacio where lg_NumLugar=numLug and lg_NumEspacio=numEsp;
+end//
+DELIMITER ;
+
 
 ######################################### INICIO DE SESIÓN ###################################################
 

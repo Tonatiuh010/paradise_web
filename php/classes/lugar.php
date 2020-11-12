@@ -112,6 +112,14 @@
                } 
 
 
+               if (func_num_args()==4){
+                    $this->num=$args[0];                 
+                    $this->costo=$args[1];
+                    $this->capacidad=$args[2];  
+                    $this->espacio=$args[3];
+                }
+
+
               if (func_num_args()==6){                    
                     $this->nombre=$args[0];
                     $this->desc=$args[1];
@@ -248,7 +256,34 @@
 
 
         public function updateLugar (){
-            
+                $sql="call SP_update_lugar(?,?,?);";
+                $conn=mysqlConnection::getConnection();
+                $command=$conn->prepare($sql);
+
+                $command->bind_param('idi',$this->num,$this->costo,$this->capacidad);
+
+                 $command->execute();
+
+                  if ($command->error!=""){
+                    echo "Error ---> ".$command->error;
+
+                  } else {
+                    $espaciosArray=$this->espacio->arrayId;
+                    $this->espacio=new espacios();
+                    $currentEsps=json_decode($this->espacio->getAllEspaciosByLugar($this->num));
+
+                    for ($x=0;$x<count($currentEsps);$x++){                         
+                        $this->espacio->deleteEspaciosLugar($currentEsps[$x].num,$this->num);                           
+                    }
+
+                    for ($y=0;$y<count($espaciosArray);$y++){
+                        $this->espacio->insertEspaciosLugar($espaciosArray[$y],$this->num);                                            
+                    }        
+                     echo "Registrado";
+                  }
+
+            mysqli_stmt_close($command);
+            $conn->close();    
         }
 
         public function getJsonObject(){

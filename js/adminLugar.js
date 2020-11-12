@@ -80,8 +80,6 @@
 }
 
 
-
-
 function buscarLugar() {
     createDialog();
     document.getElementById("listLugar").innerHTML = "";
@@ -104,20 +102,6 @@ function buscarLugar() {
 
 }
 
-function modifyLugar(a) {
-   //Llamar a diálogo
-    document.getElementById("btnModify").style.display = "block";
-    document.getElementById("btnSend").style.display = "none";
-
-    document.getElementById("txtNombreLugar").value = a.nombre;
-    document.getElementById("txtDescLugar").value = a.desc;
-    document.getElementById("txtCostoLugar").value = a.costo;
-    document.getElementById("txtCapacidadLugar").value = a.capacidad;
-
-
-   
-
-}
 
 function loadOptions() {
     var ajax = new XMLHttpRequest();
@@ -142,10 +126,14 @@ function fillOptions(ob) {
 
     var espSection = document.getElementById("boxEsp");
 
+    var diag = document.getElementById("dialogEsp");
+
+
     var tabla = document.createElement("table");
     tabla.className = "tablaBox";
 
     espSection.appendChild(tabla);
+    diag.appendChild(tabla);
 
     while (arrayEspacios[y]) {
         var ckBox = document.createElement("input");
@@ -312,7 +300,7 @@ function fillLugarShc(ob) {
 
             btn.addEventListener("click", function (_x) {
                 return function () {
-                    modifyLugar(arrayLugar[_x]);
+                    abrir(arrayLugar[_x]);
                 }
 
             }(x));
@@ -323,4 +311,77 @@ function fillLugarShc(ob) {
         list.appendChild(table);
         x++;
     }
+}
+
+function updateLugar(ck) {
+    //Llamar a diálogo
+
+    var CKS = document.getElementsByClassName("ckB");
+
+    var lugarOb = {
+        numero: document.getElementById("lblNum").value,    
+        costo: document.getElementById("txtCostoLugarD").value,
+        capacidad: document.getElementById("txtCapacidadLugarD").value,
+
+        espacios: new function () {
+            var a = 0;
+            this.arrayId = [];
+            while (CKS[a]) {
+                if (CKS[a].checked == true) {
+                    this.arrayId.push(CKS[a].value);
+                }
+                a++;
+            }
+        }
+
+        };    
+
+
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            //console.log(ajax.responseText);
+            document.getElementById("msgD").innerHTML = ajax.responseText;
+            
+        }
+    };
+
+
+    ajax.open("GET", "../php/actions/buscarLugar.php?b=" + shc, true);
+    ajax.send();
+}
+
+function abrir(a) {
+    var dialogo = document.getElementById('update');
+    dialogo.showModal();
+
+
+    document.getElementById("lblNum").value = a.num;
+    document.getElementById("lblNombre").value = a.nombre;
+    document.getElementById("txtCostoLugarD").value = a.costo;
+    document.getElementById("txtCapacidadLugarD").value = a.capacidad;   
+
+    var ch = document.getElementsByClassName("ckB");
+
+    for (var x = 0; x < ch.length; x++) {
+        for (var y=0; y<a.espacios.length;y++){
+            if (ch[x].value == a.espacios[y].num) {
+                ch[x].checked = true;
+            }
+        }        
+    }
+
+}
+
+function cerrar() {
+    var ch = document.getElementsByClassName("ckB");
+
+
+    for (var x = 0; x < ch.length; x++) {
+        ch[x].checked = false;
+    }
+
+    document.getElementById('update').close();
+
+
 }
