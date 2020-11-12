@@ -7,6 +7,7 @@
 
     <script src="../js/dialog.js"></script>
     <script src="../js/adminLugar.js"></script>
+    <script src="../js/session.js"></script>
 </head>
 
 
@@ -20,11 +21,12 @@
             <article class="pMTx"><a href="construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-            <article class="pMTxt" id="sesion"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+            <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
-            <article class="pMTxt1" id="sesion" style="display:none;"><a href="HTML_SIGN_IN.html";>
-                <img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="../img/log_out.png" width="25%;" /></a></article>
+            <article class="pMTxt1" id="login" style="display:none;"><a href="HTML_SIGN_IN.html";>
+                <a href="../html/construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
+            </article>
 
         </section>
         <br />
@@ -221,6 +223,8 @@
             loadOptions();           
 
             showSlides(1);
+
+            sesion();
         }
 
         

@@ -1,5 +1,5 @@
 <?php
-    include('config.php');                              
+include('config.php');                              
 $mysqli=@mysqli_connect($HOST,$USER,$PASS,$BD);   
 
 
