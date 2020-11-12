@@ -1,5 +1,5 @@
 ############################################# RESERVADO NO! TOCAR ##################################################
-
+select * from usuario;
 # select * from agente where agMatricula like "a%" or agNombre like "a%" or agApPat like "a%";
 select * from tipolugar;
 use paradise;
@@ -60,6 +60,7 @@ create view vw_lugares_basic_list as
     lugCosto as Costo, lugCapacidad as Capacidad 
     from lugar;
 
+select * from vw_lugares_basic_list;
 
 select * from lugespacio;
 select * from espacio;
@@ -91,7 +92,7 @@ select * from cliente;
 select * from agente;
 
 # Vista para obtener las llaves primarias y tipo de usuario de los diferentes usuarios
-create view vw_primary_user as
+alter view vw_primary_user as
 	select cliNum as numC, usNum as numU, usTipoUS as tipo, agMatricula as mat, usNombre as username, usContrasenia as contrasenia, usCorreo as correo
 	from cliente as cli right join usuario as us
 	on cli.FK_usuario=us.usNum right join agente as ag
@@ -103,7 +104,7 @@ create view vw_primary_user as
 	on ag.FK_usuario=us.usNum 
 	where cliNum is null or agMatricula is null;
     
-
+	select * from vw_primary_user;
     select * from usuario;
     
 #-----------------------------------------------------------------------------------------------------------------

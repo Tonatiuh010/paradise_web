@@ -196,6 +196,15 @@ insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
 select * from lugar;
 select * from espacio;
 
+########################################### INSERTANDO ADMINISTRADOR ###################################################
+insert into usuario(usNombre,usContrasenia,usCorreo,usTipoUS) values
+('tonatiuh','sandwich','0319125293@miutt.edu.mx','Administrador');
+
+insert into usuario(usNombre,usContrasenia,usCorreo,usTipoUS) values
+('Arreola','123456789','0319124849@miutt.edu.mx','Administrador');
+
+
+select * from usuario;
 
 
 

@@ -323,7 +323,10 @@
                 mysqli_stmt_close($command);
                 $conn->close();         
                  return json_encode($list);
-              } 
+        }
+
+        
+        
                 
 
               
