@@ -1,12 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\css",
-    "\\html",
+    "\\js",
     "\\php",
-    "\\php\\basurero.com",
-    "\\php\\classes"
+    "\\php\\actions",
+    "\\php\\classes",
+    "\\php\\mysql"
   ],
-  "SelectedNode": "\\php\\show_search_lugares.php",
+  "SelectedNode": "\\php\\classes\\funciones.php",
   "PreviewInSolutionExplorer": false
 }

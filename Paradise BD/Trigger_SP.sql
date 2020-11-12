@@ -204,20 +204,28 @@ create procedure sp_log_in
     in passwd varchar(30)
 )
 begin
-	set @tipoU=(select tipo from vw_primary_user
-				where contrasenia = passwd  and (correo=usern or username=usern));
+	set @tipoU=(select tipo from vw_user_list
+				where contrasenia = passwd  and (correo=usern or nombre=usern));
+	/*set @tipoU=(select tipo from vw_primary_user
+				where contrasenia = passwd  and (correo=usern or username=usern));*/
                 
 	if(@tipoU='Cliente') then
 		select numc as id, numU, tipo from vw_primary_user
 		where contrasenia = passwd  and (correo=usern or username=usern);
-	else
+	else if(@tipoU='Agente') then
 		select mat as id, numU, tipo from vw_primary_user
 		where contrasenia = passwd  and (correo=usern or username=usern);
+	else
+		select 0 as id, numU, tipo from vw_user_list 
+        where contrasenia = passwd  and (correo=usern or username=usern);
 	end if;
 end// 
 DELIMITER ;
 
-# call sp_log_in ('usuario26','guadalupe');
+use paradise;
+call sp_log_in ('tonatiuh','sandwich');
+select * from usuario;
+select * from cliente;
 
 #################################### ACTUALIZAR A UN CLIENTE ################################################
 DELIMITER //
@@ -270,6 +278,7 @@ begin
 end //
 DELIMITER ;
 
+#insert reservacion(resNumPR) values(1);
 ############################################### Insert Espacios #####################################
 #drop procedure SP_insert_espacios
 DELIMITER //
@@ -286,7 +295,7 @@ DELIMITER ;
 
 
 #call SP_insert_espacios ('Test');
-#insert reservacion(resNumPR) values(1);
+
 
 
 ############################################### Insert Tipo Lugar #####################################

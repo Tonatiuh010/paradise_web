@@ -99,7 +99,6 @@
                 
                 var ajax = new XMLHttpRequest();
 
-                caso = 1;
                 lista = '';
 
                 ajax.onreadystatechange = function () {
@@ -110,7 +109,7 @@
                     }
                 }
 
-                ajax.open("GET", "../php/show_search_lugares.php?caso=" + caso + "&lista=" + lista, true);
+                ajax.open("GET", "../php/actions/show_search_lugares.php?lista=" + lista, true);
                 ajax.send();
             }
 
@@ -200,7 +199,7 @@
                     }
                 };
 
-                ajax.open("get", "../php/loadElements.php?", true);
+                ajax.open("get", "../php/actions/loadElements.php?", true);
                 ajax.send();
 
             }
