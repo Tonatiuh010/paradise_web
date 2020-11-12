@@ -1,6 +1,6 @@
 <?php
 
-require_once("mysql/connection.php");
+require_once("../mysql/connection.php");
 
 function get_log_in($us='',$pwd='')
 {
