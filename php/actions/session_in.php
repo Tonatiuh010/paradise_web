@@ -1,18 +1,30 @@
 <?php
- require_once("../classes/funciones.php");
+
+require_once("../classes/funciones.php");
+
+    //$usuario='solis_emma';
+    //$contrasenia='pelicula';
+
+    //$usuario='sql';
+    //$contrasenia='123456';
+
+    //$usuario='tonatiuh';
+    //$contrasenia='sandwich';
 
     $usuario= $_GET['user'];
     $contrasenia= $_GET['passwd'];
 
     $buscar=JSON_DECODE(get_log_in($usuario,$contrasenia));
-    //var_dump($verificar);
 
     $verificada= $buscar->{'id'};
+
     
     if($verificada=='empty'){
 
         //echo 'Verifique su usuario o contrasenia';
-        return false;
+        $obj= array( "res" => false, "tipo" => '');
+
+        echo json_encode($obj);
 
     }else{
 
@@ -21,9 +33,9 @@
         $_SESSION['USER'] = $buscar->{'num_us'};
         $_SESSION['TYPE'] = $buscar->{'tipo'};
 
+        $obj= array( "res" => true, "tipo" => $buscar->{'tipo'});
         //echo 'Sesion iniciada';
-        return true;
+        echo json_encode($obj);
     }
-
 
 ?>

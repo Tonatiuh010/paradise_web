@@ -228,6 +228,7 @@ DELIMITER ;
 ######################################### INICIO DE SESIÓN ###################################################
 
 #No ejecutar sin antes antes ejecutar la vista 'vw_primary_user' en la linea 94 en 'Consultas.sql'
+#drop procedure sp_log_in;
 
 DELIMITER //
 create procedure sp_log_in
@@ -244,20 +245,20 @@ begin
 	if(@tipoU='Cliente') then
 		select numc as id, numU, tipo from vw_primary_user
 		where contrasenia = passwd  and (correo=usern or username=usern);
-	else if(@tipoU='Agente') then
+	elseif(@tipoU='Agente') then
 		select mat as id, numU, tipo from vw_primary_user
 		where contrasenia = passwd  and (correo=usern or username=usern);
 	else
-		select 0 as id, numU, tipo from vw_user_list 
-        where contrasenia = passwd  and (correo=usern or username=usern);
+		select '0' as id, numU, tipo from vw_user_list 
+        where contrasenia = passwd  and (correo=usern or nombre=usern);
 	end if;
 end// 
 DELIMITER ;
 
-use paradise;
-call sp_log_in ('tonatiuh','sandwich');
+
+#call sp_log_in ('tonatiuh','sandwich');
 select * from usuario;
-select * from cliente;
+#select * from cliente;
 
 #################################### ACTUALIZAR A UN CLIENTE ################################################
 DELIMITER //

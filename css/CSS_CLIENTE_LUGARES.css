@@ -110,6 +110,14 @@ nav a {
     text-align: right;
 }
 
+.pMTxt1 {
+    width: 16%;
+    float: right;
+    text-align: right;
+    margin-top: -1.5%;
+    padding-right: 2.5%;
+}
+
 button {
     cursor: pointer;
 }

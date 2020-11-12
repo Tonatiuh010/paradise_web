@@ -15,7 +15,7 @@
             <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-            <article class="pMTxt" id="sesion"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
+            <article class="pMTxt" id="sesion"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="sesion" style="display:none;"><a href="HTML_SIGN_IN.html";>
                 <img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;
@@ -34,9 +34,9 @@
 
     </nav>
     <main>
-                <dialog id="errorLog" close>
-                    Sesión iniciada <br />
-                    <a href="../index.html" ;> Continuar </a>
+                <dialog id="errorLog">
+                    <p id="errorp">Sesión iniciada</p> <br />
+                    <button onclick="cerrar()"> Continuar </button>
                 </dialog>
         <br />
         <section class="signImg">
@@ -65,56 +65,54 @@
         </section> 
     </main>
     <script>
-        function inicio_sesion()
-        {
+
+        function inicio_sesion() {
             document.getElementById("prueba").innerHTML = "";
             user = document.getElementById("User").value;
             passwd = document.getElementById("Password").value;
 
 
             var ajax = new XMLHttpRequest();
-            var dialogo = document.getElementById('errorLog');
-
 
             ajax.onreadystatechange = function () {
-                if (ajax.status == 200 && ajax.readyState == 4)
-                {
-                    var respuesta = ajax.responseText;
-                   if (respuesta == true) {
-                        location.href = "../index.html";
-                       
-                       //dialogo.showModal();
-                       //document.getElementById('errorLog').style.display = "block";
-                    } else {
-                        //document.getElementById('errorLog').innerHTML = ajax.responseText;
-                        //document.getElementById('errorLog').style.display = "block";
-                        document.getElementById('errorLog').innerHTML = '';
-                        document.getElementById('errorLog').innerHTML = ajax.responseText;
-
-                        dialogo.showModal();
+                    if (ajax.status == 200 && ajax.readyState == 4) {
+                        fill(ajax.responseText);
+                        //console.log(ajax.responseText);
                     }
+            };
 
-                    
+            ajax.open("GET", "../php/actions/session_in.php?user=" + user + "&passwd=" + passwd, true);
+            ajax.send();
+        }
+
+        function fill(ob) {
+
+            var dialogo = document.getElementById('errorLog');
+            var obj = JSON.parse(ob);
+            var respuesta = obj.res;
+            
+
+            if (respuesta == true) {
+                var tipo = obj.tipo;
+
+                if (tipo == 'Cliente') {
+                    location.href = "../html/HTML_PERFIL_USUARIO.html";
+                } else if (tipo == 'Agente') {
+                    location.href = "../html/HTML_AGEN_LUGARES.html";
+                } else {
+                    location.href = "../html/HTML_ADMIN_LUGARES.html";
                 }
+                        //location.href = "../index.html";
+            } else {
+
+                document.getElementById('errorp').innerHTML = '';
+                document.getElementById('errorp').innerHTML = 'Verifique su correo o contraseña';
+
+                dialogo.showModal();
             }
 
-            ajax.open("GET", "../php/conectividad.php?user=" + user + "&passwd=" + passwd, true);
-            ajax.send();
-
-            //var ajax = new XMLHttpRequest();
-            //ajax.onreadystatechange = function () {
-            //    if (ajax.readyState == 4 && ajax.status == 200) {
-            //        var respuesta = ajax.responseText;
-            //        if(respuesta==true)
-            //        {
-            //            location.href = "../index.html";
-            //        } else {
-            //            document.getElementById("prueba").innerHTML = "No se pudo conectar";
-            //        }
-            //    }
-            //};
-            
         }
+
 
         function showIcon()
         {
