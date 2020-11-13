@@ -87,7 +87,7 @@
 
 
         public function getAllPreReservaciones($p){
-            $sql="select * from vw_reservacion_completa where num= ?;";  
+            $sql="select * from vw_reservacion_completa where cliente= ?;";  
             $conn=mysqlConnection::getConnection();
               $command=$conn->prepare($sql);
               $command->bind_param('i',$p);
@@ -116,9 +116,23 @@
                 $this->status=$estado; 
                 $this->notas=$notas;
 
-                $this->lugar=new lugar($lugar);
-                $this->cliente=new cliente($cliente);    //objeto
-                $this->agente=new agente($agente);      //objeto
+                if($lugar==null){
+                    $this->lugar=new lugar();
+                }else{
+                    $this->lugar=new lugar($lugar);
+                }
+                
+                if($cliente==null){
+                    $this->cliente=new cliente();
+                }else{
+                    $this->cliente=new cliente($cliente);
+                }
+                
+                if($agente==null){
+                    $this->agente=new agente();
+                }else{
+                    $this->agente=new agente($agente);
+                }
                 
                 parent:: setNum($num);
                 parent:: setConfirmada($confirmacion);
