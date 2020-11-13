@@ -313,7 +313,20 @@ function fillLugarShc(ob) {
     }
 }
 
-function updateLugar(ck) {
+function cerrar() {
+    var ch = document.getElementsByClassName("ckB");
+
+
+    for (var x = 0; x < ch.length; x++) {
+        ch[x].checked = false;
+    }
+
+    document.getElementById('update').close();
+
+
+}
+
+function updateLugar() {
     //Llamar a diálogo
 
     var CKS = document.getElementsByClassName("ckB");
@@ -342,12 +355,22 @@ function updateLugar(ck) {
         if (ajax.readyState == 4 && ajax.status == 200) {
             //console.log(ajax.responseText);
             document.getElementById("msgD").innerHTML = ajax.responseText;
+
+            if (ajax.responseText == true) {
+                location.reload();
+                cerrar();                
+            }
+
+            //Mostrar error en caso de que falle.
+            
+            
+            
             
         }
     };
 
 
-    ajax.open("GET", "../php/actions/buscarLugar.php?b=" + shc, true);
+    ajax.open("GET", "../php/actions/actualizarLugar.php?b=" + JSON.stringify(lugarOb), true);
     ajax.send();
 }
 
@@ -373,15 +396,3 @@ function abrir(a) {
 
 }
 
-function cerrar() {
-    var ch = document.getElementsByClassName("ckB");
-
-
-    for (var x = 0; x < ch.length; x++) {
-        ch[x].checked = false;
-    }
-
-    document.getElementById('update').close();
-
-
-}

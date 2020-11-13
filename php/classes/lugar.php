@@ -273,13 +273,13 @@
                     $currentEsps=json_decode($this->espacio->getAllEspaciosByLugar($this->num));
 
                     for ($x=0;$x<count($currentEsps);$x++){                         
-                        $this->espacio->deleteEspaciosLugar($currentEsps[$x].num,$this->num);                           
+                        $this->espacio->deleteEspaciosLugar($currentEsps[$x]->num,$this->num);                           
                     }
 
                     for ($y=0;$y<count($espaciosArray);$y++){
                         $this->espacio->insertEspaciosLugar($espaciosArray[$y],$this->num);                                            
                     }        
-                     echo "Registrado";
+                     echo true;
                   }
 
             mysqli_stmt_close($command);
