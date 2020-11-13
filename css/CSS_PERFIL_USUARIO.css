@@ -359,25 +359,92 @@ dialog[open] {
 /*--------------------------------- G R I D -------------------------------------------------------*/
 
 .complete_section {
-    width: 90%;
+    width: 70%;
     /*max-width: 100%;*/
     /*border: 10px solid #000;*/
-    height:80%;
+    height: 80%;
     margin: auto;
-    font-size: medium;
-    line-height:1.5;
+    font-size: large;
+    /*line-height: 1.5;*/
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    /*grid-template-rows: minmax(50%,auto);*/
-    grid-gap: 4%;
-    background-color: var(--pcolor5);
+    grid-template-columns: 40% 58%;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1%;
+    /*background-color: var(--pcolor5);*/
+    background-color: rgba(170,255,255,0.7);
+    border-radius:2%;
+    font-family:Georgia;
 }
 
-    .complete_section >section {
-        display: block;
-        padding: 1%;
-        color: black;
-        /*background-color: #2f89fc;*/
-        /*box-shadow: 2px 2px 10px rgba(0,0,0,.25);*/
-    }
+.child {
+    display: block;
+    padding-top: 5%;
+    padding-left: 10%;
+    color: darkslategray;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-color: gray;
+    /*background-color: #2f89fc;*/
+    /*box-shadow: 2px 2px 10px rgba(0,0,0,.25);*/
+}
+
+.child2 {
+    display: block;
+    padding-top: 5%;
+    padding-left: 15%;
+    color: darkslategray;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-color: gray;
+    /*background-color: #2f89fc;*/
+}
+
+.updBoton {
+    float: right;
+    margin-right: 10%;
+    width: 20%;
+    height: 50%;
+    /*background-color: var(--pcolor1);*/
+    background-color:white;
+}
+
+.configuracion > h3 {
+    color: darkslategray;
+    /*background-color: rgba(170,255,255,0.7);*/
+}
+
+/*--------------------------------- G R I D -------------------------------------------------------*/
+
+
+/*--------------------------------- M I N I   U P D A T E -------------------------------------------------------*/
+
+.update{
+    width:50%;
+    /*background-color:aquamarine;*/
+    display:inline-block;
+    font-family:Georgia;
+    font-size:medium;
+    
+}
+
+.pss_us {
+    /*background-color: aqua;*/
+    float:left;
+    /*line-height:2.5;*/
+}
+
+.txt_input {
+    background-color: var(--pcolor1);
+    border:none;
+    float: right;
+    width:63%;
+    height:7%;
+}
+
+.udpButton {
+    background-color: var(--pcolor5);
+    width:30%;
+    height:5%;
+    float:right;
+}

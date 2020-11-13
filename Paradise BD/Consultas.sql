@@ -168,11 +168,21 @@ alter view vw_reservacion_completa as
 select prNum as num, prFechaRegistro as registro, prFechaInic as inicio, prFechaFin as termino,
 prStatus as estado, prNotas as notas, FK_Lugar as lugar, FK_Cliente as cliente, FK_Agente as agente,
 resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total 
-from pre_reservacion inner join reservacion
-on prNum=resNumPR;
+from pre_reservacion left join reservacion
+on prNum=resNumPR
+union all
+select prNum as num, prFechaRegistro as registro, prFechaInic as inicio, prFechaFin as termino,
+prStatus as estado, prNotas as notas, FK_Lugar as lugar, FK_Cliente as cliente, FK_Agente as agente,
+resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total 
+from pre_reservacion right join reservacion
+on prNum=resNumPR
+where resFecConfirmacion is null or resTotDias is null or resTotPagar is null;
 
-select * from vw_reservacion_completa;
+select * from vw_reservacion_completa
+where cliente=10;
 select * from pre_reservacion;
+#insert into pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,FK_Lugar,FK_Cliente)values('2020-11-12 15:22:10','2020-12-20','2020-12-23','Proceso',5,10);
+
 
 
 select * from usuario;

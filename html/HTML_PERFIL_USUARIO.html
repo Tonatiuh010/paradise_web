@@ -1,5 +1,4 @@
 ﻿
-
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,7 +20,7 @@
                 <article class="pMTxt" id="log"><a href="./html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
                 <article class="pMTxt1" id="login" style="display:none;"><a href="HTML_SIGN_IN.html";>
-                    <a href="../html/construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="../html/HTML_PERFIL_USUARIO.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
                 </article>
 
@@ -51,12 +50,12 @@
                 <br />
                 <img src="../img/user_sin_foto.png" width="40%" />
                 <br />
-                <i>Juanito Alcachofa</i>
+                <i id="user_name"></i>
                 <br /><br /><br />
                 <section class="Plateral">
                     <hr /><br /><button class="button2" onclick="usarHistorial()">Historial</button><br />
                     <hr /><br /><button class="button2" onclick="usarConfiguracion()">Configuración</button>
-                    <hr /><section class="button2"><a href="../php/salir.php";>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar Sesión</a></section>
+                    <hr /><section class="button2"><a href="../php/actions/session_out.php";>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar Sesión</a></section>
                     
                     <!--<hr /><br /><button class="button2" onclick="">Cerrar Sesión</button><hr />-->
                 </section>
@@ -75,16 +74,35 @@
                 <!--ESTA SECCIÓN ES PARA ACTUALIZAR-->
                 <section class="configuracion" id="configuracion" style="display:none">
                     <br /><br />
-                    <h3>Configuración general de la cuenta</h3>
+                    <h3>CONFIGURACIÓN GENERAL DE LA CUENTA</h3>
                     <br /><br />
-                    <section id="data"></section>
+                    <section id="data" ></section>
+                    <section class="update" id="update">
+                        <section id="udpPsswd" style="display:none">
+                            <label class="pss_us">Nueva Contraseña:&nbsp;</label>
+                            <input class="txt_input" name="txtPass" type="password" id="psswd" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br /><br /><br />
+                            <label class="pss_us">Confirmar Contraseña:&nbsp;</label>
+                            <input class="txt_input" name="txtConfiPass" type="password" id="veri_psswd" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br /><br /><br />
+                            <button class="udpButton" id="password" onclick="update()">Guardar</button>
+                        </section>
+                        <section id="udpUser" style="display:none">
+                            <label class="pss_us">Nuevo Usuario:&nbsp;</label>
+                            <input class="txt_input" name="txtUsuario" type="text" id="txtUsuario" title="Puede contener números, letras en mayúsculas y minusculas" required><br /><br /><br />
+                            <button class="udpButton" id="user" onclick="update()">Guardar</button>
+                        </section>
+                        <section id="udpTel" style="display:none">
+                            <label class="pss_us">Número de Teléfono: </label>
+                            <input class="txt_input" name="txtTelefono" type="tel" id="txtTelefono" required /><br /><br />';
+                            <button class="udpButton" id="telefono" onclick="update()">Guardar</button>
+                        </section>
+                    </section>
                 </section>
 
 
             </section>
 
-            <dialog id="error">
-                 <p>La contraseña no coincide</p><br />
+            <dialog id="errorD">
+                 <p id="error">La contraseña no coincide</p><br />
                  <input type="button"  onclick="cerrar()" value="Cerrar"/>
             </dialog>
 
@@ -106,6 +124,13 @@
             document.getElementById('historial').style.display = "None";
             document.getElementById('configuracion').style.display = "block";
 
+            document.getElementById('udpUser').style.display = "none";
+            document.getElementById('udpPsswd').style.display = 'none';
+            document.getElementById('udpTel').style.display = "none";
+            document.getElementById('data').innerHTML = '';
+            //document.getElementById('update').style.display = 'none';
+
+
                 var ajax = new XMLHttpRequest();
 
                 ajax.onreadystatechange = function () {
@@ -116,7 +141,7 @@
                     }
                 };
 
-                ajax.open("get", "../php/actions/update_cliente.php?", true);
+                ajax.open("get", "../php/actions/show_cliente_info.php?", true);
                 ajax.send();
         }
 
@@ -142,19 +167,19 @@
             var user_bt = document.createElement("button");
             user_bt.setAttribute("class", "updBoton");
             user_bt.addEventListener('click', function () { updUser(); });
-            user_bt.innerHTML = 'Editar';
+            user_bt.innerHTML = 'Cambiar';
             //ESTO LO HIZO TONATIUH
 
             var pssw_bt = document.createElement("button");
             pssw_bt.setAttribute("class", "updBoton");
             pssw_bt.addEventListener('click', function () { updPssw(); });
-            pssw_bt.innerHTML = 'Editar';
+            pssw_bt.innerHTML = 'Cambiar';
             //ESTO LO HIZO TONATIUH
 
             var tel_bt = document.createElement("button");
             tel_bt.setAttribute("class", "updBoton");
             tel_bt.addEventListener('click', function () { updTel(); });
-            tel_bt.innerHTML = 'Editar';
+            tel_bt.innerHTML = 'Cambiar';
             //ESTO LO HIZO TONATIUH
 
             var parent = document.createElement('section');
@@ -162,7 +187,7 @@
 
             var child1 = document.createElement('section');
             child1.setAttribute("class", "child");
-            child1.innerHTML = nombre + paterno + materno;
+            child1.innerHTML = nombre + ' ' + paterno + ' ' + materno;
 
             var child2 = document.createElement('section');
             child2.setAttribute("class", "child");
@@ -182,43 +207,50 @@
 
             var child6 = document.createElement('section');
             child6.setAttribute("class", "child");
-            child6.innerHTML = contrasenia;
+            var y = '*'; var z = '';
+            var passwd = contrasenia.length;
+            for (x = 0; x < passwd; x++) {
+                z += y;
+            }
+            child6.innerHTML = z;
 
             var child7 = document.createElement('section');
             child7.setAttribute("class", "child");
-            child6.innerHTML = correo;
+            child7.innerHTML = correo;
 
             var child1_1 = document.createElement('section');
-            child1_1.setAttribute("class", "child");
+            child1_1.setAttribute("class", "child2");
             child1_1.innerHTML = 'NOMBRE: ';
 
             var child2_2 = document.createElement('section');
-            child2_2.setAttribute("class", "child");
+            child2_2.setAttribute("class", "child2");
             child2_2.innerHTML = 'FECHA DE NACIMIENTO: ';
 
             var child3_3 = document.createElement('section');
-            child3_3.setAttribute("class", "child");
+            child3_3.setAttribute("class", "child2");
             child3_3.innerHTML = 'EDAD: ';
 
             var child4_4 = document.createElement('section');
-            child4_4.setAttribute("class", "child");
+            child4_4.setAttribute("class", "child2");
             child4_4.innerHTML = 'TÉLEFONO: ';
 
             var child5_5 = document.createElement('section');
-            child5_5.setAttribute("class", "child");
+            child5_5.setAttribute("class", "child2");
             child5_5.innerHTML = 'USUARIO: ';
 
             var child6_6 = document.createElement('section');
-            child6_6.setAttribute("class", "child");
+            child6_6.setAttribute("class", "child2");
             child6_6.innerHTML = 'CONTRASEÑA: ';
 
             var child7_7 = document.createElement('section');
-            child7_7.setAttribute("class", "child");
+            child7_7.setAttribute("class", "child2");
             child7_7.innerHTML = 'CORREO: ';
             //var br = document.createElement('br');
+            var hr = document.createElement('hr');
             //--------------------------- Elementos para append child ------------------------------------------------
 
-
+            var username = document.getElementById('user_name');
+            username.innerHTML = nombre;
 
             child4.appendChild(tel_bt);
             child5.appendChild(user_bt);
@@ -228,108 +260,106 @@
 
             parent.appendChild(child1_1);
             parent.appendChild(child1);
+
             parent.appendChild(child2_2);
             parent.appendChild(child2);
+
             parent.appendChild(child3_3);
             parent.appendChild(child3);
-            parent.appendChild(child4_4);
-            parent.appendChild(child4);
+
+            if (telefono != null) {
+                parent.appendChild(child4_4);
+                parent.appendChild(child4);
+            }
+
             parent.appendChild(child5_5);
             parent.appendChild(child5);
+
             parent.appendChild(child6_6);
             parent.appendChild(child6);
+
             parent.appendChild(child7_7);
             parent.appendChild(child7);
-            
 
             //console.log(nombre, paterno, materno, nacimiento, edad, telefono, usuario, contrasenia, correo);
 
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         function updUser() {
-
-            var form1 = '<label>Usuario:&nbsp;</label><input name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required ><br />';
-            var form2 = '<button id="user" onclick="update()">Guardar</button>'  //Recuerda que el ID es el alias que vas a editar en el update.
-            document.getElementById('configForm').innerHTML = '';
-            document.getElementById('configForm').innerHTML = form1 + form2;
-            document.getElementById('configForm').style.display = "block";
+            document.getElementById('data').innerHTML = '';
+            //document.getElementById('update').styele.display = 'block';
+            document.getElementById('udpUser').style.display = "block";
         }
 
         function updPssw() {
-            //var form1 = '<label>Actual Contraseña:&nbsp;</label><input name="txtPass" type="password" id="oldPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br />';
-            var form2 = '<label>Nueva Contraseña:&nbsp;</label><input name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br />';
-            var form3 = '<label>Confirmar Contraseña:&nbsp;</label><input name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br />';
-            var form4 = '<button id="password" onclick="update()">Guardar</button>'  //Recuerda que el ID es el alias que vas a editar en el update.
-            document.getElementById('configForm').innerHTML = '';
-            document.getElementById('configForm').innerHTML = form2 + form3 + form4;
-            document.getElementById('configForm').style.display = "block";
+            document.getElementById('data').innerHTML = '';
+            //document.getElementById('update').styele.display = 'block';
+            document.getElementById('udpPsswd').style.display = 'block';
         }
 
         function updTel() {
-            var form1 = '<label>Número de Teléfono: </label><input name="txtTelefono" type="tel" id="txtTelefono" required />';
-            var form2 = '<button id="telefono" onclick="update()">Guardar</button>'  //Recuerda que el ID es el alias que vas a editar en el update.
-            document.getElementById('configForm').innerHTML = '';
-            document.getElementById('configForm').innerHTML = form1 + form2;
-            document.getElementById('configForm').style.display = "block";
+            document.getElementById('data').innerHTML = '';
+            //document.getElementById('update').styele.display = 'block';
+            document.getElementById('udpTel').style.display = "block";
         }
 
-        
-
         function update() {
+            confirmar = true;
+
             txtTelefono = document.getElementById('txtTelefono').value;
-                if (txtTelefono = null) {
+                if (txtTelefono == null) {
                     txtTelefono = '';
                 }
             txtUsuario = document.getElementById('txtUsuario').value;
-                if (txtUsuario = null) {
+                if (txtUsuario == null) {
                 txtUsuario = '';
                 }
-            txtPass = document.getElementById('txtPass').value;
-                if (txtPass = null) {
-                    txtPass = '';
+            confipassword = document.getElementById('veri_psswd').value;
+            txtPass = document.getElementById('psswd').value;
+            if (txtPass == null) {
+                txtPass = '';
+            } else {
+                if (txtPass != confipassword) {
+                    confirmar = false;
+                    document.getElementById('error').innerHTML = '';
+                    document.getElementById('error').innerHTML = 'Verifique que las contraseñas coincidan';
+                    var dialogo = document.getElementById('errorD');
+                    dialogo.showModal();
                 }
-            confipassword = document.getElementById('txtConfiPass').value;
-
-            //document.getElementById('inscrito').innerHTML = 'Entró a la función';
-
-            console.log('Entró a la función');
-
-
-            if (txtPass != confipassword) {
-                var dialogo = document.getElementById('error');
-                dialogo.showModal();
             }
 
-             console.log(txtTelefono,txtUsuario,txtPass);
+            if (confirmar != false) {
 
+                var ajax = new XMLHttpRequest();
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        //document.getElementById("listaRes").innerHTML = ajax.responseText;
+                        document.getElementById('error').innerHTML = '';
+                        document.getElementById('error').innerHTML = ajax.responseText;
+                        var dialogo = document.getElementById('errorD');
+                        dialogo.showModal();
+                    }
+                };
+
+
+                ajax.open("GET", "../php/actions/update_cliente.php?txtTelefono=" + txtTelefono + "&txtUsuario=" + txtUsuario + "&txtPass" + txtPass, true);
+                ajax.send();
+            }
+
+            
+            //console.log('Entró a la función');
+            //console.log(txtUsuario);
         }
 
         function cerrar()
         {
-            document.getElementById("error").close();
+            document.getElementById("errorD").close();
+            location.reload();
         }
+
+        //---------------------------- H I S T O R I A L   D E    R E S E R V A C I O N E S -------------------------------------
 
 
         function usarHistorial() {
@@ -343,16 +373,22 @@
 
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("listaRes").style.display = "block";
-                    document.getElementById("listaRes").innerHTML = ajax.responseText;
+                    //fillHistorial(ajax.responseText);
+                    console.log(ajax.responseText);
                 }
             };
 
 
-            ajax.open("GET", "../php/showResPerUs.php?", true);
+            ajax.open("GET", "../php/actions/show_cliente_reservaciones.php?", true);
             ajax.send();
         }
 
+        //function fillHistorial(ht) {
+        //    var y=0;
+        //    var arrayHistorial = JSON.parse(ob);
+
+
+        //}
 
 
         function buscarRes() {
