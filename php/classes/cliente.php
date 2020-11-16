@@ -111,7 +111,49 @@ require_once("usuario.php");
                             }
                             mysqli_stmt_close($command);
                             $conn->close();                     
-                  }        
+                  }
+
+                    if (func_num_args()==2){                    
+                      $sql="select * from vw_cliente_perfil where nombre=? and email=?;";
+
+                      $conn=mysqlConnection::getConnection();
+                      $command=$conn->prepare($sql);
+                      $command->bind_param('ss',$args[0],$args[1]);
+                      $command->bind_result($num,                   //Generamos nuevas variables que nos
+                                    $nombre,                //almacenen los resultados obtenidos 
+                                    $paterno,               //desde la base de datos
+                                    $materno,               //NOTA: Las variables deben ir acomodadas
+                                    $nacimiento,            //según el orden en el que estan en la BD
+                                    $edad,                  //en este caso, el orden de los campos en la vista o consulta
+                                    $telefono,
+                                    $num_us,
+                                    $usuario,
+                                    $contrasenia,
+                                    $correo,        
+                                    $tipo);
+
+                        $command->execute();
+
+                          $list=array();
+                          while ($command->fetch()){
+                            $this->num=$num;                            
+                            $this->nombre=$nombre;
+                            $this->paterno=$paterno;
+                            $this->materno=$materno;
+                            $this->nacimiento=$nacimiento; 
+                            $this->edad=$edad;
+
+                            parent:: setNum($num_us);
+                            parent:: setNombre($usuario);
+                            parent:: setContrasenia($contrasenia);
+                            parent:: setCorreo($correo);
+                            parent:: setTipo($tipo);
+
+                            array_push($list,json_decode(self::getJsonObject()));
+                            }
+                            mysqli_stmt_close($command);
+                            $conn->close();                     
+                    }                
             }
 
         public function getAllClientes($n){                 //Esta función la requiero para mostrarle al cliente sus propios datos
@@ -182,21 +224,17 @@ require_once("usuario.php");
                   $command->execute();
 
                   if ($command->error!=""){
-                    echo "Error ---> ".$command->error;
+                    return "Error ---> ".$command->error;
                     
 
                   } else {
 
-                    echo "Registrado";
+                    return "Registrado";
                    
-                    
+                    mysqli_stmt_close($command);
+					$conn->close();
                   }
             }
-
-            
-
-            mysqli_stmt_close($command);
-            $conn->close();
         }
 
         public function updateCliente($id,$tel,$name,$pwd){
@@ -238,6 +276,20 @@ require_once("usuario.php");
             mysqli_stmt_close($command);
             $conn->close();
 
+        }
+
+        public function deleteCliente($c){
+            $conn=mysqlConnection::getConnection();
+            $verificar= parent::deleteUserCli($c);
+
+            if($verificar==true){
+                return true;
+            }else{
+                return false;
+            }
+
+            //mysqli_stmt_close($command);
+            $conn->close();
         }
 
         public function getJsonObject(){

@@ -1,5 +1,8 @@
 use paradise;
 
+######
+#NOTA: ANTES DE EJECUTAR LO SIGUIENTE, PRIMERO EJECUTE LAS VISTAS EN EL SCRIPT CONSULTAS
+######
 
 ############################################ INSERTAR A UN AGENTE ##################################################
 
@@ -118,7 +121,7 @@ begin
 		insert into usuario (usNombre,usContrasenia,usCorreo,usTipoUS) values
 		(userName,contrasenia,correo,'Cliente');
 	else 
-		set @prueba =  (select count(usNum) from usuario);
+		set @prueba =  (select count(usNum) from usuario)+1;
 		set @again= concat('usuario',@prueba);
         
 		insert into usuario (usNombre,usContrasenia,usCorreo,usTipoUS) values
@@ -257,7 +260,7 @@ DELIMITER ;
 
 
 #call sp_log_in ('tonatiuh','sandwich');
-select * from usuario;
+#select * from usuario;
 #select * from cliente;
 
 #################################### ACTUALIZAR A UN CLIENTE ################################################
@@ -291,10 +294,52 @@ begin
 end//
 DELIMITER ;
 
+#################################### BORRAR A UN CLIENTE ################################################
+#drop procedure sp_delete_perfilCli;
+DELIMITER //
+create procedure sp_delete_perfilCli
+(
+	in cliente int
+)
+begin
+	declare usernum int;
+	set usernum=(select num_us from vw_cliente_perfil where num=cliente);
+    delete from usuario where usNum=usernum;
+end//
+DELIMITER ;
+
+#call sp_delete_perfilCli(1);
+
+
+####################################### GENERAR PRE-RESERVACIÓN ###########################################
+DELIMITER //
+create trigger DIS_PRE_RESERVACION_REGISTRO before insert on pre_reservacion 
+for each row 
+begin 
+    set new.prFechaRegistro = (SELECT NOW());
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure SP_PRE_RESERVACION_REGISTRO 
+(
+	in fecha_inicial date,
+    in fecha_finalizar date,
+    in lugar int,
+    in cliente int
+)
+begin 
+    insert into pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,FK_Lugar,FK_Cliente) values
+    ((SELECT NOW()),fecha_inicial,fecha_finalizar,'Proceso',lugar,cliente);
+end //
+DELIMITER ;
+
+call SP_PRE_RESERVACION_REGISTRO('2020-12-20','2020-12-23',2,10);
+#select * from pre_reservacion;
 
 
 ####################################### CALCULAR RESERVACIÓN ###########################################
-drop trigger DIS_RESERVACION_DIAS;
+#drop trigger DIS_RESERVACION_DIAS;
 
 DELIMITER //
 create trigger DIS_RESERVACION_DIAS before insert on reservacion 
@@ -303,7 +348,7 @@ begin
 	declare dias int;
     declare total decimal(12,2);
 	set dias=(SELECT DATEDIFF((select prFechaFin from pre_reservacion where prNum=new.resNumPR),
-								(select prFechaInic from pre_reservacion where prNum=new.resNumPR)));
+								(select prFechaInic from pre_reservacion where prNum=new.resNumPR)))+1;
     set total=((select lugCosto from pre_reservacion inner join lugar 
 				on FK_Lugar=lugNum where prNum=new.resNumPR) * dias);  
                                 
@@ -314,6 +359,7 @@ end //
 DELIMITER ;
 
 #insert reservacion(resNumPR) values(1);
+
 
 
 ############################################### Insert Espacios #####################################
@@ -347,10 +393,97 @@ begin
 end //
 DELIMITER ;
 
-select * from reservacion;
-select * from lugar;
-select * from pre_reservacion;
-select * from espacio;
+##################################### Acceder a la vista "vw_lugar_complete_data############################################
 
-delete from reservacion
-where resNumPR=1;
+DELIMITER //
+create procedure SP_lugares_complete_list
+(
+	in numLug int
+)
+begin
+	declare numExt varchar(25);
+    set numExt=(select dlNumExterior from diclugar where dlNum=numLug);
+    
+    if (numExt is null) then 
+			select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
+			concat('Ubicado en ',dlCalle,' CP ',dlCP,' #',dlNumInterior,' ',mun_nombre) as Domicilio,
+			tlNombre as 'Tipo de Lugar', espNombre as Espacios
+			from vw_lugar_complete_data
+			where lugNum=numLug;
+	else
+			select lugNum as 'No', lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
+					concat('Ubicado en ',dlCalle,' CP ',dlCP,' #',dlNumInterior,'-',dlNumExterior,' ',mun_nombre) as Domicilio,
+					tlNombre as 'Tipo de Lugar', espNombre as Espacios
+			from vw_lugar_complete_data
+			where lugNum=numLug;
+	end if;
+end//
+DELIMITER ;
+
+############################################ PERFIL CLIENTE #####################################################
+
+DELIMITER //
+create procedure sp_perfil_cliente
+(
+	in id int
+)
+begin
+	select * from vw_cliente_perfil
+    where num=id;
+end//
+DELIMITER ;
+################################### DIAS DISPONIBLES PRE-RESERVACIÓN Y RESERVACIÓN ##############################
+
+#drop procedure sp_dias_disponibles;
+
+DELIMITER //
+create procedure sp_dias_disponibles
+(
+	in fecInic date,
+    in fecFin date,
+    in lugar int
+    #out mensaje varchar(60)
+)
+begin
+	 DECLARE dias int;
+     DECLARE resultado int;
+     DECLARE busqueda date;
+     DECLARE ocupado int default 0;
+     DECLARE counter int default 0;
+     SET dias = (SELECT DATEDIFF(fecFin,fecInic))+1;
+     
+     my_loop: LOOP
+     
+     IF counter=dias THEN
+     select ocupado;
+     LEAVE my_loop;
+     END IF;
+     
+     set busqueda= (select DATE_ADD(fecInic,INTERVAL counter DAY));
+     
+     set resultado=(select count(*)
+     from pre_reservacion
+     where prFechaInic<= busqueda and prFechaFin>=busqueda and FK_Lugar=lugar);
+     
+     SET counter=counter+1;
+     SET ocupado = ocupado + resultado;
+     END LOOP my_loop;
+
+end//
+DELIMITER ;
+
+
+call sp_dias_disponibles('2020-12-25','2020-12-27',2);
+call sp_dias_disponibles('2020-12-21','2020-12-24',2);
+
+#call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
+
+alter table pre_reservacion
+auto_increment=0;
+select * from pre_reservacion;
+
+select * from usuario;
+
+
+
+

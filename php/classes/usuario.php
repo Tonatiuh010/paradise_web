@@ -60,8 +60,9 @@
         public function insertUserCli(){
             $conn=mysqlConnection::getConnection();
 
-            $sql="call SP_insert_userCli (?,?,?);";//SQL Sentence
-            $command=$conn->prepare($sql);
+            if($this->nombre!=''){
+                $sql="call SP_insert_userCli (?,?,?);";//SQL Sentence
+                $command=$conn->prepare($sql);
                   
 
                   $command->bind_param('sss',
@@ -70,6 +71,18 @@
                         $this->correo,);
             
                   $command->execute();
+            }else{
+                 $sql="call SP_insert_userCli (null,?,?);";//SQL Sentence
+                 $command=$conn->prepare($sql);
+                  
+
+                  $command->bind_param('ss',
+                        $this->contrasenia,
+                        $this->correo,);
+            
+                  $command->execute();
+            }
+
 
                   if ($command->error!=""){
                     //$mensaje= "Error ---> ".$command->error;
@@ -97,6 +110,32 @@
                         $this->contrasenia,
                         $this->correo,);
             
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    //$mensaje= "Error ---> ".$command->error;
+                    return false;
+
+                  } else {
+
+                    //$mensaje= "Registrado";
+                    return true;
+                    
+                  }
+
+            mysqli_stmt_close($command);
+            $conn->close();
+        }
+
+        public function deleteUserCli($c){
+            $conn=mysqlConnection::getConnection();
+            $sql="call sp_delete_perfilCli(?);";//SQL Sentence
+            $command=$conn->prepare($sql);
+                  
+
+                  $command->bind_param('i',$c);     //se recibe el número de cliente que a su vez, en el procedimiento almacenado
+                                                    //va a encontrar el numero de usuario para poderlo eliminar
+                                                    //como es eliminacion por cascada, automaticamente borra al usuario y al cliente
                   $command->execute();
 
                   if ($command->error!=""){

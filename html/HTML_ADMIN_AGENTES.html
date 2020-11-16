@@ -1,4 +1,354 @@
-﻿
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Paradise - Administrador</title>
+    <link rel="stylesheet" href="../css/cssBase.css" />
+
+    <script src="../js/dialog.js"></script>
+</head>
+
+<body >
+    <header>
+        <!--Encabezado-->
+        Agentes
+    </header>
+
+    <section class="sectionPrincipal">
+
+        <article id="barAdmin">
+            <table class="upBar">
+
+                <tr>
+
+                    <td> <button onclick="turnOnPnlConsult()">Consultar</button> </td>
+                    <td>  <button onclick="turnOnPnlAdd()">Registrar</button>  </td>
+                    <td>  <button onclick="turnOnPnlModify()">Modificar</button>  </td>
+
+                </tr>
+
+
+
+            </table>
+
+        </article>
+
+
+        <nav>
+            Lista de opciones (Puede estar escondida.) <br />
+
+
+            <ul>
+
+                <li>
+                    <a>Esquemas (Opción predefinida)</a>
+                </li>
+
+                <li>
+                    <a>Reservaciones</a>
+                </li>
+
+                <li>
+                    <a  href="HTML_ADMIN_AGENTES.html">Agentes</a>
+                </li>
+
+                <li>
+                    <a href="HTML_ADMIN_LUGARES.html">Lugares</a>
+
+                    <ol>
+                        Provedores
+                    </ol>
+                    <ol>
+                        Municipios
+                    </ol>
+                </li>
+
+                <li>
+                    <a>Clientes</a>
+                </li>
+
+            </ul>
+        </nav>
+
+
+
+        <article id="artMain">
+
+
+            <section class="consultPanel" id="pnlConsult" style="display:Block">
+                <section class='searchForm'>
+                    <input type='search' placeholder='Búsqueda de Agente.' id='id_Agente'>
+                    <input type='button' style="display:block" id="shcS" value='Buscar' onclick="buscarAgente(true)">
+                    <input type='button' style="display:none" id="shcM" value='Buscar' onclick="buscarAgente(false)">
+                </section>
+            </section>
+
+            <section class="addPanel" id="pnlAdd" style="display:none">
+                <section class='registerSection' name='searchAdminForm'>
+                    <label id="lblMatricula" style="display:none"> Matrícula del Agente:</label> <label id="tbMatricula" style="display:none" > </label><br />
+
+                    Nombre del Agente: <input type='text' id='txtNombreAgente' maxlength="30" autofocus required><br />
+                    Apellido paterno del Agente: <input type='text' id='txtApPatAgente' maxlength="20" required><br />
+                    Apellido materno del Agente: <input type='text' id='txtApMatAgente' maxlength="20" ><br />
+                    Genero: 
+                    <select id="genreBox">                     
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+
+                    <br />
+                    
+                    Fecha de Nacimiento: <input type='date' id="dateNac" required /><br />
+
+                    <input type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente(true)" /> <br />
+
+                    <input type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarAgente(false)" /> <br />                 
+
+                    <p id="msg">En proceso</p>
+
+                </section>
+            </section>
+
+           
+
+            <section id="listAgente" style="display:none; width:100%;"></section>
+        </article>
+
+    </section>
+
+
+    <script>
+
+
+        function turnOnPnlConsult() {
+            document.getElementById("listAgente").innerHTML = "";
+            document.getElementById('pnlConsult').style.display = "block";
+            document.getElementById('pnlAdd').style.display = "None";
+            document.getElementById("listAgente").style.display = "none";
+            document.getElementById('shcM').style.display = "none";
+            document.getElementById('shcS').style.display = "block";
+
+        }
+
+
+        function turnOnPnlAdd() {
+            document.getElementById("listAgente").innerHTML = "";
+            document.getElementById('pnlConsult').style.display = "None";
+            document.getElementById('pnlAdd').style.display = "block";
+            document.getElementById("listAgente").style.display = "none";
+            
+        }
+
+        function turnOnPnlModify() {
+            document.getElementById("listAgente").innerHTML = "";
+            document.getElementById('pnlConsult').style.display = "block";
+            document.getElementById('pnlAdd').style.display = "None";
+            document.getElementById("listAgente").style.display = "none";
+            document.getElementById('shcM').style.display = "block";
+            document.getElementById('shcS').style.display = "none";
+
+        }
+
+        function registrarAgente(res) {
+            createDialog();
+            document.getElementById("listAgente").innerHTML = "";          
+
+            var agenteOb = null;
+
+
+            var a = document.getElementById("genreBox").selectedIndex;
+
+            if (res == true) {
+                agenteOb = {
+                    nombre: document.getElementById("txtNombreAgente").value,
+                    apPat: document.getElementById("txtApPatAgente").value,
+                    apMat: document.getElementById("txtApMatAgente").value,
+                    genre: document.getElementById("genreBox").options[a].value,
+                    date: document.getElementById("dateNac").value,
+                    type: true
+                };
+            } else {
+
+                agenteOb = {
+                    matricula: document.getElementById('tbMatricula').textContent,
+                    nombre: document.getElementById("txtNombreAgente").value,
+                    apPat: document.getElementById("txtApPatAgente").value,
+                    apMat: document.getElementById("txtApMatAgente").value,
+                    genre: document.getElementById("genreBox").options[a].value,
+                    date: document.getElementById("dateNac").value,
+                    type: false
+                };
+            }
+
+            //textContent            
+
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange= function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {                    
+                    document.getElementById("msg").innerHTML = ajax.responseText;
+                }
+            };
+
+            ajax.open("GET", "../php/registerUpdateAgente.php?b=" + JSON.stringify(agenteOb), true);
+            ajax.send();
+        }
+
+
+        function buscarAgente(res) {
+            createDialog();
+            document.getElementById("listAgente").innerHTML = "";
+            var ajax = new XMLHttpRequest();
+
+            var searchForm= null;
+
+            searchForm = {
+                nombre: document.getElementById("id_Agente").value,
+                type: res
+            };
+           
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    update_Bar(0);
+                    extractAgenteData(ajax.responseText);                                        
+                }
+            };
+
+            ajax.open("GET", "../php/busquedaAgente.php?b=" + JSON.stringify(searchForm), true);
+            ajax.send();
+
+        }
+
+
+        function extractAgenteData(ob) {
+
+            document.getElementById("listAgente").style.display = "block";
+
+            var x = 0;           
+
+            var obAgente = JSON.parse(ob);
+            var arrayAgente = obAgente.agentesArray;
+
+            var sectionAgentes = document.getElementById("listAgente");
+            //sectionAgentes.setAttribute("class","blabla");
+
+            while (arrayAgente[x]) {               
+                //Se crea la tabla mediante elementos JS
+
+                var table = document.createElement("TABLE");
+
+                table.style.width = "30%";
+                table.style.marginRight = "8%";
+                table.style.border = "2px solid";
+                table.style.marginBottom = "3%";                
+
+                //Se crean las filas TR con TD ya predefinido por la columna. 
+                var tr1 = document.createElement("TR");                
+                tr1.innerHTML = "<td>Matricula: </td>";
+                var tr2 = document.createElement("TR");
+                tr2.innerHTML = "<td>Nombre: </td>";
+                var tr3 = document.createElement("TR");
+                tr3.innerHTML = "<td>Apellido Paterno: </td>";
+                var tr4 = document.createElement("TR");
+                tr4.innerHTML = "<td>Apellido Materno: </td>";
+                var tr5 = document.createElement("TR");
+                tr5.innerHTML = "<td> Nacimiento: </td>";
+                var tr6 = document.createElement("TR");
+                tr6.innerHTML = "<td> Genero: </td>";
+
+                //Añadir valores a las columnas TD desde el arreglo traído.
+
+                var tdMtr = document.createElement("TD");
+                tdMtr.innerHTML = arrayAgente[x].matricula;
+
+                var tdNom = document.createElement("TD");
+                tdNom.innerHTML = arrayAgente[x].nombre;
+
+                var tdApPat = document.createElement("TD");
+                tdApPat.innerHTML = arrayAgente[x].apPat;
+
+                var tdApMat = document.createElement("TD");
+                tdApMat.innerHTML = arrayAgente[x].apMat;
+
+                var tdNac = document.createElement("TD");
+                tdNac.innerHTML = arrayAgente[x].nacimiento;
+
+                var tdGen= document.createElement("TD");
+                tdGen.innerHTML = arrayAgente[x].genero;
+
+
+                //Append hacia la tabla y TR creados. 
+                var tdArray = [];
+                tr1.appendChild(tdMtr);
+                tr2.appendChild(tdNom);
+                tr3.appendChild(tdApPat);
+                tr4.appendChild(tdApMat);
+                tr5.appendChild(tdNac);
+                tr6.appendChild(tdGen);
+
+                tdArray[0]= tr1;
+                tdArray[1] = tr2;
+                tdArray[2] = tr3;
+                tdArray[3] = tr4;
+                tdArray[4] = tr5;
+                tdArray[5] = tr6;
+
+                for (y=0; y<6;y++){
+                    table.appendChild(tdArray[y]);                   
+                }
+                                   
+
+                if (obAgente.type == false) {
+                    var btn = document.createElement("Button");                    
+
+                    btn.addEventListener("click", function (_x) {
+                        return function () { modifyAgente(arrayAgente[_x]); }    //XD, no sé que hace.                    
+                    }(x));
+             
+                    btn.innerHTML = "Click";                  
+                    table.appendChild(btn);                    
+                }
+
+                sectionAgentes.appendChild(table);
+                x++;
+            }           
+
+        }
+
+        function modifyAgente(a) {
+            turnOnPnlAdd();               
+
+            var x = 0;
+
+            if (a.genero!='Masculino'){
+                x = 1;
+            }
+
+            document.getElementById("genreBox").options.selectedIndex = x;
+            document.getElementById('tbMatricula').textContent = a.matricula;
+           document.getElementById("txtNombreAgente").value=a.nombre;
+           document.getElementById("txtApPatAgente").value=a.apPat;
+           document.getElementById("txtApMatAgente").value = a.apMat;
+                       
+           document.getElementById("dateNac").value=a.nacimiento;
+
+
+            document.getElementById("tbMatricula").style.display = "block";
+            document.getElementById("lblMatricula").style.display = "block";
+
+            document.getElementById("btnSend").style.display = "none";
+            document.getElementById("btnModify").style.display = "block";
+
+            
+
+        }
+
+       
+       
+        
+
+    </script>
+
+
 <html lang="en">
 <head>
     <title>Paradise - Administrador</title>
