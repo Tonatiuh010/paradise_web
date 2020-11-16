@@ -64,7 +64,13 @@ create view vw_primary_user as
     
     create view vw_user_list as
 		select usNum as numU, usNombre as nombre, usCorreo as correo, usContrasenia as contrasenia, usTipoUS as tipo 
-        from usuario;
+    from usuario;
+ 
+	select * from vw_primary_user;
+    select * from usuario;
+    
+    create view vw_user_list as
+    select usNum as numU, usNombre as nombre, usCorreo as correo, usContrasenia as contrasenia, usTipoUS as tipo from usuario;
     
 #-----------------------------------------------------------------------------------------------------------------
 create view vw_cliente_perfil as	
@@ -157,8 +163,8 @@ right join diclugar dl on dl.dlNum=l.lugNum
 right join municipio m  on m.mun_cod=dl.FK_Municipio
 where dl.dlNum is null;
 
-
 #select * from VW_lugar_admin;
+select * from VW_lugar_admin;
 
 ##----------------------------------------- Lugar Admin -----------------------------------
 /*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/
@@ -172,8 +178,17 @@ usContrasenia as contrasenia, usCorreo as correo, usTipoUS as tipo
 from agente inner join usuario
 on FK_usuario=usNum;
 
+
 #select * from agente;
 #select * from usuario;
+
+select * from VW_agente_admin;
+
+select * from agente;
+select * from usuario;
+
+insert into telef_agentes(tgTelefono,FK_agente) values('6647799903','VAC0FZA') ;
+
 
 ##------------------------------------------ Espacio -----------------------------------------------
 
@@ -190,7 +205,11 @@ create view VW_lugEspacios as
 select lg_numEspacio numEsp, lg_NumLugar numLugar,espNombre nombre from lugespacio join espacio 
 on lg_NumEspacio=espNum order by lg_NumLugar;
 
+
 #select * from vw_lugEspacios;
+
+select * from vw_lugEspacios where numLugar=1;
+
 ##------------------------------------------ Tipos_Lugares -----------------------------------------
 
 create view VW_tipolugares_admin as

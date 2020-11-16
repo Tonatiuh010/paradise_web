@@ -18,7 +18,7 @@
 
         <section class="pruebaMenu">
             <article class="pMT"><a href="../index.html" ;>INICIO</a></article>
-            <article class="pMTx"><a href="construccion.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
             <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
@@ -110,9 +110,9 @@
                         <label>Nombre del Lugar:</label> 
                             <input class="in" type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
                         <label>Costo del Lugar:</label> 
-                            <input class="in" type='text' id="txtCostoLugar"  /><br />
+                            <input class="in" type='number' id="txtCostoLugar"  /><br />
                         <label>Capacidad del Lugar:</label> 
-                            <input class="in" type='text' id="txtCapacidadLugar" required /><br />
+                            <input class="in" type='number' id="txtCapacidadLugar" required /><br />
                         <label>Descripción del Lugar:</label> 
                             <input class="in" type='text' id="txtDescLugar" maxlength="120" />
                         <br />
@@ -139,6 +139,9 @@
 
                         </select>
 
+                    <input type="file" id="files" multiple accept="image/*" onchange="showFilesData()" />
+                    <output id="list"></output>
+                        <img id="myImg"/>
                         <select class="select" id="CBtp" required>
                         </select>
 
@@ -173,10 +176,9 @@
                                 <input class="in" type='number' id="txtCP" /><br />
                         </section>
 
-                        <input class="botones" type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar(true)" />
+                        <input class="botones" type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar()" />
                         <br />
-                        <input class="botones" type="button" id="btnModify" style="float:right;display:none" value="Enviar" onclick="registrarLugar(false)" />
-                        <br />
+                        
 
                         <p id="msg">En proceso</p>
 
@@ -191,18 +193,21 @@
         <dialog id="update">
             <form>
                 <label>Número de Lugar:</label> 
-                    <input type='text'  class="dlabel" id='txtNombreLugar' required disabled><br /><br />
+                    <input type='text'  class="dlabel" id='lblNum' required disabled><br /><br />
                 <label>Nombre del Lugar:</label> 
-                    <input type='text'  class="dlabel" id='txtNombreLugar' required disabled><br /><br />
+                    <input type='text'  class="dlabel" id='lblNombre' required disabled><br /><br />
 
                 <label>Costo del Lugar:</label> 
-                    <input type='text'  class="dlabel" id="txtCostoLugar"  /><br /><br />
+                    <input type='number'  class="dlabel" id="txtCostoLugarD"  /><br /><br />
                 <label>Capacidad del Lugar:</label> 
-                    <input type='text'  class="dlabel" id="txtCapacidadLugar" required /><br /><br />
+                    <input type='number'  class="dlabel" id="txtCapacidadLugarD" required /><br /><br />
 
-                <section id="boxEsp"></section>
+                <section id="dialogEsp"></section>
 
-                <button type="button"  class="botond" onclick="cerrar()">Enviar</button>
+                <p id="msgD"></p>
+
+
+                <button type="button"  class="botond" onclick="updateLugar()">Enviar</button>
                 <button type="button"  class="botonc" onclick="cerrar()">Cancelar</button>
                 <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
             </form>
@@ -254,19 +259,7 @@
             }
 
             slideArray[n].style.display = "block";
-        }
-
-
-
-
-        function abrir() {
-            var dialogo = document.getElementById('update');
-            dialogo.showModal();
-        }
-
-        function cerrar() {
-            document.getElementById('update').close();
-        }
+        }        
 
     </script>
 

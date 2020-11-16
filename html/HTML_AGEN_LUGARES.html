@@ -1,145 +1,143 @@
-﻿<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+﻿
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Paradise - Agente</title>
+    <title>Paradise - Administrador</title>
     <link rel="stylesheet" href="../css/cssBase.css" />
+    <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <script src="../js/dialog.js"></script>
+    <script src="../js/agenteLugar.js"></script>
     <script src="../js/session.js"></script>
 </head>
 
 
-<body onload="sesion();">
-    <header>
-        <!--Encabezado-->
-        Titulo
-    </header>
+<body onload="loading();">
+    
+     <nav class="NavOficial">
+        <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
-    <article class="pMTxt1" id="sesion" style="display:none;"><a href="HTML_SIGN_IN.html";>
-                <img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="../img/log_out.png" width="25%;" /></a></article>
+        <section class="pruebaMenu">
+            <article class="pMT"><a href="../index.html" ;>INICIO</a></article>
+            <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
+            <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
+            <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
-    <section class="sectionPrincipal">
+            <article class="pMTxt1" id="login" style="display:none;"><a href="HTML_SIGN_IN.html";>
+                <a href="../html/construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
+            </article>
 
-        <article id="barAgen">
-            <table class="upBar">
+        </section>
+        <br />
+        <section class="barraBusqueda">
+            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="search" class="boton">Buscar</button>
+        </section>
+         <br />
+    </nav>
+    <br />
+    <main>
 
-                <tr>
-
-                    <td> <button onclick="turnOnPnlConsult()">Consultar</button> </td>                    
-                    
-
-                </tr>
-
-
-
-            </table>
-
-        </article>
-
-
+        <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
         <nav>
-            Lista de opciones (Puede estar escondida.) <br />
+            <section class="Nav2do">
+               
+                &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+<!--Tus botones-->  <button class="dot" onclick="showSlides(1)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                    
+                
+                   
+            </section>
+        </nav>
+        <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
+    <section class="principal">
+        
+        <section class="lateral">
+             <!--Lista de opciones (Puede estar escondida.) <br />-->
+            <!--<button type="button" onclick="abrir()">Abrir</button>--> <!--quitar esto de aqui-->
 
             <ul>
 
                 <li>
-                    <a>Esquemas (Opción predefinida)</a>
+                    <a >Esquemas (Opción predefinida)</a>
                 </li>
 
                 <li>
                     <a>Reservaciones</a>
-                </li>
+                </li>                
 
                 <li>
-                    <a href="HTML_AGEN_....html">Clientes?!?!?!?!?!?</a>
+                    <a href="HTML_AGEN_LUGARES.html">Lugares</a>                            
                 </li>
+                
 
                 <li>
-                    <a href="HTML_AGEN_LUGARES.html">Lugares</a>
-                   
-                </li>
+                    <a>Historial</a>
+                </li>                
             </ul>
-        </nav>
+        </section>
 
+        <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco-->
 
+            <section class="slides fade"  >    
 
-        <article id="artMain">
+                <section class="shcAdmin">
+                    <input type="search" id="shcId" class="busqueda" placeholder="¿Qué estás buscando?" />
+                    <button type="button" id="search" class="boton" onclick="buscarLugar()">Buscar</button>
+                </section>    
+                        
+                <section id="listLugar"></section>                          
+            </section>
 
-
-            <section class="consultPanel" id="pnlConsult" style="display:Block">
-                <select id="tipoBusqueda">
-                    <option>
-                        Nombre
-                    </option>
-
-                    <option>
-                        Identificación
-                    </option>
-
-                    <option>
-                        Precio
-                    </option>
-
-                    <option>
-                        Capacidad
-                    </option>
-
-                </select>
-
-                <section class='searchForm'>                    
-                    <input type='search' placeholder='B&uacute;squeda de lugares.' id='id_lugar'>                    
-                    <input type='button' value='Buscar' onclick="buscarLugar()" id="btnS" style="display:block">
-
-                </section>
-            </section>            
-
-            <section id="listLugar" style="display:none; width:100%;"></section>
-
-        </article>
+           
+                                                             
+            
+        </section>
 
     </section>
 
+       
+    
+    </main>
+
+    
+    
 
     <script>
 
+        
 
-        function turnOnPnlConsult() {
-
-            document.getElementById("listLugar").innerHTML = "";
-            document.getElementById('pnlConsult').style.display = "block";
+        function loading() {
             
+            loadOptions();           
+
+            showSlides(0);
+
+            sesion();
         }
-        
-        
-        function buscarLugar() {
-            createDialog();
-            document.getElementById("listLugar").innerHTML = "";
 
-            var x=document.getElementById("tipoBusqueda").selectedIndex;                    
+        
 
-            var ajax = new XMLHttpRequest();            
+        function showSlides(n) {
 
             
-                searchForm = {
-                    search: document.getElementById("id_lugar").value,                   
-                };
-            
+            var i;
+            var slideArray = document.getElementsByClassName("slides");      
+                    
 
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    document.getElementById("listLugar").style.display = "block";
-                    document.getElementById("listLugar").innerHTML = ajax.responseText;
-                }
-            };
+            for (i = 0; i < slideArray.length;i++){               
+                slideArray[i].style.display = "none";                
+            }
 
-
-            ajax.open("GET", "../php/busquedaLugar.php?b=" +JSON.stringify(searchForm), true);
-            ajax.send();
-
-        }     
+            slideArray[n].style.display = "block";
+        }        
 
     </script>
+
+
+
 </body>
 </html>
