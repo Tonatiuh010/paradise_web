@@ -1,5 +1,5 @@
 ﻿
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../css/CSS_CLIENTE_REGISTRO.css" type="text/css">
@@ -46,7 +46,7 @@
                 <br />
                 <h3>CALIDAD Y BUENOS RECUERDOS</h3>
                 <br />
-                <h2>Registrate</h2>
+                <h4>REGISTRATE</h4>
                 <br />
                 <section>
                     <form> <!--action="../php/config.php" method="post"-->
@@ -119,8 +119,7 @@
                      </dialog>
 
                 </section> 
-                <section id="inscrito">
-                </section>             
+                <!--<section id="inscrito"></section>-->             
             </section>
     </main>
 
@@ -185,11 +184,11 @@
                 document.getElementById('mensaje').innerHTML = '';
                 document.getElementById('mensaje').innerHTML = 'Favor de colocar su fecha de nacimiento';}
 
-            if (isNaN(dato3))   // == false
-            {
-                confirmar = false;
-                document.getElementById('mensaje').innerHTML = '';
-                document.getElementById('mensaje').innerHTML = 'Favor de no colocar numeros en el campo apellido materno ';} 
+            //if (isNaN(dato3))   // == false
+            //{
+            //    confirmar = false;
+            //    document.getElementById('mensaje').innerHTML = '';
+            //    document.getElementById('mensaje').innerHTML = 'Favor de no colocar numeros en el campo apellido materno ';} 
 
             if (dato2 == '' || dato2.length < 2 || isNaN(dato2) == false) //
             {
@@ -240,8 +239,8 @@
                          dialogo.showModal();
                     }
             };
-            ajax.open("GET", "../php/registrarUser.php?obj=" + JSON.stringify(newUserObj), true);
-                ajax.send();
+            ajax.open("GET", "../php/actions/registrarUser.php?obj=" + JSON.stringify(newUserObj), true);
+            ajax.send();
             
         }
 
@@ -254,15 +253,12 @@
         function cerrar()
         {
             document.getElementById("error").close();
+            location.reload();
             //document.getElementById("error2").close();
             
         }
 
     </script>
-
-
-
-
 </body>
 </html>
 

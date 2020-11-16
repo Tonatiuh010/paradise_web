@@ -166,7 +166,7 @@
                     bt.setAttribute("class", "lugBoton");
                     bt.addEventListener('click', function (_y) {
                         return function () {
-                            location.href = '../php/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
+                            location.href = '../php/actions/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
                             console.log(_y);}}(y));
                     bt.innerHTML = 'Consultar Lugar';
 

@@ -147,6 +147,83 @@
                 return json_encode($list);
         }
 
+        public function verifyReservacion($i,$f,$l){
+            $conn=mysqlConnection::getConnection();
+                $validar=0;
+
+            // i= fecha de inicio
+            // f= fecha de cierre
+            // l= lugar a reservar
+            // c= cliente
+                
+                //$counter=array();
+
+                //                   Fecha inicial/Fecha de cierre/Lugar a reservar
+                //call sp_dias_disponibles('2020-12-25','2020-12-27',2);
+
+                //Este procedimiento almacenado me ayuda a verificar si la fecha solicitada para el evento
+                //ya se encuentra registrada en el sistema o interfiere con las fechas apartadas de algún otro
+                //cliente
+
+                $sql="call sp_dias_disponibles (?,?,?);";
+                $command=$conn->prepare($sql);
+                 
+                $command->bind_param('ssi',$i,$f,$l);
+
+                $command->execute();
+
+                $command->bind_result($counter);
+                
+
+                if ($command->fetch()){
+                    $validar= $counter;             //validar debe ser igual a 0 para indicar que no se encontró ninguna
+                }                                   //pre_reservacion con las mismas fechas, por lo tanto, las fechas seleccionadas
+                                                    //por el cliente, se encuntran disponibles para reservar
+                return $validar;
+
+        }
+
+
+        public function insertReservacion($i,$f,$l,$c){
+            //$conn=mysqlConnection::getConnection();
+
+            // i= fecha de inicio
+            // f= fecha de cierre
+            // l= lugar a reservar
+            // c= cliente
+
+            $validar=self::verifyReservacion($i,$f,$l);
+
+                if($validar!=0){
+                    return false;
+                }else{
+
+                    //                          Fecha inicial/Fecha de cierre/Lugar/Cliente
+                    //call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
+
+					  $conn=mysqlConnection::getConnection();
+                      $sql="call SP_PRE_RESERVACION_REGISTRO(?,?,?,?);";
+                      $command=$conn->prepare($sql);
+                  
+                      $command->bind_param('ssii',$i,$f,$l,$c);
+
+                      $command->execute();
+
+                      if ($command->error!=""){
+                        return false;
+                    
+
+                      } else {
+
+                        return true;
+                   
+                      }
+
+                      mysqli_stmt_close($command);
+                      $conn->close();
+                }
+            
+        }
 
         public function getJsonObject(){
             return json_encode(

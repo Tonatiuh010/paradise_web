@@ -27,10 +27,17 @@
         /*azul cielo más intenso*/
 }
 
+
+
 *
 {
     padding:0;
     margin:0;
+}
+
+body{
+    height:100%;
+    width:100%;
 }
 
 nav
@@ -82,7 +89,8 @@ main
     width:100%;
     height:200%;
     clear:both;
-    background-color: var(--color3);
+    /*background-color: var(--color3);*/
+    background-image:url(../img/fondos/registro.jpg);
     text-align:center;
 }
 
@@ -92,7 +100,7 @@ main
     background-color:#F0F8FF;
     display:inline-block;
     text-align:center;
-    width:70%;
+    width:80%;
     height:90%;
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;
@@ -100,10 +108,14 @@ main
     line-height:1.5;
 }
 
-.secS
-{
+.formulario{
+    height:100%;
     width:100%;
-    height:10%;
+}
+
+.secS {
+    width: 100%;
+    height: 10%;
 }
 
 .secMargin h3 {
