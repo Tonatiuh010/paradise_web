@@ -199,6 +199,47 @@ require_once("usuario.php");
             $conn->close();
         }
 
+        public function updateCliente($id,$tel,$name,$pwd){
+            
+            $conn=mysqlConnection::getConnection();
+
+            //call sp_update_perfilCli(id,number_case,cambio);
+            //case 1= nombre de usuario
+            //case 2= contraseña
+            //case 3= telefono
+
+            $case;
+            $cambio;
+
+            if($name!=''){$case=1; $cambio=$name;}
+            if($pwd!=''){$case=2; $cambio=$pwd;}
+            if($tel!=''){$case=3; $cambio=$tel;}
+
+            $sql="call sp_update_perfilCli (?,?,?);";//SQL Sentence
+            $command=$conn->prepare($sql);
+                  
+                $command->bind_param('iss',$id,$case,$cambio);
+
+                $command->execute();
+
+                if ($command->error!=""){
+                return $command->error;
+                    
+
+                } else {
+
+                return "Registrado";
+                   
+                    
+                }
+
+            
+
+            mysqli_stmt_close($command);
+            $conn->close();
+
+        }
+
         public function getJsonObject(){
 
             return json_encode(

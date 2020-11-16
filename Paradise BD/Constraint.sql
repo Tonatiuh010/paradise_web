@@ -35,6 +35,8 @@ add constraint UQ_foreign_userCli unique (FK_usuario);
 alter table agente
 add constraint UQ_foreign_userAg unique (FK_usuario);
 
+<<<<<<< HEAD
+
 
 
 alter table espacio
@@ -45,3 +47,9 @@ add constraint UQ_tipoLugar_nombre unique (tlNombre);
 
 
 
+
+alter table pre_reservacion
+add constraint CK_pre_res_status check (prStatus='Proceso' or prStatus='Rechazada' or prStatus='Autorizada' or prStatus='Finalizada');
+
+
+select * from pre_reservacion;

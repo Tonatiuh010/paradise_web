@@ -261,26 +261,28 @@ select * from usuario;
 #select * from cliente;
 
 #################################### ACTUALIZAR A UN CLIENTE ################################################
+#drop procedure sp_update_perfilCli;
+
 DELIMITER //
 create procedure sp_update_perfilCli
 (
-	in campo varchar(20),
-	in cambio varchar(20),
-    in cliente int
+	in cliente int,
+	in campo int,
+	in cambio varchar(60)
 )
 begin
 	case
-	  when campo='user' then
+	  when campo=1 then
 			UPDATE cliente INNER JOIN usuario
 			ON FK_usuario = usNum 
 			SET usNombre = cambio
 			where cliNum=cliente;
-	  when campo='password' then
+	  when campo=2 then
 			UPDATE cliente INNER JOIN usuario
 			ON FK_usuario = usNum 
 			SET usContrasenia = cambio
 			where cliNum=cliente;
-	  when campo='telefono' then
+	  when campo=3 then
 			UPDATE cliente
 			SET cliTelefono = cambio
 			where cliNum=cliente;
@@ -289,9 +291,9 @@ begin
 end//
 DELIMITER ;
 
-#call sp_update_perfilCli('user','MagdalenaTV',5);
 
-####################################### CALCULAR DIAS DE RESERVACIÓN ###########################################
+
+####################################### CALCULAR RESERVACIÓN ###########################################
 drop trigger DIS_RESERVACION_DIAS;
 
 DELIMITER //
@@ -312,6 +314,8 @@ end //
 DELIMITER ;
 
 #insert reservacion(resNumPR) values(1);
+
+
 ############################################### Insert Espacios #####################################
 #drop procedure SP_insert_espacios
 DELIMITER //
