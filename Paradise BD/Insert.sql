@@ -158,7 +158,7 @@ máxima satisfacción. Con comodidad podrán recibir varios comensales sin probl
 Disfruten de la velada junto a sus seres queridos o amigos en las instalaciones que les ofrecen.',
 20000,400,3,null,null,null,null,null);
 
-call SP_insert_lugar ('La Casa del Tutuli',
+call SP_insert_lugar (@numLug,'La Casa del Tutuli',
 'La Casa del Tutuli es un restaurante que ofrece banquetes para todos sus eventos sociales importantes. 
 Los platillos que ofrecen van desde cortes finos hasta puerco a la vuelta y vuelta, con el cual además 
 de consentir el paladar de todos sus invitados, los sorprenderán con un atractivo visual. 17 años atendiendo 

@@ -67,7 +67,7 @@
                 $command->execute();
 
                 if ($command->error!=""){
-                    echo 'Error: '.$command->error;
+                    echo 'Error in insert: '.$command->error;
                 }
 
                 mysqli_stmt_close($command);
@@ -77,7 +77,7 @@
 
 
          public function deleteEspaciosLugar($numEspacios,$numLugar){
-                $sql='call SP_delete_EspLug(?,?);';
+                $sql='call SP_delete_EspLug(?,?);';                           
                 $conn=mysqlConnection::getConnection();
                 $command=$conn->prepare($sql);
 
@@ -86,7 +86,7 @@
                 $command->execute();
 
                 if ($command->error!=""){
-                    echo 'Error: '.$command->error;
+                    echo 'Error in delete: '.$command->error;
                 }
 
                 mysqli_stmt_close($command);

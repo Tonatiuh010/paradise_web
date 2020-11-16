@@ -54,7 +54,7 @@ require_once("agTelefono.php");
                         $this->edad=0;
                         $this->genero='';
                         $this->telefono= new agTelefono();      //Creo una nueva instancia.
-                        parent::__construct();                           
+                        parent::__construct();
                   }
                   
                   if (func_num_args()==13){
@@ -200,11 +200,8 @@ require_once("agTelefono.php");
                       $command->execute();
 
                       if ($command->error!=""){
-                        echo "Error ---> ".$command->error;
-                    
-
+                        echo "Error ---> ".$command->error;                    
                       } else {
-
                         echo "Registrado";
                       }
                     
@@ -225,11 +222,8 @@ require_once("agTelefono.php");
                         $command->execute();
 
                         if ($command->error!=""){
-                        echo "Error ---> ".$command->error;
-                    
-
+                        echo "Error ---> ".$command->error;                    
                         } else {
-
                         echo "Registrado";
                         }
                 
@@ -249,6 +243,7 @@ require_once("agTelefono.php");
                     'paterno'=>$this->paterno,
                     'materno'=>$this->materno,
                     'nacimiento'=>$this->nacimiento,
+                    'genero'=>$this->genero,
                     'edad'=>$this->edad,
                     'telefono'=>json_decode($this->telefono->getAgTelefonos($this->matricula)),
                     'usuario'=>json_decode(parent::getJsonObject()))

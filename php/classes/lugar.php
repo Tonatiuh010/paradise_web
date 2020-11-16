@@ -262,21 +262,37 @@
 
                 $command->bind_param('idi',$this->num,$this->costo,$this->capacidad);
 
-                 $command->execute();
+                $command->execute();
 
                   if ($command->error!=""){
                     echo "Error ---> ".$command->error;
 
                   } else {
                     $espaciosArray=$this->espacio->arrayId;
+                   
                     $this->espacio=new espacios();
                     $currentEsps=json_decode($this->espacio->getAllEspaciosByLugar($this->num));
 
-                    for ($x=0;$x<count($currentEsps);$x++){                         
-                        $this->espacio->deleteEspaciosLugar($currentEsps[$x]->num,$this->num);                           
-                    }
+                    //$listNoInsert=array();                    
 
+                    //for ($y=0;$y<count($espaciosArray);$y++){
+                    //    for ($x=0;$x<count($currentEsps);$x++){                                                     
+                    //        if ($espaciosArray[$y]==$currentEsps[$x]){
+                    //           array_push($listNoInsert,$espaciosArray[$y]);
+                    //        }                                                      
+                    //    }
+                        
+                    //}
+
+                    //var_dump($listNoInsert);
+                    
+                       
+                    for ($x=0;$x<count($currentEsps);$x++){                                           
+                        $this->espacio->deleteEspaciosLugar($currentEsps[$x]->num,$this->num);
+                    }
+                        
                     for ($y=0;$y<count($espaciosArray);$y++){
+                        
                         $this->espacio->insertEspaciosLugar($espaciosArray[$y],$this->num);                                            
                     }        
                      echo true;

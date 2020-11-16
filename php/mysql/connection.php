@@ -6,7 +6,6 @@
                //$var='{ "mysqlCrendentials" : { "server" : "localhost", "user" : "root", "pass" : "", "db" : "paradise" } }';                              
                $var='{ "mysqlCrendentials" : { "server" : "localhost", "user" : "root", "pass" : "losseisbastardos12", "db" : "paradise" } }';
 
-
                $config=json_decode($var,true);
 
                if (isset($config['mysqlCrendentials'])){ 

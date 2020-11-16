@@ -1,4 +1,4 @@
-﻿function registrarLugar(res) {
+﻿function registrarLugar() {
     document.getElementById("listLugar").innerHTML = "";
 
     var lugarOb = null;
@@ -8,7 +8,6 @@
     var sctTP = document.getElementById("CBtp");
     var sctCiudades = document.getElementById("CBCiudades");
 
-    if (res == true) {
 
         lugarOb = {
             nombre: document.getElementById("txtNombreLugar").value,
@@ -38,32 +37,8 @@
                     }
                     a++;
                 }
-            },
-            type: true
+            }            
         };
-    } else {
-
-        lugarOb = {
-            numero: parseInt(document.getElementById("tbNum").value),
-            nombre: document.getElementById("txtNombreLugar").value,
-            desc: document.getElementById("txtDescLugar").value,
-            costo: document.getElementById("txtCostoLugar").value,
-            capacidad: document.getElementById("txtCapacidadLugar").value,
-            estado: sctCiudades.options[sctCiudades.selectedIndex].value,
-            tipoLugar: sctTP.options[sctTP.selectedIndex].value,
-            espacios: new function () {
-                var a = 0;
-                this.arrayId = [];
-                while (CKS[a]) {
-                    if (CKS[a].checked == true) {
-                        this.arrayId.push(CKS[a].value);
-                    }
-                    a++;
-                }
-            },
-            type: false
-        };
-    }
 
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
@@ -117,8 +92,7 @@ function loadOptions() {
 }
 
 
-function fillOptions(ob) {
-
+function fillOptions(ob) { 
     var y = 0;
     var obj = JSON.parse(ob);
 
@@ -126,16 +100,16 @@ function fillOptions(ob) {
 
     var espSection = document.getElementById("boxEsp");
 
-    var diag = document.getElementById("dialogEsp");
-
-
+   
     var tabla = document.createElement("table");
     tabla.className = "tablaBox";
-
+        
     espSection.appendChild(tabla);
-    diag.appendChild(tabla);
+
+    
 
     while (arrayEspacios[y]) {
+
         var ckBox = document.createElement("input");
         ckBox.setAttribute("type", "checkbox");
 
@@ -156,12 +130,46 @@ function fillOptions(ob) {
 
         tr.appendChild(td);
         tabla.appendChild(tr);
+
         //espSection.appendChild(lbl);
         //espSection.appendChild(ckBox);
         y++;
-
     }
+   
+    var x = 0;
 
+    var diag = document.getElementById("dialogEsp");
+
+    var tablaD = document.createElement("table");
+    tablaD.className = "tablaBox";
+
+    diag.appendChild(tablaD);
+
+    while (arrayEspacios[x]) {
+
+        var ckBox = document.createElement("input");
+        ckBox.setAttribute("type", "checkbox");
+
+        ckBox.setAttribute("class", "ckBD");
+        ckBox.style.marginRight = "50px";
+
+        ckBox.value = arrayEspacios[x].num;
+
+        var lbl = document.createElement("Label");
+        lbl.innerHTML = arrayEspacios[x].nombre;
+
+        var td = document.createElement("td");
+        var tr = document.createElement("tr");
+
+        td.appendChild(ckBox);
+        td.appendChild(lbl);
+
+        //Destino <------------ Objeto a agregar
+
+        tr.appendChild(td);
+        tablaD.appendChild(tr);
+        x++;
+    }
 
 
     var arrayTipoLugar = obj.tipoLugar;
@@ -329,7 +337,7 @@ function cerrar() {
 function updateLugar() {
     //Llamar a diálogo
 
-    var CKS = document.getElementsByClassName("ckB");
+    var CKS = document.getElementsByClassName("ckBD");
 
     var lugarOb = {
         numero: document.getElementById("lblNum").value,    
@@ -355,6 +363,8 @@ function updateLugar() {
         if (ajax.readyState == 4 && ajax.status == 200) {
             //console.log(ajax.responseText);
             document.getElementById("msgD").innerHTML = ajax.responseText;
+
+            console.log(document.getElementById("msgD").innerHTML);
 
             if (ajax.responseText == true) {
                 location.reload();
@@ -384,7 +394,7 @@ function abrir(a) {
     document.getElementById("txtCostoLugarD").value = a.costo;
     document.getElementById("txtCapacidadLugarD").value = a.capacidad;   
 
-    var ch = document.getElementsByClassName("ckB");
+    var ch = document.getElementsByClassName("ckBD");
 
     for (var x = 0; x < ch.length; x++) {
         for (var y=0; y<a.espacios.length;y++){
@@ -396,3 +406,35 @@ function abrir(a) {
 
 }
 
+
+
+function showFilesData(){
+    var myFile = document.getElementById("files").files;
+    
+
+    for (var i = 0, f; f = myFile[i]; i++) {
+
+        var reader = new FileReader();
+        reader.readAsDataURL(f);
+
+        var decodeImg;
+
+        reader.onloadend = function () {
+            decodeImg = reader.result;
+            console.log(reader.result);
+            document.getElementById("myImg").src = reader.result;
+        }
+
+    //    var ajax = new XMLHttpRequest();
+    //    ajax.onreadystatechange = function () {
+    //        if (ajax.readyState == 4 && ajax.status == 200) {
+    //            document.getElementById("myImg").src=ajax.responseText;
+               
+    //        }
+    //    };
+
+
+    //    ajax.open("GET", "../php/test.php?f=" +decodeImg, true);
+    //    ajax.send();
+    }
+}

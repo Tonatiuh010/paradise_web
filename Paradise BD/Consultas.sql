@@ -69,7 +69,7 @@ select * from lugar;
 
 #SP o vista para los filtros de busqueda
 
-alter view vw_lugares_filtros_list as
+create view vw_lugares_filtros_list as
 	select lugNum as num, lugNombre as Lugar, lugDescripcion as Descripcion, lugCosto as Costo, lugCapacidad as Capacidad,
 	#--------- Estos campos se van a mandar a llamar cuando se seleccione la vista --------------------------------------#
 	tlNum as Categoria, espNum as Espacio, mun_cod as Municipio
@@ -92,7 +92,7 @@ select * from cliente;
 select * from agente;
 
 # Vista para obtener las llaves primarias y tipo de usuario de los diferentes usuarios
-alter view vw_primary_user as
+create view vw_primary_user as
 	select cliNum as numC, usNum as numU, usTipoUS as tipo, agMatricula as mat, usNombre as username, usContrasenia as contrasenia, usCorreo as correo
 	from cliente as cli right join usuario as us
 	on cli.FK_usuario=us.usNum right join agente as ag
@@ -103,15 +103,15 @@ alter view vw_primary_user as
 	on cli.FK_usuario=us.usNum left join agente as ag
 	on ag.FK_usuario=us.usNum 
 	where cliNum is null or agMatricula is null;
-    
+ 
 	select * from vw_primary_user;
     select * from usuario;
     
-    alter view vw_user_list as
+    create view vw_user_list as
     select usNum as numU, usNombre as nombre, usCorreo as correo, usContrasenia as contrasenia, usTipoUS as tipo from usuario;
     
 #-----------------------------------------------------------------------------------------------------------------
-alter view vw_cliente_perfil as	
+create view vw_cliente_perfil as	
     select cliNum as num, cliNombre as nombre, cliApPat as paterno, cliApMat as materno,  
 	cliFecNac as nacimiento, cliEdad as edad, cliTelefono as telefono, usNum as num_us,
 	usNombre as usuario, usContrasenia as contrasenia, usCorreo as email, usTipoUS as tipo
@@ -164,7 +164,7 @@ select num, telefono from vw_agente_telefonos where agente=?;
 /*insert pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,prNotas,FK_Lugar,FK_cliente) values
 ('2020-11-07 15:22:10','2020-12-20','2020-12-23','Proceso','Aun sin autorizar',4,10);*/
 
-alter view vw_reservacion_completa as
+create view vw_reservacion_completa as
 select prNum as num, prFechaRegistro as registro, prFechaInic as inicio, prFechaFin as termino,
 prStatus as estado, prNotas as notas, FK_Lugar as lugar, FK_Cliente as cliente, FK_Agente as agente,
 resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total 
@@ -235,7 +235,6 @@ right join municipio m  on m.mun_cod=dl.FK_Municipio
 where dl.dlNum is null
 ;
 
-
 select * from VW_lugar_admin;
 
 ##----------------------------------------- Lugar Admin -----------------------------------
@@ -243,12 +242,14 @@ select * from VW_lugar_admin;
 
 drop view VW_agente_admin ;
 
-alter view VW_agente_admin as 
+create view VW_agente_admin as 
 select agMatricula as matricula, agNombre as nombre,agApPat as paterno,agApMat as materno,agFecNac as
 nacimiento,agEdad as edad, agGenero as genero, usNum as num, usNombre as usuario, 
 usContrasenia as contrasenia, usCorreo as correo, usTipoUS as tipo
 from agente inner join usuario
 on FK_usuario=usNum;
+
+select * from VW_agente_admin;
 
 select * from agente;
 select * from usuario;
@@ -269,7 +270,7 @@ create view VW_lugEspacios as
 select lg_numEspacio numEsp, lg_NumLugar numLugar,espNombre nombre from lugespacio join espacio 
 on lg_NumEspacio=espNum order by lg_NumLugar;
 
-select * from vw_lugEspacios;
+select * from vw_lugEspacios where numLugar=1;
 ##------------------------------------------ Tipos_Lugares -----------------------------------------
 
 create view VW_tipolugares_admin as

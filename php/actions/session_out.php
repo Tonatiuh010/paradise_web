@@ -2,5 +2,5 @@
     session_start();
     session_destroy();
 
-    header("Location:/../paradise/index.html");
+    header("Location:../../index.html");
 ?>
