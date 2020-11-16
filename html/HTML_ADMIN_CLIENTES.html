@@ -6,7 +6,7 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <script src="../js/dialog.js"></script>
-    <script src="../js/adminAgentes.js"></script>
+    <script src="../js/adminClientes.js"></script>
     <script src="../js/session.js"></script>
 </head>
 
@@ -47,9 +47,6 @@
                 &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
                 <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
                 <!--Tus botones-->  <button class="dot" onclick="showSlides(1)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-
-
-
             </section>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
@@ -98,80 +95,23 @@
 
                     <section class="shcAdmin">
                         <input type="search" id="shcId" class="busqueda" placeholder="¿Qué estás buscando?" />
-                        <button type="button" id="search" class="boton" onclick="buscarAgente()">Buscar</button>
+                        <button type="button" id="search" class="boton" onclick="buscarClientes()">Buscar</button>
                     </section>
 
-                    <section id="listAgen"></section>
+                    <section id="listClientes"></section>
+
                 </section>
-
-                <section class="slides fade">
-                    <section class='registerSection' name='searchAdminForm'>
-
-
-
-                        <label>Nombre:</label>
-                        <input class="in" type='text' id='txtNombre' maxlength="30" autofocus required><br />
-                        <label>Apellido Paterno *:</label>
-                        <input class="in" type='text' id="txtApPat" /><br />
-                        <label>Apellido Materno *:</label>
-                        <input class="in" type='text' id="txtApMat" /><br />
-                        <label>Fecha de nacimiento:</label>
-                        <input class="in"  type="date" id="txtFecNac" required><br />            
-                        <label>Teléfono:</label>
-                        <input class="in" type="tel" id="txtTelefono" required><br />             
-                        <label>Genero:</label>
-                        <select id="genreBox" class="select">
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                        </select><br />
-
-                        
-                        <label>Correo Electrónico: </label>
-                        <input class="in" name="txtCorreo" type="email" maxlength="30" id="txtCorreo" required /><br />
-                     
-                        <label>Usuario:</label>
-                        <input class="in" name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required><br />
-                     
-                        <label>Contraseña:</label>
-                        <input class="in" name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br />
-                        
-                        <label>Confirmar Contraseña:</label>
-                        <input class="in" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br />
-                        
-                        
-                        
-
-                        <input class="botones" type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente()" />
-                        <br />
-                        
-                        <p id="msg">En proceso</p>
-
-                    </section>
-                </section>
-
+             
             </section>
-
         </section>
-
-        
     </main>
-
-
-
 
     <script>
 
-
-
-        function loading() {
-
-           
-
+        function loading() {           
             showSlides(0);
-
             sesion();
         }
-
 
 
         function showSlides(n) {
@@ -186,10 +126,7 @@
 
             slideArray[n].style.display = "block";
         }
-
     </script>
-
-
 
 </body>
 </html>
