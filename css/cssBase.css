@@ -359,10 +359,6 @@ main dialog[open] {
     /*background-color: rgb(135,225,215);*/
 }
 
-dialog::backdrop{
-
-}
-
 .botond {
     width: 28%;
     height: 8%;
@@ -374,4 +370,45 @@ dialog::backdrop{
     float:right;
     height: 8%;
     background-color: var(--pcolor1);
+}
+
+
+/*SEGUNDO DIALOGO*/
+
+section dialog[open] {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 40%;
+    height: 60%;
+    text-align: left;
+    background-color: white;
+    padding-top: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: Georgia;
+    font-size: medium;
+    line-height: 1.5;
+    color: darkslategray;
+    border: none;
+    border-radius: 2%;
+
+}
+
+.cargar_img {
+    background-color: rgb(246, 247, 255);
+    width: 96%;
+    height: 40%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2%;
+    padding:2%;
+}
+
+.child{
+    /*background-color:aqua;*/
+}
+
+.upload{
+    width:100%;
 }

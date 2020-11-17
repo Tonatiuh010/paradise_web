@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\css",
     "\\html",
     "\\php",
+    "\\php\\actions",
+    "\\php\\classes",
     "\\php\\mysql"
   ],
-  "SelectedNode": "\\html\\HTML_ADMIN_LUGARES.html",
+  "SelectedNode": "\\css\\CSS_CLIENTE_MLUGAR.css",
   "PreviewInSolutionExplorer": false
 }
