@@ -72,6 +72,10 @@ create view vw_primary_user as
     create view vw_user_list as
     select usNum as numU, usNombre as nombre, usCorreo as correo, usContrasenia as contrasenia, usTipoUS as tipo from usuario;
     
+    select * from vw_lugares_filtros_list;
+    
+    select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where categoria=1;
+    
 #-----------------------------------------------------------------------------------------------------------------
 create view vw_cliente_perfil as	
     select cliNum as num, cliNombre as nombre, cliApPat as paterno, cliApMat as materno,  
