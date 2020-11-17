@@ -62,7 +62,7 @@
             <ul>
 
                 <li>
-                    <a >Esquemas (Opción predefinida)</a>
+                    <a>Esquemas (Opción predefinida)</a>
                 </li>
 
                 <li>
@@ -80,11 +80,15 @@
                         <ol>
                             > Herramientas del Lugar
                         </ol>
-                    </a>                    
+                    </a>
                 </li>
 
                 <li>
                     <a href="HTML_ADMIN_CLIENTES.html">Clientes</a>
+                </li>
+
+                <li>
+                    <button onclick="openDialog()">Open</button>
                 </li>
 
             </ul>
@@ -211,28 +215,33 @@
             </form>
         </dialog>
         <!--------------------------------------------------------------------------------------------------------------------------------------->
-
-        <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
-        <dialog id="addImg" class="imgDialog">
-            <form method="get" action="">
-                <label>Capacidad del Lugar:</label> 
-                    <input type='text'  class="dlabel" id="txtCapacidadLugar" required /><br /><br />
-                <section class="cargar_img">
-                    Aquí van las imagenes
-                </section>
-                <button type="submit"  class="botond">Subir</button>
-                <button type="button"  class="botonc" onclick="cerrar()">Omitir</button>
-            </form>
-        </dialog>
-        <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
     </main>
 
-    
+        <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
+        <section>
+            <dialog id="addImg" class="imgDialog">
+            <form method="get" action="">
+                <h2>Selecciona las imagenes del lugar</h2><br />
+                <input type="file" id="files" multiple accept="image/*" class="upload" /><br /><br />
+                <section class="cargar_img">
+                    <section class="child"></section>
+                    <section class="child"></section>
+                    <section class="child"></section>
+                </section><br />
+                <button type="submit" class="botond">Subir</button>
+                <button type="button" class="botonc" onclick="cerrar()">Omitir</button>
+            </form>
+            </dialog>
+        </section>
+        <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
     
 
     <script>
 
-        
+        function openDialog() {
+            var dialogo = document.getElementById('addImg');
+            dialogo.showModal();
+        }
 
         function loading() {
             
@@ -257,7 +266,13 @@
             }
 
             slideArray[n].style.display = "block";
-        }        
+        }       
+
+         function cerrar()
+        {
+            document.getElementById("addImg").close();
+            
+        }
 
     </script>
 
