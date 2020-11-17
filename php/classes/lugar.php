@@ -438,10 +438,58 @@
 
                 mysqli_stmt_close($command);
                 $conn->close();         
-                 return json_encode($list);
+                return json_encode($list);
               }
-        
+
+                
+        public function getAllLugaresFiltros($cd,$tl,$p,$cap,$esp){
+            //cd = ciudad
+            //tl = tipo
+            //p = precio
+            //cap = capacidad
+            //esp = espacios
+
+            if($cd == 'na'){$cd='';}
+            if($p == 'na'){$p='';}
+            if($cap == 'na'){$cap ='';}
+            if($esp == 'and Espacio in ()'){$esp='';}
+            
+            
+            $sql="select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where Categoria = ?;";
+            $var =$tl.' '.$cd.' '.$cap.' '.$esp.' '.$p;
+            $newSQL="select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where Categoria = ".$var.";";
+                  $conn=mysqlConnection::getConnection();
+                  $command=$conn->prepare($newSQL);
+                  //$command->bind_param('s',$var);
+
+                  $command->bind_result(
+                        $numero,
+                        $nombre, 
+                        $desc, 
+                        $costo,
+                        $capacidad);
+
+                       $command->execute();
+
+                       $list=array();
+
+                       while($command->fetch()){
+
+                                $this->num=$numero;
+                                $this->nombre=$nombre;
+                                $this->desc=$desc;
+                                $this->costo=$costo;
+                                $this->capacidad=$capacidad;
+
+                                array_push($list,json_decode(self::getJsonObject()));                                               
+                       }          
+
+                mysqli_stmt_close($command);
+                $conn->close();         
+                return json_encode($list);
         }
+        
+     }
 
 
 
