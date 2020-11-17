@@ -98,9 +98,17 @@ select tgNum as num, tgTelefono as telefono, FK_agente as agente from telef_agen
 ('2020-11-07 15:22:10','2020-12-20','2020-12-23','Proceso','Aun sin autorizar',4,10);*/
 
 create view vw_reservacion_completa as
-select prNum as num, prFechaRegistro as registro, prFechaInic as inicio, prFechaFin as termino,
-prStatus as estado, prNotas as notas, FK_Lugar as lugar, FK_Cliente as cliente, FK_Agente as agente,
-resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total 
+select prNum as num, 
+prFechaRegistro as registro, 
+prFechaInic as inicio, 
+prFechaFin as termino,
+prStatus as estado, ##'Proceso' -- 'Rechazada' -- 'Autorizada' -- 'Finalizada'
+prNotas as notas, 
+FK_Lugar as lugar, 
+FK_Cliente as cliente, 
+FK_Agente as agente,
+resFecConfirmacion as confirmacion, 
+resTotDias as dias, resTotPagar as total 
 from pre_reservacion left join reservacion
 on prNum=resNumPR
 union all
@@ -168,7 +176,7 @@ select * from VW_lugar_admin;
 
 ##----------------------------------------- Lugar Admin -----------------------------------
 /*concat(day(agFecNac),' de ',monthname(agFecNac),' del ',year(agFecNac))*/
-
+##------------------------------------------ Agente Admin ---------------------------------
 #drop view VW_agente_admin ;
 
 CREATE view VW_agente_admin as 
@@ -188,6 +196,7 @@ select * from agente;
 select * from usuario;
 
 insert into telef_agentes(tgTelefono,FK_agente) values('6647799903','VAC0FZA') ;
+
 
 
 ##------------------------------------------ Espacio -----------------------------------------------

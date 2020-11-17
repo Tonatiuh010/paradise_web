@@ -483,7 +483,3 @@ auto_increment=0;
 select * from pre_reservacion;
 
 select * from usuario;
-
-
-
-

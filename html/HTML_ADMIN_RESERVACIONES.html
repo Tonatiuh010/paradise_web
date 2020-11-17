@@ -1,12 +1,11 @@
-﻿
-<html lang="en">
+﻿<html lang="en">
 <head>
     <title>Paradise - Administrador</title>
     <link rel="stylesheet" href="../css/cssBase.css" />
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <script src="../js/dialog.js"></script>
-    <script src="../js/adminClientes.js"></script>
+    <script src="../js/adminReservaciones.js"></script>
     <script src="../js/session.js"></script>
 </head>
 
@@ -21,7 +20,7 @@
             <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-            <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
+            <article class="pMTxt" id="sesion"><a href="HTML_SIGN_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="login" style="display:none;">
                 <a href="HTML_SIGN_IN.html" ;></a>
@@ -43,24 +42,21 @@
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
         <nav>
             <section class="Nav2do">
-
                 &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <!--Tus botones-->  <button class="dot" onclick="showSlides(1)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                <button class="dot" onclick="showSlides(0)">Reservaciones</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                <button class="dot" onclick="showSlides(1)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
+                
             </section>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
         <section class="principal">
-
             <section class="lateral">
                 <!--Lista de opciones (Puede estar escondida.) <br />-->
-                <!--<button type="button" onclick="abrir()">Abrir</button>--> <!--quitar esto de aqui-->
-
                 <ul>
 
                     <li>
-                        <a>Esquemas (Opción predefinida)</a>
+                        <a>Esquemas </a>
                     </li>
 
                     <li>
@@ -92,26 +88,36 @@
                 <!--Seccion sin nombre, toda la que esta en blanco-->
 
                 <section class="slides fade">
+                                          
+                    <section id="listAltaReservaciones">
 
-                    <section class="shcAdmin">
-                        <input type="search" id="shcId" class="busqueda" placeholder="¿Qué estás buscando?" />
-                        <button type="button" id="search" class="boton" onclick="buscarClientes()">Buscar</button>
-                    </section>
-
-                    <section id="listClientes"></section>
-
+                    </section>                 
                 </section>
-             
+
+                <section class="slides fade">
+                    <!-- Sección Consultas -->
+                    
+                </section>
+
+
+                             
             </section>
+
         </section>
+
     </main>
+
+
+
 
     <script>
 
+
         function loading() {           
             showSlides(0);
-            sesion();
+            loadReservaciones();
         }
+
 
 
         function showSlides(n) {
@@ -119,14 +125,18 @@
             var i;
             var slideArray = document.getElementsByClassName("slides");
 
-
             for (i = 0; i < slideArray.length;i++){
                 slideArray[i].style.display = "none";
             }
-
+            
             slideArray[n].style.display = "block";
         }
+
+        
+
     </script>
+
+
 
 </body>
 </html>

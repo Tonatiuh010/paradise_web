@@ -157,11 +157,11 @@ require_once("usuario.php");
             }
 
         public function getAllClientes($n){                 //Esta función la requiero para mostrarle al cliente sus propios datos
-            $sql="select * from vw_cliente_perfil where num= ?;";  
+            $sql="select * from vw_cliente_perfil where nombre like ?;";  
             $conn=mysqlConnection::getConnection();
-
+            $var=$n.'%';
               $command=$conn->prepare($sql);
-              $command->bind_param('i',$n);
+              $command->bind_param('s',$var);
               $command->bind_result($num,                   //Generamos nuevas variables que nos
                                     $nombre,                //almacenen los resultados obtenidos 
                                     $paterno,               //desde la base de datos
@@ -185,6 +185,7 @@ require_once("usuario.php");
                 $this->materno=$materno;
                 $this->nacimiento=$nacimiento; 
                 $this->edad=$edad;
+                $this->telefono=$telefono;
 
                 parent:: setNum($num_us);
                 parent:: setNombre($usuario);

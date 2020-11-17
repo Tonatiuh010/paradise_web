@@ -11,12 +11,12 @@ function buscarClientes() {
       
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            console.log(ajax.responseText);           
-            //fillClientesShc(ajax.responseText);
+            //console.log(ajax.responseText);           
+            fillClientesShc(ajax.responseText);
         }
     };
 
-    ajax.open("GET", "../php/actions/buscarClientes.php?b=" + shc, true);
+    ajax.open("GET", "../php/actions/buscarCliente.php?b=" + shc, true);
     ajax.send();
 }
 
@@ -25,11 +25,11 @@ function fillClientesShc(ob) {
 
     var list = document.getElementById("listClientes");
     list.style.display = "block"; 
-    var arrayAgentes = JSON.parse(ob);
-
+    var arrayClientes = JSON.parse(ob);
+    console.log(arrayClientes);
     var x = 0;
-   
-    while (arrayAgentes[x]) {
+    
+    while (arrayClientes[x]) {
 
         var table = document.createElement("table");
 
@@ -43,43 +43,21 @@ function fillClientesShc(ob) {
         var tr3 = document.createElement("tr");
         var tr4 = document.createElement("tr");
         var tr5 = document.createElement("tr");
-        var tr6 = document.createElement("tr");
-        var tr7 = document.createElement("tr");
-        
+        var tr6 = document.createElement("tr");                
         
 
-        tr1.innerHTML = "<td> Matrícula </td> <td> " + arrayAgentes[x].matricula + "</td> ";
-        tr2.innerHTML = "<td> Nombre </td> <td> " + arrayAgentes[x].nombre + " " + arrayAgentes[x].paterno + " " + arrayAgentes[x].materno + "</td> ";
-        tr3.innerHTML = "<td> Edad </td> <td> " + arrayAgentes[x].edad + "</td> ";
-        tr4.innerHTML = "<td> Correo </td> <td> " + arrayAgentes[x].usuario.correo + "</td> ";
-        tr5.innerHTML = "<td> Usuario </td> <td> " + arrayAgentes[x].usuario.nombre + "</td>  ";
-        tr7.innerHTML = "<td> Genero </td> <td> " + arrayAgentes[x].genero+ "</td>  ";
-        
+        tr1.innerHTML = "<td> Número </td> <td> " + arrayClientes[x].num + "</td> ";
+        tr2.innerHTML = "<td> Nombre </td> <td> " + arrayClientes[x].nombre + " " + arrayClientes[x].paterno + " " + arrayClientes[x].materno + "</td> ";
+        tr3.innerHTML = "<td> Edad </td> <td> " + arrayClientes[x].edad + "</td> ";
+        tr4.innerHTML = "<td> Correo </td> <td> " + arrayClientes[x].usuario.correo + "</td> ";
+        tr5.innerHTML = "<td> Usuario </td> <td> " + arrayClientes[x].usuario.nombre + "</td>  ";                              
+        tr6.innerHTML = "<td> Teléfonos </td> <td> " + arrayClientes[x].telefono + "</td>";
 
-        var str = "";
-      
-        for (var i = 0; i < arrayAgentes[x].telefono.length; i++) {
+        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6];
 
-            if (i!=arrayAgentes[x].telefono.length-1)
-                str += arrayAgentes[x].telefono[i].telefono+ ", ";
-            else {
-                str += arrayAgentes[x].telefono[i].telefono;
-
-            }
-        }
-
-        tr6.innerHTML = "<td> Teléfonos </td> <td> " + str + "</td>";        
-        
-
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6, tr7];
-
-
-        for (z = 0; z < 7; z++) {
+        for (z = 0; z < 6; z++) {
             table.appendChild(arrayTr[z]);
         }
-
-
-                           
 
         list.appendChild(table);
         x++;

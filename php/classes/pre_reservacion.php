@@ -145,7 +145,23 @@
                 mysqli_stmt_close($command);
                 $conn->close(); 
                 return json_encode($list);
+        }        
+
+        /// En proceso, Cuack!
+        public function getAllReservacionesByAgente($n){
+                $sql="select * from vw_reservacion_completa where agente=? estado='Proceso';";
+                $conn=mysqlConnection::getConnection();
+
+                $command=$conn->prepare($sql);
+                 
+                $command->bind_param('s',$n);
+
+                $command->execute();
+
+
+
         }
+
 
         public function verifyReservacion($i,$f,$l){
             $conn=mysqlConnection::getConnection();
@@ -181,7 +197,8 @@
                                                     //por el cliente, se encuntran disponibles para reservar
                 return $validar;
 
-        }
+        }       
+
 
 
         public function insertReservacion($i,$f,$l,$c){
