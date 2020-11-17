@@ -144,17 +144,15 @@ create table dicLugar
 );
 
 
-/*create table imagenes
+create table imagenesLugar
 (		
 	img_Num	int	auto_increment not null,
-	img_Nombre	varchar(50)	not null,
-	img_Descripcion	text null,	
-	# img_Imagen blob not null,	
-	FK_Lugar char(5) not null,
+	img_Nombre text not null,		
+	FK_Lugar int not null,
     
     constraint PK_imagenes_Num primary key (img_Num),
-    constraint FK_imagenes_lugar foreign key (FK_Lugar) references lugar(lugCod) on delete cascade
-);*/
+    constraint FK_imagenes_lugar foreign key (FK_Lugar) references lugar(lugNum) on delete cascade
+);
 
 create table lugEspacio
 (		

@@ -43,9 +43,17 @@
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
+
             createDialog();
-            document.getElementById("msg").innerHTML = ajax.responseText;
-            clearForm();
+            
+            var response = JSON.parse(ajax.responseText);
+            if (response.res!=true){
+                console.log("Error al momento de registrar: "+response.error);
+            } else {
+                imgDialogOpen(response.num);
+                clearForm();
+            }
+            
         }
     };
 
@@ -321,18 +329,6 @@ function fillLugarShc(ob) {
     }
 }
 
-function cerrar() {
-    var ch = document.getElementsByClassName("ckB");
-
-
-    for (var x = 0; x < ch.length; x++) {
-        ch[x].checked = false;
-    }
-
-    document.getElementById('update').close();
-
-
-}
 
 function updateLugar() {
     //Llamar a diálogo
@@ -406,6 +402,36 @@ function abrir(a) {
 
 }
 
+function cerrar() {
+    var ch = document.getElementsByClassName("ckB");
+
+
+    for (var x = 0; x < ch.length; x++) {
+        ch[x].checked = false;
+    }
+
+    document.getElementById('update').close();
+
+
+}
+
+
+function imgDialogOpen(lug) {
+    var dialogo = document.getElementById('addImg');
+    var imgForm = document.getElementById("imgForm");
+    
+    var input = document.createElement("input");
+    input.name = "numeroLugar";
+    input.value = lug;
+    input.style.display = "none";
+    imgForm.appendChild(input);
+    dialogo.showModal();
+}
+
+function imgDialogClose() {
+    document.getElementById("addImg").close();
+
+}
 
 
 function showFilesData(){

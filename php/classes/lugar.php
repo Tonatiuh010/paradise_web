@@ -3,6 +3,8 @@
     require_once("tipoLugar.php");
     require_once("direccion.php");
     require_once("espacios.php");
+    require_once("imagenes.php");
+
 
     
 
@@ -18,6 +20,7 @@
         private $espacio;
         private $tipoLugar; 
         private $direccion; 
+        private $imagen; 
 
 	   //Getters and Setters
        public function getNum(){return $this->num;}
@@ -45,7 +48,10 @@
 
 
        public function getEsp(){return $this->espacio;}
-       public function setEsp($var){$this->espacio=$var;}                    
+       public function setEsp($var){$this->espacio=$var;}     
+
+       public function getImg(){return $this->imagen;}
+       public function setImg($var){$this->imagen=$var;}                    
 
        public function __construct() {
 
@@ -58,9 +64,12 @@
                     $this->costo=0.00;
                     $this->capacidad='';
 
+
+
                     $this->espacio=new espacios();
                     $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
                     $this->direccion=new direccion();
+                    $this->imagen=new imagenes();
               }
 
               //Constructor con un único parámetro. 
@@ -185,7 +194,7 @@
                   $command->execute();
 
                   if ($command->error!=""){
-                    echo "Error ---> ".$command->error;
+                   echo json_encode(array("res"=>false,"error"=>$command->error));
                     
 
                   } else {
@@ -194,13 +203,13 @@
                     $this->espacio=new espacios();
                     $resLug=$conn->query("select @numLug as num;");    
                     $numLug=$resLug->fetch_assoc();
-                    echo $numLug['num'];
+                    
                     for ($a=0;$a<count($espaciosArray);$a++){
                         $this->espacio->insertEspaciosLugar($espaciosArray[$a],$numLug['num']);
                     }
 
                     
-                    echo "Registrado";
+                    echo json_encode(array("res"=>true,"num"=>$numLug['num']));
                     
                   }
 
@@ -230,7 +239,7 @@
                   $command->execute();
 
                   if ($command->error!=""){
-                    echo "Error ---> ".$command->error;
+                     echo json_encode(array("res"=>false,"error"=>$command->error));
 
                   } else {
                   
@@ -244,7 +253,7 @@
                     }
 
                     
-                    echo "Registrado";
+                     echo json_encode(array("res"=>true,"num"=>$numLug['num']));
                    
                   }
 
@@ -311,7 +320,8 @@
                               "capacidad"=>$this->capacidad,
                               "tipoLugar"=> json_decode($this->tipoLugar->getJsonObject()),
                               "direccion"=> json_decode($this->direccion->getJsonObject()),
-                              "espacios"=> json_decode($this->espacio->getAllEspaciosByLugar($this->num))
+                              "espacios"=> json_decode($this->espacio->getAllEspaciosByLugar($this->num)),
+                               "imagenes"=> json_decode($this->imagen)
                             )
                     );                
               }

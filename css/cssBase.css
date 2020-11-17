@@ -405,6 +405,10 @@ section dialog[open] {
     padding:2%;
 }
 
+.imgPreview {
+    width:100%;
+}
+
 .child{
     /*background-color:aqua;*/
 }
