@@ -89,11 +89,11 @@
             $command->execute();
             
              if ($command->error!=""){
-                    echo false;
+                    return false;
                     die;
              }
 
-             echo true;
+             return true;
 
                 mysqli_stmt_close($command);
                 $conn->close();        

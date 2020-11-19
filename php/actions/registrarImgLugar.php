@@ -1,8 +1,7 @@
 <?php
  
 require_once("../classes/imagenes.php");
-
-                   
+       
 
         $baseDirec="../../img/lugares";
        

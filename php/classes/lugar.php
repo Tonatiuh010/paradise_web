@@ -6,9 +6,6 @@
     require_once("imagenes.php");
 
 
-    
-
-
      class lugar {
         private $num;        
 	    private $nombre;
@@ -196,7 +193,7 @@
                   $command->execute();
 
                   if ($command->error!=""){
-                   echo json_encode(array("res"=>false,"error"=>$command->error));
+                   return json_encode(array("res"=>false,"error"=>$command->error));
                     
 
                   } else {
@@ -211,7 +208,7 @@
                     }
 
                     
-                    echo json_encode(array("res"=>true,"num"=>$numLug['num']));
+                    return json_encode(array("res"=>true,"num"=>$numLug['num']));
                     
                   }
 
@@ -241,7 +238,7 @@
                   $command->execute();
 
                   if ($command->error!=""){
-                     echo json_encode(array("res"=>false,"error"=>$command->error));
+                     return json_encode(array("res"=>false,"error"=>$command->error));
 
                   } else {
                   
@@ -253,9 +250,14 @@
                     for ($a=0;$a<count($espaciosArray);$a++){
                         $this->espacio->insertEspaciosLugar($espaciosArray[$a],$numLug['num']);
                     }
-
                     
-                     echo json_encode(array("res"=>true,"num"=>$numLug['num']));
+                     $baseDirec="../../img/lugares";
+                     if (!mkdir($baseDirec.'/'.$numLug['num'],0777,true)){
+                             return json_encode(array('res'=>false));
+                             die;
+                     }       
+                    
+                     return json_encode(array("res"=>true,"num"=>$numLug['num']));
                    
                   }
 
@@ -276,7 +278,7 @@
                 $command->execute();
 
                   if ($command->error!=""){
-                    echo "Error ---> ".$command->error;
+                   return "Error ---> ".$command->error;
 
                   } else {
                     $espaciosArray=$this->espacio->arrayId;
@@ -305,7 +307,7 @@
                         
                         $this->espacio->insertEspaciosLugar($espaciosArray[$y],$this->num);                                            
                     }        
-                     echo true;
+                     return true;
                   }
 
             mysqli_stmt_close($command);

@@ -7,8 +7,9 @@ require_once("../classes/imagenes.php");
        $obj= new imagenes();
        $obj->setNum($imgObj->imagenes->num);    
     
-       if ($obj->deleteImagen()){
+       if ($obj->deleteImagen()==true){                
                  unlink("../../img/lugares/".$imgObj->lugar."/".$imgObj->imagenes->nombre);
+                 echo true;
        }
 
        

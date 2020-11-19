@@ -46,6 +46,8 @@
 
             createDialog();
             
+ 
+
             var response = JSON.parse(ajax.responseText);
             if (response.res!=true){
                 console.log("Error al momento de registrar: "+response.error);
@@ -507,6 +509,8 @@ function closeEditImgDialog() {
     document.getElementById("updateImg").close();
     var section = document.getElementById("imgList");
     section.innerHTML = "";
+
+    location.reload();
 }
 
 
@@ -524,8 +528,6 @@ function deleteImg(obj) {
         }    
     };
     
-
-    console.log(obj);
     ajax.open("GET", "../php/actions/eliminarImagenLugar.php?b=" + JSON.stringify(obj), true);
     ajax.send();
 }
