@@ -1,11 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\html",
+    "\\js",
     "\\php",
     "\\php\\actions",
     "\\php\\classes",
     "\\php\\mysql"
   ],
-  "SelectedNode": "\\php\\classes\\lugar.php",
+  "SelectedNode": "\\php\\actions\\PHP_MLUGAR.php",
   "PreviewInSolutionExplorer": false
 }
