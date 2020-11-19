@@ -49,9 +49,7 @@
 
             if ($command->error!=""){
                     echo 'Error: '.$command->error;
-             } else {
-                    echo 'registrado';
-             }
+             } 
 
                 mysqli_stmt_close($command);
                 $conn->close();        
@@ -59,10 +57,26 @@
 
         public function getAllImagenesByLugar($n){
 
-            $sql="select * from imagenesLugar where FK_lugar=?";
+            $sql="select img_Num,img_Nombre from imagenesLugar where FK_Lugar=?";
+             $conn=mysqlConnection::getConnection();
             $command=$conn->prepare($sql);
             $command->bind_param('i',$n);
             $command->execute();
+
+            $command->bind_result($numero,$nombre);
+
+            $list =array();
+
+            while ($command->fetch()){
+                $this->num=$numero;
+                $this->nombre=$nombre;
+                 array_push($list,json_decode(self::getJsonObject()));                                               
+            }
+
+            mysqli_stmt_close($command);
+                $conn->close();         
+                 return json_encode($list);
+
         } 
 
         public function getJsonObject(){

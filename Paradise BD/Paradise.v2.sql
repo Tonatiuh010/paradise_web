@@ -154,6 +154,8 @@ create table imagenesLugar
     constraint FK_imagenes_lugar foreign key (FK_Lugar) references lugar(lugNum) on delete cascade
 );
 
+select * from imagenesLugar;
+##delete from imagenesLugar where FK_Lugar=4;
 create table lugEspacio
 (		
 	lg_NumEspacio int not null,

@@ -196,6 +196,8 @@ insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
 select * from lugar;
 select * from espacio;
 
+
+
 ########################################### INSERTANDO ADMINISTRADOR ###################################################
 insert into usuario(usNombre,usContrasenia,usCorreo,usTipoUS) values
 ('tonatiuh','sandwich','0319125293@miutt.edu.mx','Administrador');
@@ -275,6 +277,7 @@ select * from proveedor;*/
 
 /*alter table proveedor
 modify column pro_Sitio varchar(60);*/
+
 
 
 

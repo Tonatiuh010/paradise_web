@@ -231,8 +231,31 @@
             </form>
             </dialog>
         </section>
-        <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
+      <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
     
+    <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
+    <section>
+        <dialog id="updateImg" class="imgDialog">
+
+            
+
+            <form method="post" id="updateimgForm" action="../php/actions/registrarImgLugar.php" enctype="multipart/form-data">
+                <h2>Añadir Imágenes</h2><br />
+                <input type="file" id="filesUpd" name="files[]" multiple accept="image/*" class="upload" onchange="previewImg()" /><br /><br />
+                
+               
+                    
+                <button type="submit" class="botond">Subir</button>
+                <button type="button" class="botonc" onclick="closeEditImgDialog()">Cancelar</button>
+            </form>
+
+            <section id="imgList"></section>
+            <br />
+
+        </dialog>
+    </section>
+    <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
+
 
     <script>
 
@@ -249,9 +272,7 @@
 
         
 
-        function showSlides(n) {
-
-            
+        function showSlides(n) {            
             var i;
             var slideArray = document.getElementsByClassName("slides");      
                     
@@ -279,8 +300,7 @@
                 img.className = "imgPreview";
                 imgSections[i].appendChild(img);
                 i++;
-            }
-            console.log(myFiles);
+            }            
         }
 
     </script>

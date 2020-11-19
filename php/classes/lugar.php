@@ -289,8 +289,7 @@
                     //        if ($espaciosArray[$y]==$currentEsps[$x]){
                     //           array_push($listNoInsert,$espaciosArray[$y]);
                     //        }                                                      
-                    //    }
-                        
+                    //    } 
                     //}
 
                     //var_dump($listNoInsert);
@@ -321,7 +320,7 @@
                               "tipoLugar"=> json_decode($this->tipoLugar->getJsonObject()),
                               "direccion"=> json_decode($this->direccion->getJsonObject()),
                               "espacios"=> json_decode($this->espacio->getAllEspaciosByLugar($this->num)),
-                               "imagenes"=> json_decode($this->imagen)
+                               "imagenes"=> json_decode($this->imagen->getAllImagenesByLugar($this->num))
                             )
                     );                
               }
@@ -377,7 +376,7 @@
                                 $this->espacio=new espacios();                                
                                 $this->tipoLugar= new tipoLugar($tipoLugarNumero,$tipoLugar);
                                 $this->direccion=new direccion($numero,$calle,$numInterior,$numExterior,$CP,$municipioCod,$municipioNombre);     
-
+                                $this->imagen=new imagenes();
                                 array_push($list,json_decode(self::getJsonObject()));                                               
                         }           
 
@@ -442,7 +441,7 @@
                                 $this->espacio=new espacios();                                
                                 $this->tipoLugar= new tipoLugar($tipoLugarNumero,$tipoLugar);
                                 $this->direccion=new direccion($numero,$calle,$numInterior,$numExterior,$CP,$municipioCod,$municipioNombre);     
-
+                                $this->imagen=new imagenes();
                                 array_push($list,json_decode(self::getJsonObject()));                                               
                         }           
 
