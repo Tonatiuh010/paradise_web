@@ -82,7 +82,7 @@ call SP_insert_userCli (null,'salome','salome@gmail.com');
 call SP_insert_userCli ('solis_emma','pelicula','emmaPSR@outlook.com');
 call SP_insert_userCli ('daniel01','basura','daniel@outlook.com');
 call SP_insert_userCli (null,'guadalupe','mariaGMc@gmail.com');
-call SP_insert_userCli ('jose_guadalupe','constrasenia','joseGuadalupe@outloo.com');
+call SP_insert_userCli ('jose_guadalupe','constrasenia','joseGuadalupe@outlook.com');
 
 # call SP_insert_cliente ('DANIEL','TINAJERO','TRISTAN','1980-01-15','6647733133','daniel@outlook.com');
 
@@ -196,8 +196,6 @@ insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
 select * from lugar;
 select * from espacio;
 
-
-
 ########################################### INSERTANDO ADMINISTRADOR ###################################################
 insert into usuario(usNombre,usContrasenia,usCorreo,usTipoUS) values
 ('tonatiuh','sandwich','0319125293@miutt.edu.mx','Administrador');
@@ -277,7 +275,6 @@ select * from proveedor;*/
 
 /*alter table proveedor
 modify column pro_Sitio varchar(60);*/
-
 
 
 

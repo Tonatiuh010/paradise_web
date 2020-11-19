@@ -20,6 +20,7 @@ function usarConfiguracion() {
         if (ajax.status == 200 && ajax.readyState == 4) {
             //document.getElementById('data').innerHTML = ajax.responseText;
             fillData(ajax.responseText);
+          
             //console.log(JSON.parse(ajax.responseText));
         }
     };

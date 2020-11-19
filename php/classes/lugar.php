@@ -6,9 +6,6 @@
     require_once("imagenes.php");
 
 
-    
-
-
      class lugar {
         private $num;        
 	    private $nombre;
@@ -63,8 +60,6 @@
                     $this->desc='';
                     $this->costo=0.00;
                     $this->capacidad='';
-
-
 
                     $this->espacio=new espacios();
                     $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
