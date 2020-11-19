@@ -1,4 +1,4 @@
-﻿
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -107,7 +107,7 @@
             </section>-->
         </section>
 
-        <!--call SP_PRE_RESERVACION_REGISTRO('2020-12-20','2020-12-23',2,10);-->
+        <input type="date" id="evenInic" value="<?php $_GET['id']?>" disabled>
 
         <dialog id="reservacion">
             <section class="complete_section">
@@ -168,6 +168,8 @@
 
     <script>
         var activada = false;
+        var userID = '';
+        var typeUser = '';
 
         function abrir_reservacion() {
             var dialogo = document.getElementById('reservacion');
@@ -194,6 +196,8 @@
                         document.getElementById('log').style.display = "none";
                         setForm();
                         activada = true;
+                        userID = obj_user.user;
+                        typeUser = obj_user.tipo;
                     }
 
 
