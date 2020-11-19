@@ -79,6 +79,27 @@
 
         } 
 
+        public function deleteImagen(){
+
+            $sql="call SP_delete_imagen(?);";
+            $conn=mysqlConnection::getConnection();
+            $command=$conn->prepare($sql);
+            $command->bind_param('i',$this->num);
+
+            $command->execute();
+            
+             if ($command->error!=""){
+                    echo false;
+                    die;
+             }
+
+             echo true;
+
+                mysqli_stmt_close($command);
+                $conn->close();        
+
+        }
+
         public function getJsonObject(){
 
             return json_encode(

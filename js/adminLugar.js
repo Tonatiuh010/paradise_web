@@ -487,8 +487,9 @@ function editImgDialog(obj) {
                 btnDelete.innerHTML = "Eliminar imagen";
                 btnDelete.addEventListener("click", function (_a) {
                     return function () {
-
-                        deleteImg(imgArray[a]);
+               
+                        deleteImg({ lugar: lugar, imagenes: imgArray[_a] });
+                        document.getElementsByClassName('imgArray')[_a].style.display="none";
                     }
                 }(a));
 
@@ -519,11 +520,12 @@ function deleteImg(obj) {
             if (ajax.responseText == true) {
                 console.log("hecho"); // Mostrar en dialogo
             }
-            //Mostrar error en caso de que falle.                                    
+            
         }    
     };
-    console.log(obj.num);
-    ajax.open("GET", "../php/actions/eliminarImagen.php?b=" + obj.num, true);
-    //ajax.send();
+    
 
+    console.log(obj);
+    ajax.open("GET", "../php/actions/eliminarImagenLugar.php?b=" + JSON.stringify(obj), true);
+    ajax.send();
 }

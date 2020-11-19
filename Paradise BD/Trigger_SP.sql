@@ -375,6 +375,19 @@ end //
 DELIMITER ;
 
 
+#################################### Borrar imagenes #############################################################
+
+DELIMITER //
+create procedure SP_delete_imagen 
+(
+	in num int
+)
+begin
+	delete from imageneslugar where img_Num=num;    
+end //
+DELIMITER ;
+
+###################################################################################################################
 
 
 #call SP_insert_espacios ('Test');

@@ -155,7 +155,7 @@ create table imagenesLugar
 );
 
 select * from imagenesLugar;
-##delete from imagenesLugar where FK_Lugar=4;
+delete from imagenesLugar where img_Num between 1 and 100;
 create table lugEspacio
 (		
 	lg_NumEspacio int not null,
