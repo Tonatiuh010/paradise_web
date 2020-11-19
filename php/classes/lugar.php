@@ -69,7 +69,7 @@
                     $this->espacio=new espacios();
                     $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
                     $this->direccion=new direccion();
-                    $this->imagen=new imagenes();
+                    $this->imagen= new imagenes();
               }
 
               //Constructor con un único parámetro. 
@@ -111,6 +111,8 @@
                             $this->capacidad=$capacidad;
 
                             $this->espacio=new espacios();
+                              $this->imagen=new imagenes();
+
                             $this->espacio->getAllEspaciosByLugar($numero);
                             $this->tipoLugar= new tipoLugar($tipoLugarNumero,$tipoLugar);
                             $this->direccion=new direccion($numero,$calle,$numInterior,$numExterior,$CP,$municipioCod,$municipioNombre);
@@ -489,7 +491,7 @@
                                 $this->desc=$desc;
                                 $this->costo=$costo;
                                 $this->capacidad=$capacidad;
-
+                                 
                                 array_push($list,json_decode(self::getJsonObject()));                                               
                        }          
 
