@@ -75,7 +75,7 @@ function verifyForm() {
     if (dato1 == '' || dato1.length < 2 || isNaN(dato1) == false) {
         confirmar = false;
         document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de llenar el campo nombre (sin ingresar números)";
+        document.getElementById('mensaje').innerHTML = "Favor de llenar el campo nombre (sin ingresar n&uacute;meros)";
     }
 
 

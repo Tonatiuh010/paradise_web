@@ -61,8 +61,6 @@
                     $this->costo=0.00;
                     $this->capacidad='';
 
-
-
                     $this->espacio=new espacios();
                     $this->tipoLugar= new tipoLugar();//Creo una nueva instancia.
                     $this->direccion=new direccion();
