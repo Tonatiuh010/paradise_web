@@ -43,9 +43,17 @@
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
+
             createDialog();
-            document.getElementById("msg").innerHTML = ajax.responseText;
-            clearForm();
+            
+            var response = JSON.parse(ajax.responseText);
+            if (response.res!=true){
+                console.log("Error al momento de registrar: "+response.error);
+            } else {
+                imgDialogOpen(response.num);
+                clearForm();
+            }
+            
         }
     };
 
@@ -105,8 +113,6 @@ function fillOptions(ob) {
     tabla.className = "tablaBox";
         
     espSection.appendChild(tabla);
-
-    
 
     while (arrayEspacios[y]) {
 
@@ -223,7 +229,6 @@ function clearForm() {
 
 function fillLugarShc(ob) {
 
-
     var list = document.getElementById("listLugar");
     list.style.display = "block"; 
     var arrayLugar = JSON.parse(ob);
@@ -232,7 +237,7 @@ function fillLugarShc(ob) {
 
 
     while (arrayLugar[x]) {
-
+        
         var table = document.createElement("table");
 
         table.style.width = "80%";
@@ -246,7 +251,7 @@ function fillLugarShc(ob) {
         var tr4 = document.createElement("tr");
         var tr5 = document.createElement("tr");
         var tr6 = document.createElement("tr");
-        var tr7 = document.createElement("tr");
+        var tr7 = document.createElement("tr");       
         
 
         tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].num + "</td> ";
@@ -255,6 +260,7 @@ function fillLugarShc(ob) {
         tr4.innerHTML = "<td> Costo </td> <td> " + arrayLugar[x].costo + "</td> ";
         tr5.innerHTML = "<td> Capacidad </td> <td> " + arrayLugar[x].capacidad + "</td>  ";
         tr6.innerHTML = "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar.nombre + "</td>";
+
         
 
         var str = "";
@@ -303,7 +309,7 @@ function fillLugarShc(ob) {
             }
         }
 
-        
+        // EDITAR BUTTON
             var btn = document.createElement("button");
 
             btn.addEventListener("click", function (_x) {
@@ -313,26 +319,35 @@ function fillLugarShc(ob) {
 
             }(x));
             btn.innerHTML = "Editar";
+            
             table.appendChild(btn);
-        
+        // ADD IMG BUTTON
+            var btnImg= document.createElement("button");
 
-        list.appendChild(table);
+            btnImg.addEventListener("click", function (_x) {
+                return function () {
+                    editImgDialog({lugar: arrayLugar[_x].num, imagenes: arrayLugar[_x].imagenes});
+                }
+
+            }(x));
+            btnImg.innerHTML = "Imagen";
+
+            table.appendChild(btnImg);
+            list.appendChild(table);
+            
+            if (arrayLugar[x].imagenes.length>0) {
+                var img = document.createElement("img");
+                img.style.width = "20%";
+                img.src = "../img/lugares/" + arrayLugar[x].num + "/" + arrayLugar[x].imagenes[0].nombre;
+                list.appendChild(img);
+            }
+            
         x++;
     }
 }
 
-function cerrar() {
-    var ch = document.getElementsByClassName("ckB");
 
 
-    for (var x = 0; x < ch.length; x++) {
-        ch[x].checked = false;
-    }
-
-    document.getElementById('update').close();
-
-
-}
 
 function updateLugar() {
     //Llamar a diálogo
@@ -406,35 +421,109 @@ function abrir(a) {
 
 }
 
+function cerrar() {
+    var ch = document.getElementsByClassName("ckB");
 
 
-function showFilesData(){
-    var myFile = document.getElementById("files").files;
-    
-
-    for (var i = 0, f; f = myFile[i]; i++) {
-
-        var reader = new FileReader();
-        reader.readAsDataURL(f);
-
-        var decodeImg;
-
-        reader.onloadend = function () {
-            decodeImg = reader.result;
-            console.log(reader.result);
-            document.getElementById("myImg").src = reader.result;
-        }
-
-    //    var ajax = new XMLHttpRequest();
-    //    ajax.onreadystatechange = function () {
-    //        if (ajax.readyState == 4 && ajax.status == 200) {
-    //            document.getElementById("myImg").src=ajax.responseText;
-               
-    //        }
-    //    };
-
-
-    //    ajax.open("GET", "../php/test.php?f=" +decodeImg, true);
-    //    ajax.send();
+    for (var x = 0; x < ch.length; x++) {
+        ch[x].checked = false;
     }
+
+    document.getElementById('update').close();
+
+
+}
+
+
+function imgDialogOpen(lug) {
+    var dialogo = document.getElementById('addImg');
+    var imgForm = document.getElementById("imgForm");
+    
+    var input = document.createElement("input");
+    input.name = "numeroLugar";
+    input.value = lug;
+    input.style.display = "none";
+    imgForm.appendChild(input);
+    dialogo.showModal();
+}
+
+function imgDialogClose() {
+    document.getElementById("addImg").close();
+
+}
+
+
+function editImgDialog(obj) {
+    var dialogo = document.getElementById('updateImg'); 
+    dialogo.showModal();
+
+    
+    var imgArray = obj.imagenes;
+    var lugar = obj.lugar;
+    
+    var imgForm = document.getElementById("updateimgForm");
+
+    var input = document.createElement("input");
+    input.name = "numeroLugar";
+    input.value = lugar;
+    input.style.display = "none";
+
+    imgForm.appendChild(input);
+
+    var section = document.getElementById("imgList");
+
+        if (imgArray.length>0){
+            for (var a = 0; a < imgArray.length; a++) {
+
+                var img = document.createElement("img");
+                var internalSection = document.createElement("section");
+                internalSection.className = "imgArray fade";
+                
+
+                img.className = "imgDisplay";
+                img.src = "../img/lugares/" + lugar + "/" + imgArray[a].nombre;
+
+                var btnDelete = document.createElement("button");
+                btnDelete.innerHTML = "Eliminar imagen";
+                btnDelete.addEventListener("click", function (_a) {
+                    return function () {
+
+                        deleteImg(imgArray[a]);
+                    }
+                }(a));
+
+                internalSection.appendChild(img);
+                internalSection.appendChild(btnDelete);
+                section.appendChild(internalSection);
+            }
+        }
+      
+       
+        
+}
+
+function closeEditImgDialog() {
+    document.getElementById("updateImg").close();
+    var section = document.getElementById("imgList");
+    section.innerHTML = "";
+}
+
+
+function deleteImg(obj) {
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            //console.log(ajax.responseText);                      
+            if (ajax.responseText == true) {
+                console.log("hecho"); // Mostrar en dialogo
+            }
+            //Mostrar error en caso de que falle.                                    
+        }    
+    };
+    console.log(obj.num);
+    ajax.open("GET", "../php/actions/eliminarImagen.php?b=" + obj.num, true);
+    //ajax.send();
+
 }

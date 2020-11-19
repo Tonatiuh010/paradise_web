@@ -87,9 +87,7 @@
                     <a href="HTML_ADMIN_CLIENTES.html">Clientes</a>
                 </li>
 
-                <li>
-                    <button onclick="openDialog()">Open</button>
-                </li>
+                
 
             </ul>
         </section>
@@ -220,31 +218,51 @@
         <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
         <section>
             <dialog id="addImg" class="imgDialog">
-            <form method="get" action="">
+            <form method="post" id="imgForm" action="../php/actions/registrarImgLugar.php" enctype="multipart/form-data">
                 <h2>Selecciona las imagenes del lugar</h2><br />
-                <input type="file" id="files" multiple accept="image/*" class="upload" /><br /><br />
+                <input type="file" id="files" name="files[]" multiple accept="image/*" class="upload" onchange="previewImg()"/><br /><br />
                 <section class="cargar_img">
                     <section class="child"></section>
                     <section class="child"></section>
                     <section class="child"></section>
                 </section><br />
-                <button type="submit" class="botond">Subir</button>
-                <button type="button" class="botonc" onclick="cerrar()">Omitir</button>
+                <button type="submit" class="botond" >Subir</button>
+                <button type="button" class="botonc" onclick="imgDialogClose()">Omitir</button>
             </form>
             </dialog>
         </section>
-        <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
+      <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
     
+    <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
+    <section>
+        <dialog id="updateImg" class="imgDialog">
+
+            
+
+            <form method="post" id="updateimgForm" action="../php/actions/registrarImgLugar.php" enctype="multipart/form-data">
+                <h2>Añadir Imágenes</h2><br />
+                <input type="file" id="filesUpd" name="files[]" multiple accept="image/*" class="upload" onchange="previewImg()" /><br /><br />
+                
+               
+                    
+                <button type="submit" class="botond">Subir</button>
+                <button type="button" class="botonc" onclick="closeEditImgDialog()">Cancelar</button>
+            </form>
+
+            <section id="imgList"></section>
+            <br />
+
+        </dialog>
+    </section>
+    <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
+
 
     <script>
 
-        function openDialog() {
-            var dialogo = document.getElementById('addImg');
-            dialogo.showModal();
-        }
+        
 
-        function loading() {
-            
+        function loading() {        
+
             loadOptions();           
 
             showSlides(1);
@@ -254,9 +272,7 @@
 
         
 
-        function showSlides(n) {
-
-            
+        function showSlides(n) {            
             var i;
             var slideArray = document.getElementsByClassName("slides");      
                     
@@ -268,10 +284,23 @@
             slideArray[n].style.display = "block";
         }       
 
-         function cerrar()
-        {
-            document.getElementById("addImg").close();
-            
+        function previewImg() {
+            var myFiles = document.getElementById("files").files;
+
+            var imgSections = document.getElementsByClassName("child");
+
+            for (var x = 0; x < imgSections.length;x++){
+                imgSections[x].innerHTML = "";
+            }
+
+            var i = 0;
+            while ( myFiles[i] && i<3){
+                var img = document.createElement("img");
+                img.src = URL.createObjectURL(myFiles[i]);
+                img.className = "imgPreview";
+                imgSections[i].appendChild(img);
+                i++;
+            }            
         }
 
     </script>

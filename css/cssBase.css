@@ -405,6 +405,24 @@ section dialog[open] {
     padding:2%;
 }
 
+
+#imgList {
+    background-color: rgb(246, 247, 255);
+    width: 96%;
+    height: 40% auto;
+    clear:both;
+  
+    padding:2%;
+}
+
+.imgPreview {
+    width:100%;
+}
+
+.imgDisplay {
+    width:30%;
+}
+
 .child{
     /*background-color:aqua;*/
 }
