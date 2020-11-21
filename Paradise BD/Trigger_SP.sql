@@ -491,6 +491,19 @@ call sp_dias_disponibles('2020-12-21','2020-12-24',2);
 
 #call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
 
+############################################# Asignar agente a una pre_reservacion ###################################
+
+DELIMITER // 
+create procedure SP_preReservacion_asignarAgente (
+	in pr int,
+    in agente char (7)
+)
+begin 
+	update pre_reservacion set FK_Agente=agente where prNum=pr;
+
+end //
+DELIMITER ;
+############################################# Asignar agente a una pre_reservacion ###################################
 alter table pre_reservacion
 auto_increment=0;
 select * from pre_reservacion;

@@ -45,3 +45,6 @@ alter table pre_reservacion
 add constraint CK_pre_res_status check (prStatus='Proceso' or prStatus='Rechazada' or prStatus='Autorizada' or prStatus='Finalizada');
 
 select * from pre_reservacion;
+
+
+

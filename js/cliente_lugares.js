@@ -105,7 +105,7 @@ function pruebaCarrusel(ls) {
                     bt.addEventListener('click', function (_y) {
                         return function () {
                             location.href = '../php/actions/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
-                            console.log(_y);
+                            
                         }
                     }(y));
                     bt.innerHTML = 'Consultar Lugar';
@@ -266,22 +266,6 @@ function cargarOPE() {
 
 }
 
-//function cargarOPTL()
-//{
-
-//    var ajax = new XMLHttpRequest();
-//    caso = 2;
-
-//    ajax.onreadystatechange = function () {
-//        if (ajax.status == 200 && ajax.readyState == 4) {
-//            fillDataTl(ajax.responseText);
-//        }
-//    };
-
-//    ajax.open("get", "../php/filtrosLug.php?caso=" + caso, true);
-//    ajax.send();
-
-//}
 
 function fillData(ob) {
     var y = 0;

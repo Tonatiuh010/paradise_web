@@ -101,7 +101,7 @@ select tgNum as num, tgTelefono as telefono, FK_agente as agente from telef_agen
 /*insert pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,prNotas,FK_Lugar,FK_cliente) values
 ('2020-11-07 15:22:10','2020-12-20','2020-12-23','Proceso','Aun sin autorizar',4,10);*/
 
-create view vw_reservacion_completa as
+alter view vw_reservacion_completa as
 select prNum as num, 
 prFechaRegistro as registro, 
 prFechaInic as inicio, 
@@ -122,6 +122,8 @@ resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total
 from pre_reservacion right join reservacion
 on prNum=resNumPR
 where resFecConfirmacion is null or resTotDias is null or resTotPagar is null;
+
+select * from vw_reservacion_completa where estado='Proceso' and agente is null;
 
 #select * from vw_reservacion_completa
 #where cliente=10;

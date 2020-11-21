@@ -147,6 +147,74 @@
                 return json_encode($list);
         }        
 
+
+        public function getAllReservacionesInProcess(){
+
+            $sql="select * from vw_reservacion_completa where estado='Proceso' and agente is null;";
+
+                $conn=mysqlConnection::getConnection();
+
+                $command=$conn->prepare($sql);                                 
+
+                $command->bind_result($num,             //Generamos nuevas variables que nos
+                                    $registro,                //almacenen los resultados obtenidos 
+                                    $inicio,               //desde la base de datos
+                                    $termino,               //NOTA: Las variables deben ir acomodadas
+                                    $estado,            //según el orden en el que estan en la BD
+                                    $notas,                  //en este caso, el orden de los campos en la vista o consulta
+                                    $lugar,
+                                    $cliente,
+                                    $agente,
+                                    $confirmacion,        
+                                    $dias,
+                                    $total);
+
+
+                $command->execute();
+
+                $list=array();
+
+                while ($command->fetch()){
+                    
+                    $this->num=$num;                            
+                $this->registro=$registro;
+                $this->inicio=$inicio;
+                $this->termino=$termino;
+                $this->status=$estado; 
+                $this->notas=$notas;
+
+                if($lugar==null){
+                    $this->lugar=new lugar();
+                }else{
+                    $this->lugar=new lugar($lugar);
+                }
+                
+                if($cliente==null){
+                    $this->cliente=new cliente();
+                }else{
+                    $this->cliente=new cliente($cliente);
+                }
+                
+                if($agente==null){
+                    $this->agente=new agente();
+                }else{
+                    $this->agente=new agente($agente);
+                }
+                
+                parent:: setNum($num);
+                parent:: setConfirmada($confirmacion);
+                parent:: setDias($dias);
+                parent:: setTotal($total);
+
+
+                array_push($list,json_decode(self::getJsonObject()));                    
+                }
+
+              mysqli_stmt_close($command);
+              $conn->close(); 
+              return json_encode($list);
+        }
+
         /// En proceso, Cuack!
         public function getAllReservacionesByAgente($n){
                 $sql="select * from vw_reservacion_completa where agente=? estado='Proceso';";
@@ -201,6 +269,11 @@
 
 
 
+        public function updateAgentePR(){
+            
+            
+        }
+
         public function insertReservacion($i,$f,$l,$c){
             //$conn=mysqlConnection::getConnection();
 
@@ -241,6 +314,9 @@
                 }
             
         }
+
+
+        
 
         public function getJsonObject(){
             return json_encode(

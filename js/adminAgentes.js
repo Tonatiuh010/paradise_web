@@ -5,9 +5,6 @@
 
     var genero = document.getElementById("genreBox");
 
-   
-
-
         agenteOb = {
             nombre: document.getElementById("txtNombre").value,
             apPat: document.getElementById("txtApPat").value,

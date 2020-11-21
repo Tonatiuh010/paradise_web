@@ -28,18 +28,33 @@ function fillPictures(obj) {
         internalSection.style.width="100%";
         internalSection.style.height = "100%";
         
+        var parag = document.createElement("p");
+        internalSection.appendChild(parag);
+
         var imgArray = arrayLugar[i].imagenes;
         
         if (imgArray.length >= 3) {
 
             for (var a = 0; a < 3; a++) {               
                 var img = document.createElement("img");
-                img.className = "imgf";
+               
+                parag.innerHTML = arrayLugar[i].nombre;
 
-                img.src = "./img/lugares/"+arrayLugar[i].num+"/"+imgArray[a].nombre;
+                img.className = "imgf";
+                img.src = "./img/lugares/" + arrayLugar[i].num + "/" + imgArray[a].nombre;
+                                
                 internalSection.appendChild(img);
 
+                img.addEventListener('click', function (_i) {
+                    return function () {
+                        location.href = './php/actions/PHP_MLUGAR.php?id=' + arrayLugar[_i].num;
+                    }
+                }(i));
             }
+
+            
+            
+
             section.appendChild(internalSection);
         }
     }

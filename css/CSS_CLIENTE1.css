@@ -245,7 +245,7 @@ main {
 
 .imgf {
     width: 27.3%;
-
+    cursor: pointer;
     height: 72%;
     opacity: 1;
 }
@@ -368,5 +368,22 @@ button{
 }
 
 .next {
+    right: 0;
+}
+
+
+
+.nextLit, .prevLit {
+    position: absolute;    
+    width: 3%;
+    margin-top:8%;
+    cursor: pointer;
+}
+
+.prevLit{
+    left:0;
+}
+
+.nextLit {
     right: 0;
 }
