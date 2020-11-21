@@ -23,43 +23,46 @@ function fillPictures(obj) {
    
     
 
-    for (var i = 0; i < 10;i++){
-        var internalSection = document.createElement("section");
-        internalSection.className = "imgPicture fade";// Slide
-        internalSection.style.width="100%";
-        internalSection.style.height = "100%";
-        
-        var parag = document.createElement("p");
-        internalSection.appendChild(parag);
+    for (var i = 0; i < 10; i++) {
 
-        var imgArray = arrayLugar[i].imagenes;
-        
-        if (imgArray.length >= 3) {
 
-            for (var a = 0; a < 3; a++) {               
-                var img = document.createElement("img");
+       if (arrayLugar[i]){
+            var internalSection = document.createElement("section");
+            internalSection.className = "imgPicture fade";// Slide
+            internalSection.style.width="100%";
+            internalSection.style.height = "100%";
+        
+            var parag = document.createElement("p");
+            internalSection.appendChild(parag);
+
+            var imgArray = arrayLugar[i].imagenes;
+        
+            if (imgArray.length >= 3) {
+
+                for (var a = 0; a < 3; a++) {               
+                    var img = document.createElement("img");
                
-                parag.innerHTML = arrayLugar[i].nombre;
+                    parag.innerHTML = arrayLugar[i].nombre;
 
-                img.className = "imgf";
-                img.src = "./img/lugares/" + arrayLugar[i].num + "/" + imgArray[a].nombre;
+                    img.className = "imgf";
+                    img.src = "./img/lugares/" + arrayLugar[i].num + "/" + imgArray[a].nombre;
                                 
-                internalSection.appendChild(img);
+                    internalSection.appendChild(img);
 
-                img.addEventListener('click', function (_i) {
-                    return function () {
-                        location.href = './php/actions/PHP_MLUGAR.php?id=' + arrayLugar[_i].num;
-                    }
-                }(i));
+                    img.addEventListener('click', function (_i) {
+                        return function () {
+                            location.href = './php/actions/PHP_MLUGAR.php?id=' + arrayLugar[_i].num;
+                        }
+                    }(i));
+                }
+
+            
+            
+
+                section.appendChild(internalSection);
             }
-
-            
-            
-
-            section.appendChild(internalSection);
         }
     }
-
     showPictures(0);
 }
 

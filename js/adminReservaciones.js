@@ -202,8 +202,6 @@ function fillAgenteShc(ob) {
 
 function setAgente(matricula, numPR) {
 
-    console.log(numPR);
-
     var ajax = new XMLHttpRequest();
 
     ajax.onreadystatechange = function () {
@@ -211,7 +209,7 @@ function setAgente(matricula, numPR) {
             //console.log(ajax.responseText);
             var res=JSON.parse(ajax.responseText);
             if (res.res==false){
-                console.log("error");
+                console.log(res.error);
             } else {
                 location.reload();
             }
