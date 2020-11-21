@@ -101,29 +101,53 @@ select tgNum as num, tgTelefono as telefono, FK_agente as agente from telef_agen
 /*insert pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,prNotas,FK_Lugar,FK_cliente) values
 ('2020-11-07 15:22:10','2020-12-20','2020-12-23','Proceso','Aun sin autorizar',4,10);*/
 
-create view vw_reservacion_completa as
-select prNum as num, 
-prFechaRegistro as registro, 
-prFechaInic as inicio, 
-prFechaFin as termino,
+
+alter view vw_reservacion_completa as
+select prNum as num,
+date_format(prFechaRegistro, '%d-%m-%Y  %h:%i') as fechas,
+#prFechaRegistro as registro, 
+date_format(prFechaInic, '%d-%m-%Y') as inicio,
+date_format(prFechaFin, '%d-%m-%Y') as termino,
 prStatus as estado, ##'Proceso' -- 'Rechazada' -- 'Autorizada' -- 'Finalizada'
 prNotas as notas, 
 FK_Lugar as lugar, 
 FK_Cliente as cliente, 
 FK_Agente as agente,
-resFecConfirmacion as confirmacion, 
+date_format(resFecConfirmacion, '%d-%m-%Y  %h:%i') as confirmacion,
 resTotDias as dias, resTotPagar as total 
 from pre_reservacion left join reservacion
 on prNum=resNumPR
 union all
-select prNum as num, prFechaRegistro as registro, prFechaInic as inicio, prFechaFin as termino,
-prStatus as estado, prNotas as notas, FK_Lugar as lugar, FK_Cliente as cliente, FK_Agente as agente,
-resFecConfirmacion as confirmacion, resTotDias as dias, resTotPagar as total 
+select prNum as num, 
+date_format(prFechaRegistro, '%d-%m-%Y  %h:%i') as registro,
+#prFechaRegistro as registro, 
+date_format(prFechaInic, '%d-%m-%Y') as inicio,
+date_format(prFechaFin, '%d-%m-%Y') as termino,
+prStatus as estado, 
+prNotas as notas, 
+FK_Lugar as lugar, 
+FK_Cliente as cliente, 
+FK_Agente as agente,
+date_format(resFecConfirmacion, '%d-%m-%Y  %h:%i') as confirmacion,
+resTotDias as dias, 
+resTotPagar as total 
 from pre_reservacion right join reservacion
 on prNum=resNumPR
 where resFecConfirmacion is null or resTotDias is null or resTotPagar is null;
 
-#select * from vw_reservacion_completa
+select * from vw_reservacion_completa
+where cliente=10;
+
+select * from lugar;
+
+update pre_reservacion
+set prNotas='Evento Finalizado'
+where prNum =1;
+
+update pre_reservacion
+set prStatus='Rechazada'
+where prNum =13;
+
 #where cliente=10;
 #select * from pre_reservacion;
 

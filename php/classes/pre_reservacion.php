@@ -147,7 +147,7 @@
                 return json_encode($list);
         }        
 
-        /// En proceso, Cuack!
+        /// En proceso, Cuack!  :v :D
         public function getAllReservacionesByAgente($n){
                 $sql="select * from vw_reservacion_completa where agente=? estado='Proceso';";
                 $conn=mysqlConnection::getConnection();

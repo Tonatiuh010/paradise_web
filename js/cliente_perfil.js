@@ -240,7 +240,7 @@ function cerrar() {
 }
 
 //---------------------------- H I S T O R I A L   D E    R E S E R V A C I O N E S -------------------------------------
-
+var slideIndex = 1;
 
 function usarHistorial() {
     //document.getElementById('reservacion').style.display = "None";
@@ -253,7 +253,7 @@ function usarHistorial() {
 
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            //fillHistorial(ajax.responseText);
+            fillHistorial(ajax.responseText);
             console.log(ajax.responseText);
         }
     };
@@ -263,13 +263,173 @@ function usarHistorial() {
     ajax.send();
 }
 
-//function fillHistorial(ht) {
-//    var y=0;
-//    var arrayHistorial = JSON.parse(ob);
+function fillHistorial(ht) {
+    var y=0;
+    var arrayHistorial = JSON.parse(ht);
+    var historial = document.getElementById('historial');
+
+    while (arrayHistorial[y]) {
+
+        var slide = document.createElement('section');
+        slide.className = "slides fade";
+
+        var pat = document.createElement('Section');
+        pat.setAttribute("class", "pat");
+
+        //------------------ C H I L D  1 -----------------------
+        var child1 = document.createElement('Section');
+        child1.setAttribute("class", "ch1");
+
+        var lb1 = document.createElement("Section");
+        lb1.innerHTML = 'Reservación';
+
+        var lb2 = document.createElement("Section");
+        lb2.innerHTML = 'Lugar: ' + arrayHistorial[y].lugar.nombre;
+
+        var lb4 = document.createElement("Section");
+        lb4.innerHTML = 'Fechas solicitadas: </br>' +
+                        arrayHistorial[y].inicio + '</br>' +
+                        arrayHistorial[y].termino;
+
+        var lb5 = document.createElement("Section");
+        lb5.innerHTML = 'Estado: ' + arrayHistorial[y].status;
+
+        if (arrayHistorial[y].reservacion.total != null) {
+            var lb5_1 = document.createElement("Section");
+            lb5_1.innerHTML = 'Total: $' + arrayHistorial[y].reservacion.total;
+        } else {
+            var lb5_1 = document.createElement("Section");
+            lb5_1.innerHTML = 'Total: ---';
+        }
+        
+
+        child1.appendChild(lb1);
+        child1.appendChild(lb2);
+        //child1.appendChild(lb3);
+        child1.appendChild(lb4);
+        child1.appendChild(lb5);
+        child1.appendChild(lb5_1);
+        
+        //-------------------------------------------------------
+
+        //------------------ C H I L D  2 -----------------------
+        var child2 = document.createElement('Section');
+        child2.setAttribute("class", "ch2");
+
+        var lb3 = document.createElement("Section");
+        lb3.innerHTML = 'Solicitud: ';
+        var lb3_1 = document.createElement("Section");
+        lb3_1.innerHTML = arrayHistorial[y].registro;
+
+        var lb6 = document.createElement("Section");
+        lb6.innerHTML = 'Cliente: ';
+        var lb6_1 = document.createElement("Section");
+        lb6_1.innerHTML = arrayHistorial[y].cliente.nombre + ' '
+                        + arrayHistorial[y].cliente.paterno + ' '
+                        + arrayHistorial[y].cliente.materno;
+
+        var lb7 = document.createElement("Section");
+        lb7.innerHTML = 'Agente: ';
+        var lb7_1 = document.createElement("Section");
+        lb7_1.innerHTML = arrayHistorial[y].agente.nombre + ' '
+                        + arrayHistorial[y].agente.paterno + ' '
+                        + arrayHistorial[y].agente.materno;
+
+        var lb8 = document.createElement("Section");
+        lb8.innerHTML = 'Telefono del Agente: ';
+        var lb8_1 = document.createElement("Section");
+        lb8_1.innerHTML = arrayHistorial[y].agente.telefono;
+
+        var lb9 = document.createElement("Section");
+        lb9.innerHTML = 'Correo del Agente: ';
+        var lb9_1 = document.createElement("Section");
+        lb9_1.innerHTML = arrayHistorial[y].agente.usuario.correo;
+
+        var lb10 = document.createElement("Section");
+        lb10.innerHTML = 'Notas: ';
+        var lb10_1 = document.createElement("Section");
+        lb10_1.innerHTML = arrayHistorial[y].notas;
+
+        child2.appendChild(lb3);
+        child2.appendChild(lb3_1);
+        child2.appendChild(lb6);
+        child2.appendChild(lb6_1);
+        child2.appendChild(lb7);
+        child2.appendChild(lb7_1);
+        child2.appendChild(lb8);
+        child2.appendChild(lb8_1);
+        child2.appendChild(lb9);
+        child2.appendChild(lb9_1);
+        child2.appendChild(lb10);
+        child2.appendChild(lb10_1);
+
+        //-------------------------------------------------------
+
+        //------------------ C H I L D  3 -----------------------
+        var child3 = document.createElement('Section');
+        child3.setAttribute("class", "ch3");
+
+        child1.appendChild(child3);
+        //-------------------------------------------------------
+
+        
+        pat.appendChild(child1);
+        pat.appendChild(child2);
+
+        var right_arrow = document.createElement('img');
+        right_arrow.setAttribute("class", "next");
+        right_arrow.src = "../img/next_page.png";
+        right_arrow.addEventListener('click', function () { plusSlides(1); });
+
+        var left_arrow = document.createElement('img');
+        left_arrow.setAttribute("class", "prev");
+        left_arrow.src = "../img/prev_page.png";
+        left_arrow.addEventListener('click', function () { plusSlides(-1); });
+
+        var esp = document.createElement("Section");
+        esp.setAttribute("class", "espacio");
+
+        slide.appendChild(pat);
+        slide.appendChild(esp);
+        slide.appendChild(left_arrow);
+        slide.appendChild(right_arrow);
+
+        historial.appendChild(slide);
+
+        y++;
+
+    }
+
+    showSlides(slideIndex);
+
+}
 
 
-//}
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
 
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("slides");
+    //console.log(document.getElementsByClassName('slide'));
+
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+
+
+}
 
 function buscarRes() {
     document.getElementById("listaRes").innerHTML = "";
