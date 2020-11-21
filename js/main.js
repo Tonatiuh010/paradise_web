@@ -17,6 +17,7 @@
 function fillPictures(obj) {
 
     var arrayLugar = JSON.parse(obj);
+    console.log(arrayLugar);
 
     var section = document.getElementById("pictures_container");
    
