@@ -237,6 +237,7 @@ function fillLugarShc(ob) {
 
     var x = 0;
 
+    
 
     while (arrayLugar[x]) {
         

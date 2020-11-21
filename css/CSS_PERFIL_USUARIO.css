@@ -305,16 +305,7 @@ section h3
 	font-size:120%;
 }
 
-.historial
-{
-    width:100%;
-    height:100%;
-    float:right;
-    background-color:aqua;
-    border-top-right-radius: 4%;
-    border-bottom-right-radius: 4%;
-    background-color:white;
-}
+
 
 .configuracion
 {
@@ -356,7 +347,7 @@ dialog[open] {
 }
 
 
-/*--------------------------------- G R I D -------------------------------------------------------*/
+/*--------------------------------- G R I D   C O N F I G U R A C I O N -------------------------------------------------------*/
 
 .complete_section {
     width: 70%;
@@ -447,4 +438,132 @@ dialog[open] {
     width:30%;
     height:5%;
     float:right;
+}
+
+
+
+/*--------------------------------- G R I D   H I S T O R I A L -------------------------------------------------------*/
+
+.historial {
+    width: 100%;
+    height: 100%;
+    float: right;
+    background-color: aqua;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: white;
+    /*grid-gap: 1%;*/
+}
+
+/*.lugares {
+    max-width: 70%;*/
+    /*height: 100%;*/
+    /*float: right;
+    background-color: white;*/
+    /*clear: both;*/
+    /*position: relative;*/
+    /*background-color: aqua;*/
+/*}*/
+
+.slides {
+    width: 90%;
+    height: 90%;
+    background-size: cover;
+    clear: both;
+    display: none;
+    padding-top: 2%;
+    padding-right: 5%;
+    padding-left: 5%;
+    font-family: Georgia;
+    font-size: medium;
+}
+
+.pat {
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /*grid-template-rows: 1fr;*/
+    background-color: aqua;
+    grid-gap: 6px;
+    font-family: Georgia;
+    font-size: medium;
+}
+
+.ch1 {
+    display: block;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr 1fr 1fr 4fr;
+    background-color: aquamarine;
+    font-family: Georgia;
+    font-size: medium;
+}
+
+.ch2 {
+    display: block;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 4fr;
+    background-color: cornflowerblue;
+    font-family: Georgia;
+    font-size: medium;
+}
+
+.ch3{
+    background-color:lightslategray;
+}
+
+.espacio {
+    height: 5%;
+    width: 100%;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.next, .prev {
+    /*position: absolute;*/
+    /*top: 0%;
+    width: 3%;
+    height: 100%;*/
+    top: 0%;
+    cursor: pointer;
+    width: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2%;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;
 }
