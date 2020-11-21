@@ -1,13 +1,15 @@
 ﻿<html>
 <head> 
     <script src="./js/session.js"></script>
+    <script src="./js/main.js"></script>
 
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/CSS_CLIENTE1.css" type="text/css">
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Paradise Prueba 1</title>
+    <title>Paradise</title>
+
 </head>
-<body onload="sesion();">
+<body onload="loading()">
     <!--location.reload()   esta función recarga la pagina-->
     <nav>
         <img src="img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
@@ -103,15 +105,21 @@
             <a href="https://www.bodas.com.mx/"><img src="img/index/publicidad1.jpg" alt="bodas.mx" class="imgp" style="float:left"/></a>
             <a href="https://www.booking.com/"><img src="img/index/publicidad2.jpg" alt="booking.com" class="imgp" style="float:right"/></a>
         </aside>
+
         <br /><br /><br />
         <section class="fotografias" id="pictures_container">
-            <section>
-                <!--<br />
+           
+            <!--
+            <br />
             <p> T O S C A N O  &nbsp;&nbsp;&nbsp;&nbsp;  P I C T U R E S </p>
-            <img src="img/index/anuncio4.jpg" alt="bodas.mx" class="imgf" style="float:left" />
-            <img src="img/index/anuncio5.jpg" alt="bodas.mx" class="imgf" style="float:left" />
-            <img src="img/index/anuncio6.jpeg" alt="bodas.mx" class="imgf" style="float:right" />-->
-            </section>
+            <img src="img/index/anuncio4.jpg" alt="bodas.mx" class="imgf"  />
+            <img src="img/index/anuncio5.jpg" alt="bodas.mx" class="imgf"/>
+            <img src="img/index/anuncio6.jpeg" alt="bodas.mx" class="imgf"  />
+                -->
+
+            <button   onclick="plusPictures(-1)"> prev</button>
+            <button  onclick="plusPictures(1)">nexto</button>
+           
         </section>
         
         <!--<section class="submenu"></section>-->
@@ -124,6 +132,9 @@
     </main>
 
     <script>
+
+        
+
         function sesion() {
 
             var ajax = new XMLHttpRequest();
@@ -150,7 +161,10 @@
     <script>        //Carrusel
 
         function loading() {
-            loadPictures(); 
+            sesion();
+            loadPictures();
+           
+            
         }
 
         var slideIndex = 1;
