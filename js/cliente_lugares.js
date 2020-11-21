@@ -1,4 +1,8 @@
 // JavaScript source code
+
+var slideIndex = 1;
+
+
 function lugares() {
 
     var ajax = new XMLHttpRequest();
@@ -8,13 +12,168 @@ function lugares() {
     ajax.onreadystatechange = function () {
         if (ajax.status == 200 && ajax.readyState == 4) {
             //document.getElementById('lugares').innerHTML = ajax.responseText;
-            lugaresList(ajax.responseText);
+            //lugaresList(ajax.responseText);
+            pruebaCarrusel(ajax.responseText);
+            //console.log(ajax.responseText);
         }
     }
 
     ajax.open("GET", "../php/actions/show_search_lugares.php?lista=" + lista, true);
     ajax.send();
 }
+
+function pruebaCarrusel(ls) {
+    //var y = 0;
+    //var inPanel = 0;
+    var arrayLugares = JSON.parse(ls);
+    //console.log(arrayLugares);
+    var lugares = document.getElementById("lugares");
+
+    var arreglos = arrayLugares.length;
+    var paneles = arreglos / 5;
+    paneles = Math.ceil(paneles);
+
+    var right_arrow = document.createElement('img');
+    right_arrow.setAttribute("class", "next");
+    right_arrow.setAttribute("src", "../img/left.png");
+    right_arrow.addEventListener('click', function () { plusSlides(1); });
+
+    var left_arrow = document.createElement('img');
+    left_arrow.setAttribute("class", "prev");
+    left_arrow.setAttribute("src", "../img/right.png");
+    left_arrow.addEventListener('click', function () { plusSlides(-1); });
+
+    var panel = document.createElement('section');
+    panel.className = "slide";
+
+
+    //var right_arrow = document.createElement('section');
+    //right_arrow.setAttribute('class', 'colores');
+    //var left_arrow = document.createElement('section');
+    //left_arrow.setAttribute('class', 'colores');
+
+
+        var y = 0;
+
+        for (x = 0; x < paneles; x++) {
+
+            var panel = document.createElement('section');
+            panel.className = "slide";
+
+            lugares.appendChild(panel);
+
+            for (a = 0; a < 5; a++) {
+
+                var lugAg = document.createElement('section');
+                lugAg.setAttribute("class", "complete_section");
+
+                var lb5 = document.createElement("Section");
+                lb5.setAttribute("class", "espacio");
+
+                panel.appendChild(lb5);
+
+                if (arrayLugares[y]) {
+
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'lugImg');
+                    img.setAttribute('src', '../img/index/anuncio6.jpeg');
+
+                    var lugSec = document.createElement("section");
+                    lugSec.setAttribute("class", "lista")
+
+                    var lb6 = document.createElement("Section");
+                    lb6.setAttribute("class", "espacio");
+
+                    var lb1 = document.createElement("Section");
+                    lb1.setAttribute("class", "nombreLug");
+                    lb1.innerHTML = arrayLugares[y].nombre;
+
+                    var lb2 = document.createElement("Section");
+                    lb2.setAttribute("class", "description");
+                    lb2.innerHTML = arrayLugares[y].desc;
+
+                    var lb3 = document.createElement("Section");
+                    lb3.setAttribute("class", "costo");
+                    lb3.innerHTML = 'A partir de $' + arrayLugares[y].costo;
+
+                    var lb4 = document.createElement("Section");
+                    lb4.setAttribute("class", "capacidad");
+                    lb4.innerHTML = 'Apropiado para ' + arrayLugares[y].capacidad + ' personas';
+
+                    var bt = document.createElement("button");
+                    bt.setAttribute("class", "lugBoton");
+                    bt.addEventListener('click', function (_y) {
+                        return function () {
+                            location.href = '../php/actions/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
+                            console.log(_y);
+                        }
+                    }(y));
+                    bt.innerHTML = 'Consultar Lugar';
+
+                    var br = document.createElement('br');
+
+                    panel.appendChild(lugAg);
+
+                    lugAg.appendChild(lugSec);
+                    lugAg.appendChild(img);
+                    lugSec.appendChild(br);
+                    lugSec.appendChild(lb1);
+                    lugSec.appendChild(lb2);
+                    lugSec.appendChild(lb3);
+                    lugSec.appendChild(lb4);
+                    lugSec.appendChild(bt);
+
+                    lugSec.appendChild(lb6);
+
+                    y++;
+                }
+            }
+        }
+    
+
+    showSlides(slideIndex);
+    //showSlides(0);
+
+}
+
+//showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("slide");
+    console.log(document.getElementsByClassName('slide'));
+
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function lugaresList(ls) {
     var y = 0;
