@@ -147,15 +147,6 @@ main {
     background-color: hsl(0, 0%, 92%);
 }
 
-.lugares
-{
-    width: 70%;
-    /*height: 100%;*/
-    float:right;
-    background-color:white;
-    /*background-color: var(--pcolor1);*/
-}
-
 .lugLista {
     width: 96%;
     height: 100%;
@@ -164,7 +155,7 @@ main {
 }
 
 .lista {
-    width: 70%;
+    width: 63%;
     float: right;
     display: inline-block;
     background-color: var(--pcolor1);
@@ -215,10 +206,11 @@ main {
 }
 
 .complete_section {
-    width: 95%;
+    width: 90%;
     display: inline-block;
     background-color: var(--pcolor1);
-    border-radius: 4%;
+    border-radius: 10px;
+    clear:both;
 }
 
 .lugBoton {
@@ -252,7 +244,7 @@ main {
 
 
 .lugImg {
-    width: 28%;
+    width: 35%;
     float:left;
     padding-top:2%;
     padding-left:2%;
@@ -312,5 +304,72 @@ h5 {
     border:none;
 }
 
+/*---------------------------------- CARRUSEL PARA LA LISTA DE LUGARES --------------------------------------------*/
+
+.lugares {
+    max-width: 70%;
+    /*height: 100%;*/
+    float: right;
+    background-color: white;
+    /*clear: both;*/
+    position: relative;
+    /*background-color: aqua;*/
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    clear: both;
+    display: none;
+    /*padding-top: 3%;
+    padding-bottom: 3%;*/
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
 
 
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.next, .prev {
+    position: absolute;
+    top: 0%;
+    width: 3%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.colores{
+    background-color:pink;
+}
