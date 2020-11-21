@@ -273,14 +273,24 @@
 
 
         public function updateAgentePR($matricula,$numPr){
-            $sql="call SP_preReservacion_asignarAgente (?,?);";
+             $sql="call SP_preReservacion_asignarAgente (?,?);";
             
              $conn=mysqlConnection::getConnection();
 
              $command=$conn->prepare($sql);
              $command->bind_param('is',$numPr,$matricula);
+             
+             $command->execute();
 
+             if ($command->error!=""){
+                return json_encode(array("res"=>false, "error"=>$command->error));
+                die;
+             }
 
+              mysqli_stmt_close($command);
+              $conn->close();
+
+             return json_encode(array("res"=>true, "response"=>"Hecho"));
         }
 
         public function insertReservacion($i,$f,$l,$c){
