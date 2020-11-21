@@ -186,6 +186,12 @@ function verifyForm() {
         document.getElementById('mensaje').innerHTML = 'Favor de colocar su correo electrónico sin espacios';
     }
 
+    if (dato5.length==10) {
+        confirmar = false;
+        document.getElementById('mensaje').innerHTML = '';
+        document.getElementById('mensaje').innerHTML = 'Número de caracteres incorrecto para el número de telefono';
+    }
+
     if (dato4 == '') {
         confirmar = false;
         document.getElementById('mensaje').innerHTML = '';
@@ -196,13 +202,13 @@ function verifyForm() {
     {
         confirmar = false;
         document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de llenar el campo apellido paterno (sin ingresar números)';
+        document.getElementById('mensaje').innerHTML = 'Favor de llenar correctamente el campo apellido paterno';
     }
 
     if (dato1 == '' || dato1.length < 2 || isNaN(dato1) == false) {
         confirmar = false;
         document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de llenar el campo nombre (sin ingresar números)';
+        document.getElementById('mensaje').innerHTML = 'Favor de llenar correctamente el campo nombre';
     }
 
 
