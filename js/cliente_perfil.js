@@ -254,7 +254,7 @@ function usarHistorial() {
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
             fillHistorial(ajax.responseText);
-            console.log(ajax.responseText);
+            //console.log(ajax.responseText);
         }
     };
 
@@ -284,7 +284,8 @@ function fillHistorial(ht) {
         lb1.innerHTML = 'Reservación';
 
         var lb2 = document.createElement("Section");
-        lb2.innerHTML = 'Lugar: ' + arrayHistorial[y].lugar.nombre;
+        lb2.innerHTML = arrayHistorial[y].lugar.nombre;
+        //lb2.setAttribute('class', 'centrar');
 
         var lb4 = document.createElement("Section");
         lb4.innerHTML = 'Fechas solicitadas: </br>' +
@@ -315,40 +316,53 @@ function fillHistorial(ht) {
         //------------------ C H I L D  2 -----------------------
         var child2 = document.createElement('Section');
         child2.setAttribute("class", "ch2");
+        //child2.setAttribute('class', 'labelL');
 
         var lb3 = document.createElement("Section");
         lb3.innerHTML = 'Solicitud: ';
+        lb3.setAttribute('class', 'labelL');
         var lb3_1 = document.createElement("Section");
+        lb3_1.setAttribute('class', 'labelR');
         lb3_1.innerHTML = arrayHistorial[y].registro;
 
         var lb6 = document.createElement("Section");
         lb6.innerHTML = 'Cliente: ';
+        lb6.setAttribute('class', 'labelL');
         var lb6_1 = document.createElement("Section");
         lb6_1.innerHTML = arrayHistorial[y].cliente.nombre + ' '
                         + arrayHistorial[y].cliente.paterno + ' '
                         + arrayHistorial[y].cliente.materno;
+        lb6_1.setAttribute('class', 'labelR');
 
         var lb7 = document.createElement("Section");
         lb7.innerHTML = 'Agente: ';
+        lb7.setAttribute('class', 'labelL');
         var lb7_1 = document.createElement("Section");
         lb7_1.innerHTML = arrayHistorial[y].agente.nombre + ' '
                         + arrayHistorial[y].agente.paterno + ' '
                         + arrayHistorial[y].agente.materno;
+        lb7_1.setAttribute('class', 'labelR');
 
         var lb8 = document.createElement("Section");
         lb8.innerHTML = 'Telefono del Agente: ';
+        lb8.setAttribute('class', 'labelL');
         var lb8_1 = document.createElement("Section");
         lb8_1.innerHTML = arrayHistorial[y].agente.telefono;
+        lb8_1.setAttribute('class', 'labelR');
 
         var lb9 = document.createElement("Section");
         lb9.innerHTML = 'Correo del Agente: ';
+        lb9.setAttribute('class', 'labelL');
         var lb9_1 = document.createElement("Section");
         lb9_1.innerHTML = arrayHistorial[y].agente.usuario.correo;
+        lb9_1.setAttribute('class', 'labelR');
 
         var lb10 = document.createElement("Section");
         lb10.innerHTML = 'Notas: ';
+        lb10.setAttribute('class', 'labelL');
         var lb10_1 = document.createElement("Section");
         lb10_1.innerHTML = arrayHistorial[y].notas;
+        lb10_1.setAttribute('class', 'labelR');
 
         child2.appendChild(lb3);
         child2.appendChild(lb3_1);
@@ -368,6 +382,20 @@ function fillHistorial(ht) {
         //------------------ C H I L D  3 -----------------------
         var child3 = document.createElement('Section');
         child3.setAttribute("class", "ch3");
+
+        imagenes=arrayHistorial[y].lugar.imagenes.length;
+
+        if (imagenes > 0) {
+            var imglb = document.createElement('Img');
+            imglb.setAttribute('class', 'ImgCH');
+            imglb.setAttribute('src', '../img/lugares/' + arrayHistorial[y].lugar.num + "/" + arrayHistorial[y].lugar.imagenes[0].nombre);
+        } else {
+            var imglb = document.createElement('img');
+            imglb.setAttribute('class', 'ImgCH');
+            imglb.src = '../img/index/anuncio5.jpg';
+        }
+
+        child3.appendChild(imglb);
 
         child1.appendChild(child3);
         //-------------------------------------------------------

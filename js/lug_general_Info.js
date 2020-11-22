@@ -237,3 +237,121 @@ function verifyForm() {
     }
 
 }
+
+
+//------------------------------------ C A R R U S E L ------------------------------------------------------------------
+
+var slideIndex = 1;
+
+function extract_img() {
+    var ajax = new XMLHttpRequest();
+    var lugar = lugID;
+
+    ajax.onreadystatechange = function () {
+        if (ajax.status == 200 && ajax.readyState == 4) {
+            //document.getElementById('data').innerHTML = ajax.responseText;
+            console.log(JSON.parse(ajax.responseText));
+            fill_img(ajax.responseText);
+        }
+    };
+
+    ajax.open("get", "extract_img.php?lug=" + lugar, true);
+    ajax.send();
+}
+
+function fill_img(img) {
+    var arrayImg = JSON.parse(img);
+    var imgsec = document.getElementById('imglug');
+
+    var arreglos = arrayImg.length;
+    var paneles = arreglos / 3;
+    paneles = Math.ceil(paneles);
+
+    y = 0;
+
+    if (arreglos > 0) {
+
+        for (x = 0; x < paneles; x++) {
+
+            var panel = document.createElement('section');
+            panel.className = "slide fade";
+
+            var right_arrow = document.createElement('img');
+            right_arrow.setAttribute("class", "next");
+            right_arrow.src = "../../img/right.png";
+            right_arrow.addEventListener('click', function () { plusSlides(1); });
+
+            var left_arrow = document.createElement('img');
+            left_arrow.setAttribute("class", "prev");
+            left_arrow.src = "../../img/left.png";
+            left_arrow.addEventListener('click', function () { plusSlides(-1); });
+
+            var imagenes = document.createElement('section');
+            imagenes.setAttribute("class", "imagenes");
+
+            panel.appendChild(imagenes);
+            if (arreglos > 3) {
+                imagenes.appendChild(right_arrow);
+                imagenes.appendChild(left_arrow);
+            }
+            
+            imgsec.appendChild(panel);
+
+            for (a = 0; a < 3; a++) {
+
+                
+
+                if (arrayImg[y]) {
+
+                    var imgbox = document.createElement('section');
+                    imgbox.setAttribute('class', 'ch1');
+                    var img = document.createElement("img");
+                    img.setAttribute('class', 'ch2');
+
+                    img.src = "../../img/lugares/" + lugID + "/" + arrayImg[y].nombre;
+
+                    imgbox.appendChild(img);
+                    imagenes.appendChild(imgbox);
+                    
+
+                    y++;
+                }
+
+            }
+
+        }
+    }
+
+    
+
+
+
+    showSlides(slideIndex);
+}
+
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("slide");
+    //console.log(document.getElementsByClassName('slide'));
+
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+
+
+}
