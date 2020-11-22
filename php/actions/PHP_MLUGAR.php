@@ -7,7 +7,7 @@
     <title>Lugares y Salones - Paradise</title>
     <script src="../../js/lug_general_Info.js" charset="ISO-8859-1"></script>
 </head>
-<body onload="sesion();">
+<body onload="sesion(); extract_img();">
     <nav class="NavOficial">
         <img src="../../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -18,7 +18,7 @@
             <article class="pMT2"><a href="../../html/construccion.html" ;>PROMOCIONES</a></article>
             <article class="pMTxt" id="log"><a href="../../html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
-            <article class="pMTxt1" id="login" style="display:none;"><a href="HTML_SIGN_IN.html";>
+            <article class="pMTxt1" id="login" style="display:none;">
                 <a href="../../html/construccion.html" ;><img src="../../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 <a href="session_out.php" ;><img src="../../img/log_out.png" width="25%;" /></a>
             </article>
@@ -38,10 +38,7 @@
                 
         </section>-->
         <section id="lugar">
-            <section class="imglug">
-                Inserte imagen del lugar aquí.
-                Ira con un carousel
-            </section>
+            <section class="imglug" id="imglug"></section>
 
             <section>
                 <?php
@@ -96,9 +93,13 @@
 
             </section>
 
-            <!--<section class="publicidad">
-                Anuncio
-            </section>-->
+            <section class="publicidad">
+                <a href="https://www.zankyou.com.mx/">
+                <img src="../../img/anuncios/anuncio_floral1.jpg" alt="Arreglos Florales" class="imgAnuncio"/>
+                <p>¿BUSCAS ARREGLOS FLORALES?</p>
+                <img src="../../img/anuncios/anuncio_floral2.jpg" alt="Arreglos Florales" class="imgAnuncio"/>
+                </a>
+            </section>
         </section>
 
         <input type="text" id="numLugar" value="<?php echo $_GET['id']; ?>" disabled style="display:none">
