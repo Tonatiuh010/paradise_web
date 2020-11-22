@@ -5,8 +5,10 @@
     "\\html",
     "\\js",
     "\\php",
+    "\\php\\actions",
+    "\\php\\classes",
     "\\php\\mysql"
   ],
-  "SelectedNode": "\\js\\main.js",
+  "SelectedNode": "\\css\\CSS_PERFIL_USUARIO.css",
   "PreviewInSolutionExplorer": false
 }

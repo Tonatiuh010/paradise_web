@@ -383,9 +383,17 @@ function fillHistorial(ht) {
         var child3 = document.createElement('Section');
         child3.setAttribute("class", "ch3");
 
-        var imglb = document.createElement('img');
-        imglb.setAttribute('class', 'ImgCH');
-        imglb.src = '../img/index/anuncio5.jpg';
+        imagenes=arrayHistorial[y].lugar.imagenes.length;
+
+        if (imagenes > 0) {
+            var imglb = document.createElement('Img');
+            imglb.setAttribute('class', 'ImgCH');
+            imglb.setAttribute('src', '../img/lugares/' + arrayHistorial[y].lugar.num + "/" + arrayHistorial[y].lugar.imagenes[0].nombre);
+        } else {
+            var imglb = document.createElement('img');
+            imglb.setAttribute('class', 'ImgCH');
+            imglb.src = '../img/index/anuncio5.jpg';
+        }
 
         child3.appendChild(imglb);
 
