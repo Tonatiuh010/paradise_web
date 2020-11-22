@@ -25,7 +25,7 @@ function fillReservacionAlta(ob) {
     list.innerHTML = "";
 
     var arrayPreReservaciones=JSON.parse(ob);
-    console.log(arrayPreReservaciones);
+   
     var x = 0;
 
     while (arrayPreReservaciones[x]) {
@@ -60,9 +60,15 @@ function fillReservacionAlta(ob) {
             table.appendChild(arrayTr[z]);
         }
 
-        var img = document.createElement("img");
+        if (arrayPreReservaciones[x].lugar.imagenes.length > 0) {
+            var img = document.createElement("img");
         img.src = "../img/lugares/" + arrayPreReservaciones[x].lugar.num + "/" + arrayPreReservaciones[x].lugar.imagenes[0].nombre;
         img.style.width = "20%";
+        table.appendChild(img);
+        }
+
+        
+
 
         var button = document.createElement("button");
         button.innerHTML = "Establecer Agente";
@@ -77,7 +83,7 @@ function fillReservacionAlta(ob) {
         table.appendChild(button);
         
         list.appendChild(table);
-        list.appendChild(img);
+  
 
         x++;
     }
@@ -222,18 +228,35 @@ function setAgente(matricula, numPR) {
 }
 
 
-function fillReservacionShc(ob) {
+function buscarPReservacionesEstado() {
 
-    var list = document.getElementById("listLugar");
+    var cbStatus=document.getElementById("statusShc");
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            //console.log(ajax.responseText);
+            fillPReservacionShc(ajax.responseText);           
+        }
+    };
+
+
+    ajax.open("GET", "../php/actions/buscarReservacionesEstado.php?b=" +cbStatus.options[cbStatus.selectedIndex].value, true);
+    ajax.send();
+}
+
+
+function fillPReservacionShc(ob) {
+
+    var list = document.getElementById("listReservacion");
     list.innerHTML = "";
-    list.style.display = "block";
 
-    var arrayLugar = JSON.parse(ob);
+    var arrayPreReservaciones = JSON.parse(ob);
 
     var x = 0;
 
-
-    while (arrayLugar[x]) {
+    while (arrayPreReservaciones[x]) {
 
         var table = document.createElement("table");
 
@@ -249,63 +272,35 @@ function fillReservacionShc(ob) {
         var tr5 = document.createElement("tr");
         var tr6 = document.createElement("tr");
         var tr7 = document.createElement("tr");
+        var tr8 = document.createElement("tr");
+
+        tr1.innerHTML = "<td> Folio </td> <td> " + arrayPreReservaciones[x].num + "</td> ";
+        tr2.innerHTML = "<td> Lugar </td> <td> " + arrayPreReservaciones[x].lugar.nombre + "</td> ";
+        tr3.innerHTML = "<td> Cliente</td> <td> " + arrayPreReservaciones[x].cliente.nombre + " " + arrayPreReservaciones[x].cliente.paterno + " " + arrayPreReservaciones[x].cliente.materno + "</td> ";
+        tr4.innerHTML = "<td> Cliente Correo </td> <td> " + arrayPreReservaciones[x].cliente.usuario.correo + "</td> ";
+        tr5.innerHTML = "<td> Status </td> <td> " + arrayPreReservaciones[x].status + "</td>  ";
+        tr6.innerHTML = "<td> Registrada en: </td> <td> " + arrayPreReservaciones[x].registro + "</td>  ";
+        tr7.innerHTML = "<td> Fecha de evento: </td> <td> " + arrayPreReservaciones[x].inicio + " a " + arrayPreReservaciones[x].termino + "</td>  ";
+        tr8.innerHTML = "<td> Agente: </td> <td> "+arrayPreReservaciones[x].agente.nombre + " " + arrayPreReservaciones[x].agente.paterno + " " + arrayPreReservaciones[x].agente.materno + "</td>  ";
 
 
-        tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].num + "</td> ";
-        tr2.innerHTML = "<td> Nombre </td> <td> " + arrayLugar[x].nombre + "</td> ";
-        tr3.innerHTML = "<td> Descripción </td> <td> " + arrayLugar[x].desc + "</td> ";
-        tr4.innerHTML = "<td> Costo </td> <td> " + arrayLugar[x].costo + "</td> ";
-        tr5.innerHTML = "<td> Capacidad </td> <td> " + arrayLugar[x].capacidad + "</td>  ";
-        tr6.innerHTML = "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar.nombre + "</td>";
+        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6, tr7,tr8];
 
 
-        var str = "";
-
-        for (var i = 0; i < arrayLugar[x].espacios.length; i++) {
-
-            if (i != arrayLugar[x].espacios.length - 1)
-                str += arrayLugar[x].espacios[i].nombre + ", ";
-            else {
-                str += arrayLugar[x].espacios[i].nombre;
-
-            }
-        }
-
-        tr7.innerHTML = "<td> Espacios </td> <td> " + str + "</td>";
-
-
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6, tr7];
-
-
-        for (z = 0; z < 7; z++) {
+        for (z = 0; z < 8; z++) {
             table.appendChild(arrayTr[z]);
         }
 
-
-        var arrayDirec = arrayLugar[x].direccion;
-
-        if (arrayDirec.calle != null || arrayDirec.NI != null || arrayDirec.NE != null || arrayDirec.CP != null) {
-
-            var trC = document.createElement("tr");
-            var trNI = document.createElement("tr");
-            var trNE = document.createElement("tr");
-            var trCP = document.createElement("tr");
-            var trMun = document.createElement("tr");
-
-            trC.innerHTML = " <td> Calle </td> <td> " + arrayDirec.calle + "</td>";
-            trNI.innerHTML = "<td> No. Interno </td> <td> " + arrayDirec.NI + "</td>";
-            trNE.innerHTML = "<td> Num. Ext </td> <td> " + arrayDirec.NE + "</td> ";
-            trCP.innerHTML = " <td> Código Postal </td> <td> " + arrayDirec.CP + "</td>  ";
-            trMun.innerHTML = " <td> Municipio </td> <td> " + arrayDirec.municipio.nombre + "</td>  ";
-
-            var arrayDir = [trC, trNI, trNE, trCP, trMun];
-
-            for (y = 0; y < 5; y++) {
-                table.appendChild(arrayDir[y]);
-            }
+        if (arrayPreReservaciones[x].lugar.imagenes.length > 0) {
+            var img = document.createElement("img");
+            img.src = "../img/lugares/" + arrayPreReservaciones[x].lugar.num + "/" + arrayPreReservaciones[x].lugar.imagenes[0].nombre;
+            img.style.width = "20%";
+            table.appendChild(img);
         }
 
         list.appendChild(table);
+
+
         x++;
     }
 }

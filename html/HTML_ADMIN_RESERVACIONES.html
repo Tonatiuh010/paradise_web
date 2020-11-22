@@ -96,12 +96,23 @@
 
                 <section class="slides fade">
                     <!-- Sección Consultas -->
-                    <section class="shcAdmin" style="clear:both">
-                        <input type="search" id="shc" class="busqueda" placeholder="¿Qué estás buscando?" />
-                        <button type="button" id="search" class="boton" onclick="buscarAgente()">Buscar</button>
-                    </section>
+                    <select id="statusShc" class="select" onchange="buscarPReservacionesEstado()">
+                        <option value="Proceso">
+                            Proceso
+                        </option>
+
+                        <option value="Rechazada">
+                            Rechazada
+                        </option>
+
+                        <option value="Finalizada">
+                            Finalizada
+                        </option>
+
+                    </select>
+                  
                     <br><br><br>
-                    <section id="">
+                    <section id="listReservacion">
 
 
                     </section>
@@ -147,6 +158,7 @@
         function loading() {           
             showSlides(0);
             loadReservaciones();
+            buscarPReservacionesEstado();
         }
 
 

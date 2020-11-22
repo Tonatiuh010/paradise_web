@@ -223,7 +223,17 @@ function fillLugarShc(ob) {
             }
         }
 
+
+
         list.appendChild(table);
+
+        if (arrayLugar[x].imagenes.length > 0) {
+            var img = document.createElement("img");
+            img.style.width = "20%";
+            img.src = "../img/lugares/" + arrayLugar[x].num + "/" + arrayLugar[x].imagenes[0].nombre;
+            list.appendChild(img);
+        }
+
         x++;
     }
 }

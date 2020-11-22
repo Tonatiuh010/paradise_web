@@ -154,7 +154,7 @@ update pre_reservacion
 set prStatus='Rechazada'
 where prNum =13;
 
->>>>>>> 959cf3f40f7796735657c4779257f8ed96c692f0
+
 #where cliente=10;
 #select * from pre_reservacion;
 

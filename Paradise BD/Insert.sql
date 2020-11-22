@@ -165,6 +165,9 @@ de consentir el paladar de todos sus invitados, los sorprenderán con un atracti
 banquetes, los señalan como la mejor opción para darle a su evento el auténtico sabor campirano.',
 25000,200,3,null,null,null,null,null);
 
+
+#delete from lugar where lugNum between 8 and 100;
+
 select * from lugar;
 select * from diclugar;
 # delete from lugar
