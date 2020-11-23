@@ -63,8 +63,21 @@
     font-family: Georgia;
     float: right;
     width: 40%;
-    height: 1%;
+    height: 8%;
     clear: both;
+}
+
+.btAdmin {
+    width: 28%;
+    height: 70%;
+    float: right;
+    background-color: var(--pcolor1);
+}
+
+.busAdmin{
+    width:70%;
+    height:70%;
+    float:left;
 }
 
 #listMunicipio {
@@ -81,35 +94,11 @@
     width:100%;
     height: auto 80%;
     margin:auto 0;
- 
     float:inherit;
-     clear: both;
-    background-color: pink;
+    clear: both;
     
 }
 
-#listEspacios{
-    width:100%;
-    height: auto 80%;
-    margin:auto 0;
- 
-    float:inherit;
-     clear: both;
-    background-color: pink;
-    
-}
-
-
-#listTL{
-    width:100%;
-    height: auto 80%;
-    margin:auto 0;
- 
-    float:inherit;
-     clear: both;
-    background-color: pink;
-    
-}
 
 .busqueda {
     width: 70%;
@@ -177,7 +166,7 @@ button {
 
 main {
     width: 100%;
-    height: 100%;
+    height: auto;
     clear: both;
     text-align: center;
     /*background-color:#F5F5F5;*/
@@ -442,12 +431,13 @@ section dialog[open] {
 
 .shcDialog {
 
-     font-family: Georgia;
+    font-family: Georgia;
     float: right;
     width: 40%;
     height: 1%;
     clear: both;
 }
+
 
 
 
@@ -578,4 +568,237 @@ section dialog[open] {
 
 .next {
     float: right;
+}
+
+/*------------------------------------------ G R I D ---------------------------------------------------------------------------*/
+.paneles {
+    width: 100%;
+    height: 100%;
+    clear: both;
+    display: none;
+}
+
+.espacio {
+    height: 5%;
+    width: 100%;
+}
+
+.right, .left {
+    top: 0%;
+    cursor: pointer;
+    width: 5%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.patern {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    grid-gap:2%;
+    background-color: rgba(199, 199, 199,0.1);
+    font-family: Georgia;
+    font-size: 90%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding:2%;
+}
+
+.child1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 1fr 1fr 1fr;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.child2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr 1fr 1fr;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.child2-1 {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    grid-template-rows: 1fr;
+}
+
+.child2-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.imgsec {
+    width: 100%;
+    height: 90%;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.img {
+    height: 100%;
+    max-width:98%;
+    border-radius: 4px;
+}
+
+.label {
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding-top:2%;
+}
+
+.label2 {
+    width:100%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    text-align:justify;
+    padding:3%;
+}
+
+.label3 {
+    width:76%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    text-align:left;
+    margin-left:17%;
+    padding:3%;
+}
+
+.btnGLug1 {
+    background-color: var(--color1);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    float: left;
+    width: 40%;
+    height: 80%;
+    margin-left: 5%;
+}
+
+.btnGLug2 {
+    background-color: var(--color1);
+    color:white;
+    border:none;
+    border-radius:3px;
+    float: right;
+    width: 40%;
+    height:80%;
+    margin-right: 5%;
+}
+
+
+/*------------------------------------------- LISTA DE ESPACIOS ---------------------------------------------------*/
+#listEspacios {
+    width: 100%;
+    height: auto 80%;
+    margin: auto 0;
+    float: inherit;
+    clear: both;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5%;
+    line-height:2;
+}
+
+
+.lugEspacios {
+    font-family: Georgia;
+    font-size: medium;
+    background-color: rgba(26,143,196,0.2);
+    padding: 3%;
+    padding-right: 5%;
+    padding-left: 5%;
+    text-align: left;
+}
+
+/*------------------------------- LISTA TIPO DE LUGAR ---------------------------------------------------------*/
+
+#listTL {
+    width: 100%;
+    height: auto 80%;
+    margin: auto 0;
+    float: inherit;
+    clear: both;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5%;
+    line-height: 2;
+}
+
+/*---------------------------------- OTRO GRID LISTA DE AGENTES ------------------------------------------------*/
+
+.patern2 {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2%;
+    background-color: rgba(199, 199, 199,0.1);
+    font-family: 'Times New Roman';
+    font-size: 90%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 2%;
+}
+
+.chl1 {
+
+}
+
+.chl2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.chl2-1 {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.chl2-2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.chl2-2-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    text-align: left;
+    padding-left: 3%;
+    padding-top: 2%;
+}
+
+.img2{
+    width:100px;
+}
+
+.labe2 {
+    padding-left: 3%;
+    padding-top: 2%;
+    text-align: left;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
 }

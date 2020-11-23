@@ -380,74 +380,131 @@ function searchSp() {
 function fillCompresData(ob) {
     var y = 0;
     var arrayLugares = JSON.parse(ob);
+    //console.log(ob);
 
     var lugares = document.getElementById("lugares");
     lugares.innerHTML = '';
 
+    var arreglos = arrayLugares.length;
+    var paneles = arreglos / 5;
+    paneles = Math.ceil(paneles);
 
 
-    while (arrayLugares[y]) {
+    var y = 0;
 
-        var lugAg = document.createElement('section');
-        lugAg.setAttribute("class", "complete_section")
+    for (x = 0; x < paneles; x++) {
 
-        var img = document.createElement('Img');
-        img.setAttribute('class', 'lugImg');
-        img.setAttribute('src', '../img/index/anuncio6.jpeg');
+        var panel = document.createElement('section');
+        panel.className = "slide fade";
 
-        var lugSec = document.createElement("section");
-        lugSec.setAttribute("class", "lista")
+        var right_arrow = document.createElement('img');
+        right_arrow.setAttribute("class", "next");
+        right_arrow.src = "../img/next_page.png";
+        right_arrow.addEventListener('click', function () { plusSlides(1); });
 
-        var lb5 = document.createElement("Section");
-        lb5.setAttribute("class", "espacio");
+        var left_arrow = document.createElement('img');
+        left_arrow.setAttribute("class", "prev");
+        left_arrow.src = "../img/prev_page.png";
+        left_arrow.addEventListener('click', function () { plusSlides(-1); });
 
-        var lb6 = document.createElement("Section");
-        lb6.setAttribute("class", "espacio");
+        lugares.appendChild(panel);
 
-        var lb1 = document.createElement("Section");
-        lb1.setAttribute("class", "nombreLug");
-        lb1.innerHTML = arrayLugares[y].nombre;
+        for (a = 0; a < 5; a++) {
 
-        var lb2 = document.createElement("Section");
-        lb2.setAttribute("class", "description");
-        lb2.innerHTML = arrayLugares[y].desc;
+            var lugAg = document.createElement('section');
+            lugAg.setAttribute("class", "complete_section");
 
-        var lb3 = document.createElement("Section");
-        lb3.setAttribute("class", "costo");
-        lb3.innerHTML = 'A partir de $' + arrayLugares[y].costo;
+            var lb5 = document.createElement("Section");
+            lb5.setAttribute("class", "espacio");
 
-        var lb4 = document.createElement("Section");
-        lb4.setAttribute("class", "capacidad");
-        lb4.innerHTML = 'Apropiado para ' + arrayLugares[y].capacidad + ' personas';
+            var lb7 = document.createElement("Section");
+            lb7.setAttribute("class", "espacio");
 
-        var bt = document.createElement("button");
-        bt.setAttribute("class", "lugBoton");
-        bt.addEventListener('click', function (_y) {
-            return function () {
-                location.href = '../php/actions/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
-                //console.log(_y);
+            //panel.appendChild(lb5);
+
+            if (arrayLugares[y]) {
+
+
+                if (arrayLugares[y].imagenes.length > 0) {
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'lugImg');
+                    img.setAttribute('src', '../img/lugares/' + arrayLugares[y].num + "/" + arrayLugares[y].imagenes[0].nombre);
+                } else {
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'lugImg');
+                    img.setAttribute('src', '../img/index/anuncio6.jpeg');
+                }
+
+                var lugSec = document.createElement("section");
+                lugSec.setAttribute("class", "lista")
+
+                var lb6 = document.createElement("Section");
+                lb6.setAttribute("class", "espacio");
+
+                var lb1 = document.createElement("Section");
+                lb1.setAttribute("class", "nombreLug");
+                lb1.innerHTML = arrayLugares[y].nombre;
+
+                var lb2 = document.createElement("Section");
+                lb2.setAttribute("class", "description");
+                lb2.innerHTML = arrayLugares[y].desc;
+
+                var lb3 = document.createElement("Section");
+                lb3.setAttribute("class", "costo");
+                lb3.innerHTML = 'A partir de $' + arrayLugares[y].costo;
+
+                var lb4 = document.createElement("Section");
+                lb4.setAttribute("class", "capacidad");
+                lb4.innerHTML = 'Apropiado para ' + arrayLugares[y].capacidad + ' personas';
+
+                var bt = document.createElement("button");
+                bt.setAttribute("class", "lugBoton");
+                bt.addEventListener('click', function (_y) {
+                    return function () {
+                        location.href = '../php/actions/PHP_MLUGAR.php?id=' + arrayLugares[_y].num;
+
+                    }
+                }(y));
+                bt.innerHTML = 'Consultar Lugar';
+
+                var br = document.createElement('br');
+
+                panel.appendChild(lugAg);
+                panel.appendChild(lb5);
+
+                lugAg.appendChild(lugSec);
+                lugAg.appendChild(img);
+                lugSec.appendChild(br);
+                lugSec.appendChild(lb1);
+                lugSec.appendChild(lb2);
+                lugSec.appendChild(lb3);
+                lugSec.appendChild(lb4);
+                lugSec.appendChild(bt);
+
+                lugSec.appendChild(lb6);
+
+                y++;
             }
-        }(y));
-        bt.innerHTML = 'Consultar Lugar';
 
-        var br = document.createElement('br');
+        }
 
 
-        lugares.appendChild(lb5);
-        lugares.appendChild(lugAg);
-        lugAg.appendChild(lugSec);
-        lugAg.appendChild(img);
-        lugSec.appendChild(br);
-        lugSec.appendChild(lb1);
-        lugSec.appendChild(lb2);
-        lugSec.appendChild(lb3);
-        lugSec.appendChild(lb4);
-        lugSec.appendChild(bt);
-
-        lugSec.appendChild(lb6);
-
-        y++;
+        if (arreglos > 5) {
+            if (x == 0) {
+                panel.appendChild(lb7);
+                panel.appendChild(right_arrow);
+            } else {
+                panel.appendChild(right_arrow);
+                panel.appendChild(left_arrow);
+            }
+        }
+        
     }
+
+
+    showSlides(slideIndex);
+
+    
 }
 
 function cerrar() {
