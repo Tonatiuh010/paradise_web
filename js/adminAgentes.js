@@ -1,4 +1,7 @@
-﻿function registrarAgente() {
+﻿var slideIndex = 1;
+
+
+function registrarAgente() {
     document.getElementById("msg").innerHTML = "";
 
     var agenteOb = null;
@@ -104,63 +107,192 @@ function fillAgenteShc(ob) {
     var list = document.getElementById("listAgen");
     list.style.display = "block"; 
     var arrayAgentes = JSON.parse(ob);
+    console.log(arrayAgentes);
 
-    var x = 0;
-   
-    while (arrayAgentes[x]) {
+    var arreglos = arrayAgentes.length;
+    var paneles = arreglos / 5;
+    paneles = Math.ceil(paneles);
 
-        var table = document.createElement("table");
 
-        table.style.width = "80%";
-        table.style.marginRight = "8%";
-        table.style.border = "2px solid";
-        table.style.marginBottom = "3%";
+    var y = 0;
 
-        var tr1 = document.createElement("tr");
-        var tr2 = document.createElement("tr");
-        var tr3 = document.createElement("tr");
-        var tr4 = document.createElement("tr");
-        var tr5 = document.createElement("tr");
-        var tr6 = document.createElement("tr");
-        var tr7 = document.createElement("tr");
-        
-        
+    for (x = 0; x < paneles; x++) {
 
-        tr1.innerHTML = "<td> Matrícula </td> <td> " + arrayAgentes[x].matricula + "</td> ";
-        tr2.innerHTML = "<td> Nombre </td> <td> " + arrayAgentes[x].nombre + " " + arrayAgentes[x].paterno + " " + arrayAgentes[x].materno + "</td> ";
-        tr3.innerHTML = "<td> Edad </td> <td> " + arrayAgentes[x].edad + "</td> ";
-        tr4.innerHTML = "<td> Correo </td> <td> " + arrayAgentes[x].usuario.correo + "</td> ";
-        tr5.innerHTML = "<td> Usuario </td> <td> " + arrayAgentes[x].usuario.nombre + "</td>  ";
-        tr7.innerHTML = "<td> Genero </td> <td> " + arrayAgentes[x].genero+ "</td>  ";
-        
+        var panel = document.createElement('section');
+        panel.className = "paneles fade";
 
-        var str = "";
-      
-        for (var i = 0; i < arrayAgentes[x].telefono.length; i++) {
+        var right_arrow = document.createElement('img');
+        right_arrow.setAttribute("class", "right");
+        right_arrow.src = "../img/next_page.png";
+        right_arrow.addEventListener('click', function () { plusPaneles(1); });
 
-            if (i!=arrayAgentes[x].telefono.length-1)
-                str += arrayAgentes[x].telefono[i].telefono+ ", ";
-            else {
-                str += arrayAgentes[x].telefono[i].telefono;
+        var left_arrow = document.createElement('img');
+        left_arrow.setAttribute("class", "left");
+        left_arrow.src = "../img/prev_page.png";
+        left_arrow.addEventListener('click', function () { plusPaneles(-1); });
 
+        var esp2 = document.createElement("Section");
+        esp2.setAttribute("class", "espacio");
+
+        list.appendChild(panel);
+
+        for (a = 0; a < 5; a++) {
+
+            var agente_sec = document.createElement('section');
+            agente_sec.setAttribute("class", "patern2");
+
+            var esp = document.createElement("Section");
+            esp.setAttribute("class", "espacio");
+
+            if (arrayAgentes[y]) {
+
+                panel.appendChild(agente_sec);
+                panel.appendChild(esp);
+
+                var child1 = document.createElement('section');
+                child1.setAttribute('class', 'chl1');
+
+                var child2 = document.createElement('section');
+                child2.setAttribute('class', 'chl2');
+
+                //--------------------------------------- C H I L D  1 -----------------------------------------------------------------
+                    //if (arrayAgentes[y].imagenes.length > 0) {
+                    //    var img = document.createElement('Img');
+                    //    img.setAttribute('class', 'img');
+                    //    img.setAttribute('src', '../img/lugares/' + arrayAgentes[y].num + "/" + arrayAgentes[y].imagenes[0].nombre);
+                    //} else {
+                    //    var img = document.createElement('Img');
+                    //    img.setAttribute('class', 'img');
+                    //    img.setAttribute('src', '../img/perfil_usuario.png');
+                    //}
+
+                var img = document.createElement('Img');
+                img.setAttribute('class', 'img2');
+                img.setAttribute('src', '../img/perfil_usuario.png');
+
+                var imgsec = document.createElement('section');
+                imgsec.setAttribute('class', 'imgsec');
+
+                imgsec.appendChild(img);
+                child1.appendChild(imgsec);
+
+                //-----------------------------------------------------------------------------------------------------------------------
+
+                //--------------------------------------- C H I L D  2 -----------------------------------------------------------------
+                var row1 = document.createElement('section');
+                var row2 = document.createElement('section');
+                var row3 = document.createElement('section');
+
+                child2.appendChild(row1);
+                child2.appendChild(row2);
+                child2.appendChild(row3);
+
+                var lb1 = document.createElement('section');
+                lb1.setAttribute('class', 'label');
+                lb1.innerHTML = 'Matricula: ' + arrayAgentes[y].matricula;
+
+                var lb2 = document.createElement('section');
+                lb2.setAttribute('class', 'label');
+                lb2.innerHTML = 'Género: ' + arrayAgentes[y].genero;
+
+                var lb3 = document.createElement('section');
+                lb3.setAttribute('class', 'label');
+                lb3.innerHTML = 'Edad: ' + arrayAgentes[y].edad;
+
+                row1.appendChild(lb1);
+                row1.appendChild(lb2);
+                row1.appendChild(lb3);
+                row1.setAttribute('class', 'chl2-1');
+
+                row2.innerHTML = 'Nombre: ' + arrayAgentes[y].nombre + " " + arrayAgentes[y].paterno + " " + arrayAgentes[y].materno + '</br>';
+                row2.setAttribute('class', 'label');
+
+                var lb4 = document.createElement('section');
+                    var str = "";
+                    for (var i = 0; i < arrayAgentes[y].telefono.length; i++) {
+
+                        if (i == 0) {
+                            str += 'Teléfonos: </br></br><li>' + arrayAgentes[y].telefono[i].telefono + '</li>';
+                        } else {
+                            if (i != arrayAgentes[y].telefono.length - 1)
+                                str += '<li>' + arrayAgentes[y].telefono[i].telefono + '</li>';
+                            else {
+                                str += '<li>' + arrayAgentes[y].telefono[i].telefono + '</li>';
+
+                            }
+                        }
+                    }
+                lb4.innerHTML = str;
+                lb4.setAttribute('class', 'labe2');
+
+                var lb5 = document.createElement('section');
+                lb5.setAttribute('class', 'chl2-2-1')
+
+                var lb6 = document.createElement('section');
+                lb6.innerHTML = 'Usuario : ' + arrayAgentes[y].usuario.nombre;
+
+                var lb7 = document.createElement('section');
+                lb7.innerHTML = 'Correo : ' + arrayAgentes[y].usuario.correo;
+
+                lb5.appendChild(lb6);
+                lb5.appendChild(lb7);
+
+                row3.appendChild(lb4);
+                row3.appendChild(lb5);
+                row3.setAttribute('class', 'chl2-2');
+
+                //-----------------------------------------------------------------------------------------------------------------------
+
+                agente_sec.appendChild(child1);
+                agente_sec.appendChild(child2);
+
+                y++;
             }
         }
-
-        tr6.innerHTML = "<td> Teléfonos </td> <td> " + str + "</td>";        
-        
-
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6, tr7];
+		
+		
 
 
-        for (z = 0; z < 7; z++) {
-            table.appendChild(arrayTr[z]);
+        if (x == 0) {
+            panel.appendChild(right_arrow);
+            panel.appendChild(esp2);
+        } else {
+            panel.appendChild(right_arrow);
+            panel.appendChild(left_arrow);
+            panel.appendChild(esp2);
         }
 
 
-                           
-
-        list.appendChild(table);
-        x++;
     }
+
+
+    showPaneles(slideIndex);
+
+}
+
+function plusPaneles(n) {
+    showPaneles(slideIndex += n);
+}
+
+function showPaneles(n) {
+    var i;
+    var slides = document.getElementsByClassName("paneles");
+    //console.log(document.getElementsByClassName('slide'));
+
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+
+
 }
 
