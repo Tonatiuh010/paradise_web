@@ -64,11 +64,16 @@
                             $numInt=$decLug->direccion->NI;
                             $numExt=$decLug->direccion->NE;
                             $municipio=$decLug->direccion->municipio->nombre;
-                            if($numExt==''){
-                                $domicilio='Ubicado en '.$calle.' CP '.$cp.' #'.$numInt.' '.$municipio;
+                            if($calle!=''){
+                                if($numExt==''){
+                                    $domicilio='Ubicado en '.$calle.' CP '.$cp.' #'.$numInt.' '.$municipio;
+                                }else{
+                                    $domicilio='Ubicado en '.$calle.' CP '.$cp.' #'.$numInt.'-'.$numExt.' '.$municipio;
+                                }
                             }else{
-                                $domicilio='Ubicado en '.$calle.' CP '.$cp.' #'.$numInt.'-'.$numExt.' '.$municipio;
+                                $domicilio='';
                             }
+                            
                         $espacio=$decLug->espacios;
 
                         echo '</br><section><table class="tablelug" >';
