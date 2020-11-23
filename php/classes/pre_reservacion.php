@@ -225,6 +225,8 @@
                 $command=$conn->prepare($sql);                                 
                 $command->bind_param('s',$estado);
 
+                 $command->execute();
+
                 $command->bind_result($num,             //Generamos nuevas variables que nos
                                     $registro,                //almacenen los resultados obtenidos 
                                     $inicio,               //desde la base de datos
@@ -239,7 +241,7 @@
                                     $total);
 
 
-                $command->execute();
+               
 
                 $list=array();
 
@@ -283,23 +285,147 @@
               $conn->close(); 
               return json_encode($list);
         }
-
-        /// En proceso, Cuack!  :v :D
+     
 
         public function getAllReservacionesByAgente($n){
-                $sql="select * from vw_reservacion_completa where agente=? estado='Proceso';";
+                $sql="select * from vw_reservacion_completa where agente=? and estado='Proceso';";
                 $conn=mysqlConnection::getConnection();
 
                 $command=$conn->prepare($sql);
                  
-                $command->bind_param('s',$n);
+                $command->bind_param('s',$n);       
 
-                $command->execute();
+                $command->execute();        
+
+                $command->bind_result($num,             //Generamos nuevas variables que nos
+                                    $registro,                //almacenen los resultados obtenidos 
+                                    $inicio,               //desde la base de datos
+                                    $termino,               //NOTA: Las variables deben ir acomodadas
+                                    $estado,            //según el orden en el que estan en la BD
+                                    $notas,                  //en este caso, el orden de los campos en la vista o consulta
+                                    $lugar,
+                                    $cliente,
+                                    $agente,
+                                    $confirmacion,        
+                                    $dias,
+                                    $total);
 
 
+                
+
+                $list=array();
+
+                while ($command->fetch()){
+                    
+                    $this->num=$num;                            
+                $this->registro=$registro;
+                $this->inicio=$inicio;
+                $this->termino=$termino;
+                $this->status=$estado; 
+                $this->notas=$notas;
+
+                if($lugar==null){
+                    $this->lugar=new lugar();
+                }else{
+                    $this->lugar=new lugar($lugar);
+                }
+                
+                if($cliente==null){
+                    $this->cliente=new cliente();
+                }else{
+                    $this->cliente=new cliente($cliente);
+                }
+                
+                if($agente==null){
+                    $this->agente=new agente();
+                }else{
+                    $this->agente=new agente($agente);
+                }
+                
+                parent:: setNum($num);
+                parent:: setConfirmada($confirmacion);
+                parent:: setDias($dias);
+                parent:: setTotal($total);
+
+
+                array_push($list,json_decode(self::getJsonObject()));                    
+                }
+
+              mysqli_stmt_close($command);
+              $conn->close(); 
+              return json_encode($list);
 
         }
 
+        public function getAllHistorialAgente($n){
+                $sql="select * from vw_reservacion_completa where agente=? and estado='Autorizada';";
+                $conn=mysqlConnection::getConnection();
+
+                $command=$conn->prepare($sql);
+                 
+                $command->bind_param('s',$n);       
+
+                $command->execute();        
+
+                $command->bind_result($num,             //Generamos nuevas variables que nos
+                                    $registro,                //almacenen los resultados obtenidos 
+                                    $inicio,               //desde la base de datos
+                                    $termino,               //NOTA: Las variables deben ir acomodadas
+                                    $estado,            //según el orden en el que estan en la BD
+                                    $notas,                  //en este caso, el orden de los campos en la vista o consulta
+                                    $lugar,
+                                    $cliente,
+                                    $agente,
+                                    $confirmacion,        
+                                    $dias,
+                                    $total);
+
+
+                
+
+                $list=array();
+
+                while ($command->fetch()){
+                    
+                    $this->num=$num;                            
+                $this->registro=$registro;
+                $this->inicio=$inicio;
+                $this->termino=$termino;
+                $this->status=$estado; 
+                $this->notas=$notas;
+
+                if($lugar==null){
+                    $this->lugar=new lugar();
+                }else{
+                    $this->lugar=new lugar($lugar);
+                }
+                
+                if($cliente==null){
+                    $this->cliente=new cliente();
+                }else{
+                    $this->cliente=new cliente($cliente);
+                }
+                
+                if($agente==null){
+                    $this->agente=new agente();
+                }else{
+                    $this->agente=new agente($agente);
+                }
+                
+                parent:: setNum($num);
+                parent:: setConfirmada($confirmacion);
+                parent:: setDias($dias);
+                parent:: setTotal($total);
+
+
+                array_push($list,json_decode(self::getJsonObject()));                    
+                }
+
+              mysqli_stmt_close($command);
+              $conn->close(); 
+              return json_encode($list);
+
+        }
 
         public function verifyReservacion($i,$f,$l){
             $conn=mysqlConnection::getConnection();
@@ -360,7 +486,7 @@
              return json_encode(array("res"=>true, "response"=>"Hecho"));
         }
 
-        public function insertReservacion($i,$f,$l,$c){
+        public function insertReservacion($i,$f,$l,$c){ // PreRESERVACION!!!!
             //$conn=mysqlConnection::getConnection();
 
             // i= fecha de inicio
@@ -402,7 +528,55 @@
         }
 
 
-        
+        public function altaReservacion($n,$t){
+            $sql="call SP_insertarReservacion(?,?);";
+
+
+             $conn=mysqlConnection::getConnection();
+                      
+            $command=$conn->prepare($sql);
+                  
+            $command->bind_param('is',$n,$t);
+
+            $command->execute();
+
+            if ($command->error!=""){
+            return json_encode(array("res"=>false,"error"=>$command->error));
+            die;
+
+            } 
+
+            return json_encode(array("res"=>true));
+                               
+
+            mysqli_stmt_close($command);
+            $conn->close();
+        }
+
+        public function rechazarReservacion($n,$t){
+                $sql="call SP_updatePreReservacion(?,?);";
+
+                $conn=mysqlConnection::getConnection();
+                      
+                $command=$conn->prepare($sql);
+                  
+                $command->bind_param('is',$n,$t);
+
+                $command->execute();
+
+                if ($command->error!=""){
+                return json_encode(array("res"=>false,"error"=>$command->error));
+                die;
+
+                } 
+
+                return json_encode(array("res"=>true));
+                               
+
+                mysqli_stmt_close($command);
+                $conn->close();
+
+        }
 
         public function getJsonObject(){
             return json_encode(

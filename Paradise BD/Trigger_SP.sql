@@ -360,6 +360,37 @@ DELIMITER ;
 
 #insert reservacion(resNumPR) values(1);
 
+############################################### Insert Reservacion #####################################
+
+#drop procedure SP_insertarReservacion;
+
+	DELIMITER // 
+    create procedure SP_insertarReservacion (
+		in pr int,
+        in notas text
+	)
+	begin 
+		insert reservacion(resNumPR) values(pr);
+        update pre_reservacion set prNotas=notas, prStatus='Autorizada' where prNum=pr;
+    end //
+    DELIMITER ;
+    
+    #call SP_insertarReservacion();
+    
+############################################### Insert Reservacion #####################################
+
+#drop procedure SP_updatePreReservacion
+
+DELIMITER //
+ create procedure SP_updatePreReservacion(
+	in pr int,
+    in notas text
+ )
+	begin 
+		update pre_reservacion set prStatus='Rechazada', prNotas=notas where prNum=pr ;
+    end //
+    DELIMITER ;
+
 
 
 ############################################### Insert Espacios #####################################

@@ -141,6 +141,8 @@ select * from vw_reservacion_completa where estado='Proceso' and agente is null;
 
 #select * from vw_reservacion_completa
 
+
+
 select * from vw_reservacion_completa
 where cliente=10;
 
@@ -227,6 +229,8 @@ on FK_usuario=usNum;
 
 select * from VW_agente_admin;
 
+
+select * from lugar;
 select * from agente;
 select * from usuario;
 

@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../img/Loto_icon.png">
 
     <script src="../js/dialog.js" charset="ISO-8859-1"></script>
-    <script src="../js/agenteLugar.js" charset="ISO-8859-1"></script>
+    <script src="../js/agenteReservaciones.js" charset="ISO-8859-1"></script>
     <script src="../js/session.js" charset="ISO-8859-1"></script>
 </head>
 
@@ -45,7 +45,7 @@
             <section class="Nav2do">
                
                 &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;         
+                <button class="dot" onclick="showSlides(0)">Pendientes</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;                         
             </section>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
@@ -72,51 +72,70 @@
                 
 
                 <li>
-                    <a>Historial</a>
+                    <a href="HTML_AGEN_HISTORIAL.html">Historial</a>
                 </li>                
             </ul>
         </section>
 
         <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco-->
 
-            <section class="slides fade"  >    
-                <!-- Reservaciones bajo el proceso del agente. -->
-                <section class="shcAdmin">
-                    <input type="search" id="shcId" class="busqueda" placeholder="¿Qué estás buscando?" />
-                    <button type="button" id="search" class="boton" onclick="buscarLugar()">Buscar</button>
-                </section>    
-                        
+            <section class="slides fade"  >                                                            
                 <section id="listReservaciones"></section>                          
-            </section>
-
-           
-                                                             
+            </section>                                                                        
             
         </section>
 
     </section>
 
-       
-    
+
+        <!-- ################################### DIALOGO ASIGAR NOTAR Y DAR DE ALTA ######################## -->
+        <dialog id="update">
+            <form>
+
+                <label>Número de Reservación:</label>
+                <input type='text' class="dlabel" id='lblNum' required disabled><br /><br />
+
+
+                <label>Notas:</label><br />
+                <textarea rows="15" cols="80" id="txtNotas"></textarea>
+
+                <select id="statusShc" class="select">
+
+                    <option value="Rechazada">
+                        Rechazar
+                    </option>
+
+                    <option value="Autorizada">
+                        Autorizar
+                    </option>
+
+                </select>
+                <br /><br /><br />
+                <button type="button" class="botond" onclick="altaReservacion()">Enviar</button>
+                <button type="button" class="botonc" onclick="cerrar()">Cancelar</button>
+
+            </form>
+        </dialog>
+        <!-- ################################### DIALOGO ASIGAR NOTAR Y DAR DE ALTA ######################## -->
+
+           
     </main>
 
     
     
 
-    <script>
+    <script>        
 
-        
+        function loading() {           
+            sesion();         
 
-        function loading() {
-                            
+            showSlides(0);            
 
-            showSlides(0);
-
-            sesion();
+            loadReservaciones();                        
+            
         }
 
-        
-
+       
         function showSlides(n) {
 
             

@@ -448,3 +448,134 @@ section dialog[open] {
     height: 1%;
     clear: both;
 }
+
+
+
+
+
+
+/*#########################################################################################################*/
+
+/*######################################################Grid De agentes########################################*/
+
+.pat {
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    /* background-color: aqua;*/
+    grid-gap: 6px;
+    font-family: Georgia;
+    font-size: medium;
+    /*background-color: rgba(199, 199, 199,0.1);*/
+}
+
+.ch1 {
+    display: block;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr 1fr 1fr 4fr;
+    /*background-color: aquamarine;*/
+    font-family: Georgia;
+    font-size: medium;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    text-align:center;
+}
+
+.centrar{
+    text-align:center;
+}
+
+.ch2 {
+    display: block;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 4fr;
+    background-color: rgba(199, 199, 199,0.1);
+    /*grid-gap: 20px;*/
+    /*background-color: cornflowerblue;*/
+    font-family: Georgia;
+    font-size: medium;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.labelR {
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 2.5%;
+    /*border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-right: 1px solid rgba(0,0,0,0.2);
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-topright: 4px;*/
+}
+
+.labelL {
+    padding-top: 6%;
+    padding-left:10%;
+    /*text-align:left;*/
+}
+
+.labe2L {
+    padding-top: 6%;
+    padding-left:10%;
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 1fr;
+    /*text-align:left;*/
+}
+
+
+.ch1 > section {
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: rgba(199, 199, 199,0.1);
+    border-radius: 4px;
+    padding:2.5%;
+}
+
+.ch3 {
+    background-color: rgba(199, 199, 199,0.1);
+    /*border: solid rgba(0,0,0,0.1);*/
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.ImgCH{
+    height:100%;
+    border-radius:4px;
+}
+
+.espacio {
+    height: 5%;
+    width: 100%;
+}
+
+.ImgCH{
+    height:100%;
+    max-width:90%;
+    border-radius:4px;
+}
+
+.next, .prev {
+    /*position: absolute;*/
+    /*top: 0%;
+    width: 3%;
+    height: 100%;*/
+    top: 0%;
+    cursor: pointer;
+    width: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2%;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;
+}

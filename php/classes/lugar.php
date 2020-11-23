@@ -205,6 +205,11 @@
                         $this->espacio->insertEspaciosLugar($espaciosArray[$a],$numLug['num']);
                     }
 
+                    $baseDirec="../../img/lugares";
+                     if (!mkdir($baseDirec.'/'.$numLug['num'],0777,true)){
+                             return json_encode(array('res'=>false));
+                             die;
+                     }     
                     
                     return json_encode(array("res"=>true,"num"=>$numLug['num']));
                     
