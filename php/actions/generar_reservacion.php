@@ -15,7 +15,7 @@
                 $resultado=$ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$_SESSION['ID']);
 
                 if($resultado==true){
-                    echo 'Reservacion Registrada';
+                    echo true;
                 }else{
                     echo 'Lo sentimos, las fechas solicitadas ya se encuentran apartadas';
                 }
@@ -36,7 +36,7 @@
                 $resultado=$ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$cliente);
 
                 if($resultado==true){
-                    echo 'Reservacion Registrada';
+                    echo true;
                 }else{
                     $borrar=new cliente();
                     $finalizar=$borrar->deleteCliente($cliente);

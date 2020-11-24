@@ -21,7 +21,6 @@ function inicio_sesion() {
 
 function fill(ob) {
 
-    var dialogo = document.getElementById('errorLog');
     var obj = JSON.parse(ob);
     var respuesta = obj.res;
 
@@ -39,10 +38,8 @@ function fill(ob) {
         //location.href = "../index.html";
     } else {
 
-        document.getElementById('errorp').innerHTML = '';
-        document.getElementById('errorp').innerHTML = 'Verifique su correo o contraseña';
-
-        dialogo.showModal();
+        mensaje = 'Verifique su correo o contraseña';
+        showError(mensaje);
     }
 
 }
@@ -52,7 +49,4 @@ function showIcon() {
     document.getElementById('icon').style.display = "block";
 }
 
-function cerrar() {
-    document.getElementById("errorLog").close();
 
-}

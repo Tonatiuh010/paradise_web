@@ -232,24 +232,6 @@ main {
     padding-top:2%;
 }
 
-.fotografias
-{
-    width:100%;
-    height:62%;
-    background-color: var(--color1);
-    clear:both;
-    text-align:center;
-    color:white;
-    opacity:0.9;
-}
-
-.imgf {
-    width: 27.3%;
-    cursor: pointer;
-    height: 72%;
-    opacity: 1;
-}
-
 .submenu {
     width: 100%;
     height: 30%;
@@ -373,10 +355,33 @@ button{
 
 
 
+
+
+
+
+.imgPictures {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 6fr 1fr;
+    grid-gap: 5px;
+}
+
+.label1{
+    text-align:left;
+    font-family:Georgia;
+    font-size:xx-large;
+    color:darkslategray;
+    padding-left:5%;
+}
+
 .nextLit, .prevLit {
-    position: absolute;    
+    position: absolute;
+    margin-left: 1%;
+    margin-right: 1%;
     width: 3%;
-    margin-top:8%;
+    margin-top: -15%;
     cursor: pointer;
 }
 
@@ -386,4 +391,23 @@ button{
 
 .nextLit {
     right: 0;
+}
+
+.imgf {
+    width:98%;
+    cursor: pointer;
+    height: 98%;
+    opacity: 1;
+    border-radius:5px;
+}
+
+.fotografias {
+    width: 100%;
+    height: 62%;
+    /*background-color: hsl(0, 0%, 92%);*/
+    background-color: rgba(144,218,219,0.9); 
+    clear: both;
+    text-align: center;
+    color: white;
+    opacity: 0.9;
 }

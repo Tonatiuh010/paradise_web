@@ -230,9 +230,13 @@ require_once("usuario.php");
 
                   } else {
 
+<<<<<<< HEAD
 
 
                     return "Registrado";
+=======
+                    return "Registrado Exitosamente";
+>>>>>>> 7ac3efacc0790e5eca189f72e50d06635a5de32a
                    
                     
                   }
@@ -271,7 +275,7 @@ require_once("usuario.php");
 
                 } else {
 
-                return "Registrado";
+                return "Cambios realizados";
                    
                     
                 }

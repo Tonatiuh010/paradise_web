@@ -1,11 +1,17 @@
 
 <html lang="en">
 <head>
+    <title>Lugares y Salones - Paradise</title>
+
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../css/CSS_CLIENTE_MLUGAR.css" type="text/css">
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Lugares y Salones - Paradise</title>
+    <link rel="shortcut icon" href="../../img/Loto_icon.png">
+
+
     <script src="../../js/lug_general_Info.js" charset="ISO-8859-1"></script>
+    <script src="../../js/error_dialog.js" charset="ISO-8859-1"></script>
+
 </head>
 <body onload="sesion(); extract_img();">
     <nav class="NavOficial">
@@ -156,13 +162,6 @@
             </section>
         </dialog>
 
-        <dialog id="error" 
-                style="width:30%; height:10%; align-items:center; margin:auto; 
-                margin-top:-50%; background-color:rgb(3,95,108); color:white; text-align:center; 
-                padding:4%; font-family:Arial; font-size:larger;  ">
-            <p id="mensaje"></p><br />
-            <input type="button"  onclick="cerrar_reservacion()" value="Cerrar"/>
-        </dialog>
 
     </main>
 
@@ -173,6 +172,9 @@
         var lugID = document.getElementById('numLugar').value;
 
         //console.log(lugID);
+        function scroll() {
+            window.scrollTo(0, 0);
+        }
 
     </script>
 

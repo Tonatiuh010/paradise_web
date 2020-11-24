@@ -199,17 +199,18 @@ function update() {
     if (txtUsuario == null) {
         txtUsuario = '';
     }
-    confipassword = document.getElementById('veri_psswd').value;
-    txtPass = document.getElementById('psswd').value;
+
+    var confipassword = document.getElementById('veri_psswd').value;
+    var txtPass = document.getElementById('psswd').value;
+
+
     if (txtPass == null) {
         txtPass = '';
     } else {
         if (txtPass != confipassword) {
             confirmar = false;
-            document.getElementById('error').innerHTML = '';
-            document.getElementById('error').innerHTML = 'Verifique que las contraseñas coincidan';
-            var dialogo = document.getElementById('errorD');
-            dialogo.showModal();
+            var mensaje = 'Verifique que las contraseñas coincidan';
+            showError(mensaje);
         }
     }
 
@@ -219,16 +220,12 @@ function update() {
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                //document.getElementById("listaRes").innerHTML = ajax.responseText;
-                document.getElementById('error').innerHTML = '';
-                document.getElementById('error').innerHTML = ajax.responseText;
-                var dialogo = document.getElementById('errorD');
-                dialogo.showModal();
+                showError(ajax.responseText);
             }
         };
 
 
-        ajax.open("GET", "../php/actions/update_cliente.php?txtTelefono=" + txtTelefono + "&txtUsuario=" + txtUsuario + "&txtPass" + txtPass, true);
+        ajax.open("GET", "../php/actions/update_cliente.php?txtTelefono=" + txtTelefono + "&txtUsuario=" + txtUsuario + "&pass=" + txtPass, true);
         ajax.send();
     }
 
@@ -475,4 +472,8 @@ function buscarRes() {
     ajax.open("GET", "../php/buscarLugares.php?", true);
     ajax.send();
 
+}
+
+function reloadd() {
+    location.reload();
 }
