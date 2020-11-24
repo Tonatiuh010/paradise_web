@@ -25,44 +25,37 @@ function verifyForm() {
 
     if (dato9 == '' || snEspacio.test(dato9) || dato9.length < 8) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de confirmar su contraseña";
+        var mensaje = "Favor de confirmar su contraseña";
     }
 
     if (dato8 == '' || snEspacio.test(dato8) || dato8.length < 8) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de colocar su constraseña, sin espacios, con al menos 8 caracteres";
+        var mensaje = "Favor de colocar su constraseña, sin espacios, con al menos 8 caracteres";
     }
 
     if (dato8 != dato9) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Verifique que las contraseñas coincidan";
+        var mensaje = "Verifique que las contraseñas coincidan";
     }
 
     if (dato7 == '' || snEspacio.test(dato7) || dato7.length < 8 || isNaN(dato7) == false) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de colocar su nombre de usuario, sin espacios, al menos 8 caracteres y con al menos 1 letra";
+        var mensaje = "Favor de colocar su nombre de usuario, sin espacios, al menos 8 caracteres y con al menos 1 letra";
     }
 
     if (dato6 == '' || snEspacio.test(dato6)) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de colocar su correo electrónico sin espacios";
+        var mensaje = "Favor de colocar su correo electrónico sin espacios";
     }
 
     if (dato4 == '') {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de colocar su fecha de nacimiento';
+        var mensaje = 'Favor de colocar su fecha de nacimiento';
     }
 
-    if (dato5.length == 10) {
+    if (dato5 != '' && dato5.length != 10) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Número de caracteres incorrecto para el número de telefono';
+        var mensaje = 'Número de caracteres incorrecto para el número de telefono';
     }
 
     //if (isNaN(dato3))   // == false
@@ -74,19 +67,17 @@ function verifyForm() {
     if (dato2 == '' || dato2.length < 2 || isNaN(dato2) == false) //
     {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de llenar correctamente el campo apellido paterno";
+        var mensaje = "Favor de llenar correctamente el campo apellido paterno";
     }
 
     if (dato1 == '' || dato1.length < 2 || isNaN(dato1) == false) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = "Favor de llenar correctamente el campo nombre";
+        var mensaje = "Favor de llenar correctamente el campo nombre";
     }
 
 
     if (confirmar == false) {                       //En esta sección verificamos que todos los datos se encuentren correctos
-        dialogo.showModal();                        //si encuentra un solo error, despliega un dialogo con el mensaje de error
+        showError(mensaje);                        //si encuentra un solo error, despliega un dialogo con el mensaje de error
     } else {
         registrarUS(dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8);
     }   //Una vez que todo esta verificado y correcto, enviamos los parametros a la función
@@ -97,7 +88,7 @@ function verifyForm() {
 }
 
 function registrarUS(d1, d2, d3, d4, d5, d6, d7, d8) {
-    var dialogo = document.getElementById('error');
+    //var dialogo = document.getElementById('error');
 
     //Generamos un objeto con los datos proporcionados por el usuario
 
@@ -115,20 +106,13 @@ function registrarUS(d1, d2, d3, d4, d5, d6, d7, d8) {
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            document.getElementById('mensaje').innerHTML = '';
-            document.getElementById('mensaje').innerHTML = ajax.responseText;
-            dialogo.showModal();
+            showError(ajax.responseText);
         }
     };
     ajax.open("GET", "../php/actions/registrarUser.php?obj=" + JSON.stringify(newUserObj), true);
     ajax.send();
 
 }
-
-//function confirmar()
-//{
-//    document.getElementById('dialogo1').style.display = "none";
-//}
 
 
 function cerrar() {

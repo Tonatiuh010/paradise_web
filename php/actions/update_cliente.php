@@ -4,7 +4,7 @@ require_once("../classes/cliente.php");
     session_start();
 
     $obj=new cliente(); 
-    $cliente= $obj->updateCliente($_SESSION['ID'],$_GET['txtTelefono'],$_GET['txtUsuario'],$_GET['txtPass']);  
+    $cliente= $obj->updateCliente($_SESSION['ID'],$_GET['txtTelefono'],$_GET['txtUsuario'],$_GET['pass']);  
 
     //$telefono='';
     //$usuario='emma_solis';

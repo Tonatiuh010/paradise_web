@@ -158,19 +158,7 @@ main
     background-color: white;
 }
 
-dialog[open] {
-    /*position: center;*/
-    /* position: fixed;*/
-/*    padding-right: -10%;*/
-/*    padding-left: -10%;*/
-    margin-left: 35%;
-    margin-right: 35%;
-    width: 30%;
-    height: 15%;
-    /*display: inline-block;*/
-    text-align: center;
-    background-color: white;
-}
+
 
 .signImg
 {
@@ -249,3 +237,29 @@ p
     color:darkslategrey;
 }
 
+#dialog_error[open] {
+    width: 40%;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    padding: 1%;
+    top: auto;
+    left: 28%;
+    right: 28%;
+    color: darkslategray;
+    border: 15px solid;
+    border-color: rgba(3,95,108,0.8);
+    background-color: white;
+    font-family: Georgia;
+    font-size: medium;
+    line-height: 1.5;
+}
+
+#cerrar_error {
+    background-color: rgba(77,209,196,0.8);
+    color: black;
+    width: 50%;
+    font-family: Georgia;
+    font-size: medium;
+    line-height: 1.5;
+}

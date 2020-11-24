@@ -61,12 +61,14 @@ function setForm(ob) {
 
 function abrir_reservacion() {
     var dialogo = document.getElementById('reservacion');
+    disableScroll();
     dialogo.showModal();
 }
 
 function cerrar_reservacion() {
     document.getElementById('error').close();
     document.getElementById('reservacion').close();
+    enableScroll();
     location.reload();
 }
 
@@ -115,7 +117,10 @@ function reservar() {
 
         ajax.onreadystatechange = function () {
             if (ajax.status == 200 && ajax.readyState == 4) {
-                console.log(ajax.responseText);
+                if (ajax.responseText == true) {
+                    alert('Reservación en proceso, revise en su historial de reservaciones para continuar');
+                    window.location.href = "../../index.html";
+                }
             }
         };
 
@@ -131,7 +136,8 @@ function reservar() {
 
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200 && ajax.readyState == 4) {
-                    console.log(ajax.responseText);
+                    alert('Reservación en proceso, inicie sesión para revisar su historial de reservaciones');
+                    window.location.href = "../../index.html";
                 }
             };
 
@@ -150,7 +156,6 @@ function verifyForm() {
     //Variable que me autoriza si todo se encuentra correcto
     var confirmar = true;
     //Variable con el id del dialogo de error
-    var dialogo = document.getElementById('error');
 
     var dato1 = document.getElementById('txtNombre').value;
     var dato2 = document.getElementById('txtPaterno').value;
@@ -164,57 +169,49 @@ function verifyForm() {
 
     if (dato8 == '' || snEspacio.test(dato8) || dato8.length < 8) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de confirmar su contraseña';
+        var mensaje = 'Favor de confirmar su contraseña';
     }
 
     if (dato7 == '' || snEspacio.test(dato7) || dato7.length < 8) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de colocar su constraseña, sin espacios, con al menos 8 caracteres';
+        var mensaje = 'Favor de colocar su constraseña, sin espacios, con al menos 8 caracteres';
     }
 
     if (dato7 != dato8) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Verifique que las contraseñas coincidan';
+        var mensaje = 'Verifique que las contraseñas coincidan';
     }
 
     if (dato6 == '' || snEspacio.test(dato6)) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de colocar su correo electrónico sin espacios';
+        var mensaje = 'Favor de colocar su correo electrónico sin espacios';
     }
 
-    if (dato5.length==10) {
+    if  (dato5 != '' && dato5.length!=10) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Número de caracteres incorrecto para el número de telefono';
+        var mensaje = 'Número de caracteres incorrecto para el número de telefono';
     }
 
     if (dato4 == '') {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de colocar su fecha de nacimiento';
+        var mensaje = 'Favor de colocar su fecha de nacimiento';
     }
 
     if (dato2 == '' || dato2.length < 2 || isNaN(dato2) == false) //
     {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de llenar correctamente el campo apellido paterno';
+        var mensaje = 'Favor de llenar correctamente el campo apellido paterno';
     }
 
     if (dato1 == '' || dato1.length < 2 || isNaN(dato1) == false) {
         confirmar = false;
-        document.getElementById('mensaje').innerHTML = '';
-        document.getElementById('mensaje').innerHTML = 'Favor de llenar correctamente el campo nombre';
+        var mensaje = 'Favor de llenar correctamente el campo nombre';
     }
 
 
     if (confirmar == false) {
         document.getElementById('reservacion').close();
-        dialogo.showModal();
+        showError(mensaje);
         empty = '';
         return empty;
 
@@ -332,6 +329,7 @@ function fill_img(img) {
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
+    scroll();
 }
 
 function showSlides(n) {

@@ -250,17 +250,16 @@ function fillAgenteShc(ob) {
             }
         }
 		
-		
-
-
-        if (x == 0) {
-            panel.appendChild(right_arrow);
-            panel.appendChild(esp2);
-        } else {
-            panel.appendChild(right_arrow);
-            panel.appendChild(left_arrow);
-            panel.appendChild(esp2);
-        }
+		if(arreglos>5){
+				if (x == 0) {
+					panel.appendChild(right_arrow);
+					panel.appendChild(esp2);
+				} else {
+					panel.appendChild(right_arrow);
+					panel.appendChild(left_arrow);
+					panel.appendChild(esp2);
+				}
+		}
 
 
     }
@@ -272,6 +271,7 @@ function fillAgenteShc(ob) {
 
 function plusPaneles(n) {
     showPaneles(slideIndex += n);
+    scroll();
 }
 
 function showPaneles(n) {

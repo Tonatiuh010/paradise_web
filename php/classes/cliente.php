@@ -230,7 +230,7 @@ require_once("usuario.php");
 
                   } else {
 
-                    return "Registrado";
+                    return "Registrado Exitosamente";
                    
                     mysqli_stmt_close($command);
 					$conn->close();
@@ -267,7 +267,7 @@ require_once("usuario.php");
 
                 } else {
 
-                return "Registrado";
+                return "Cambios realizados";
                    
                     
                 }

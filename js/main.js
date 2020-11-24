@@ -19,11 +19,21 @@ function fillPictures(obj) {
     var arrayLugar = JSON.parse(obj);
     console.log(arrayLugar);
 
-    var section = document.getElementById("pictures_container");
+    var seccion = document.getElementById("pictures_container");
    
     
 
     for (var i = 0; i < 10; i++) {
+
+        var right_arrow = document.createElement('img');
+        right_arrow.setAttribute("class", "nextLit");
+        right_arrow.src = "./img/next_page.png";
+        right_arrow.addEventListener('click', function () { plusPictures(1) ; });
+
+        var left_arrow = document.createElement('img');
+        left_arrow.setAttribute("class", "prevLit");
+        left_arrow.src = "./img/prev_page.png";
+        left_arrow.addEventListener('click', function () { plusPictures(-1); });
 
 
        if (arrayLugar[i]){
@@ -31,23 +41,33 @@ function fillPictures(obj) {
             internalSection.className = "imgPicture fade";// Slide
             internalSection.style.width="100%";
             internalSection.style.height = "100%";
-        
-            var parag = document.createElement("p");
-            internalSection.appendChild(parag);
 
-            var imgArray = arrayLugar[i].imagenes;
+
+           var section = document.createElement('section');
+           section.setAttribute('class', 'imgPictures');
+
+           internalSection.appendChild(section);
+
+           var imgArray = arrayLugar[i].imagenes;
+
+           var lb1 = document.createElement("section");
+           lb1.setAttribute('class', 'label1');
         
             if (imgArray.length >= 3) {
 
                 for (var a = 0; a < 3; a++) {               
                     var img = document.createElement("img");
                
-                    parag.innerHTML = arrayLugar[i].nombre;
+                    lb1.innerHTML = arrayLugar[i].nombre;
 
                     img.className = "imgf";
                     img.src = "./img/lugares/" + arrayLugar[i].num + "/" + imgArray[a].nombre;
-                                
-                    internalSection.appendChild(img);
+
+                    var secImg = document.createElement('section');
+                    secImg.setAttribute('class', 'imagen');
+
+                    secImg.appendChild(img);
+                    section.appendChild(secImg);
 
                     img.addEventListener('click', function (_i) {
                         return function () {
@@ -56,10 +76,13 @@ function fillPictures(obj) {
                     }(i));
                 }
 
-            
-            
 
-                section.appendChild(internalSection);
+                section.appendChild(lb1);
+
+                internalSection.appendChild(right_arrow);
+                internalSection.appendChild(left_arrow);
+
+                seccion.appendChild(internalSection);
             }
         }
     }
@@ -71,7 +94,7 @@ var slide = 0;
 
 
 function plusPictures(n) {
-    showPictures(slide+=n);
+    showPictures(slide += n);
 }
 
 
