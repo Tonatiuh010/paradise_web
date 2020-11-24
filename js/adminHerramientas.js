@@ -360,6 +360,7 @@ function fillLugarShc(ob) {
 
 function plusPaneles(n) {
     showPanel(slideIndex += n);
+    scroll();
 }
 
 function showPanel(n) {

@@ -207,6 +207,7 @@ function lugaresList(ls) {
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
+    scroll();
 }
 
 function showSlides(n) {
