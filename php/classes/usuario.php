@@ -60,25 +60,26 @@
         public function insertUserCli(){
             $conn=mysqlConnection::getConnection();
 
+            $conn->query("set @num=0;");
+
             if($this->nombre!=''){
-                $sql="call SP_insert_userCli (?,?,?);";//SQL Sentence
+                $sql="call SP_insert_userCli (@num,?,?,?);";//SQL Sentence
                 $command=$conn->prepare($sql);
                   
 
                   $command->bind_param('sss',
                         $this->nombre,
                         $this->contrasenia,
-                        $this->correo,);
+                        $this->correo);
             
                   $command->execute();
             }else{
-                 $sql="call SP_insert_userCli (null,?,?);";//SQL Sentence
-                 $command=$conn->prepare($sql);
-                  
+                 $sql="call SP_insert_userCli (@num,null,?,?);";//SQL Sentence
+                 $command=$conn->prepare($sql);                  
 
                   $command->bind_param('ss',
                         $this->contrasenia,
-                        $this->correo,);
+                        $this->correo);
             
                   $command->execute();
             }
@@ -89,10 +90,16 @@
                     return false;
 
                   } else {
-
-                    //$mensaje= "Registrado";
-                    return true;
                     
+                    $resNum=$conn->query("select @num as num;");    
+                    $numUs=$resNum->fetch_assoc();   
+
+                     $baseDirec="../../img/usuario";
+                     if (!mkdir($baseDirec.'/'.$numUs['num'],0777,true)){
+                        return false;                             
+                     }     else {
+                        return true;
+                    }                                        
                   }
 
             mysqli_stmt_close($command);
@@ -101,14 +108,18 @@
 
         public function insertUserAgente(){
             $conn=mysqlConnection::getConnection();
-            $sql="call SP_insert_userAg (?,?,?);";//SQL Sentence
+
+            $conn->query("set @num=0;");
+
+            $sql="call SP_insert_userAg (@num,?,?,?);";//SQL Sentence
             $command=$conn->prepare($sql);
-                  
+            
+             
 
                   $command->bind_param('sss',
                         $this->nombre,
                         $this->contrasenia,
-                        $this->correo,);
+                        $this->correo);
             
                   $command->execute();
 
@@ -117,9 +128,15 @@
                     return false;
 
                   } else {
-
+                   $resNum=$conn->query("select @num as num;");    
+                    $numUs=$resNum->fetch_assoc(); 
                     //$mensaje= "Registrado";
-                    return true;
+                    $baseDirec="../../img/usuario";
+                     if (!mkdir($baseDirec.'/'.$numUs['num'],0777,true)){
+                        return false;                             
+                        }     else {
+                        return true;
+                     }
                     
                   }
 

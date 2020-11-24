@@ -220,6 +220,7 @@ main nav button {
     background-color: var(--pcolor1);
     font-family: 'Times New Roman';
     cursor: pointer;
+    outline:none;
     line-height: 1.5;
     font-size:100%;
 }
@@ -351,6 +352,7 @@ main dialog[open] {
 .botond {
     width: 28%;
     height: 8%;
+    outline:none;
     background-color: var(--pcolor1);
 }
 
@@ -422,7 +424,7 @@ section dialog[open] {
 
 
 .listaDialogo{
-    width:80%;
+    width:70%;
     height:60%;
 
     overflow-y: scroll;
@@ -437,12 +439,6 @@ section dialog[open] {
     height: 1%;
     clear: both;
 }
-
-
-
-
-
-
 
 /*#########################################################################################################*/
 
@@ -801,4 +797,58 @@ section dialog[open] {
     text-align: left;
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 4px;
+}
+
+
+/*########################################### GRID COnfiguracion agente ############################*/
+
+.complete_sectionConf {
+    width: 70%;
+    /*max-width: 100%;*/
+    /*border: 10px solid #000;*/
+    height: 80%;
+    margin: auto;
+    font-size: large;
+    /*line-height: 1.5;*/
+    text-align: center;
+    display: grid;
+    grid-template-columns: 40% 58%;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1%;
+    /*background-color: var(--pcolor5);*/
+    background-color: rgba(170,255,255,0.7);
+    border-radius:2%;
+    font-family:Georgia;
+}
+
+.childConf {
+    display: block;
+    padding-top: 5%;
+    padding-left: 10%;
+    color: darkslategray;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-color: gray;
+    /*background-color: #2f89fc;*/
+    /*box-shadow: 2px 2px 10px rgba(0,0,0,.25);*/
+}
+
+.child2Conf {
+    display: block;
+    padding-top: 5%;
+    padding-left: 15%;
+    color: darkslategray;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-color: gray;
+    /*background-color: #2f89fc;*/
+}
+
+.updBotonConf {
+    float: right;
+    margin-right: 10%;
+    width: 20%;
+    height: 50%;
+    /*background-color: var(--pcolor1);*/
+    background-color:white;
 }

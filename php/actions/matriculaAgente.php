@@ -3,5 +3,8 @@
 
     session_start();
     $matricula=$_SESSION['ID'];//"mudamuda";
-    echo $matricula;
+
+    $obj=new agente($matricula);
+
+    echo $obj->getJsonObject();
 ?>

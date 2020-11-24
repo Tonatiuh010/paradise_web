@@ -1,5 +1,7 @@
-﻿function buscarLugar() {
-    createDialog();
+﻿var slideIndex = 0;
+
+function buscarLugar() {
+   
     document.getElementById("listLugar").innerHTML = "";
 
     var ajax = new XMLHttpRequest();
@@ -20,96 +22,224 @@
 
 }
 
-function fillLugarShc(ob) {
+function fillLugarShc(ob) {    
     var list = document.getElementById("listLugar");
-    list.style.display = "block"; 
+    //list.style.display = "block"; 
     var arrayLugar = JSON.parse(ob);
 
-    var x = 0;
+    var arreglos = arrayLugar.length;
+    var paneles = arreglos / 5;
+    paneles = Math.ceil(paneles);
+
+    var y = 0;
+
+    for (x = 0; x < paneles; x++) {
+
+        var panel = document.createElement('section');
+        panel.className = "paneles fade";
+
+        var right_arrow = document.createElement('img');
+        right_arrow.setAttribute("class", "right");
+        right_arrow.src = "../img/next_page.png";
+        right_arrow.addEventListener('click', function () { plusPaneles(1); });
+
+        var left_arrow = document.createElement('img');
+        left_arrow.setAttribute("class", "left");
+        left_arrow.src = "../img/prev_page.png";
+        left_arrow.addEventListener('click', function () { plusPaneles(-1); });
+
+        list.appendChild(panel);
+
+        for (a = 0; a < 5; a++) {
+
+            var lugar_section = document.createElement('section');
+            lugar_section.setAttribute("class", "patern");
+
+            var esp = document.createElement('section');
+            esp.setAttribute('class', 'espacio');
+
+            if (arrayLugar[y]) {
+
+                panel.appendChild(lugar_section);
+                panel.appendChild(esp);
+
+                var child1 = document.createElement('section');
+                child1.className = 'child1';
+
+                var child2 = document.createElement('section');
+                child2.className = 'child2';
+
+                //----------------------------- C H I L D   1 -------------------------------------------------------------------------
+                if (arrayLugar[y].imagenes.length > 0) {
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'img');
+                    img.setAttribute('src', '../img/lugares/' + arrayLugar[y].num + "/" + arrayLugar[y].imagenes[0].nombre);
+                } else {
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'img');
+                    img.setAttribute('src', '../img/index/anuncio6.jpeg');
+                }
+
+                var imgsec = document.createElement('section');
+                imgsec.setAttribute('class', 'imgsec');
+                imgsec.appendChild(img);
+
+                var lb1 = document.createElement("section");
+                lb1.setAttribute('class', 'label');
+                lb1.innerHTML = arrayLugar[y].num;
+
+                var lb2 = document.createElement('section');
+                lb2.setAttribute('class', 'label');
+                lb2.innerHTML = arrayLugar[y].nombre;
+
+                var lb3 = document.createElement('section');
+                lb3.setAttribute('class', 'label');
+                lb3.innerHTML = 'Tipo: ' + arrayLugar[x].tipoLugar.nombre;
+
+                child1.appendChild(imgsec);
+                child1.appendChild(lb1);
+                child1.appendChild(lb2);
+                child1.appendChild(lb3);
+                //----------------------------------------------------------------------------------------------------------------------
+
+                //----------------------------- C H I L D   2 -------------------------------------------------------------------------
+
+                var row1 = document.createElement('section');
+                var row2 = document.createElement('section');
+                var row3 = document.createElement('section');
+                var row4 = document.createElement('section');
+
+                child2.appendChild(row1);
+                child2.appendChild(row2);
+                child2.appendChild(row3);
+                child2.appendChild(row4);
+
+                var lb4 = document.createElement('section');
+                lb4.setAttribute('class', 'label2');
+                lb4.innerHTML = arrayLugar[y].desc;
+
+                var str = '';
+                for (var i = 0; i < arrayLugar[y].espacios.length; i++) {
+
+                    if (i == 0) {
+                        str += 'Cuenta con: </br></br><li>' + arrayLugar[y].espacios[i].nombre + '</li>';
+                    } else {
+                        if (i != arrayLugar[y].espacios.length - 1)
+                            str += '<li>' + arrayLugar[y].espacios[i].nombre + '</li>';
+                        else {
+                            str += '<li>' + arrayLugar[y].espacios[i].nombre + '</li>';
+                        }
+                    }
+
+                }
+
+                var lb5 = document.createElement('section');
+                lb5.setAttribute('class', 'label3');
+                lb5.innerHTML = str;
+
+                row1.appendChild(lb4);
+                row1.appendChild(lb5);
+                row1.setAttribute('class', 'child2-1');
+
+                var lb6 = document.createElement('section');
+                lb6.setAttribute('class', 'label');
+                lb6.innerHTML = 'Costo: $' + arrayLugar[y].costo;
+
+                var lb7 = document.createElement('section');
+                lb7.setAttribute('class', 'label');
+                lb7.innerHTML = 'Apropiado para ' + arrayLugar[y].capacidad + ' personas';
+
+                row2.appendChild(lb6);
+                row2.appendChild(lb7);
+                row2.setAttribute('class', 'child2-2');
+
+                arrayDirec = arrayLugar[y].direccion;
+                if (arrayDirec.calle == null) {
+                    var calle = '';
+                } else {
+                    var calle = 'Ubicado en ' + arrayDirec.calle;
+                }
+                if (arrayDirec.NI == null) {
+                    var numInt = '';
+                } else {
+                    var numInt = ' ' + arrayDirec.NI;
+                }
+                if (arrayDirec.NE == null) {
+                    var numExt = '';
+                } else {
+                    var numExt = '-' + arrayDirec.NE;
+                } if (arrayDirec.CP == null) {
+                    var cp = '';
+                } else {
+                    var cp = ' ' + arrayDirec.CP;
+                }
+                if (arrayDirec.municipio.nombre == null) {
+                    var mun = '';
+                } else {
+                    var mun = ' ' + arrayDirec.municipio.nombre;
+                }
+
+                var direccion = calle + numInt + numExt + cp + mun;
+
+                row3.innerHTML = direccion;
+                row3.setAttribute('class', 'label');
+
+                
+                row4.setAttribute('class', 'label');                
 
 
-    while (arrayLugar[x]) {
+                lugar_section.appendChild(child1);
+                lugar_section.appendChild(child2);
 
-        var table = document.createElement("table");
-
-        table.style.width = "80%";
-        table.style.marginRight = "8%";
-        table.style.border = "2px solid";
-        table.style.marginBottom = "3%";
-
-        var tr1 = document.createElement("tr");
-        var tr2 = document.createElement("tr");
-        var tr3 = document.createElement("tr");
-        var tr4 = document.createElement("tr");
-        var tr5 = document.createElement("tr");
-        var tr6 = document.createElement("tr");
-        var tr7 = document.createElement("tr");
-        
-
-        tr1.innerHTML = "<td> Numero </td> <td> " + arrayLugar[x].num + "</td> ";
-        tr2.innerHTML = "<td> Nombre </td> <td> " + arrayLugar[x].nombre + "</td> ";
-        tr3.innerHTML = "<td> Descripción </td> <td> " + arrayLugar[x].desc + "</td> ";
-        tr4.innerHTML = "<td> Costo </td> <td> " + arrayLugar[x].costo + "</td> ";
-        tr5.innerHTML = "<td> Capacidad </td> <td> " + arrayLugar[x].capacidad + "</td>  ";
-        tr6.innerHTML = "<td> Tipo de lugar </td> <td> " + arrayLugar[x].tipoLugar.nombre + "</td>";
-        
-
-        var str = "";
-      
-        for (var i = 0; i < arrayLugar[x].espacios.length; i++) {
-
-            if (i!=arrayLugar[x].espacios.length-1)
-                str += arrayLugar[x].espacios[i].nombre + ", ";
-            else {
-                str += arrayLugar[x].espacios[i].nombre;
-
+                y++;
             }
-        }
-
-        tr7.innerHTML = "<td> Espacios </td> <td> " + str + "</td>";        
-        
-
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5, tr6,tr7];
 
 
-        for (z = 0; z < 7; z++) {
-            table.appendChild(arrayTr[z]);
+            //panel.appendChild(lb7);
+            //panel.appendChild(lb7);
+            //panel.appendChild(right_arrow);
+            //panel.appendChild(left_arrow);
         }
 
 
-        var arrayDirec = arrayLugar[x].direccion;
 
-        if (arrayDirec.calle != null || arrayDirec.NI != null || arrayDirec.NE != null || arrayDirec.CP != null) {
-
-            var trC = document.createElement("tr");
-            var trNI = document.createElement("tr");
-            var trNE = document.createElement("tr");
-            var trCP = document.createElement("tr");
-            var trMun = document.createElement("tr");
-
-            trC.innerHTML = " <td> Calle </td> <td> " + arrayDirec.calle + "</td>";
-            trNI.innerHTML = "<td> No. Interno </td> <td> " + arrayDirec.NI + "</td>";
-            trNE.innerHTML = "<td> Num. Ext </td> <td> " + arrayDirec.NE+ "</td> ";
-            trCP.innerHTML = " <td> Código Postal </td> <td> " + arrayDirec.CP + "</td>  ";
-            trMun.innerHTML = " <td> Municipio </td> <td> " + arrayDirec.municipio.nombre + "</td>  ";
-
-            var arrayDir = [trC, trNI, trNE, trCP,trMun];
-
-            for (y = 0; y < 5; y++) {
-                table.appendChild(arrayDir[y]);
-            }
-        }                   
-        
-
-
-        list.appendChild(table);
-
-        if (arrayLugar[x].imagenes.length > 0) {
-            var img = document.createElement("img");
-            img.style.width = "20%";
-            img.src = "../img/lugares/" + arrayLugar[x].num + "/" + arrayLugar[x].imagenes[0].nombre;
-            list.appendChild(img);
+        if (x == 0) {
+            panel.appendChild(right_arrow);
+        } else {
+            panel.appendChild(right_arrow);
+            panel.appendChild(left_arrow);
         }
-        x++;
+
+
     }
+
+
+    showPanel(slideIndex);
+}
+
+
+function plusPaneles(n) {
+    showPanel(slideIndex += n);
+}
+
+function showPanel(n) {
+    var i;
+    var slides = document.getElementsByClassName("paneles");
+    //console.log(document.getElementsByClassName('slide'));
+
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+
+
 }

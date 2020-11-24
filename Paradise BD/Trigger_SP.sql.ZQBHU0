@@ -79,7 +79,7 @@ create procedure SP_delete_telefono(
 in num int
 )
 begin 
-delete from telef_agentes where tgNum=num;
+delete from telef_agen where tgNum=num;
 
 end //
 DELIMITER ;

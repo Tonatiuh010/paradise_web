@@ -230,12 +230,16 @@ require_once("usuario.php");
 
                   } else {
 
+
+
                     return "Registrado";
                    
-                    mysqli_stmt_close($command);
-					$conn->close();
+                    
                   }
             }
+
+            mysqli_stmt_close($command);
+		    $conn->close();
         }
 
         public function updateCliente($id,$tel,$name,$pwd){

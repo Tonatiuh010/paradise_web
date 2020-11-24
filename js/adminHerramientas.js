@@ -367,16 +367,16 @@ function showPanel(n) {
     var slides = document.getElementsByClassName("paneles");
     //console.log(document.getElementsByClassName('slide'));
 
-        list.appendChild(table);
+        //list.appendChild(table);
 
-        if (arrayLugar[x].imagenes.length > 0) {
-            var img = document.createElement("img");
-            img.style.width = "20%";
-            img.src = "../img/lugares/" + arrayLugar[x].num + "/" + arrayLugar[x].imagenes[0].nombre;
-            list.appendChild(img);
-        }
+        //if (arrayLugar[x].imagenes.length > 0) {
+        //    var img = document.createElement("img");
+        //    img.style.width = "20%";
+        //    img.src = "../img/lugares/" + arrayLugar[x].num + "/" + arrayLugar[x].imagenes[0].nombre;
+        //    list.appendChild(img);
+        //}
 
-        x++;
+        //x++;
 
     if (n < 1) {
         slideIndex = slides.length;

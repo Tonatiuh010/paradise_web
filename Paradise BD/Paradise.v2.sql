@@ -248,4 +248,12 @@ create table clientes_Baja
 );*/
 
 
-
+create table imagenesUsuario
+(		
+	img_Num	int	auto_increment not null,
+	img_Nombre text not null,		
+	FK_Usuario int not null,	
+    
+    constraint PK_imagenes_Num primary key (img_Num),
+    constraint FK_imagenes_Usuario foreign key (FK_Usuario) references usuario(usNum) on delete cascade
+);

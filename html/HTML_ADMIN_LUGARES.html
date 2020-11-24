@@ -25,7 +25,7 @@
             <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="login" style="display:none;">
-                <a href="construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="HTML_ADMIN_RESERVACIONES.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
             </article>
 
@@ -95,7 +95,8 @@
 
         <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco--> 
 
-            <section class="slides fade"  >        
+            <section class="slides fade"  >    
+                <h3>Buscar Lugar</h3><br />
                 <section class="shcAdmin">
                     <input type="search" id="shcId" class="busAdmin" placeholder="¿Qué estás buscando?" />
                     <button type="button" id="search" class="btAdmin" onclick="buscarLugar()">Buscar</button>
@@ -107,7 +108,7 @@
             <section class="slides fade" >
                 <section class='registerSection' name='searchAdminForm'>
 
-                      
+                    <h3>Registrar Lugar</h3><br />
 
                         <label>Nombre del Lugar:</label> 
                             <input class="in" type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
@@ -249,7 +250,14 @@
                 <button type="button" class="botonc" onclick="closeEditImgDialog()">Guardar Cambios</button>
             </form>
 
-            <section id="imgList"></section>
+            
+
+            <section id="imgList" class="listaDialogo">
+                <section id="container" style="height:auto">
+
+                </section>
+
+            </section>
             <br />
 
         </dialog>
@@ -262,12 +270,13 @@
         
 
         function loading() {        
-
+            sesion();
             loadOptions();           
 
             showSlides(1);
 
-            sesion();
+            buscarLugar();
+            
         }
 
         

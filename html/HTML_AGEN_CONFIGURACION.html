@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../img/Loto_icon.png">
 
     <script src="../js/dialog.js" charset="ISO-8859-1"></script>
-    <script src="../js/agenteReservaciones.js" charset="ISO-8859-1"></script>
+    <script src="../js/agenteConfiguracion.js" charset="ISO-8859-1"></script>
     <script src="../js/session.js" charset="ISO-8859-1"></script>
 </head>
 
@@ -73,57 +73,69 @@
 
                 <li>
                     <a href="HTML_AGEN_HISTORIAL.html">Historial</a>
-                </li>    
+                </li>       
                 
                 <li>
                     <a href="HTML_AGEN_CONFIGURACION.html">Configuración</a>
-                </li>                            
+                </li>                         
             </ul>
         </section>
 
-        <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco-->
-
-            <section class="slides fade"  >   
-                <h3>Reservaciones En proceso</h3><br />                                                         
-                <section id="listReservaciones"></section>                          
-            </section>                                                                        
+        <section class="sn">
+            <!--Seccion sin nombre, toda la que esta en blanco-->
+            <section class="slides fade" >
+                <h3>Configuracion De cuenta</h3><br />
+                <section id="data"></section>
+                <button class="botond" onclick="abrirDialogEdit()">
+                    Actualizar
+                </button>
+            </section>     
+                                                             
             
         </section>
 
     </section>
 
 
-        <!-- ################################### DIALOGO ASIGAR NOTAR Y DAR DE ALTA ######################## -->
+        <!-- ######################################## Dialogo ########################################### -->
         <dialog id="update">
-            <form>
+            <form method="post" action="../php/actions/update_agente.php" enctype="multipart/form-data">
+                
+                <label>Foto:</label>
+                <input type="file" class="upload" name="files" accept="image/*" />
 
-                <label>Número de Reservación:</label>
-                <input type='text' class="dlabel" id='lblNum' required disabled><br /><br />
+                
+                    <!--<label >Nueva Contraseña:&nbsp;</label>
+                    <input class="dlabel" name="txtPass" type="password" id="psswd" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br /><br /><br />
 
+                    <label >Confirmar Contraseña:&nbsp;</label>
+                    <input class="dlabel" name="txtConfiPass" type="password" id="veri_psswd" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br /><br /><br />
+                 
+                
+                    <label >Nuevo Usuario:&nbsp;</label>
+                    <input class="dlabel" name="txtUsuario" type="text" id="txtUsuario" title="Puede contener números, letras en mayúsculas y minusculas" required><br /><br /><br />                                        
+                
+                    <label >Número de Teléfono: </label>
+                    <input class="dlabel" name="txtTelefono" type="tel" id="txtTelefono" required /><br /><br /><br />-->
 
-                <label>Notas:</label><br />
-                <textarea rows="15" cols="80" id="txtNotas"></textarea>
-
-                <select id="statusShc" class="select">
-
-                    <option value="Rechazada">
-                        Rechazar
-                    </option>
-
-                    <option value="Autorizada">
-                        Autorizar
-                    </option>
-
-                </select>
+                    
+                    
                 <br /><br /><br />
-                <button type="button" class="botond" onclick="altaReservacion()">Enviar</button>
-                <button type="button" class="botonc" onclick="cerrar()">Cancelar</button>
 
+                <input type="submit" class="botond" value="Enviar">
+                <button  class="botonc" onclick="closeDialogEdit()">Cancelar</button>
+                <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
             </form>
-        </dialog>
-        <!-- ################################### DIALOGO ASIGAR NOTAR Y DAR DE ALTA ######################## -->
 
-           
+            <section id="secTel"></section>
+
+
+        </dialog>
+
+
+        <!-- ######################################## Dialogo ########################################### -->
+       
+        
     </main>
 
     
@@ -132,28 +144,22 @@
     <script>        
 
         function loading() {           
-            sesion();         
-
-            showSlides(0);            
-
-            loadReservaciones();                        
-            
+            sesion();                                                         
+            showSlides(0);
+            buscarAgente();
         }
 
-       
         function showSlides(n) {
-
-            
             var i;
-            var slideArray = document.getElementsByClassName("slides");      
-                    
+            var slideArray = document.getElementsByClassName("slides");
 
-            for (i = 0; i < slideArray.length;i++){               
-                slideArray[i].style.display = "none";                
+
+            for (i = 0; i < slideArray.length; i++) {
+                slideArray[i].style.display = "none";
             }
 
             slideArray[n].style.display = "block";
-        }        
+        }
 
     </script>
 

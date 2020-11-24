@@ -241,7 +241,6 @@ function fillLugarShc(ob) {
     var paneles = arreglos / 5;
     paneles = Math.ceil(paneles);
 
-
     var y = 0;
 
     for (x = 0; x < paneles; x++) {
@@ -605,7 +604,7 @@ function editImgDialog(obj) {
 
     imgForm.appendChild(input);
 
-    var section = document.getElementById("imgList");
+    var section = document.getElementById("container");
 
         if (imgArray.length>0){
             for (var a = 0; a < imgArray.length; a++) {

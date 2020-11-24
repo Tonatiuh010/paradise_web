@@ -37,6 +37,24 @@
                      
         }
 
+        public function insertImagenUser($n){
+            $sql="insert into imagenesUsuario (img_Nombre,FK_Usuario) values (?,?);";
+
+            $conn=mysqlConnection::getConnection();
+
+            $conn->query("delete from imagenesUsuario where FK_Usuario=".$n.";");
+
+            $command=$conn->prepare($sql);
+            $command->bind_param('si',$this->nombre,$n);
+            $command->execute();
+
+            if ($command->error!=""){
+                    echo 'Error: '.$command->error;
+             } 
+
+                mysqli_stmt_close($command);
+                $conn->close();        
+        }
 
         public function insertImagen($n){
             $sql="insert into imagenesLugar (img_Nombre,FK_Lugar) values (?,?);";

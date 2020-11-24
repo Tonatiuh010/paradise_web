@@ -21,10 +21,10 @@
             <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-            <article class="pMTxt" id="sesion"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
+            <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="login" style="display:none;">
-                <a href="construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="HTML_ADMIN_RESERVACIONES.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
             </article>
 
@@ -89,7 +89,7 @@
 
                 <section class="slides fade">
                     <!-- Sección Municipios -->
-
+                    <h3>Buscar Lugares Por Municipio</h3><br />
                     <section>
                         <select class="select" id="CBCiudades" required onchange="buscarLugaresMunicipio()">
                             <option value="TIJ">
@@ -133,6 +133,7 @@
                     <br /><br />
 
                         <section class="espaciosForm fade">
+                            <h3>Insertar Espacio</h3><br />
                             <!-- Insert -->
                             <br /><br />
                             <label>Nombre del Espacio:</label>
@@ -144,7 +145,7 @@
                         </section>
 
                         <section class="espaciosForm fade">
-                            <!-- Consult -->
+                            <!-- Consult --><h3>Lista Espacios</h3><br />
 
                             <section id="listEspacios"></section>
                         </section>
@@ -166,7 +167,7 @@
                     <br /><br />
 
                         <section class="TLForm fade">
-                            <!-- Insert -->
+                            <h3>Insertar Tipo De lugar</h3><br />
                             <br /><br />
                             <label>Tipo de lugar:</label>
                             <input class="in" type='text' id='txtTL' maxlength="30" autofocus required><br /><br /><br />
@@ -177,7 +178,7 @@
                         </section>
 
                         <section class="TLForm fade">
-                            <!-- Consult -->
+                            <h3>Lista Tipo Lugares</h3><br />
                             <section id="listTL"></section>
                         </section>
 
@@ -195,10 +196,14 @@
     <script>
 
 
-        function loading() {           
+        function loading() {
+            sesion();
             showSlides(0);
             showSlidesEspacios(0)
             showSlidesTL(0)
+            buscarEspacios();
+            buscarLugaresMunicipio();
+            buscarTL();
         }
 
 

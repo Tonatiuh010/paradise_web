@@ -34,9 +34,17 @@ function registrarAgente() {
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            createDialog();
-            document.getElementById("msg").innerHTML = ajax.responseText;
-            clearForm();
+            //console.log(ajax.responseText);
+            var res = JSON.parse(ajax.responseText);
+
+            if (res.res==false){
+                console.log(res.error);
+            } else {
+                location.reload();
+             
+            }
+
+            
         }
     };
 
@@ -54,7 +62,6 @@ function registrarAgente() {
 
 
 function buscarAgente() {
-    createDialog();
     document.getElementById("listAgen").innerHTML = "";
 
     var ajax = new XMLHttpRequest();
@@ -265,7 +272,6 @@ function fillAgenteShc(ob) {
 
     }
 
-
     showPaneles(slideIndex);
 
 }
@@ -292,7 +298,5 @@ function showPaneles(n) {
     }
 
     slides[slideIndex - 1].style.display = 'block';
-
-
 }
 

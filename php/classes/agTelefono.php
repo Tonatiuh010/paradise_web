@@ -35,6 +35,25 @@
                      
             }
 
+            public function deleteTelefono(){
+                $sql="call SP_delete_telefono(?);";
+            $conn=mysqlConnection::getConnection();
+            $command=$conn->prepare($sql);
+            $command->bind_param('i',$this->num);
+
+            $command->execute();
+            
+             if ($command->error!=""){
+                    return false;
+                    die;
+             }
+
+             return true;
+
+                mysqli_stmt_close($command);
+                $conn->close();        
+            }
+
             public function getJsonObject(){
 
                 return json_encode(

@@ -18,29 +18,29 @@ select * from espacio;
 
 
 ########################################### AGENTES ###################################################################
-# call SP_insert_userAg ('jose_guadalupe','constrasenia','joseGuadalupe@outloo.com');
+# call SP_insert_userAg (@num ,'jose_guadalupe','constrasenia','josSSeGuadalupe@outloo.com');
 
-call SP_insert_userAg ('user1','St@rt123','iabarcae@yahoo.es');
-call SP_insert_userAg ('admin','P@ssw0rd','maeillanes@hotmail.com');
-call SP_insert_userAg ('alex','bl4ck4ndwhite','osabarca@hotmail.com'); 
-call SP_insert_userAg ('pos','administrator','cabrigo@garmendia.cl'); 
-call SP_insert_userAg ('demo','.......','Sb.nashxo.sk8@hotmail.com'); 
-call SP_insert_userAg ('sql','123456','fran.afull@live.cl'); 
-call SP_insert_userAg (null,'654321','carlosaguileram@hotmail.com'); 	 
-call SP_insert_userAg (null,'password','ikis_rojo@hotmail.com'); 
-call SP_insert_userAg (null,'constraseña','daniela_aguilera_m500@hotmail.com'); 
-call SP_insert_userAg (null,'Juana','vizkala@hotmail.com');	 
-call SP_insert_userAg (null,'123456','alexus3@hotmail.com');	
-call SP_insert_userAg (null,'654321','capitanaguilera@hotmail.com');	 
-call SP_insert_userAg (null,'098765','apalamosg@hotmail.com');	 
-call SP_insert_userAg (null,'567890','niikhox__@hotmail.com');
-call SP_insert_userAg (null,'345678','luuuuuuci@hotmail.com'); 
-call SP_insert_userAg (null,'876543','kristian_siempre_azul@hotmail.com');
+call SP_insert_userAg (@num,'user1','St@rt123','iabarcae@yahoo.es');
+call SP_insert_userAg (@num,'admin','P@ssw0rd','maeillanes@hotmail.com');
+call SP_insert_userAg (@num,'alex','bl4ck4ndwhite','osabarca@hotmail.com'); 
+call SP_insert_userAg (@num,'pos','administrator','cabrigo@garmendia.cl'); 
+call SP_insert_userAg (@num,'demo','.......','Sb.nashxo.sk8@hotmail.com'); 
+call SP_insert_userAg (@num,'sql','123456','fran.afull@live.cl'); 
+call SP_insert_userAg (@num,null,'654321','carlosaguileram@hotmail.com'); 	 
+call SP_insert_userAg (@num,null,'password','ikis_rojo@hotmail.com'); 
+call SP_insert_userAg (@num,null,'constraseña','daniela_aguilera_m500@hotmail.com'); 
+call SP_insert_userAg (@num,null,'Juana','vizkala@hotmail.com');	 
+call SP_insert_userAg (@num,null,'123456','alexus3@hotmail.com');	
+call SP_insert_userAg (@num,null,'654321','capitanaguilera@hotmail.com');	 
+call SP_insert_userAg (@num,null,'098765','apalamosg@hotmail.com');	 
+call SP_insert_userAg (@num,null,'567890','niikhox__@hotmail.com');
+call SP_insert_userAg (@num,null,'345678','luuuuuuci@hotmail.com'); 
+call SP_insert_userAg (@num,null,'876543','kristian_siempre_azul@hotmail.com');
 
 select * from usuario;
 
 #call SP_insert_agente ('JOSE GUADALUPE','LOZANO','VALDEZ','2000-12-23','Masculino','joseGuadalupe@outloo.com','6645577934');
-
+select * from agente;
 call SP_insert_agente ('ANA CAROLINA','LOPEZ','MARTINEZ', '2000-12-23','Femenino','iabarcae@yahoo.es',null);
 call SP_insert_agente ('MANUEL','MENDEZ','HERNANDEZ','1990-08-03','Masculino','maeillanes@hotmail.com','6646211878');
 call SP_insert_agente ('MARCO ANTONIO','RAMIREZ','LOZANO','1980-01-12','Masculino','osabarca@hotmail.com',null);
@@ -58,6 +58,8 @@ call SP_insert_agente ('JUAN CARLOS','JARAMILLO','VAZQUEZ','1980-01-12','Masculi
 call SP_insert_agente ('VICTOR ALFONSO','CALDERON','TURRUBIATES','1990-08-05','Masculino','luuuuuuci@hotmail.com','6646834654');
 call SP_insert_agente ('MARTHA ALICIA','LEON','CARREÑO','1995-10-03','Femenino','kristian_siempre_azul@hotmail.com',null);
 
+
+insert into telef_agentes (tgTelefono,FK_agente)values('6645757968','AAN0LZP');
 /*
 call SP_insert_agente ('RODOLFO','HERNANDEZ','AVILA','1989-07-21','Masculino','6646834654');
 call SP_insert_agente ('JULIO CESAR','JUAREZ','BORRAYO','1980-01-12','Masculino','6646073608');
@@ -71,18 +73,18 @@ select * from agente;
 ########################################### CLIENTES ###################################################################
 # call SP_insert_userCli ('daniel01','basura','daniel@outlook.com');
 
-call SP_insert_userCli (null,'123456','m.altamiro@gmail.com');
-call SP_insert_userCli ('zuleima05','654321','zuleima@hotmail.com');
-call SP_insert_userCli ('marisolS','098765','marisolSP@gmail.com');
-call SP_insert_userCli ('Mgonzales','contrasenia','gonzalesMR@hotmail.com');
-call SP_insert_userCli (null,'password','guadalupe@hotmail.com');
-call SP_insert_userCli ('Arely15','arely','arelyY@outlook.com');
-call SP_insert_userCli ('juan_espinoza','correo','juan.ER@gmail.com');
-call SP_insert_userCli (null,'salome','salome@gmail.com');
-call SP_insert_userCli ('solis_emma','pelicula','emmaPSR@outlook.com');
-call SP_insert_userCli ('daniel01','basura','daniel@outlook.com');
-call SP_insert_userCli (null,'guadalupe','mariaGMc@gmail.com');
-call SP_insert_userCli ('jose_guadalupe','constrasenia','joseGuadalupe@outlook.com');
+call SP_insert_userCli (@num,null,'123456','m.altamiro@gmail.com');
+call SP_insert_userCli (@num,'zuleima05','654321','zuleima@hotmail.com');
+call SP_insert_userCli (@num,'marisolS','098765','marisolSP@gmail.com');
+call SP_insert_userCli (@num,'Mgonzales','contrasenia','gonzalesMR@hotmail.com');
+call SP_insert_userCli (@num,null,'password','guadalupe@hotmail.com');
+call SP_insert_userCli (@num,'Arely15','arely','arelyY@outlook.com');
+call SP_insert_userCli (@num,'juan_espinoza','correo','juan.ER@gmail.com');
+call SP_insert_userCli (@num,null,'salome','salome@gmail.com');
+call SP_insert_userCli (@num,'solis_emma','pelicula','emmaPSR@outlook.com');
+call SP_insert_userCli (@num,'daniel01','basura','daniel@outlook.com');
+call SP_insert_userCli (@num,null,'guadalupe','mariaGMc@gmail.com');
+call SP_insert_userCli (@num,'jose_guadalupe','constrasenia','joseGuadalupe@outlook.com');
 
 # call SP_insert_cliente ('DANIEL','TINAJERO','TRISTAN','1980-01-15','6647733133','daniel@outlook.com');
 

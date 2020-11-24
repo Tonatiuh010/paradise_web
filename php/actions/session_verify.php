@@ -8,11 +8,11 @@ session_start();
 
 if($_SESSION != null)
 {   
+    
     $ob_user=array('res'=>true,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID']);
     echo json_encode($ob_user);
 
-}else
-{   
+}else{   
     session_destroy();
     //header("Location:../index.html");
     $ob_user=array('res'=>false,'tipo'=>'','user'=>'');

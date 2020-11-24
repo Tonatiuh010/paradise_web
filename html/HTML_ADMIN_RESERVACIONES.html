@@ -21,10 +21,10 @@
             <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
             <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-            <article class="pMTxt" id="sesion"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
+            <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="login" style="display:none;">
-                <a href="construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="HTML_ADMIN_RESERVACIONES.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
             </article>
 
@@ -88,13 +88,14 @@
                 <!--Seccion sin nombre, toda la que esta en blanco-->
 
                 <section class="slides fade">
-                                          
+                     <h3>Pendientes</h3><br />
                     <section id="listAltaReservaciones">
 
                     </section>                 
                 </section>
 
                 <section class="slides fade">
+                    <h3>Consultar Reservaciones</h3><br />
                     <!-- Sección Consultas -->
                     <select id="statusShc" class="select" onchange="buscarPReservacionesEstado()">
                         <option value="Proceso">
@@ -105,8 +106,8 @@
                             Rechazada
                         </option>
 
-                        <option value="Finalizada">
-                            Finalizada
+                        <option value="Autorizada">
+                            Autorizada
                         </option>
 
                     </select>
@@ -128,8 +129,8 @@
 
         <dialog id="addAgente">
             <section class="shcAdmin" style="clear:both">
-                <input type="search" id="shcId" class="busqueda" placeholder="¿Qué estás buscando?" />
-                <button type="button" id="search" class="boton" onclick="buscarAgente()">Buscar</button>
+                <input type="search" id="shcId" class="busAdmin" placeholder="¿Qué estás buscando?" />
+                <button type="button" id="search"  class="btAdmin" onclick="buscarAgente()">Buscar</button>
             </section>
             <br><br><br>
           
@@ -155,7 +156,8 @@
 
     <script>
 
-        function loading() {           
+        function loading() {
+            sesion();
             showSlides(0);
             loadReservaciones();
             buscarPReservacionesEstado();

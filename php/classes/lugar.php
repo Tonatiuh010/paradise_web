@@ -164,6 +164,7 @@
 
         public function insertLugar (){
             $conn=mysqlConnection::getConnection();
+
             $conn->query("set @numLug=0;");
 
             $sql="call SP_insert_lugar(@numLug,?,?,?,?,?,?,?,?,?,?);";//SQL Sentence

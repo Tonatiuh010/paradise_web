@@ -179,7 +179,7 @@ require_once("agTelefono.php");
             $correo= parent:: getCorreo();
 
             if($verificar==false){
-                echo 'Cuenta de usuario ya existe verifique su nombre de usuario o su correo';
+                return json_encode(array("res"=>false, "error"=>'Cuenta de usuario ya existe verifique su nombre de usuario o su correo'));
             }else{
                   
                 $tel=$this->telefono;
@@ -200,9 +200,10 @@ require_once("agTelefono.php");
                       $command->execute();
 
                       if ($command->error!=""){
-                        echo "Error ---> ".$command->error;                    
+                        return json_encode(array("res"=>false, "error"=>$command->error));                    
                       } else {
-                        echo "Registrado";
+
+                        return json_encode(array("res"=>true));
                       }
                     
                 }else{
@@ -221,11 +222,11 @@ require_once("agTelefono.php");
             
                         $command->execute();
 
-                        if ($command->error!=""){
-                        echo "Error ---> ".$command->error;                    
-                        } else {
-                        echo "Registrado";
-                        }
+                      if ($command->error!=""){
+                        return json_encode(array("res"=>false, "error"=>$command->error));                    
+                      } else {
+                        return json_encode(array("res"=>true));
+                      }
                 
 			  }
 
