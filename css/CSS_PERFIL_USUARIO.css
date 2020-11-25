@@ -611,3 +611,47 @@ dialog[open] {
 .next {
     float: right;
 }
+
+
+main dialog[open] {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 56%;
+    height: 75%;
+    text-align: left;
+    /*background-color: rgb(255,240,220);*/
+    background-color:white;
+    padding-top: 3%;
+    padding-left:7%;
+    padding-right:7%;
+    font-family:Georgia;
+    font-size:medium;
+    line-height: 1.5;
+    color: black;
+    border: none;
+    border-radius: 2%;
+/*    border-color: hsl(0, 0%, 92%);*/
+    /*background-color: hsl(0, 0%, 92%);*/
+    /*background-color: rgb(135,225,215);*/
+}
+
+section dialog[open] {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 40%;
+    height: 60%;
+    text-align: left;
+    background-color: white;
+    padding-top: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: Georgia;
+    font-size: medium;
+    line-height: 1.5;
+    color: darkslategray;
+    border: none;
+    border-radius: 2%;
+
+}
+
+

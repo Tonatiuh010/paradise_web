@@ -12,7 +12,7 @@
     <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
     <link rel="stylesheet" href="../css/dialogos_css.css" />
 </head>
-<body onload="sesion(1);">
+<body onload="sesion(1); buscarCliente();">
         <nav class="NavOficial">
             <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -81,6 +81,9 @@
                     <h3>CONFIGURACIÓN GENERAL DE LA CUENTA</h3>
                     <br /><br />
                     <section id="data" ></section>
+
+                    <button class="botonf" onclick="abrirDialogEdit()">Añadir imagen</button>
+
                     <section class="update" id="update">
                         <section id="udpPsswd" style="display:none">
                             <label class="pss_us">Nueva Contraseña:&nbsp;</label>
@@ -111,9 +114,22 @@
 
 
         </section>
+        <dialog id="dialogUpd">
+            <form method="post" action="../php/actions/registrarImgUser.php" enctype="multipart/form-data">
 
+                <label>Foto:</label>
+                <input type="file" class="upload" name="files" accept="image/*" />
+
+
+                <input type="submit" class="botond" value="Enviar">
+                <button class="botonc" onclick="closeDialogEdit()">Cancelar</button>
+                <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
+            </form>
+        </dialog>
     </main>
 
+
+    
     
 
 </body>

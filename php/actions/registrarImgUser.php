@@ -26,7 +26,7 @@ require_once("../classes/imagenes.php");
         $obj->setNombre($_FILES['files']['name']);  
         $obj->insertImagenUser($_SESSION['USER']);
         
-        header("Location:../../html/HTML_AGEN_CONFIGURACION.html");                                      
+        header("Location:../../".$_SESSION['INDEX']);                                      
         
     } else {
         echo "Error";

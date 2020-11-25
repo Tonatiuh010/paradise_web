@@ -1,6 +1,21 @@
 // JavaScript source code
 
+function buscarCliente() {
+    var ajax = new XMLHttpRequest();
 
+    ajax.onreadystatechange = function () {
+        if (ajax.status == 200 && ajax.readyState == 4) {
+            //document.getElementById('data').innerHTML = ajax.responseText;
+            fillData(ajax.responseText);
+
+            //console.log(JSON.parse(ajax.responseText));
+        }
+    };
+
+    ajax.open("get", "../php/actions/show_cliente_info.php?", true);
+    ajax.send();
+
+}
 
 function usarConfiguracion() {
     //document.getElementById('reservacion').style.display = "None";
@@ -10,28 +25,18 @@ function usarConfiguracion() {
     document.getElementById('udpUser').style.display = "none";
     document.getElementById('udpPsswd').style.display = 'none';
     document.getElementById('udpTel').style.display = "none";
-    document.getElementById('data').innerHTML = '';
+    
     //document.getElementById('update').style.display = 'none';
 
 
-    var ajax = new XMLHttpRequest();
-
-    ajax.onreadystatechange = function () {
-        if (ajax.status == 200 && ajax.readyState == 4) {
-            //document.getElementById('data').innerHTML = ajax.responseText;
-            fillData(ajax.responseText);
-          
-            //console.log(JSON.parse(ajax.responseText));
-        }
-    };
-
-    ajax.open("get", "../php/actions/show_cliente_info.php?", true);
-    ajax.send();
+  
 }
 
 function fillData(ob) {
 
     var seccion = document.getElementById('data');
+
+    var obj = JSON.parse(ob);
 
     if (obj.usuario.imagen.length > 0) {
         var img = document.getElementById("imgCliente");
@@ -39,7 +44,7 @@ function fillData(ob) {
     }
 
     //--------------------------- Variables del JSON ------------------------------------------------
-    var obj = JSON.parse(ob);
+    
     var nombre = obj.nombre;
     var paterno = obj.paterno;
     var materno = obj.materno;
@@ -481,4 +486,16 @@ function buscarRes() {
 
 function reloadd() {
     location.reload();
+}
+
+function abrirDialogEdit() {
+    var dialog = document.getElementById("dialogUpd");
+    dialog.showModal();
+}
+
+
+function closeDialogEdit() {
+    var dialog = document.getElementById("dialogUpd");
+    dialog.close();
+
 }
