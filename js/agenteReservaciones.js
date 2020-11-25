@@ -1,5 +1,42 @@
 ﻿var slideReservaciones = 0;
 
+function buscarAgente() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            //console.log(ajax.responseText);
+
+            fillDataShc(ajax.responseText);
+        }
+    };
+
+
+    ajax.open("GET", "../php/actions/matriculaAgente.php?", true);
+    ajax.send();
+
+}
+
+function fillDataShc(ob) {
+
+    var obj = JSON.parse(ob);
+
+
+    if (obj.usuario.imagen.length > 0) {
+        var img = document.getElementById("imgAgente");
+        img.src = "../img/usuario/" + obj.usuario.num + "/" + obj.usuario.imagen[0].nombre;
+    }
+
+    var nombre = obj.nombre;
+
+    var nameTag = document.getElementById("user_name");
+    nameTag.innerText = nombre;
+
+
+
+
+}
+
 function loadReservaciones() {
     document.getElementById("listReservaciones").innerHTML = "";
 

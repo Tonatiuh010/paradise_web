@@ -27,8 +27,8 @@
             <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="login" style="display:none;">
-                <a href="HTML_ADMIN_RESERVACIONES.html";><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
+                <img src="../img/Loto_paradise.png" width="45%;" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="../php/actions/session_out.php"><img src="../img/log_out.png" width="25%;" /></a>
             </article>
 
         </section>
@@ -112,7 +112,7 @@
 
         function loading() {           
             
-            sesion();
+            sesion(3);
             showSlides(0);
             buscarClientes();
         }

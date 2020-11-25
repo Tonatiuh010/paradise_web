@@ -1,22 +1,100 @@
 <?php
 //sesion.php
-session_start();
 //verificar si la sesion ya tiene variables, 
 //es decir, si está activa o no
 //($_SESSION['id'] !='' && $_SESSION['user'] !='' && $_SESSION['type'] !='' ) no sirve
 
+/*Permissions Users*/
+ 
+// 0 - Everyone
+// 1 - Client
+// 2 - Agent
+// 3 - Admin
 
-if($_SESSION != null)
-{   
+session_start();
+
+
+$type=$_GET['b'];
+
+  
     
-    $ob_user=array('res'=>true,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID']);
-    echo json_encode($ob_user);
+    switch ($type){
+        
+        case 0:            
 
-}else{   
-    session_destroy();
-    //header("Location:../index.html");
-    $ob_user=array('res'=>false,'tipo'=>'','user'=>'');
-    echo json_encode($ob_user);
-}
+            if($_SESSION != null){ 
+                
+                    $ob_user=array('res'=>true,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                    echo json_encode($ob_user);                
+                
+            }else{   
+                session_destroy();    
+                $ob_user=array('res'=>false,'tipo'=>'','user'=>'','index'=>'');
+                echo json_encode($ob_user);
+            }
+        break;
+
+        case 1:
+
+            if($_SESSION != null){ 
+
+               if ($_SESSION['TYPE']!='Cliente'){
+                    $ob_user=array('res'=>false,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                    echo json_encode($ob_user);
+                } else {
+                     $ob_user=array('res'=>true,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                     echo json_encode($ob_user);
+                }
+                
+            }else{
+                session_destroy();  
+                $ob_user=array('res'=>false,'tipo'=>'','user'=>'','index'=>'index.html');
+                echo json_encode($ob_user);
+            }
+
+        break;
+
+        case 2:
+            if($_SESSION != null){ 
+
+               if ($_SESSION['TYPE']!='Agente'){
+                    $ob_user=array('res'=>false,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                    echo json_encode($ob_user);
+                } else {
+                     $ob_user=array('res'=>true,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                     echo json_encode($ob_user);
+                }
+                
+            }else{
+                session_destroy();  
+                $ob_user=array('res'=>false,'tipo'=>'','user'=>'','index'=>'index.html');
+                echo json_encode($ob_user);
+            }
+        break;
+
+        case 3:
+            if($_SESSION != null){ 
+
+               if ($_SESSION['TYPE']!='Administrador'){
+                    $ob_user=array('res'=>false,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                    echo json_encode($ob_user);
+                } else {
+                     $ob_user=array('res'=>true,'tipo'=>$_SESSION['TYPE'],'user'=>$_SESSION['ID'],'index'=>$_SESSION['INDEX']);
+                     echo json_encode($ob_user);
+                }
+                
+            }else{
+                session_destroy();  
+                $ob_user=array('res'=>false,'tipo'=>'','user'=>'','index'=>'index.html');
+                echo json_encode($ob_user);
+            }
+        break;
+
+        default:
+            session_destroy();    
+            $ob_user=array('res'=>false,'tipo'=>'','user'=>'','index'=>'index.html');
+            echo json_encode($ob_user);
+        break;
+    }    
 
 ?>

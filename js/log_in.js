@@ -31,9 +31,9 @@ function fill(ob) {
         if (tipo == 'Cliente') {
             location.href = "../html/HTML_PERFIL_USUARIO.html";
         } else if (tipo == 'Agente') {
-            location.href = "../html/HTML_AGEN_LUGARES.html";
+            location.href = "../html/HTML_AGEN_RESERVACIONES.html";
         } else {
-            location.href = "../html/HTML_ADMIN_LUGARES.html";
+            location.href = "../html/HTML_ADMIN_RESERVACIONES.html";
         }
         //location.href = "../index.html";
     } else {

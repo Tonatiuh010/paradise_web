@@ -2,8 +2,8 @@
 
 <head>
     <script src="./js/main.js"></script>
-    <script src="./js/session.js" charset="ISO-8859-1"></script>
-
+    <!--<script src="./js/session.js" charset="ISO-8859-1"></script>-->
+    <script src="./js/error_dialog.js" charset="ISO-8859-1"></script>
 
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/CSS_CLIENTE1.css" type="text/css">
@@ -27,8 +27,8 @@
             <article class="pMTxt" id="log"><a href="./html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article class="pMTxt1" id="login" style="display:none;">
-                <a href="./html/construccion.html" ;><img src="img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                <a href="./php/actions/session_out.php" ;><img src="img/log_out.png" width="25%;" /></a>
+                <img src="img/Loto_paradise.png" width="45%;" id="imgHome"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="./php/actions/session_out.php"><img src="img/log_out.png" width="25%;" /></a>
             </article>
 
         </section>
@@ -139,19 +139,31 @@
 
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200 && ajax.readyState == 4) {
+
+                    
+
                     var obj_user = JSON.parse(ajax.responseText);
+
+                    //console.log(obj_user);
+
                     var respuesta = obj_user.res;
 
                     if (respuesta == true) {
-                        document.getElementById('login').style.display = "block";
                         document.getElementById('log').style.display = "none";
-                    }
+
+                        document.getElementById('login').style.display = "block";
+                        var lotoHome = document.getElementById('imgHome');
+                        lotoHome.addEventListener('click', function () {
+                            location.href = "./"+obj_user.index;
+                        });
+                        
+                    } 
 
 
                 }
             }
 
-            ajax.open("GET", "./php/actions/session_verify.php?", true);
+            ajax.open("GET", "./php/actions/session_verify.php?b=0", true);
             ajax.send();
         }
     </script>
@@ -159,7 +171,7 @@
     <script>        //Carrusel
 
         function loading() {
-            sesion();
+            sesion(2);
             loadPictures();
            
             

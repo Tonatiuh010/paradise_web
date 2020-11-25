@@ -33,6 +33,11 @@ function fillData(ob) {
 
     var seccion = document.getElementById('data');
 
+    if (obj.usuario.imagen.length > 0) {
+        var img = document.getElementById("imgCliente");
+        img.src = "../img/usuario/" + obj.usuario.num + "/" + obj.usuario.imagen[0].nombre;
+    }
+
     //--------------------------- Variables del JSON ------------------------------------------------
     var obj = JSON.parse(ob);
     var nombre = obj.nombre;

@@ -32,7 +32,7 @@ function showError(msg) {
     disableScroll();
     dialogo.showModal();
 }
-
+//backDrop;
 
 function closeError() {
     var dialogo = document.getElementById('dialog_error');

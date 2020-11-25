@@ -12,7 +12,7 @@
     <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
     <link rel="stylesheet" href="../css/dialogos_css.css" />
 </head>
-<body onload="sesion();">
+<body onload="sesion(1);">
         <nav class="NavOficial">
             <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
 
@@ -24,8 +24,8 @@
                 <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
                 <article class="pMTxt1" id="login" style="display:none;">
-                    <a href="construccion.html" ;><img src="../img/Loto_paradise.png" width="45%;" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="25%;" /></a>
+                    <img src="../img/Loto_paradise.png" width="45%;" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="../php/actions/session_out.php"><img src="../img/log_out.png" width="25%;" /></a>
                 </article>
 
             </section>
@@ -52,7 +52,7 @@
         <section class="secPrincipal">
             <section class="perfil">
                 <br />
-                <img src="../img/user_sin_foto.png" width="40%" />
+                <img src="../img/user_sin_foto.png" id="imgCliente" width="40%" />
                 <br />
                 <i id="user_name"></i>
                 <br /><br /><br />
