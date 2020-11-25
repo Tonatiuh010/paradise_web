@@ -7,7 +7,7 @@ function loadReservaciones() {
 
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            //console.log(ajax.responseText);
+           //console.log(ajax.responseText);
            fillReservacionAlta(ajax.responseText);            
 
         }

@@ -293,35 +293,7 @@ function fillLugarShc(ob) {
                 row3.innerHTML = direccion;
                 row3.setAttribute('class', 'label');
 
-                //EDITAR BUTTON
-                var btn = document.createElement("button");
-                btn.setAttribute('class', 'btnGLug1');
-
-                btn.addEventListener("click", function (_x) {
-                    return function () {
-                        abrir(arrayLugar[_x]);
-                    }
-
-                }(x));
-                btn.innerHTML = "Editar";
-
-
-                // ADD IMG BUTTON
-                var btnImg = document.createElement("button");
-                btnImg.setAttribute('class', 'btnGLug2');
-
-                btnImg.addEventListener("click", function (_x) {
-                    return function () {
-                        editImgDialog({ lugar: arrayLugar[_x].num, imagenes: arrayLugar[_x].imagenes });
-                    }
-
-                }(x));
-                btnImg.innerHTML = "Imagen";
-
-                row4.setAttribute('class', 'label');
-                row4.appendChild(btn);
-                row4.appendChild(btnImg);
-
+               
 
                 lugar_section.appendChild(child1);
                 lugar_section.appendChild(child2);

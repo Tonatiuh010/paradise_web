@@ -16,6 +16,9 @@ require_once("agTelefono.php");
         
         private $telefono;      //char(10)
 
+
+        
+
         public function getMatricula(){return $this->matricula;}
         public function setMatricula($var){$this->matricula=$var;}
 
@@ -82,7 +85,7 @@ require_once("agTelefono.php");
                   // Posible constructor para hacer búsqueda.
                   if (func_num_args()==1){                    
                       $sql="select * from VW_agente_admin where matricula= ?;";
-
+                       parent::__construct();
                       $conn=mysqlConnection::getConnection();
                       $command=$conn->prepare($sql);
                       $command->bind_param('s',$args[0]);

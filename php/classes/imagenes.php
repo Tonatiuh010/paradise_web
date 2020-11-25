@@ -30,8 +30,7 @@
               }
 
               //Buscar Constructor
-               if (func_num_args()==1){
-                    
+               if (func_num_args()==1){                    
                     $this->nombre=$args[0];                   
               }
                      
@@ -56,6 +55,7 @@
                 $conn->close();        
         }
 
+
         public function insertImagen($n){
             $sql="insert into imagenesLugar (img_Nombre,FK_Lugar) values (?,?);";
 
@@ -76,6 +76,31 @@
         public function getAllImagenesByLugar($n){
 
             $sql="select img_Num,img_Nombre from imagenesLugar where FK_Lugar=?";
+             $conn=mysqlConnection::getConnection();
+            $command=$conn->prepare($sql);
+            $command->bind_param('i',$n);
+            $command->execute();
+
+            $command->bind_result($numero,$nombre);
+
+            $list =array();
+
+            while ($command->fetch()){
+                $this->num=$numero;
+                $this->nombre=$nombre;
+                 array_push($list,json_decode(self::getJsonObject()));                                               
+            }
+
+            mysqli_stmt_close($command);
+                $conn->close();         
+                 return json_encode($list);
+
+        } 
+
+
+          public function getAllImagenesByUser($n){
+
+            $sql="select img_Num,img_Nombre from imagenesUsuario where FK_Usuario=?";
              $conn=mysqlConnection::getConnection();
             $command=$conn->prepare($sql);
             $command->bind_param('i',$n);

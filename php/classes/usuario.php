@@ -1,5 +1,7 @@
 <?php
 
+require_once("imagenes.php");
+
     abstract class usuario{
     
         private $num;           //int
@@ -7,7 +9,8 @@
         private $contrasenia;   //varchar
         private $correo;        //varchar
         private $tipo;          //varchar
-
+        
+        private $imagen;
 
         public function getNum(){return $this->num;}
         public function setNum($var){$this->num=$var;}
@@ -24,6 +27,9 @@
         public function getTipo(){return $this->tipo;}
         public function setTipo($var){$this->tipo=$var;}
 
+         public function getImagen(){return $this->imagen;}
+        public function setImagen($var){$this->imagen=$var;}
+
 
             public function __construct(){
                $args=func_get_args();
@@ -33,7 +39,9 @@
                     $this->nombre='';
                     $this->contrasenia='';  
                     $this->correo='';    
-                    $this->tipo='';                 
+                    $this->tipo='';      
+
+                    $this->imagen=new imagenes();           
               }
 
               if (func_num_args()==5){  
@@ -41,18 +49,21 @@
                     $this->nombre=$args[1];
                     $this->contrasenia=$args[2];  
                     $this->correo=$args[3];    
-                    $this->tipo=$args[4];                          
+                    $this->tipo=$args[4];      
+                    $this->imagen=new imagenes();                      
               }
             
               if (func_num_args()==3){                             
                     $this->nombre=$args[0];
                     $this->contrasenia=$args[1];  
                     $this->correo=$args[2];                             
+                    $this->imagen=new imagenes();  
               }         
 
               // Posible constructor para hacer búsqueda.
               if (func_num_args()==1){                    
-                    $this->codigo=$args[0];                                       
+                    $this->codigo=$args[0];         
+                    $this->imagen=new imagenes();                                
               }
   
             }
@@ -178,7 +189,8 @@
                         'nombre'=>$this->nombre,
                         'contrasenia'=>$this->contrasenia,
                         'correo'=>$this->correo,
-                        'tipo'=>$this->tipo
+                        'tipo'=>$this->tipo,
+                        'imagen'=>json_decode($this->imagen->getAllImagenesByUser($this->num))
                      )
             );
         }

@@ -364,6 +364,26 @@ main dialog[open] {
 }
 
 
+.perfil {
+    background-color: hsl(0, 0%, 92%);
+    width: 25%;
+    height: 100%;
+    clear: both;
+    font-family: Georgia;
+    float: left;
+    /*    background-color: var(--pcolor3);
+    width:30%;
+    height:90%;
+    clear:both;
+    float:left;
+    border-top-left-radius: 4%;
+    border-bottom-left-radius: 4%;
+    font-family:Georgia;
+    font-size:large;
+    color:darkslategrey;*/
+}
+
+
 /*SEGUNDO DIALOGO*/
 
 section dialog[open] {
@@ -439,6 +459,27 @@ section dialog[open] {
     height: 1%;
     clear: both;
 }
+
+
+.perfil {
+    background-color: hsl(0, 0%, 92%);
+    width: 25%;
+    height: 100%;
+    clear: both;
+    font-family: Georgia;
+    float: left;
+    /*    background-color: var(--pcolor3);
+    width:30%;
+    height:90%;
+    clear:both;
+    float:left;
+    border-top-left-radius: 4%;
+    border-bottom-left-radius: 4%;
+    font-family:Georgia;
+    font-size:large;
+    color:darkslategrey;*/
+}
+
 
 /*#########################################################################################################*/
 

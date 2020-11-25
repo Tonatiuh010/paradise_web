@@ -20,8 +20,16 @@ function buscarAgente() {
 function fillDataShc(ob) {    
     var seccion = document.getElementById('data');
     var sectionTel = document.getElementById('secTel');
+    
     //--------------------------- Variables del JSON ------------------------------------------------
     var obj = JSON.parse(ob);
+
+    
+    if (obj.usuario.imagen.length>0){
+        var img = document.getElementById("imgAgente");        
+        img.src = "../img/usuario/" + obj.usuario.num + "/" + obj.usuario.imagen[0].nombre;
+    }    
+
     var nombre = obj.nombre;
     var paterno = obj.paterno;
     var materno = obj.materno;
@@ -31,6 +39,11 @@ function fillDataShc(ob) {
     var usuario = obj.usuario.nombre;
     var contrasenia = obj.usuario.contrasenia;
     var correo = obj.usuario.correo;
+
+
+    var nameTag = document.getElementById("user_name");
+    nameTag.innerText = nombre;
+
     //--------------------------- Variables del JSON ------------------------------------------------
 
     //--------------------------- Elementos para append child ------------------------------------------------

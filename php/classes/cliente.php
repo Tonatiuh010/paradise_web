@@ -75,6 +75,9 @@ require_once("usuario.php");
                       $sql="select * from vw_cliente_perfil where num= ?;";
 
                       $conn=mysqlConnection::getConnection();
+
+                        parent::__construct();
+
                       $command=$conn->prepare($sql);
                       $command->bind_param('i',$args[0]);
                       $command->bind_result($num,                   //Generamos nuevas variables que nos
@@ -230,13 +233,13 @@ require_once("usuario.php");
 
                   } else {
 
-<<<<<<< HEAD
+
 
 
                     return "Registrado";
-=======
+
                     return "Registrado Exitosamente";
->>>>>>> 7ac3efacc0790e5eca189f72e50d06635a5de32a
+
                    
                     
                   }
