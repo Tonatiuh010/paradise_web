@@ -9,48 +9,56 @@
     var sctCiudades = document.getElementById("CBCiudades");
 
 
-        lugarOb = {
-            nombre: document.getElementById("txtNombreLugar").value,
-            desc: document.getElementById("txtDescLugar").value,
-            costo: document.getElementById("txtCostoLugar").value,
-            capacidad: document.getElementById("txtCapacidadLugar").value,
-            estado: sctCiudades.options[sctCiudades.selectedIndex].value,
-            tipoLugar: sctTP.options[sctTP.selectedIndex].value,
-            direc: new function () {
-                this.obDirec = {
-                    calle: document.getElementById("txtCalleDirec").value,
-                    numIn: document.getElementById("txtNumIntDirec").value,
-                    numEx: document.getElementById("txtNumExtDirec").value,
-                    cp: document.getElementById("txtCP").value
-                }
+    lugarOb = {
+        nombre: document.getElementById("txtNombreLugar").value,
+        desc: document.getElementById("txtDescLugar").value,
+        costo: document.getElementById("txtCostoLugar").value,
+        capacidad: document.getElementById("txtCapacidadLugar").value,
+        estado: sctCiudades.options[sctCiudades.selectedIndex].value,
+        tipoLugar: sctTP.options[sctTP.selectedIndex].value,
+        direc: new function () {
+            this.obDirec = {
+                calle: document.getElementById("txtCalleDirec").value,
+                numIn: document.getElementById("txtNumIntDirec").value,
+                numEx: document.getElementById("txtNumExtDirec").value,
+                cp: document.getElementById("txtCP").value
+            }
 
-                if (this.obDirec.calle == "" || this.obDirec.numIn == "" || this.obDirec.cp == "") {
-                    this.obDirec = false;
+            if (this.obDirec.calle == "" || this.obDirec.numIn == "" || this.obDirec.cp == "") {
+                this.obDirec = false;
+            }
+        },
+        espacios: new function () {
+            var a = 0;
+            this.arrayId = [];
+            while (CKS[a]) {
+                if (CKS[a].checked == true) {
+                    this.arrayId.push(CKS[a].value);
                 }
-            },
-            espacios: new function () {
-                var a = 0;
-                this.arrayId = [];
-                while (CKS[a]) {
-                    if (CKS[a].checked == true) {
-                        this.arrayId.push(CKS[a].value);
-                    }
-                    a++;
-                }
-            }            
+                a++;
+            }
+        },
+        verificacion: function () {
+           
+            if (this.nombre == "" || this.costo == "" || this.capacidad == "" || this.espacios.arrayId.length>0) {                
+                
+                return false;
+            } else {
+                
+                return true;
+            }
+            
+        }
+        
         };
 
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-
-            createDialog();
             
- 
-
             var response = JSON.parse(ajax.responseText);
             if (response.res!=true){
-                console.log("Error al momento de registrar: "+response.error);
+                showError("Error al momento de registrar: " + response.error);
             } else {
                 imgDialogOpen(response.num);
                 clearForm();
@@ -59,9 +67,19 @@
         }
     };
 
+    
+
     //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
     ajax.open("GET", "../php/actions/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
-    ajax.send();
+
+    if (lugarOb.verificacion()){
+        //ajax.send();
+    } else {
+      
+        var errorMsg = "Favor de Rellenar Todos los campos.";
+        showError(errorMsg);
+    }
+    
 }
 
 

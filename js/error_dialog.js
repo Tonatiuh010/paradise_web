@@ -1,4 +1,5 @@
 function createDialog(msg) {
+    
     var dialogo = document.createElement('dialog');
     dialogo.setAttribute('id', 'dialog_error');
 

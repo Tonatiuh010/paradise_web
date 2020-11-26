@@ -27,9 +27,6 @@ function usarConfiguracion() {
     document.getElementById('udpTel').style.display = "none";
     
     //document.getElementById('update').style.display = 'none';
-
-
-  
 }
 
 function fillData(ob) {
