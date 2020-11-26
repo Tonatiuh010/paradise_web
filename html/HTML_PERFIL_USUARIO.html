@@ -12,108 +12,116 @@
     <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
     <link rel="stylesheet" href="../css/dialogos_css.css" />
 </head>
-<body onload="sesion(1); buscarCliente();">
-        <nav class="NavOficial">
-            <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />
+<body onload="sesion(1);">
+    <nav class="navOficial">
+        <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
-            <section class="pruebaMenu">
-                <article class="pMT"><a href="../index.html" ;>INICIO</a></article>
-                <article class="pMTx"><a href="HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
-                <article class="pMT3"><a href="HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
-                <article class="pMT2"><a href="construccion.html" ;>PROMOCIONES</a></article>
-                <article class="pMTxt" id="log"><a href="HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
+        <section class="menu">
+            <article><a href="../index.html" ;>INICIO</a></article>
+            <article><a href="../html/HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article><a href="../html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
+            <article><a href="../html/construccion.html" ;>PROMOCIONES</a></article>
+            <article id="log"><a href="../html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
-                <article class="pMTxt1" id="login" style="display:none;">
-                    <img src="../img/Loto_paradise.png" width="45%;" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="../php/actions/session_out.php"><img src="../img/log_out.png" width="25%;" /></a>
+            <article id="login" style="display:none;">
+                <article class="login-icon">
+                    <a><img src="../img/Loto_paradise.png" width="40%;" height="100%" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="30%;" height="100%" /></a>
                 </article>
+            </article>
 
-            </section>
-            <br />
-            <section class="barraBusqueda">
-                <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-                <button type="button" id="search" class="boton">Buscar</button>
-            </section>
-            
-            <br />
+        </section>
+        <section></section>
+        <section class="barraBusqueda">
+            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="search" class="search-button">Buscar</button>
+        </section>
 
-        </nav>
+    </nav>
 
-    <br />
     <main>
         <nav>
-            <section class="Nav2do">
-                <hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">Inicio</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <a href="construccion.html">Agentes</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">Proveedores</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <a href="construccion.html">Otros Servicios</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;<a href="construccion.html">Contacto</a>&nbsp;&nbsp;&nbsp;<hr class="hotl" />
-            </section>
+            <a></a>
+            <a><hr class="hotl" /></a>
+            <a><hr class="hotl" /></a>
+            <a><hr class="hotl" /></a>
+            <a><hr class="hotl" /></a>
         </nav>
 
         <section class="secPrincipal">
             <section class="perfil">
-                <br />
-                <img src="../img/user_sin_foto.png" id="imgCliente" width="40%" />
-                <br />
+                <img src="../img/user_sin_foto.png" id="imgCliente" class="userFoto" />
                 <i id="user_name"></i>
-                <br /><br /><br />
                 <section class="Plateral">
-                    <hr /><br /><button class="button2" onclick="usarHistorial()">Historial</button><br />
-                    <hr /><br /><button class="button2" onclick="usarConfiguracion()">Configuración</button>
-                    <hr /><section class="button2"><a href="../php/actions/session_out.php";>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar Sesión</a></section>
-                    
-                    <!--<hr /><br /><button class="button2" onclick="">Cerrar Sesión</button><hr />-->
+                    <button class="latButton" onclick="usarHistorial()"><hr /><br />Historial<br /><br /><hr /></button>
+                    <button class="latButton" onclick="usarConfiguracion()"><hr /><br />Configuración<br /><br /><hr /></button>
+                    <section class="secbtn"><hr /><br /><a href="../php/actions/session_out.php";>Cerrar Sesión</a><br /><br /><hr /></section>
+                    <img src="../img/logoOficial.png" alt="Logotipo" class="latLogo" />
                 </section>
             </section>
 
+
             <section class="acciones">
                 
-                <!--ESTA SECCIÓN ES DEL HISTORIAL-->
                 <section class="historial" id="historial" style="display:none">
                     <br />
-                    <h3>Historial de tus reservaciones</h3>
+                    <h3>Consulta tus reservaciones</h3>
                     <section id="listaRes" style="display:none; width:100%; height:100%;"></section>
                     <br />
                 </section>
 
-                <!--ESTA SECCIÓN ES PARA ACTUALIZAR-->
                 <section class="configuracion" id="configuracion" style="display:none">
-                    <br /><br />
-                    <h3>CONFIGURACIÓN GENERAL DE LA CUENTA</h3>
+                    <br />
+                    <h3>Configuración general de la cuenta</h3>
                     <br /><br />
                     <section id="data" ></section>
 
-                    <button class="botonf" onclick="abrirDialogEdit()">Añadir imagen</button>
+                    
 
                     <section class="update" id="update">
                         <section id="udpPsswd" style="display:none">
-                            <label class="pss_us">Nueva Contraseña:&nbsp;</label>
-                            <input class="txt_input" name="txtPass" type="password" id="psswd" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br /><br /><br />
-                            <label class="pss_us">Confirmar Contraseña:&nbsp;</label>
-                            <input class="txt_input" name="txtConfiPass" type="password" id="veri_psswd" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br /><br /><br />
-                            <button class="udpButton" id="password" onclick="update()">Guardar</button>
-                            <button class="udpButton" id="cancel" onclick="reloadd()">Cancelar</button>
+                            <section class="getConfig">
+                                <label class="pss_us">Nueva Contraseña:&nbsp;</label>
+                                <input class="txt_input" name="txtPass" type="password" id="psswd"  title="Minimo 6 caracteres" required>
+                                <label class="pss_us">Confirmar Contraseña:&nbsp;</label>
+                                <input class="txt_input" name="txtConfiPass" type="password" id="veri_psswd"  title="Confirma la contraseña" required>
+                                <section></section>
+                                <section class="botones">
+                                    <button class="udpButton" id="password" onclick="update()">Guardar</button>
+                                    <button class="udpButton" id="cancel" onclick="reloadd()">Cancelar</button>
+                                </section>
+                            </section>
                         </section>
                         <section id="udpUser" style="display:none">
-                            <label class="pss_us">Nuevo Usuario:&nbsp;</label>
-                            <input class="txt_input" name="txtUsuario" type="text" id="txtUsuario" title="Puede contener números, letras en mayúsculas y minusculas" required><br /><br /><br />
-                            <button class="udpButton" id="user" onclick="update()">Guardar</button>
-                            <button class="udpButton" id="cancel" onclick="reloadd()">Cancelar</button>
+                            <section class="getConfig">
+                                <label class="pss_us">Nuevo Usuario:&nbsp;</label>
+                                <input class="txt_input" name="txtUsuario" type="text" id="txtUsuario" title="Puede contener números, letras en mayúsculas y minusculas" required>
+                                <section></section>
+                                <section class="botones">
+                                    <button class="udpButton" id="user" onclick="update()">Guardar</button>
+                                    <button class="udpButton" id="cancel" onclick="reloadd()">Cancelar</button>
+                                </section>
+                                <section></section><section></section>
+                            </section>
                         </section>
                         <section id="udpTel" style="display:none">
-                            <label class="pss_us">Número de Teléfono: </label>
-                            <input class="txt_input" name="txtTelefono" type="tel" id="txtTelefono" required /><br /><br />';
-                            <button class="udpButton" id="telefono" onclick="update()">Guardar</button>
-                            <button class="udpButton" id="cancel" onclick="reloadd()">Cancelar</button>
+                            <section class="getConfig">
+                                <label class="pss_us">Número de Teléfono: </label>
+                                <input class="txt_input" name="txtTelefono" type="tel" id="txtTelefono" required />
+                                <section></section>
+                                <section class="botones">
+                                    <button class="udpButton" id="telefono" onclick="update()">Guardar</button>
+                                    <button class="udpButton" id="cancel" onclick="reloadd()">Cancelar</button>
+                                </section>
+                                <section></section><section></section>
+                            </section>
                         </section>
                     </section>
                 </section>
-
-
             </section>
-
-
-
         </section>
+
+
         <dialog id="dialogUpd">
             <form method="post" action="../php/actions/registrarImgUser.php" enctype="multipart/form-data">
 
@@ -123,14 +131,12 @@
 
                 <input type="submit" class="botond" value="Enviar">
                 <button class="botonc" onclick="closeDialogEdit()">Cancelar</button>
-                <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
+                Por el momento esto solo cierra el dialogo, tu cambia la función
             </form>
         </dialog>
+
     </main>
 
-
     
-    
-
 </body>
 </html>
