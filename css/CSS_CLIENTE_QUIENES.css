@@ -1,28 +1,37 @@
 ﻿:root {
-    /*PALETA DE COLORES PRINCIPAL DE PARADISE*/
-    --color1: rgb(3,95,108);
-    /*Azul fuerte*/
-    --color2: rgb(26,143,196);
-    /*Turquesa oscuro*/
-    --color3: rgb(124,233,254);
-    /*Azul cielo*/
-    --color4: rgb(151,251,197);
-    /*Aquamarine claro*/
-    --color5: rgb(81,237,198);
-    /*Aquamarine intenso*/
-    /*COLORES AUXILIARES DE LA PAGINA*/
-    --pcolor1: rgb(144,218,219);
-    /*azul-claro-gris*/
-    --pcolor2: rgb(0,156,140);
-    /*verde-oscuro-azul*/
-    --pcolor3: rgb(78,209,197);
-    /*turquesa-gris*/
-    --pcolor4: rgb(0,135,209);
-    /*azul-rey-claro*/
-    --pcolor5: rgb(170,255,255);
-    /*azul cielo más claro*/
-    --pcolor6: rgb(0,183,235);
-    /*azul cielo más intenso*/
+    --color1: #FFC973;
+    /*AMARILLO CLARITO*/
+    --color2: #FFB640;
+    /*AMARILLO MENOS CLARITO*/
+    --color3: #A66600;
+    /*NARANJA OSCURO*/
+    --color4: #BF8830;
+    /*NARANJA OSCURO CLARO*/
+    --color5: #FF9E00;
+    /*NARANJA INTENSO*/
+    --color6: #7D71D8;
+    /*AZUL CLARITO*/
+    --color7: #5D4BD8;
+    /*AZUL-MORADO CLARO*/
+    --color8: #150873;
+    /*AZUL MARINO*/
+    --color9: #392E85;
+    /*AZUL MARINO CLARO*/
+    --color10: #2A17B1;
+    /*AZUL REY*/
+    --color11: #35D2AB;
+    /*UN TONO MÁS ARRIBA DEL LOGO*/
+    --color12: #1F7C65;
+    /*TURQUESA-GRIS*/
+    --color13: #00A67C;
+    /*TURQUESA OSCURO*/
+    --logo: #5FD2B5;
+    --boton: #006C51;
+    --nav: rgba(95,210,181,0.15);
+}
+
+#imgHome {
+    cursor: pointer;
 }
 
 * {
@@ -30,13 +39,75 @@
     margin: 0;
 }
 
-.NavOficial {
-    height: 8%;
-    padding: 2%;
-    background-color: white;
-    margin-left: 0%;
-    margin-right: 0%;
+.login-icon {
+    float: left;
+    width: 85%;
+    height: 70%;
+    /*    display:grid;*/
+    text-align: right;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0%;
 }
+
+body {
+    background-color: white;
+    text-align: center;
+}
+
+nav {
+    height: 11%;
+    padding: 2%;
+    padding-bottom: 1%;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2%;
+    background-color: var(--nav);
+}
+
+.logoNav {
+    width: 90%;
+    float: left;
+    clear: both;
+}
+
+.menu {
+    width: 100%;
+    float: right;
+    font-family: Georgia;
+    font-size: 100%;
+    text-align: center;
+    clear: both;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 2fr 1fr 1.5fr
+}
+
+.barraBusqueda {
+    padding-right: 3%;
+    font-family: Georgia;
+    text-align: right;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.busqueda {
+    width: 60%;
+    height: 100%;
+}
+
+.search-button {
+    height: 100%;
+    width: 10%;
+    font-family: Georgia;
+    background-color: var(--boton);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
 
 .Nav2do {
     /*background-color: rgb(152,228,221);*/
@@ -46,117 +117,44 @@
     color: darkslategray;
 }
 
-.logoNav {
-    float: left;
+main {
+/*    width: 100%;
+    height: 100%;*/
 }
 
-.barraBusqueda {
-    font-family: Georgia;
-    float: right;
-    width: 40%;
-    height: 10%;
+.presentacion {
+    width: 100%;
+    height: 70%;
     clear: both;
-}
-
-.busqueda {
-    width: 70%;
-    height: 550%;
-}
-
-.boton {
-    width: 28%;
-    height: 550%;
-    background-color: var(--pcolor1);
-}
-
-nav a {
-    text-decoration: none;
-    color: black;
-}
-
-.pruebaMenu {
-    width: 60%;
-    float: right;
-    font-family: Georgia;
-    font-size: 97%;
-}
-
-.pMTxt {
-    width: 16%;
-    float: right;
-    text-align: left;
-}
-
-.pMT {
-    width: 12%;
-    float: left;
-}
-
-.pMTx {
-    width: 20%;
-    float: left;
-}
-
-.pMT3 {
-    width: 25%;
-    float: left;
-    text-align: right;
-}
-
-.pMT2 {
-    width: 21%;
-    float: left;
-    text-align: right;
-}
-
-.pMTxt1 {
-    width: 16%;
-    float: right;
-    text-align: right;
-    margin-top: -1.5%;
-    padding-right: 2.5%;
-}
-
-main{
-    width:100%;
-    height:100%;
-}
-
-.presentacion{
-    width:100%;
-    height:70%;
-    clear:both;
-    background-color: var(--pcolor1);
+    background-color: rgba(31,124,102,0.8);
 }
 
 .anunP {
-    width:58%;
-    height:100%;
-    float:right;
+    width: 58%;
+    height: 100%;
+    float: right;
 }
 
 .pres {
     float: left;
     width: 40%;
     height: 100%;
-    background-color: var(--pcolor5);
-    opacity:0.5;
-    color:black;
-    font-family:Georgia;
-    line-height:1.6;
-    text-align:justify;
+    color: white;
+    font-family: Georgia;
+    line-height: 1.6;
+    text-align: justify;
 }
 
-.pres p,h1{
-    padding:7%;
-}
+    .pres p, h1 {
+        padding: 7%;
+    }
 
-.cita{
-    color:darkslategray;
-    font-family:Georgia;
-    text-align:center;
-    padding-top:2%;
-    padding-bottom:2%;
+.cita {
+    color: darkslategray;
+    font-family: Georgia;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 footer {
@@ -169,6 +167,5 @@ footer {
     width: 100%;
     height: 8%;
     clear: both;
-    bottom: 0;
     line-height: 1.5;
 }

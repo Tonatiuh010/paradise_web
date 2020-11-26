@@ -33,6 +33,10 @@
     margin:0;
 }
 
+#imgHome {
+    cursor: pointer;
+}
+
 nav
 {
     height:8%;

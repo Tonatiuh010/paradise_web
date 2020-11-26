@@ -19,6 +19,9 @@ function buscarCliente() {
 
 function usarConfiguracion() {
     //document.getElementById('reservacion').style.display = "None";
+    seccion = document.getElementById('data');
+    seccion.innerHTML = '';
+    buscarCliente();
     document.getElementById('historial').style.display = "None";
     document.getElementById('configuracion').style.display = "block";
 
@@ -112,6 +115,13 @@ function fillData(ob) {
     child7.setAttribute("class", "child");
     child7.innerHTML = correo;
 
+    var btnImg = document.createElement('button');
+    btnImg.setAttribute('class', 'imgButton');
+    btnImg.innerHTML = 'Cambiar foto de perfil';
+    btnImg.addEventListener('click', function () { abrirDialogEdit(); });
+        //< img src = "../img/user_sin_foto.png" id = "imgCliente" class="userFoto" />
+        //<button class="botonf" onclick="abrirDialogEdit()">Añadir imagen</button>
+
     var child1_1 = document.createElement('section');
     child1_1.setAttribute("class", "child2");
     child1_1.innerHTML = 'NOMBRE: ';
@@ -152,6 +162,9 @@ function fillData(ob) {
 
     seccion.appendChild(parent);
 
+    
+    
+
     parent.appendChild(child1_1);
     parent.appendChild(child1);
 
@@ -174,6 +187,8 @@ function fillData(ob) {
 
     parent.appendChild(child7_7);
     parent.appendChild(child7);
+
+    parent.appendChild(btnImg);
 
     //console.log(nombre, paterno, materno, nacimiento, edad, telefono, usuario, contrasenia, correo);
 
