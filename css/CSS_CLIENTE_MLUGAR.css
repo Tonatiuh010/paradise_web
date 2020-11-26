@@ -25,6 +25,10 @@
     /*azul cielo más intenso*/
 }
 
+#imgHome {
+    cursor: pointer;
+}
+
 * {
     padding: 0;
     margin: 0;
