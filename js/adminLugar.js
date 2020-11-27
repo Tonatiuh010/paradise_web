@@ -76,7 +76,7 @@
         //ajax.send();
     } else {
       
-        var errorMsg = "Favor de Rellenar Todos los campos.";
+        var errorMsg = "Favor de Rellenar Todos los campos";
         showError(errorMsg);
     }
     
