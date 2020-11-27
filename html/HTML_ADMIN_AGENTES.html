@@ -15,7 +15,7 @@
 
 <body onload="loading();">
 
-    <nav>
+    <nav class="navOficial">
         <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
         <section class="menu">
@@ -44,51 +44,29 @@
     <main>
 
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
-        <nav>
-            <section class="Nav2do">
-
-                &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <!--Tus botones-->  <button class="dot" onclick="showSlides(1)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-
-            </section>
+        <nav class="admNav">
+            <a></a>
+            <button class="dot" onclick="showSlides(0)">Consultar</button>
+            <button class="dot" onclick="showSlides(1)">Registrar</button>
+            <a></a>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
         <section class="principal">
-
             <section class="lateral">
-                <!--Lista de opciones (Puede estar escondida.) <br />-->
-                <!--<button type="button" onclick="abrir()">Abrir</button>--> <!--quitar esto de aqui-->
-
-                <ul>
-                    <li>
-                        <a>Esquemas (Opción predefinida)</a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_AGENTES.html">Agentes</a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_LUGARES.html">Lugares</a>
-
-                        <a href="HTML_ADMIN_HERRAMIENTAS.html">
-                            <ol>
-                                > Herramientas del Lugar
-                            </ol>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_CLIENTES.html">Clientes</a>
-                    </li>
-
-                </ul>
+                <a><img src="../img/estadistica.png" class="icons"/></a>
+                <section class="opciones">Estadisticas</section>
+                <a  href="HTML_ADMIN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
+                <a href="HTML_ADMIN_AGENTES.html"><img src="../img/agente.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_AGENTES.html">Agentes</a>
+                <a href="HTML_ADMIN_CLIENTES.html"><img src="../img/cliente.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_CLIENTES.html">Clientes</a>
+                <a href="HTML_ADMIN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_LUGARES.html">Lugares</a>
+                <a href="HTML_ADMIN_HERRAMIENTAS.html"><img src="../img/folder.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_HERRAMIENTAS.html" >Herramientas del Lugar</a>
+                <a></a>
             </section>
 
             <section class="sn">
@@ -111,41 +89,40 @@
 
 
                         <label>Nombre:</label>
-                        <input class="in" type='text' id='txtNombre' maxlength="30" autofocus required><br />
+                        <input class="in" type='text' id='txtNombre' maxlength="30" autofocus required>
                         <label>Apellido Paterno *:</label>
-                        <input class="in" type='text' id="txtApPat" /><br />
+                        <input class="in" type='text' id="txtApPat" />
                         <label>Apellido Materno *:</label>
-                        <input class="in" type='text' id="txtApMat" /><br />
+                        <input class="in" type='text' id="txtApMat" />
                         <label>Fecha de nacimiento:</label>
-                        <input class="in"  type="date" id="txtFecNac" required><br />            
+                        <input class="in"  type="date" id="txtFecNac" required>            
                         <label>Teléfono:</label>
-                        <input class="in" type="tel" id="txtTelefono" required><br />             
+                        <input class="in" type="tel" id="txtTelefono" required>           
                         <label>Genero:</label>
-                        <select id="genreBox" class="select">
+                        <select id="genreBox" class="in">
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
-                        </select><br />
+                        </select>
 
                         
                         <label>Correo Electrónico: </label>
-                        <input class="in" name="txtCorreo" type="email" maxlength="30" id="txtCorreo" required /><br />
+                        <input class="in" name="txtCorreo" type="email" maxlength="30" id="txtCorreo" required />
                      
                         <label>Usuario:</label>
-                        <input class="in" name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required><br />
+                        <input class="in" name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required>
                      
                         <label>Contraseña:</label>
-                        <input class="in" name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required><br />
+                        <input class="in" name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required>
                         
                         <label>Confirmar Contraseña:</label>
-                        <input class="in" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br />
-                        
-                        
-                        
-
-                        <input class="botones" type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente()" />
+                        <input class="in" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required>
                         <br />
+                        <input  type="button" class="btnSend" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente()" />
+                        <br /><br />
+
                         
-                        <p id="msg">En proceso</p>
+                        
+                        <!--<p id="msg">En proceso</p>-->
 
                     </section>
                 </section>

@@ -126,7 +126,7 @@ function fillReservacionAlta(ob) {
 
 
         var btn = document.createElement("button");
-        btn.className = "botond";
+        btn.className = "asignarbtn";
         btn.innerHTML = "Asignar Agente";
         btn.addEventListener("click", function (_y) {
 

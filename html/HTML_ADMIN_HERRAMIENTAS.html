@@ -15,7 +15,7 @@
 
 <body onload="loading();">
 
-    <nav>
+   <nav class="navOficial">
         <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
         <section class="menu">
@@ -44,48 +44,30 @@
     <main>
 
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
-        <nav>
-            <section class="Nav2do">
-                &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(0)">Municipios</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(1)">Espacios</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(2)">Tipo Lugar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-            </section>
+         <nav class="admNav2">
+            <a></a>
+                <button class="dot" onclick="showSlides(0)">Municipios</button>
+                <button class="dot" onclick="showSlides(1)">Espacios</button>
+                <button class="dot" onclick="showSlides(2)">Tipo Lugar</button>
+            <a></a>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
         <section class="principal">
             <section class="lateral">
-                <!--Lista de opciones (Puede estar escondida.) <br />-->
-                <ul>
-
-                    <li>
-                        <a>Esquemas (Opción predefinida)</a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_AGENTES.html">Agentes</a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_LUGARES.html">Lugares</a>
-
-                        <a href="HTML_ADMIN_HERRAMIENTAS.html">
-                            <ol>
-                                > Herramientas del Lugar
-                            </ol>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="HTML_ADMIN_CLIENTES.html">Clientes</a>
-                    </li>
-
-                </ul>
+                <a><img src="../img/estadistica.png" class="icons"/></a>
+                <section class="opciones">Estadisticas</section>
+                <a  href="HTML_ADMIN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
+                <a href="HTML_ADMIN_AGENTES.html"><img src="../img/agente.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_AGENTES.html">Agentes</a>
+                <a href="HTML_ADMIN_CLIENTES.html"><img src="../img/cliente.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_CLIENTES.html">Clientes</a>
+                <a href="HTML_ADMIN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_LUGARES.html">Lugares</a>
+                <a href="HTML_ADMIN_HERRAMIENTAS.html"><img src="../img/folder.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_HERRAMIENTAS.html" >Herramientas del Lugar</a>
+                <a></a>
             </section>
 
             <section class="sn">
@@ -95,7 +77,7 @@
                     <!-- Sección Municipios -->
                     <h3>Buscar Lugares Por Municipio</h3><br />
                     <section>
-                        <select class="select" id="CBCiudades" required onchange="buscarLugaresMunicipio()">
+                        <select id="CBCiudades" required onchange="buscarLugaresMunicipio()">
                             <option value="TIJ">
                                 Tijuana
                             </option>
@@ -126,26 +108,22 @@
 
                 <section class="slides fade">
                     <!-- Sección Espacios -->
-                    <nav>
-                        <section class="Nav2do">
-                            &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                            <button class="dot" onclick="showSlidesEspacios(0)">Insertar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                            <button class="dot" onclick="showSlidesEspacios(1)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-
-                        </section>
+                    <nav class="espNav">
+                        <a></a>
+                        <button class="dot" onclick="showSlidesEspacios(0)">Insertar</button>
+                        <button class="dot" onclick="showSlidesEspacios(1)">Consultar</button>
+                        <a></a>
                     </nav>
-                    <br /><br />
 
                         <section class="espaciosForm fade">
-                            <h3>Insertar Espacio</h3><br />
-                            <!-- Insert -->
-                            <br /><br />
-                            <label>Nombre del Espacio:</label>
-                            <input class="in" type='text' id='txtEspacio' maxlength="30" autofocus required><br /><br /><br />
-
-                            <input class="botones" type="button" style="float:right" value="Enviar" onclick="insertarEspacio()" />
-                            <br /><br />
-                            
+                            <h3>Insertar Espacio</h3>
+                            <br /><br /><br />
+                            <article class="form-esp-tl">
+                                <label>Nombre del Espacio:</label>
+                                <input class="in" type='text' id='txtEspacio' maxlength="30" autofocus required><br />
+                                <input class="form-button" type="button" style="float:right" value="Enviar" onclick="insertarEspacio()" />
+                                <br /><br />
+                            </article>
                         </section>
 
                         <section class="espaciosForm fade">
@@ -159,26 +137,23 @@
                 <section class="slides fade">
                     <!-- Sección Tipo Lugar -->
 
-                    <nav>
-                        <section class="Nav2do">
-                            &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                            <button class="dot" onclick="showSlidesTL(0)">Insertar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                            <button class="dot" onclick="showSlidesTL(1)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-
-                        </section>
+                    <nav class="espNav">
+                        <a></a>
+                        <button class="dot" onclick="showSlidesTL(0)">Insertar</button>
+                        <button class="dot" onclick="showSlidesTL(1)">Consultar</button>
+                        <a></a>
                     </nav>
 
-                    <br /><br />
 
                         <section class="TLForm fade">
-                            <h3>Insertar Tipo De lugar</h3><br />
-                            <br /><br />
-                            <label>Tipo de lugar:</label>
-                            <input class="in" type='text' id='txtTL' maxlength="30" autofocus required><br /><br /><br />
-
-                            <input class="botones" type="button" style="float:right" value="Enviar" onclick="insertarTL()" />
-                            <br />
-                           
+                            <h3>Insertar Tipo De lugar</h3>
+                            <br /><br /><br />
+                            <article class="form-esp-tl">
+                                <label>Tipo de lugar:</label>
+                                <input class="in" type='text' id='txtTL' maxlength="30" autofocus required>
+                                <br />
+                                <input class="form-button" type="button" style="float:right" value="Enviar" onclick="insertarTL()" />
+                            </article>
                         </section>
 
                         <section class="TLForm fade">
