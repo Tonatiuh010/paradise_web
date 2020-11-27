@@ -26,7 +26,7 @@ function sesion(type) {
                         
             } else {                
                 if (obj_user.index != '') {
-                    //showError("Error de inicio de sesión.");
+                    showError("Error de inicio de sesión.");
                     document.body.innerHTML = "";
                     location.href = "../" + obj_user.index;
                 }

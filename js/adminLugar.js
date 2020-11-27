@@ -40,7 +40,7 @@
         },
         verificacion: function () {
            
-            if (this.nombre == "" || this.costo == "" || this.capacidad == "" || this.espacios.arrayId.length>0) {                
+            if (this.nombre == "" || this.costo == "" || this.capacidad == "" || this.espacios.arrayId.length==0) {                
                 
                 return false;
             } else {
@@ -73,7 +73,7 @@
     ajax.open("GET", "../php/actions/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
 
     if (lugarOb.verificacion()){
-        //ajax.send();
+        ajax.send();
     } else {
       
         var errorMsg = "Favor de Rellenar Todos los campos";

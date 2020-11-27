@@ -231,7 +231,7 @@ function closeDialogAddAgente() {
 
 function buscarAgente() {
     
-    document.getElementById("container").innerHTML = "";
+   
 
     var ajax = new XMLHttpRequest();
 
@@ -256,71 +256,94 @@ function buscarAgente() {
 function fillAgenteShc(ob) {
 
 
+
     var list = document.getElementById("container");
+    list.innerHTML = "";
     list.style.display = "block";
-    var arrayAgentes = JSON.parse(ob);
 
-    var x = 0;
+    var arrayAgentes = JSON.parse(ob);           
 
-    while (arrayAgentes[x]) {
+    var y = 0;
 
-        var table = document.createElement("table");        
+    while (arrayAgentes[y]) {
+        console.log(arrayAgentes[y]);
 
-        table.style.width = "80%";
-        table.style.marginRight = "8%";
-        table.style.border = "2px solid";
-        table.style.marginBottom = "3%";
+        var panel = document.createElement('section');
+        panel.className = "paneles fade";
+        panel.style.display = "block";
 
-        var tr1 = document.createElement("tr");
-        var tr2 = document.createElement("tr");
-        var tr3 = document.createElement("tr");
-        var tr4 = document.createElement("tr");
-        var tr5 = document.createElement("tr");
-          
-        tr1.innerHTML = "<td> Matrícula </td> <td> " + arrayAgentes[x].matricula + "</td> ";
-        tr2.innerHTML = "<td> Nombre </td> <td> " + arrayAgentes[x].nombre + " " + arrayAgentes[x].paterno + " " + arrayAgentes[x].materno + "</td> ";
-        
-        tr3.innerHTML = "<td> Correo </td> <td> " + arrayAgentes[x].usuario.correo + "</td> ";
-        tr4.innerHTML = "<td> Usuario </td> <td> " + arrayAgentes[x].usuario.nombre + "</td>  ";
+        var esp2 = document.createElement("Section");
+        esp2.setAttribute("class", "espacio");
+
+        list.appendChild(panel);
+
        
 
+            var agente_sec = document.createElement('section');
+            agente_sec.setAttribute("class", "patern3");
 
-        var str = "";
+            
 
-        for (var i = 0; i < arrayAgentes[x].telefono.length; i++) {
+            
 
-            if (i != arrayAgentes[x].telefono.length - 1)
-                str += arrayAgentes[x].telefono[i].telefono + ", ";
-            else {
-                str += arrayAgentes[x].telefono[i].telefono;
+                panel.appendChild(agente_sec);
+            
 
-            }
-        }
+               
 
-        tr5.innerHTML = "<td> Teléfonos </td> <td> " + str + "</td>";
+                //--------------------------------------- C H I L D  1 -----------------------------------------------------------------
+                if (arrayAgentes[y].usuario.imagen.length > 0) {
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'img');
+                    img.setAttribute('src', '../img/usuario/' + arrayAgentes[y].usuario.num + "/" + arrayAgentes[y].usuario.imagen[0].nombre);
+                } else {
+                    var img = document.createElement('Img');
+                    img.setAttribute('class', 'img');
+                    img.setAttribute('src', '../img/perfil_usuario.png');
+                }
 
 
-        var arrayTr = [tr1, tr2, tr3, tr4, tr5];
 
+                var imgsec = document.createElement('section');
+                imgsec.setAttribute('class', 'imgsec');
 
-        for (z = 0; z < 5; z++) {
-            table.appendChild(arrayTr[z]);
-        }
-
-        var btn = document.createElement("Button");
-        btn.innerHTML = "Asignar";
-
-        btn.addEventListener("click", function (_x) {
-            return function () {
-                setAgente(arrayAgentes[_x].matricula, document.getElementById("numReservacion").innerText);
-            }
-        }(x));
-
-        table.appendChild(btn);
-        list.appendChild(table);
+                imgsec.appendChild(img);
         
-        x++;
-    }
+
+                //-----------------------------------------------------------------------------------------------------------------------
+
+                //--------------------------------------- C H I L D  2 -----------------------------------------------------------------
+               
+                var row2 = document.createElement("section");
+                row2.innerHTML = 'Nombre: ' + arrayAgentes[y].nombre + " " + arrayAgentes[y].paterno + " " + arrayAgentes[y].materno + '</br>';
+                row2.setAttribute('class', 'label');                                
+
+
+                var btn = document.createElement("button");
+                btn.className = "btnAsignarAgente";
+                btn.innerHTML = "Asignar Agente";
+                btn.addEventListener("click", function (_y) {
+
+                    //Mi botón kawai ;v
+                    return function () {
+                        setAgente(arrayPreReservaciones[_y].agente.matricula, arrayPreReservaciones[_y].num);
+                    }
+
+
+                }(y));
+
+
+               
+                //-----------------------------------------------------------------------------------------------------------------------
+
+                agente_sec.appendChild(imgsec);
+                agente_sec.appendChild(row2);
+                agente_sec.appendChild(btn);
+                
+                
+                y++;                           
+    }    
+
 }
 
 
