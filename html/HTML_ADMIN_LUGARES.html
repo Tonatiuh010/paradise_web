@@ -16,7 +16,7 @@
 
 <body onload="loading();">
     
-     <nav>
+     <nav class="navOficial">
         <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
         <section class="menu">
@@ -45,57 +45,30 @@
     <main>
 
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
-        <nav>
-            <section class="Nav2do">
-               
-                &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(0)">Consultar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-<!--Tus botones-->  <button class="dot" onclick="showSlides(1)">Registrar</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                    
-                
-                   
-            </section>
+         <nav class="admNav">
+            <a></a>
+            <button class="dot" onclick="showSlides(0)">Consultar</button>
+            <button class="dot" onclick="showSlides(1)">Registrar</button>
+            <a></a>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
     <section class="principal">
-        
-        <section class="lateral">
-             <!--Lista de opciones (Puede estar escondida.) <br />-->
-            <!--<button type="button" onclick="abrir()">Abrir</button>--> <!--quitar esto de aqui-->
-
-            <ul>
-
-                <li>
-                    <a>Esquemas (Opción predefinida)</a>
-                </li>
-
-                <li>
-                    <a href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
-                </li>
-
-                <li>
-                    <a href="HTML_ADMIN_AGENTES.html">Agentes</a>
-                </li>
-
-                <li>
-                    <a href="HTML_ADMIN_LUGARES.html">Lugares</a>
-
-                    <a href="HTML_ADMIN_HERRAMIENTAS.html">
-                        <ol>
-                            > Herramientas del Lugar
-                        </ol>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="HTML_ADMIN_CLIENTES.html">Clientes</a>
-                </li>
-
-                
-
-            </ul>
-        </section>
+            <section class="lateral">
+                <a><img src="../img/estadistica.png" class="icons"/></a>
+                <section class="opciones">Estadisticas</section>
+                <a  href="HTML_ADMIN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
+                <a href="HTML_ADMIN_AGENTES.html"><img src="../img/agente.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_AGENTES.html">Agentes</a>
+                <a href="HTML_ADMIN_CLIENTES.html"><img src="../img/cliente.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_CLIENTES.html">Clientes</a>
+                <a href="HTML_ADMIN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_LUGARES.html">Lugares</a>
+                <a href="HTML_ADMIN_HERRAMIENTAS.html"><img src="../img/folder.png" class="icons"/></a>
+                <a class="opciones" href="HTML_ADMIN_HERRAMIENTAS.html" >Herramientas del Lugar</a>
+                <a></a>
+            </section>
 
         <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco--> 
 
@@ -110,19 +83,17 @@
             </section>
 
             <section class="slides fade" >
+                <h3>Registrar Lugar</h3><br />
                 <section class='registerSection' name='searchAdminForm'>
 
-                    <h3>Registrar Lugar</h3><br />
-
                         <label>Nombre del Lugar:</label> 
-                            <input class="in" type='text' id='txtNombreLugar' maxlength="30" autofocus required><br />
+                            <input class="in" type='text' id='txtNombreLugar' maxlength="30" autofocus required>
                         <label>Costo del Lugar:</label> 
-                            <input class="in" type='number' id="txtCostoLugar"  /><br />
+                            <input class="in" type='number' id="txtCostoLugar"  />
                         <label>Capacidad del Lugar:</label> 
-                            <input class="in" type='number' id="txtCapacidadLugar" required /><br />
+                            <input class="in" type='number' id="txtCapacidadLugar" required />
                         <label>Descripción del Lugar:</label> 
                             <input class="in" type='text' id="txtDescLugar" maxlength="120" />
-                        <br />
                         <select class="select" id="CBCiudades" required>
                             <option value="TIJ">
                                 Tijuana
@@ -150,13 +121,12 @@
                         <select class="select" id="CBtp" required>
                         </select>
 
-                        <br /><br />
-                        <section id="boxEsp"></section>
-                        <hr class="hr"/><br />
+                        <section id="boxEsp"><br /></section>
+
                         <button onclick="document.getElementById('intPnlDirection').style.display = 'block';
                                         document.getElementById('btnDwn').style.display = 'none';
                                         document.getElementById('btnUp').style.display = 'block';"
-                                    class="botones"
+                                    class="indown"
                                 id="btnDwn">
                             down
 
@@ -166,28 +136,28 @@
                         <button onclick="document.getElementById('intPnlDirection').style.display = 'none';
                                         document.getElementById('btnDwn').style.display = 'block';
                                         document.getElementById('btnUp').style.display = 'none';"
-                                style="display:none" class="botones"
+                                style="display:none" class="indown"
                                 id="btnUp">
                             up
                         </button>
-                        <section style="display:none" id="intPnlDirection">
-                            <label>Calle: </label>
-                                <input class="in" type='text' id='txtCalleDirec'><br />
-                            <label>Número interior: </label> 
-                                <input class="in" type='text' id='txtNumIntDirec'><br />
-                            <label>Número Exterior: </label>
-                                <input class="in" type='number' id="txtNumExtDirec" /><br />
-                            <label>Código Postal: </label>
-                                <input class="in" type='number' id="txtCP" /><br />
-                        </section>
+                    <!--<p id="msg">En proceso</p>-->
 
-                        <input class="botones" type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar()" />
-                        <br />
-                        
-
-                        <p id="msg">En proceso</p>
-
-                </section>            
+                </section>          
+                <section style="display:none" id="intPnlDirection">
+                    <article id="direc">
+                        <a></a><a></a>
+                        <label>Calle: </label>
+                            <input class="in" type='text' id='txtCalleDirec'>
+                        <label>Número interior: </label> 
+                            <input class="in" type='text' id='txtNumIntDirec'>
+                        <label>Número Exterior: </label>
+                            <input class="in" type='number' id="txtNumExtDirec" />
+                        <label>Código Postal: </label>
+                            <input class="in" type='number' id="txtCP" />
+                    </article>
+                </section>
+                <input class="inbutton" type="button" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarLugar()" />
+                <br /><br /><br /><br />
             </section>
             
         </section>
