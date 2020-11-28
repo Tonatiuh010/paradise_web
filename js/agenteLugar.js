@@ -1,4 +1,4 @@
-﻿var slideIndex = 0;
+﻿var slideIndex = 1;
 
 
 function buscarAgente() {
@@ -276,16 +276,14 @@ function fillLugarShc(ob) {
             //panel.appendChild(left_arrow);
         }
 
-
-
-        if (x == 0) {
-            panel.appendChild(right_arrow);
-        } else {
-            panel.appendChild(right_arrow);
-            panel.appendChild(left_arrow);
+        if (arreglos > 5) {
+            if (x == 0) {
+                panel.appendChild(right_arrow);
+            } else {
+                panel.appendChild(right_arrow);
+                panel.appendChild(left_arrow);
+            }
         }
-
-
     }
 
 

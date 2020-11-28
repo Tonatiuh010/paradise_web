@@ -50,23 +50,23 @@
             <button class="dot" onclick="showSlides(1)">Consultar</button>
             <a></a>
         </nav>
-        
+
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
         <section class="principal">
             <section class="lateral">
-                <a><img src="../img/estadistica.png" class="icons"/></a>
+                <a><img src="../img/estadistica.png" class="icons" /></a>
                 <section class="opciones">Estadisticas</section>
-                <a  href="HTML_ADMIN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
+                <a href="HTML_ADMIN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons" /></a>
                 <a class="opciones" href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
-                <a href="HTML_ADMIN_AGENTES.html"><img src="../img/agente.png" class="icons"/></a>
+                <a href="HTML_ADMIN_AGENTES.html"><img src="../img/agente.png" class="icons" /></a>
                 <a class="opciones" href="HTML_ADMIN_AGENTES.html">Agentes</a>
-                <a href="HTML_ADMIN_CLIENTES.html"><img src="../img/cliente.png" class="icons"/></a>
+                <a href="HTML_ADMIN_CLIENTES.html"><img src="../img/cliente.png" class="icons" /></a>
                 <a class="opciones" href="HTML_ADMIN_CLIENTES.html">Clientes</a>
-                <a href="HTML_ADMIN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
+                <a href="HTML_ADMIN_LUGARES.html"><img src="../img/lugar.png" class="icons" /></a>
                 <a class="opciones" href="HTML_ADMIN_LUGARES.html">Lugares</a>
-                <a href="HTML_ADMIN_HERRAMIENTAS.html"><img src="../img/folder.png" class="icons"/></a>
-                <a class="opciones" href="HTML_ADMIN_HERRAMIENTAS.html" >Herramientas del Lugar</a>
+                <a href="HTML_ADMIN_HERRAMIENTAS.html"><img src="../img/folder.png" class="icons" /></a>
+                <a class="opciones" href="HTML_ADMIN_HERRAMIENTAS.html">Herramientas del Lugar</a>
                 <a></a>
             </section>
 
@@ -74,10 +74,9 @@
                 <!--Seccion sin nombre, toda la que esta en blanco-->
 
                 <section class="slides fade">
-                     <h3>Pendientes</h3><br />
+                    <h3>Pendientes</h3><br />
                     <section id="listAltaReservaciones">
-
-                    </section>                 
+                    </section>
                 </section>
 
                 <section class="slides fade">
@@ -97,47 +96,41 @@
                         </option>
 
                     </select>
-                  
+
                     <br><br><br>
                     <section id="listReservacion">
-
-
                     </section>
 
                 </section>
 
 
-                             
+
             </section>
 
         </section>
 
 
-        <dialog id="addAgente">
-            <section class="shcAdmin" style="clear:both">
-                <input type="search" id="shcId" class="busAdmin" placeholder="" />
-                <button type="button" id="search"  class="btAdmin" onclick="buscarAgente()">Buscar</button>
-            </section>
-            <br><br><br>
-          
-            <section id="listAgentes" class="listaDialogo">
-
-                <section id="container" style="height:auto;width:100%">
-
-                </section>
-
-            </section>
-            <br><br><br>
-
-            <button class="botonc" onclick="closeDialogAddAgente()">Cancelar</button>
-        </dialog>
-
-
-
-
     </main>
 
+    <dialog id="addAgente">
 
+        <section class="shc-add-agen" style="clear:both">
+            <input type="search" id="shcId" class="busAdmin" placeholder="" />
+            <button type="button" id="search" class="btAdmin" onclick="buscarAgente()">Buscar</button>
+        </section>
+        
+        <section id="listAgentes" class="listaDialogo">
+
+            <section id="container" class="contenedor-list" style="height:auto;width:100%">
+            </section>
+
+        </section>
+        <section class="inferior">
+            <img src="../img/logoOficial.png" class="imglogdialog" />
+            <br />
+            <button class="btnCancelar" onclick="closeDialogAddAgente()">Cancelar</button>
+        </section>
+    </dialog>
 
 
     <script>
@@ -156,14 +149,14 @@
             var i;
             var slideArray = document.getElementsByClassName("slides");
 
-            for (i = 0; i < slideArray.length;i++){
+            for (i = 0; i < slideArray.length; i++) {
                 slideArray[i].style.display = "none";
             }
-            
+
             slideArray[n].style.display = "block";
         }
 
-        
+
 
     </script>
 
