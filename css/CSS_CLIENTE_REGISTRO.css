@@ -1,105 +1,194 @@
-﻿:root
-{
-/*PALETA DE COLORES PRINCIPAL DE PARADISE*/
-    --color1: rgb(3,95,108);
-        /*Azul fuerte*/
-    --color2: rgb(26,143,196);
-        /*Turquesa oscuro*/
-    --color3: rgb(124,233,254);
-        /*Azul cielo*/
-    --color4: rgb(151,251,197);
-        /*Aquamarine claro*/
-    --color5: rgb(81,237,198);
-        /*Aquamarine intenso*/
+﻿:root {
+    --color1: #FFC973;
+    /*AMARILLO CLARITO*/
+    --color2: #FFB640;
+    /*AMARILLO MENOS CLARITO*/
+    --color3: #A66600;
+    /*NARANJA OSCURO*/
+    --color4: #BF8830;
+    /*NARANJA OSCURO CLARO*/
+    --color5: #FF9E00;
+    /*NARANJA INTENSO*/
+    --color6: #7D71D8;
+    /*AZUL CLARITO*/
+    --color7: #5D4BD8;
+    /*AZUL-MORADO CLARO*/
+    --color8: #150873;
+    /*AZUL MARINO*/
+    --color9: #392E85;
+    /*AZUL MARINO CLARO*/
+    --color10: #2A17B1;
+    /*AZUL REY*/
+    --color11: #35D2AB;
+    /*UN TONO MÁS ARRIBA DEL LOGO*/
+    --color12: #1F7C65;
+    /*TURQUESA-GRIS*/
+    --color13: #00A67C;
+    /*TURQUESA OSCURO*/
+    --logo: #5FD2B5;
+    --boton: #006C51;
+    --nav: rgba(95,210,181,0.15);
+}
 
-/*COLORES AUXILIARES DE LA PAGINA*/
-    --pcolor1: rgb(144,218,219);
-        /*azul-claro-gris*/
-    --pcolor2: rgb(0,156,140);
-        /*verde-oscuro-azul*/
-    --pcolor3: rgb(78,209,197);
-        /*turquesa-gris*/
-    --pcolor4: rgb(0,135,209);
-        /*azul-rey-claro*/
-    --pcolor5: rgb(170,255,255);
-        /*azul cielo más claro*/
-    --pcolor6: rgb(0,183,235);
-        /*azul cielo más intenso*/
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: white;
+    text-align: center;
 }
 
 #imgHome {
     cursor: pointer;
 }
 
-*
-{
-    padding:0;
-    margin:0;
+nav {
+    height: 11%;
+    padding: 2%;
+    padding-bottom: 1%;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2%;
+    background-color: var(--nav);
 }
 
-body{
-    height:100%;
-    width:100%;
+.logoNav {
+    width: 90%;
+    float: left;
+    clear: both;
 }
 
-nav
-{
-    height:8%;
-    padding:2%;
-    background-color:white;
-    margin-left: 0%;
-    margin-right: 0%;
-
-}
-
-.logoNav
-{
-    float:left;
-}
-
-.barraBusqueda
-{
+.menu {
+    width: 100%;
+    float: right;
     font-family: Georgia;
-    float:right;
-    width:40%;
-    height:10%;
-    clear:both;
+    font-size: 100%;
+    text-align: center;
+    clear: both;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 2fr 1fr 1.5fr
 }
 
-.busqueda
-{
-    width:70%;
-    height:550%;
+.barraBusqueda {
+    padding-right: 3%;
+    font-family: Georgia;
+    text-align: right;
 }
 
-.boton
-{
-    width:28%;
-    height:550%;
-    background-color: var(--pcolor1);
+nav a {
+    text-decoration: none;
+    color: black;
 }
 
-nav a
-{
-    text-decoration:none;
-    color:black;
+.busqueda {
+    width: 60%;
+    height: 100%;
 }
 
+.search-button {
+    height: 100%;
+    width: 10%;
+    font-family: Georgia;
+    background-color: var(--boton);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
 
-main
+.login-icon {
+    float: left;
+    width: 85%;
+    height: 70%;
+    /*    display:grid;*/
+    text-align: right;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0%;
+}
+
+main{
+    height:80%;
+    /*background-color:pink;*/
+}
+
+.principal {
+    padding-left: 4%;
+    padding-right: 4%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 1%;
+    /*background-color: aquamarine;*/
+}
+
+.formulario {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    height: 75%;
+    width: 85%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 2fr 1fr 1fr 2fr 3fr 1fr;
+    grid-gap: 2%;
+    /*background-color: aqua;*/
+    /*background-color: hsl(0, 0%, 92%);*/
+    background-color: rgba(174,174,174,0.2);
+    font-family: Georgia;
+    text-align: left;
+    font-size: medium;
+    border-radius:5px;
+}
+
+.child1 {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2%;
+}
+
+.child2 {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2%;
+    text-align:center;
+}
+
+.collague{
+    background-color:antiquewhite;
+    height:80%;
+}
+
+.align{
+    text-align:center;
+}
+
+.btnSubmit{
+    border:none;
+    border-radius:5px;
+    color:white;
+    font-family:Georgia;
+    background-color: var(--boton);
+}
+
+/*main
 {
     width:100%;
     height:200%;
-    clear:both;
+    clear:both;*/
     /*background-color: var(--color3);*/
-    background-image:url(../img/fondos/registro.jpg);
+    /*background-image:url(../img/fondos/registro.jpg);
     text-align:center;
 }
 
 .secMargin
-{
+{*/
     /*background-color: var(--pcolor5);*/
-    background-color:#F0F8FF;
+    /*background-color:#F0F8FF;
     display:inline-block;
     text-align:center;
     width:80%;
@@ -141,54 +230,7 @@ footer
     bottom:0;
 }
 
-.pruebaMenu
-{
-    width:60%;
-    float:right;
-    font-family:Georgia;
-    font-size:97%;
-}
 
-.pMTxt {
-    width: 16%;
-    float: right;
-    text-align: left;
-    padding-right: 1%;
-}
-
-.pMT
-{
-    width:12%;
-    float:left;
-}
-
-.pMTx
-{
-    width:20%;
-    float:left;
-}
-
-.pMT3
-{
-    width:25%;
-    float:left;
-    text-align:right;
-}
-
-.pMT2
-{
-    width:21%;
-    float:left;
-    text-align:right;
-}
-
-.pMTxt1 {
-    width: 16%;
-    float: right;
-    text-align: right;
-    margin-top: -1.5%;
-    padding-right: 2.5%;
-}
 
 .ins1
 {
@@ -302,4 +344,4 @@ button{
     padding: 4%;
     font-family: Arial;
     font-size: larger;
-}
+}*/

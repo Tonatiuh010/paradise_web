@@ -400,7 +400,7 @@ dialog[open] {
 .imgButton {
     margin-top: 3%;
     width: 98%;
-    height: 60%;
+    height: 30px;
     background-color: var(--boton);
     border: none;
     border-radius: 5px;

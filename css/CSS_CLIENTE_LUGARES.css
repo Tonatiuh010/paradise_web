@@ -131,7 +131,7 @@ main {
 
 .filtros {
     width: 30%;
-    height: 150%;
+    height: 135%;
     float: left;
     border-radius: 5px;
     background-color: hsl(0, 0%, 92%);
@@ -302,6 +302,8 @@ h5 {
     width: 95%;
     height: 5%;
     border: none;
+    color:white;
+    font-family:Georgia;
 }
 
 /*---------------------------------- CARRUSEL PARA LA LISTA DE LUGARES --------------------------------------------*/

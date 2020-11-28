@@ -17,6 +17,12 @@ insert into tipoLugar(tlNombre) values
 select * from espacio;
 
 
+select * from pre_reservacion;
+update pre_reservacion
+set FK_AGENTE = 'JEU0VZQ'
+where prNum between 16 and 22;
+
+
 ########################################### AGENTES ###################################################################
 # call SP_insert_userAg (@num ,'jose_guadalupe','constrasenia','josSSeGuadalupe@outloo.com');
 
