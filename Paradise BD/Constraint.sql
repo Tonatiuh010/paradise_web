@@ -38,11 +38,11 @@ add constraint UQ_foreign_userAg unique (FK_usuario);
 alter table espacio
 add constraint UQ_espacio_nombre unique (espNombre);
 
-alter table tipolugar
+alter table tipoLugar
 add constraint UQ_tipoLugar_nombre unique (tlNombre);
 
-alter table pre_reservacion
-add constraint CK_pre_res_status check (prStatus='Proceso' or prStatus='Rechazada' or prStatus='Autorizada' or prStatus='Finalizada');
+alter table pre_Reservacion
+add constraint CK_pre_res_status check (prStatus='Proceso' or prStatus='Rechazada' or prStatus='Autorizada');
 
 select * from pre_reservacion;
 

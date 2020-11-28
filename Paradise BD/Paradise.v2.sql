@@ -114,21 +114,20 @@ create table cliente
 
 # ALTER TABLE usuario CHANGE `usContraseña` `usContrasenia` varchar(30);
 
-create table lugar
-(
-	lugNum	int auto_increment,   
-	lugNombre varchar(30) not null,	
-	lugDescripcion text null,	
-	lugCosto decimal(12,2) null,
-	lugCapacidad int null,	
-	FK_TipoL int null not null,	                                           
-    
-	constraint PK_lugar_num primary key (lugNum),
-    constraint FK_lugar_tipoL foreign key (FK_TipoL) references TipoLugar(tlNum) on delete cascade,
-    
-	constraint CK_lugar_costo check(lugCosto>0),
-	constraint CK_lugar_capacidad check(lugCapacidad>0),
-	constraint UQ_lugar_nombre unique(lugNombre)
+CREATE TABLE lugar (
+    lugNum INT AUTO_INCREMENT,
+    lugNombre VARCHAR(30) NOT NULL,
+    lugDescripcion TEXT NULL,
+    lugCosto DECIMAL(12 , 2 ) not NULL,
+    lugCapacidad INT not NULL,
+    FK_TipoL INT NOT NULL,
+    CONSTRAINT PK_lugar_num PRIMARY KEY (lugNum),
+    CONSTRAINT FK_lugar_tipoL FOREIGN KEY (FK_TipoL)
+        REFERENCES tipoLugar (tlNum)
+        ON DELETE CASCADE,
+    CONSTRAINT CK_lugar_costo CHECK (lugCosto > 0),
+    CONSTRAINT CK_lugar_capacidad CHECK (lugCapacidad > 0),
+    CONSTRAINT UQ_lugar_nombre UNIQUE (lugNombre)
 );
 
 create table dicLugar
