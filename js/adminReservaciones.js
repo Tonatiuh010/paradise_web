@@ -221,6 +221,7 @@ function openDialogAddAgente(numPReservacion) {
     p.innerText = numPReservacion;
     p.style.display = "none";
 
+    disableScroll();
     dialog.appendChild(p);
     dialog.showModal();
     numeroPR = numPReservacion;
@@ -229,6 +230,7 @@ function openDialogAddAgente(numPReservacion) {
 
 function closeDialogAddAgente() {
     var dialog = document.getElementById("addAgente");
+    enableScroll();
     dialog.close();
 }
 
@@ -272,28 +274,30 @@ function fillAgenteShc(ob) {
     while (arrayAgentes[y]) {
      
 
-        var panel = document.createElement('section');
-        panel.className = "paneles fade";
-        panel.style.display = "block";
+        //var panel = document.createElement('section');
+        //panel.className = "paneles fade";
+        //panel.style.display = "block";
 
         var esp2 = document.createElement("Section");
         esp2.setAttribute("class", "espacio");
 
-        list.appendChild(panel);
+        //list.appendChild(panel);
 
-       
+        var agente_sec = document.createElement('section');
+        agente_sec.setAttribute("class", "patern3");
 
-            var agente_sec = document.createElement('section');
-            agente_sec.setAttribute("class", "patern3");
+        agente_sec.addEventListener("click", function (_y) {
+            return function () {
+                setAgente(arrayAgentes[_y].matricula, document.getElementById("numReservacion").innerText);
+            }
+        }(y));
 
-            
 
-            
+        list.appendChild(agente_sec);
+        list.appendChild(esp2);
 
-                panel.appendChild(agente_sec);
-            
 
-               
+                          
 
                 //--------------------------------------- C H I L D  1 -----------------------------------------------------------------
                 if (arrayAgentes[y].usuario.imagen.length > 0) {
@@ -317,36 +321,42 @@ function fillAgenteShc(ob) {
                 //-----------------------------------------------------------------------------------------------------------------------
 
                 //--------------------------------------- C H I L D  2 -----------------------------------------------------------------
-               
+
+                var matricula = document.createElement('section');
+                matricula.setAttribute('class', 'label5');  
+                matricula.innerHTML = arrayAgentes[y].matricula;
+
+
                 var row2 = document.createElement("section");
-                row2.innerHTML = 'Nombre: ' + arrayAgentes[y].nombre + " " + arrayAgentes[y].paterno + " " + arrayAgentes[y].materno + '</br>';
+                row2.innerHTML = arrayAgentes[y].nombre + " " + arrayAgentes[y].paterno + " " + arrayAgentes[y].materno + '</br>';
                 row2.setAttribute('class', 'label');                                
 
 
-                var btn = document.createElement("button");
-                btn.className = "btnAsignarAgente";
-                btn.innerHTML = "Asignar Agente";
-                btn.addEventListener("click", function (_y) {
+                //var btn = document.createElement("button");
+                //btn.className = "btnAsignarAgente";
+                //btn.innerHTML = "Asignar Agente";
+                //btn.addEventListener("click", function (_y) {
 
-                    //Mi botón kawai ;v
-                    return function () {
-                        //setAgente(arrayAgentes[_y].matricula, numeroPR);
+                //    //Mi botón kawai ;v
+                //    return function () {
+                //        //setAgente(arrayAgentes[_y].matricula, numeroPR);
 
                         
-                        setAgente(arrayAgentes[_y].matricula, document.getElementById("numReservacion").innerText);
+                //        setAgente(arrayAgentes[_y].matricula, document.getElementById("numReservacion").innerText);
 
-                    }
+                //    }
 
 
-                }(y));
+                //}(y));
 
 
                
                 //-----------------------------------------------------------------------------------------------------------------------
 
                 agente_sec.appendChild(imgsec);
+                agente_sec.appendChild(matricula);
                 agente_sec.appendChild(row2);
-                agente_sec.appendChild(btn);
+                //agente_sec.appendChild(btn);
                 
                 
                 y++;                           

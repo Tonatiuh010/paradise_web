@@ -14,7 +14,7 @@
 
 
 <body onload="loading();">
-    
+
     <nav class="navOficial">
         <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
@@ -49,109 +49,106 @@
             <button class="dot" onclick="showSlides(0)">Pendientes</button>
             <a></a>
         </nav>
-        
+
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
-    <section class="principal">
-        
-        <section class="panel-lateral">
-            <section class="perfil-agen">
-                <img src="../img/user_sin_foto.png" id="imgAgente" height="70%" />
-                <br />
-                <i id="user_name"></i>
-                <br /><br /><hr /><br />
+        <section class="principal">
+
+            <section class="panel-lateral">
+                <section class="perfil-agen">
+                    <img src="../img/user_sin_foto.png" id="imgAgente" height="70%" />
+                    <br />
+                    <i id="user_name"></i>
+                    <br /><br /><hr /><br />
+                </section>
+
+                <section class="agen-lateral">
+                    <a><img src="../img/estadistica.png" class="icons" /></a>
+                    <section class="opciones">Estadisticas</section>
+                    <a href="HTML_AGEN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons" /></a>
+                    <a class="opciones" href="HTML_AGEN_RESERVACIONES.html">Reservaciones</a>
+                    <a href="HTML_AGEN_LUGARES.html"><img src="../img/lugar.png" class="icons" /></a>
+                    <a class="opciones" href="HTML_AGEN_LUGARES.html">Lugares</a>
+
+                    <a href="HTML_AGEN_HISTORIAL.html"><img src="../img/historial.png" class="icons" /></a>
+                    <a class="opciones" href="HTML_AGEN_HISTORIAL.html">Historial</a>
+
+                    <a href="HTML_AGEN_CONFIGURACION.html"><img src="../img/configuracion.png" class="icons" /></a>
+                    <a class="opciones" href="HTML_AGEN_CONFIGURACION.html">Configuración</a>
+                    <a></a>
+                </section>
             </section>
-            
-            <section class="agen-lateral">
-                <a><img src="../img/estadistica.png" class="icons"/></a>
-                <section class="opciones">Estadisticas</section>
-                <a  href="HTML_AGEN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
-                <a class="opciones" href="HTML_AGEN_RESERVACIONES.html">Reservaciones</a>
-                <a href="HTML_AGEN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
-                <a class="opciones" href="HTML_AGEN_LUGARES.html">Lugares</a>
 
-                <a href="HTML_AGEN_HISTORIAL.html"><img src="../img/historial.png" class="icons"/></a>
-                <a class="opciones" href="HTML_AGEN_HISTORIAL.html">Historial</a>
+            <section class="sn">
+                <!--Seccion sin nombre, toda la que esta en blanco-->
 
-                <a href="HTML_AGEN_CONFIGURACION.html"><img src="../img/configuracion.png" class="icons"/></a>
-                <a class="opciones" href="HTML_AGEN_CONFIGURACION.html">Configuración</a>
-                <a></a>
+                <section class="slides fade">
+                    <h3>Reservaciones En proceso</h3><br />
+                    <section id="listReservaciones"></section>
+                </section>
+
             </section>
-        </section>
-            
-        <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco-->
 
-            <section class="slides fade"  >   
-                <h3>Reservaciones En proceso</h3><br />                                                         
-                <section id="listReservaciones"></section>                          
-            </section>                                                                        
-            
         </section>
 
-    </section>
-
-
-        <!-- ################################### DIALOGO ASIGAR NOTAR Y DAR DE ALTA ######################## -->
-        <dialog id="update">
-            <form>
-
-                <label>Número de Reservación:</label>
-                <input type='text' class="dlabel" id='lblNum' required disabled><br /><br />
-
-
-                <label>Notas:</label><br />
-                <textarea rows="15" cols="80" id="txtNotas"></textarea>
-
-                <select id="statusShc" class="select">
-
-                    <option value="Rechazada">
-                        Rechazar
-                    </option>
-
-                    <option value="Autorizada">
-                        Autorizar
-                    </option>
-
-                </select>
-                <br /><br /><br />
-                <button type="button" class="botond" onclick="altaReservacion()">Enviar</button>
-                <button type="button" class="botonc" onclick="cerrar()">Cancelar</button>
-
-            </form>
-        </dialog>
-        <!-- ################################### DIALOGO ASIGAR NOTAR Y DAR DE ALTA ######################## -->
-
-           
     </main>
 
-    
-    
+    <!-- ################################### DIALOGO ASIGAR NOTAS Y DAR DE ALTA ######################## -->
+    <dialog id="update" class="upd-agen-dlg">
+        <form>
 
-    <script>        
+            <label>Número de Reservación:</label>
+            <input type='text' class="dlabel" id='lblNum' required disabled><br /><br />
 
-        function loading() {           
-            sesion(2);         
+
+            <label>Notas:</label><br />
+            <textarea rows="15" cols="80" id="txtNotas"></textarea>
+
+            <select id="statusShc" class="select">
+
+                <option value="Rechazada">
+                    Rechazar
+                </option>
+
+                <option value="Autorizada">
+                    Autorizar
+                </option>
+
+            </select>
+            <br /><br /><br />
+            <button type="button" class="botond" onclick="altaReservacion()">Enviar</button>
+            <button type="button" class="botonc" onclick="cerrar()">Cancelar</button>
+
+        </form>
+    </dialog>
+    <!-- ################################### DIALOGO ASIGAR NOTAS Y DAR DE ALTA ######################## -->
+
+
+    <script>
+
+        function loading() {
+            sesion(2);
             buscarAgente();
-            showSlides(0);            
+            showSlides(0);
 
-            loadReservaciones();                        
-            
+            loadReservaciones();
+
         }
 
-       
+
         function showSlides(n) {
 
-            
-            var i;
-            var slideArray = document.getElementsByClassName("slides");      
-                    
 
-            for (i = 0; i < slideArray.length;i++){               
-                slideArray[i].style.display = "none";                
+            var i;
+            var slideArray = document.getElementsByClassName("slides");
+
+
+            for (i = 0; i < slideArray.length; i++) {
+                slideArray[i].style.display = "none";
             }
 
             slideArray[n].style.display = "block";
-        }        
+        }
 
     </script>
 
