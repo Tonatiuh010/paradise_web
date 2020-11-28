@@ -11,7 +11,7 @@ insert into espacio(espNombre) values
 
 # insert into metodopag(pm_Metodo) values('Efectivo'),('Tarjeta bancaria'),('Paypal'),('Tranferencia bancaria');
 
-insert into tipolugar(tlNombre) values
+insert into tipoLugar(tlNombre) values
 ('Salón'),('Hacienda'),('Restaurante'),('Centro nocturno'),('Jardín'),('Quinta'),('Playa');
 
 select * from espacio;
@@ -188,7 +188,7 @@ select * from diclugar;
 # ALTER TABLE usuario AUTO_INCREMENT = 0;
 
 ########################################### LUGAR ESPACIO ######################################################
-insert into lugespacio (lg_NumEspacio,lg_NumLugar) values
+insert into lugEspacio (lg_NumEspacio,lg_NumLugar) values
 # Lugar 1 Salón Toscano
 (2,1),(3,1),(4,1),
 # Lugar 2 Salón Casa Blanca

@@ -188,7 +188,7 @@ begin
         insert into lugar(lugNombre,lugDescripcion,lugCosto,lugCapacidad,FK_TipoL) values
         (nombre,descripcion,costo,capacidad,tipoLug);
         
-        insert into diclugar values ((select lugNum from lugar order by lugNum desc limit 1),
+        insert into dicLugar values ((select lugNum from lugar order by lugNum desc limit 1),
         calle,numInt,numExt,cp,municipio);
         
     else
@@ -228,7 +228,7 @@ create procedure SP_insertar_EspLug (
     in numLug int
 )
 begin 
-	insert into lugespacio (lg_NumEspacio,lg_NumLugar) values (numEsp,numLug);
+	insert into lugEspacio (lg_NumEspacio,lg_NumLugar) values (numEsp,numLug);
 end//
 DELIMITER ;
 
@@ -242,7 +242,7 @@ create procedure SP_delete_EspLug (
     in numLug int
 )
 begin 
-	delete from lugespacio where lg_NumLugar=numLug and lg_NumEspacio=numEsp;
+	delete from lugEspacio where lg_NumLugar=numLug and lg_NumEspacio=numEsp;
 end//
 DELIMITER ;
 
@@ -332,13 +332,15 @@ DELIMITER ;
 
 ####################################### GENERAR PRE-RESERVACIÓN ###########################################
 DELIMITER //
-create trigger DIS_PRE_RESERVACION_REGISTRO before insert on pre_reservacion 
+create trigger DIS_PRE_RESERVACION_REGISTRO before insert on pre_Reservacion 
 for each row 
 begin 
     set new.prFechaRegistro = (SELECT NOW());
 end //
 DELIMITER ;
 
+
+##drop procedure SP_PRE_RESERVACION_REGISTRO ;
 DELIMITER //
 create procedure SP_PRE_RESERVACION_REGISTRO 
 (
@@ -348,7 +350,7 @@ create procedure SP_PRE_RESERVACION_REGISTRO
     in cliente int
 )
 begin 
-    insert into pre_reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,FK_Lugar,FK_Cliente) values
+    insert into pre_Reservacion(prFechaRegistro,prFechaInic,prFechaFin,prStatus,FK_Lugar,FK_Cliente) values
     ((SELECT NOW()),fecha_inicial,fecha_finalizar,'Proceso',lugar,cliente);
 end //
 DELIMITER ;
@@ -390,7 +392,7 @@ DELIMITER ;
 	)
 	begin 
 		insert reservacion(resNumPR) values(pr);
-        update pre_reservacion set prNotas=notas, prStatus='Autorizada' where prNum=pr;
+        update pre_Reservacion set prNotas=notas, prStatus='Autorizada' where prNum=pr;
     end //
     DELIMITER ;
     
@@ -409,7 +411,7 @@ DELIMITER //
     in notas text
  )
 	begin 
-		update pre_reservacion set prStatus='Rechazada', prNotas=notas where prNum=pr ;
+		update pre_Reservacion set prStatus='Rechazada', prNotas=notas where prNum=pr ;
     end //
     DELIMITER ;
 
@@ -436,7 +438,7 @@ create procedure SP_delete_imagen
 	in num int
 )
 begin
-	delete from imageneslugar where img_Num=num;    
+	delete from imagenesLugar where img_Num=num;    
 end //
 DELIMITER ;
 
@@ -455,7 +457,7 @@ create procedure SP_insert_TL
 	in nombre varchar(30)
 )
 begin
-		insert into tipolugar (tlNombre) values (nombre);
+		insert into tipoLugar (tlNombre) values (nombre);
 end //
 DELIMITER ;
 
@@ -528,7 +530,7 @@ begin
      set busqueda= (select DATE_ADD(fecInic,INTERVAL counter DAY));
      
      set resultado=(select count(*)
-     from pre_reservacion
+     from pre_Reservacion
      where prFechaInic<= busqueda and prFechaFin>=busqueda and FK_Lugar=lugar);
      
      SET counter=counter+1;
@@ -538,6 +540,20 @@ begin
 end//
 DELIMITER ;
 
+##Procedimiendo almacenado perdido
+DELIMITER //
+create procedure SP_preReservacion_asignarAgente(
+in pr int,
+in agente char (7)
+
+)
+begin 
+		update pre_Reservacion set FK_Agente=agente where prNum=pr;
+end //
+DELIMITER ;
+
+
+
 
 call sp_dias_disponibles('2020-12-25','2020-12-27',2);
 call sp_dias_disponibles('2020-12-21','2020-12-24',2);
@@ -545,8 +561,8 @@ call sp_dias_disponibles('2020-12-21','2020-12-24',2);
 #call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
 select *from cliente;
 
-alter table pre_reservacion
+alter table pre_Reservacion
 auto_increment=0;
-select * from pre_reservacion;
+select * from pre_Reservacion;
 
 select * from usuario;

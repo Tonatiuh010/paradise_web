@@ -163,19 +163,17 @@ function fillAgenteShc(ob) {
                 child2.setAttribute('class', 'chl2');
 
                 //--------------------------------------- C H I L D  1 -----------------------------------------------------------------
-                    //if (arrayAgentes[y].imagenes.length > 0) {
-                    //    var img = document.createElement('Img');
-                    //    img.setAttribute('class', 'img');
-                    //    img.setAttribute('src', '../img/lugares/' + arrayAgentes[y].num + "/" + arrayAgentes[y].imagenes[0].nombre);
-                    //} else {
-                    //    var img = document.createElement('Img');
-                    //    img.setAttribute('class', 'img');
-                    //    img.setAttribute('src', '../img/perfil_usuario.png');
-                    //}
+                    if (arrayAgentes[y].usuario.imagen.length > 0) {
+                        var img = document.createElement('Img');
+                        img.setAttribute('class', 'img');
+                        img.setAttribute('src', '../img/usuario/' + arrayAgentes[y].usuario.num + "/" + arrayAgentes[y].usuario.imagen[0].nombre);
+                    } else {
+                        var img = document.createElement('Img');
+                        img.setAttribute('class', 'img');
+                        img.setAttribute('src', '../img/perfil_usuario.png');
+                    }
 
-                var img = document.createElement('Img');
-                img.setAttribute('class', 'img2');
-                img.setAttribute('src', '../img/perfil_usuario.png');
+               
 
                 var imgsec = document.createElement('section');
                 imgsec.setAttribute('class', 'imgsec');
