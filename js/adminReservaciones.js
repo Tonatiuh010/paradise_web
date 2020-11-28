@@ -266,7 +266,7 @@ function fillAgenteShc(ob) {
     var y = 0;
 
     while (arrayAgentes[y]) {
-        console.log(arrayAgentes[y]);
+     
 
         var panel = document.createElement('section');
         panel.className = "paneles fade";
@@ -326,7 +326,8 @@ function fillAgenteShc(ob) {
 
                     //Mi botón kawai ;v
                     return function () {
-                        setAgente(arrayPreReservaciones[_y].agente.matricula, arrayPreReservaciones[_y].num);
+                        
+                        setAgente(arrayAgentes[_y].matricula, document.getElementById("numReservacion").innerText);
                     }
 
 
