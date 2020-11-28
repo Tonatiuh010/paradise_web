@@ -22,14 +22,14 @@ $obbus=  json_decode($_GET['objbuscar']);
 
             $str = $str . ")";
 
-            $precio = $obbus->precios;
+            
             $capacidad= $obbus->capacidad;
             $ciudad= $obbus->ciudad;
             $tipo=$obbus->tipoL;
 
 
 $lugar = new lugar();
-$res=$lugar->getAllLugaresFiltros($ciudad,$tipo,$precio,$capacidad,$str);
+$res=$lugar->getAllLugaresFiltros($ciudad,$tipo,$capacidad,$str);
 //var_dump($res);
 echo $res;
 

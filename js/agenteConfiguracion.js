@@ -67,6 +67,28 @@ function fillDataShc(ob) {
     var child4 = document.createElement('section');
     child4.setAttribute("class", "childConf");
 
+    var user_bt = document.createElement("button");
+    user_bt.setAttribute("class", "updBoton");
+    user_bt.addEventListener('click', function () { updUser(); });
+    user_bt.innerHTML = 'Cambiar';
+    //ESTO LO HIZO TONATIUH
+
+    var pssw_bt = document.createElement("button");
+    pssw_bt.setAttribute("class", "updBoton");
+    pssw_bt.addEventListener('click', function () { updPssw(); });
+    pssw_bt.innerHTML = 'Cambiar';
+    //ESTO LO HIZO TONATIUH
+
+    var tel_bt = document.createElement("button");
+    tel_bt.setAttribute("class", "updBoton");
+    tel_bt.addEventListener('click', function () { updTel(); });
+    tel_bt.innerHTML = 'Cambiar';
+
+    var btnImg = document.createElement('button');
+    btnImg.setAttribute('class', 'imgButton');
+    btnImg.innerHTML = 'Cambiar foto de perfil';
+    btnImg.addEventListener('click', function () { abrirDialogEdit(); });
+
     var str = "";
 
     for (var x = 0; x < telefono.length; x++) {
@@ -82,6 +104,7 @@ function fillDataShc(ob) {
         sect.innerHTML = telefono[x].telefono;
 
         var btn = document.createElement("button");
+        btn.setAttribute('class', 'updBoton');
         btn.innerHTML = "Eliminar Telefono";
 
         btn.addEventListener("click", function (_x) {
@@ -97,14 +120,16 @@ function fillDataShc(ob) {
 
 
         sect.appendChild(btn);
-        sectionTel.appendChild(sect);
+        //sectionTel.appendChild(sect);
     }
 
     child4.innerHTML = str;
+    child4.appendChild(tel_bt);
 
     var child5 = document.createElement('section');
     child5.setAttribute("class", "childConf");
     child5.innerHTML = usuario;
+    child5.appendChild(user_bt);
 
     var child6 = document.createElement('section');
     child6.setAttribute("class", "childConf");
@@ -114,6 +139,7 @@ function fillDataShc(ob) {
         z += y;
     }
     child6.innerHTML = z;
+    child6.appendChild(pssw_bt);
 
     var child7 = document.createElement('section');
     child7.setAttribute("class", "childConf");
@@ -152,6 +178,7 @@ function fillDataShc(ob) {
 
     seccion.appendChild(parent);
 
+
     parent.appendChild(child1_1);
     parent.appendChild(child1);
 
@@ -174,22 +201,40 @@ function fillDataShc(ob) {
 
     parent.appendChild(child7_7);
     parent.appendChild(child7);
+
+    parent.appendChild(btnImg);
 }
 
-
-
-function abrirDialogEdit() {
-    var dialog = document.getElementById("update");
-    dialog.showModal();
+function updUser() {
+    document.getElementById('data').innerHTML = '';
+    //document.getElementById('update').styele.display = 'block';
+    document.getElementById('udpUser').style.display = "block";
 }
 
+function updPssw() {
+    document.getElementById('data').innerHTML = '';
+    //document.getElementById('update').styele.display = 'block';
+    document.getElementById('udpPsswd').style.display = 'block';
+}
 
-function closeDialogEdit() {
-    var dialog = document.getElementById("update");
-    location.reload();
-    dialog.close();
+function updTel() {
+    document.getElementById('data').innerHTML = '';
+    //document.getElementById('update').styele.display = 'block';
+    document.getElementById('udpTel').style.display = "block";
+}
+
+//function abrirDialogEdit() {
+//    var dialog = document.getElementById("update");
+//    dialog.showModal();
+//}
+
+
+//function closeDialogEdit() {
+//    var dialog = document.getElementById("update");
+//    location.reload();
+//    dialog.close();
     
-}
+//}
 
 
 function eliminarTelefono(obj) {    
@@ -208,4 +253,20 @@ function eliminarTelefono(obj) {
 
     ajax.open("GET", "../php/actions/eliminarTelefono.php?b="+obj.num, true);
     ajax.send();
+}
+
+function reloadd() {
+    location.reload();
+}
+
+function abrirDialogEdit() {
+    var dialog = document.getElementById("dialogUpd");
+    dialog.showModal();
+}
+
+
+function closeDialogEdit() {
+    var dialog = document.getElementById("dialogUpd");
+    dialog.close();
+
 }

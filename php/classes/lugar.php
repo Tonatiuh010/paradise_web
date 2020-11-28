@@ -459,7 +459,7 @@
               }
 
                 
-        public function getAllLugaresFiltros($cd,$tl,$p,$cap,$esp){
+        public function getAllLugaresFiltros($cd,$tl,$cap,$esp){
             //cd = ciudad
             //tl = tipo
             //p = precio
@@ -467,14 +467,14 @@
             //esp = espacios
 
             if($cd == 'na'){$cd='';}
-            if($p == 'na'){$p='';}
+            //if($p == 'na'){$p='';}
             if($cap == 'na'){$cap ='';}
             if($esp == 'and Espacio in ()'){$esp='';}
             
             
             $sql="select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where Categoria = ?;";
-            $var =$tl.' '.$cd.' '.$cap.' '.$esp.' '.$p;
-            $newSQL="select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where Categoria = ".$var.";";
+            $var =$tl.' '.$cd.' '.$cap.' '.$esp;
+            $newSQL="select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where (Categoria = ".$var.") or (Categoria=".$tl.");";
                   $conn=mysqlConnection::getConnection();
                   $command=$conn->prepare($newSQL);
                   //$command->bind_param('s',$var);

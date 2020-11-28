@@ -346,8 +346,6 @@ function searchSp() {
 
         tipoL: document.getElementById('opsel').value,
 
-        precios: document.getElementById('precio').value,
-
         capacidad: document.getElementById('cap').value,
 
         esp: new function () {

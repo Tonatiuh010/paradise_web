@@ -543,6 +543,7 @@ call sp_dias_disponibles('2020-12-25','2020-12-27',2);
 call sp_dias_disponibles('2020-12-21','2020-12-24',2);
 
 #call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
+select *from cliente;
 
 alter table pre_reservacion
 auto_increment=0;

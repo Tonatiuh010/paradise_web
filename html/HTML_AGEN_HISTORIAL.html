@@ -15,7 +15,7 @@
 
 <body onload="loading();">
     
-    <nav>
+    <nav class="navOficial">
         <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
         <section class="menu">
@@ -44,48 +44,38 @@
     <main>
 
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
-        <nav>
-            <section class="Nav2do">
-               
-                &nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;
-                <button class="dot" onclick="showSlides(0)">Pendientes</button>&nbsp;&nbsp;&nbsp;<hr class="hotl" />&nbsp;&nbsp;&nbsp;                         
-            </section>
+        <nav class="agenNav">
+            <a></a>
+            <button class="dot" onclick="showSlides(0)">Pendientes</button>
+            <a></a>
         </nav>
         <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
 
     <section class="principal">
         
-        <section class="lateral">
+         <section class="panel-lateral">
+            <section class="perfil-agen">
+                <img src="../img/user_sin_foto.png" id="imgAgente" height="70%" />
+                <br />
+                <i id="user_name"></i>
+                <br /><br /><hr /><br />
+            </section>
+            
+            <section class="agen-lateral">
+                <a><img src="../img/estadistica.png" class="icons"/></a>
+                <section class="opciones">Estadisticas</section>
+                <a  href="HTML_AGEN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
+                <a class="opciones" href="HTML_AGEN_RESERVACIONES.html">Reservaciones</a>
+                <a href="HTML_AGEN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
+                <a class="opciones" href="HTML_AGEN_LUGARES.html">Lugares</a>
 
-            <img src="../img/user_sin_foto.png" id="imgAgente" width="40%" />
-            <br />
-            <i id="user_name"></i>
-             <!--Lista de opciones (Puede estar escondida.) <br />-->
-            <!--<button type="button" onclick="abrir()">Abrir</button>--> <!--quitar esto de aqui-->
+                <a href="HTML_AGEN_HISTORIAL.html"><img src="../img/historial.png" class="icons"/></a>
+                <a class="opciones" href="HTML_AGEN_HISTORIAL.html">Historial</a>
 
-            <ul>
-
-                <li>
-                    <a >Esquemas (Opción predefinida)</a>
-                </li>
-
-                <li>
-                    <a href="HTML_AGEN_RESERVACIONES.html">Reservaciones</a>
-                </li>                
-
-                <li>
-                    <a href="HTML_AGEN_LUGARES.html">Lugares</a>                            
-                </li>
-                
-
-                <li>
-                    <a href="HTML_AGEN_HISTORIAL.html">Historial</a>
-                </li>       
-                
-                <li>
-                    <a href="HTML_AGEN_CONFIGURACION.html">Configuración</a>
-                </li>                         
-            </ul>
+                <a href="HTML_AGEN_CONFIGURACION.html"><img src="../img/configuracion.png" class="icons"/></a>
+                <a class="opciones" href="HTML_AGEN_CONFIGURACION.html">Configuración</a>
+                <a></a>
+            </section>
         </section>
 
         <section class="sn">   <!--Seccion sin nombre, toda la que esta en blanco-->

@@ -41,6 +41,71 @@
     </nav>
 
     <main>
+        <br/>
+        <section class="principal">
+            <section class="formulario">
+                <article class="child1">
+                    <article>Nombre: </article>
+                    <input class="formInput" name="txtNombre" type="text" maxlength="30" id="txtNombre"  required />
+                </article>
+
+                <article class="child1">
+                    <article>Apellido Paterno: </article>
+                    <input class="formInput" name="txtApPat" type="text" maxlength="30" id="txtApPat" required />
+                </article>
+
+                <article class="child1">
+                    <article>Apellido Materno: </article>
+                    <input class="formInput" name="txtApMat" type="text" maxlength="30" id="txtApMat" />
+                </article>
+
+                <article class="child2">
+                    <article>Fecha de nacimiento: </article>
+                    <article>Número de Teléfono: </article>
+                    <input class="formInput" name="txtFecNac" type="date" id="txtFecNac" required>
+                    <input class="formInput" name="txtTelefono" type="tel" id="txtTelefono" required />
+                </article>
+
+                <article class="child1">
+                    <article>Correo Electrónico: </article>
+                    <input class="formInput" name="txtCorreo" type="email" maxlength="30" id="txtCorreo" required />
+                </article>
+
+                <article class="child1">
+                    <article>Usuario: </article>
+                    <input class="formInput" name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required >
+                </article>
+
+                <article class="child2">
+                    <article>Contraseña: </article>
+                    <article>Confirmar Contraseña: </article>
+                    <input class="formInput" name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required>
+                    <input class="formInput" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required>
+                </article>
+
+                <article class="align">
+                    <br />
+                    <input type="checkbox" name="legal" id="legal" value="OK" required/>
+                    &nbsp;Acepto que he leído y comprendido los siguientes Términos y Condiciones de Uso,
+                    y al hacer click en el recuadro, así como utilizar el presente
+                    servicio, dejo constancia expresa que los acepto de manera libre y consciente
+                    habiendo de mi parte revisado satisfactoriamente la información la cual considero
+                    adecuada y suficiente.
+                    <br /><br /><br />
+                </article>
+
+                <input type="button" name="submit" value="Inscribirme" class="btnSubmit" onclick="verifyForm()"/>
+            </section>
+
+            <section class="collague">
+                <img src="../img/fondos/collague4.png" height="100%" width="100%"/>
+            </section>
+        </section>
+    </main>
+
+
+    <!--
+    <main>
 
 
         <section class="secS"></section>
@@ -53,7 +118,7 @@
                 <h4>REGISTRATE</h4>
                 <br />
                 <section>
-                    <form> <!--action="../php/config.php" method="post"-->
+                    <form>
                         <table class="registrar">
                             <tr>
                                 <th class="ins1"><label>Nombre: </label></th>
@@ -93,7 +158,7 @@
                                 <th class="ins1"><label>Confirmar Contraseña:&nbsp;</label></th>
                                 <th class="ins2"><input class="formInput" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required><br /></th>
                             </tr>
-                            <!--CONFIRMAR QUE LA CONTRAEÑA SEA IGUAL EN AMBOS INPUT-->
+                           
                             <tr>
                                 <th colspan="3" class="terminos">
                                     <br />
@@ -108,7 +173,7 @@
                                 </th>
                             </tr>
                             <tr><th colspan="3">&nbsp;<br />&nbsp;</th></tr>
-                            <!--<tr><th><input type="submit" name="submit" value="Inscribirme" class="botonR"/><br />&nbsp;</th></tr>-->
+                           
                             <tr><th><input type="button" name="submit" value="Inscribirme" class="botonR" onclick="verifyForm()"/><br />&nbsp;</th></tr>
                             <tr><th colspan="3">&nbsp;<br />&nbsp;<br />&nbsp;</th></tr>
                         </table>
@@ -123,10 +188,10 @@
                      </dialog>
 
                 </section> 
-                <!--<section id="inscrito"></section>-->             
+                   
             </section>
     </main>
-
+        "-->
     <script>
 
         
