@@ -1,6 +1,5 @@
-﻿var slideReservaciones = 0;
-var slideReservacionesCons = 0;
-var numeroPR = 0;
+﻿var slideReservaciones = 1;
+var slideReservacionesCons = 1;
 
 
 function loadReservaciones() {
@@ -211,7 +210,7 @@ function fillReservacionAlta(ob) {
 
 }
 
-
+var numeroPR = 0;
 
 
 function openDialogAddAgente(numPReservacion) {
@@ -223,8 +222,8 @@ function openDialogAddAgente(numPReservacion) {
 
     dialog.appendChild(p);
     dialog.showModal();
-    numeroPR = numPReservacion;
 
+    numeroPR = numPReservacion;
 }
 
 function closeDialogAddAgente() {
@@ -259,18 +258,17 @@ function buscarAgente() {
 function fillAgenteShc(ob) {
 
 
-
     var list = document.getElementById("container");
     list.innerHTML = "";
     list.style.display = "block";
 
     var arrayAgentes = JSON.parse(ob);    
-    console.log(JSON.parse(ob));
+    //console.log(JSON.parse(ob));
 
     var y = 0;
 
     while (arrayAgentes[y]) {
-        console.log(arrayAgentes[y]);
+        //console.log(arrayAgentes[y]);
 
         var panel = document.createElement('section');
         panel.className = "paneles fade";
@@ -329,6 +327,10 @@ function fillAgenteShc(ob) {
                 btn.addEventListener("click", function (_y) {
 
                     //Mi botón kawai ;v
+                    //return function () {
+                    //    setAgente(arrayPreReservaciones[_y].agente.matricula, arrayPreReservaciones[_y].num);
+                    //}
+
                     return function () {
                         setAgente(arrayAgentes[_y].matricula, numeroPR);
                     }
@@ -381,7 +383,7 @@ function buscarPReservacionesEstado() {
 
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            //console.log(ajax.responseText);
+            console.log(ajax.responseText);
             fillPReservacionShc(ajax.responseText);           
         }
     };
@@ -578,7 +580,8 @@ function plusReservaciones(n) {
 
 function showReservaciones(n) {
     var i;
-    var slides = document.getElementsByClassName("reservaciones");
+    //var slides = document.getElementsByClassName("reservaciones");
+    var slides = document.getElementsByClassName('reservacionesCons');
     //console.log(document.getElementsByClassName('slide'));
 
     if (n < 1) {
@@ -599,7 +602,7 @@ function showReservaciones(n) {
 
 
 function plusReservacionesCons(n) {
-    showReservacionesCons(slideReservacionesCons += n);
+    showReservacionesCons(slideReservaciones += n);
 }
 
 function showReservacionesCons(n) {
