@@ -596,7 +596,7 @@ function showReservaciones(n) {
 
 
 function plusReservacionesCons(n) {
-    showReservacionesCons(slideReservaciones += n);
+    showReservacionesCons(slideReservacionesCons += n);
 }
 
 function showReservacionesCons(n) {
