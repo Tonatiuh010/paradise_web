@@ -261,12 +261,24 @@ function reloadd() {
 
 function abrirDialogEdit() {
     var dialog = document.getElementById("dialogUpd");
+    disableScroll();
     dialog.showModal();
 }
 
 
 function closeDialogEdit() {
     var dialog = document.getElementById("dialogUpd");
+    enableScroll();
     dialog.close();
 
+}
+
+function disableScroll() {
+    window.scrollTo(0, 0);
+    window.addEventListener('scroll', disableScroll);
+}
+
+function enableScroll() {
+    window.scrollTo(0, 0);
+    window.removeEventListener('scroll', disableScroll);
 }

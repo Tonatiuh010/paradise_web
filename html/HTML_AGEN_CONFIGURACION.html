@@ -131,19 +131,6 @@
 
     </section>
 
-        <dialog id="dialogUpd">
-            <form method="post" action="../php/actions/registrarImgUser.php" enctype="multipart/form-data">
-
-                <label>Foto:</label>
-                <input type="file" class="upload" name="files" accept="image/*" />
-
-
-                <input type="submit" class="botond" value="Enviar">
-                <button class="botonc" onclick="closeDialogEdit()">Cancelar</button>
-                Por el momento esto solo cierra el dialogo, tu cambia la función
-            </form>
-        </dialog>
-
 
         <!-- ######################################## Dialogo ########################################### -->
         <!--<dialog id="update">
@@ -186,7 +173,19 @@
         
     </main>
 
-    
+    <dialog id="dialogUpd" class="img-perfil-dialog">
+            <form method="post" action="../php/actions/registrarImgUser.php" enctype="multipart/form-data">
+                <label class="lbimg">Foto:</label><br /><br />
+                <input type="file" class="upload" name="files" accept="image/*" />
+                <br /><br />
+                <input type="submit" class="btn-form-img" value="Enviar">
+            </form>
+            <br />
+            <section class="botones2">
+                <button class="otro-boton" onclick="closeDialogEdit()">Cancelar</button>
+                <img src="../img/logoOficial.png" alt="Logotipo" width="90%" style="margin-left:10%;" />
+            </section>
+    </dialog>
     
 
     <script>        

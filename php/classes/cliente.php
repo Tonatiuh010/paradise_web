@@ -236,7 +236,7 @@ require_once("usuario.php");
 
 
 
-                    return "Registrado";
+                    //return "Registrado";
 
                     return "Registrado Exitosamente";
 
