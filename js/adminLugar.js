@@ -75,9 +75,9 @@
     if (lugarOb.verificacion()){
         ajax.send();
     } else {
-      
+        
         var errorMsg = "Favor de Rellenar Todos los campos";
-        showError(errorMsg);
+        showError("Favor de Rellenar Todos los campos");
     }
     
 }

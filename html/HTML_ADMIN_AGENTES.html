@@ -89,15 +89,15 @@
 
 
                         <label>Nombre:</label>
-                        <input class="in" type='text' id='txtNombre' maxlength="30" autofocus required>
+                        <input class="in" type='text' id='txtNombre' maxlength="40" autofocus required>
                         <label>Apellido Paterno *:</label>
-                        <input class="in" type='text' id="txtApPat" />
-                        <label>Apellido Materno *:</label>
-                        <input class="in" type='text' id="txtApMat" />
+                        <input class="in" type='text' id="txtApPat" maxlength="20" required/>
+                        <label>Apellido Materno:</label>
+                        <input class="in" type='text' id="txtApMat" maxlength="20"/>
                         <label>Fecha de nacimiento:</label>
                         <input class="in"  type="date" id="txtFecNac" required>            
                         <label>Teléfono:</label>
-                        <input class="in" type="tel" id="txtTelefono" required>           
+                        <input class="in" type="tel" id="txtTelefono" maxlength="10">           
                         <label>Genero:</label>
                         <select id="genreBox" class="in">
                             <option value="Masculino">Masculino</option>
@@ -106,16 +106,16 @@
 
                         
                         <label>Correo Electrónico: </label>
-                        <input class="in" name="txtCorreo" type="email" maxlength="30" id="txtCorreo" required />
+                        <input class="in" name="txtCorreo" type="email" maxlength="50" id="txtCorreo" required />
                      
                         <label>Usuario:</label>
-                        <input class="in" name="txtUsuario" type="text" id="txtUsuario" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required>
+                        <input class="in" name="txtUsuario" type="text" id="txtUsuario" maxlength="30" pattern="[A-Za-z0-9._%+-]{6,}" title="Puede contener números, letras en mayúsculas y minusculas" required>
                      
                         <label>Contraseña:</label>
-                        <input class="in" name="txtPass" type="password" id="txtPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required>
+                        <input class="in" name="txtPass" type="password" id="txtPass" maxlength="30" pattern="[A-Za-z0-9._%+-]{6,}" title="Minimo 6 caracteres" required>
                         
                         <label>Confirmar Contraseña:</label>
-                        <input class="in" name="txtConfiPass" type="password" id="txtConfiPass" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required>
+                        <input class="in" name="txtConfiPass" type="password" id="txtConfiPass" maxlength="30" pattern="[A-Za-z0-9._%+-]{6,}" title="Confirma la contraseña" required>
                         <br />
                         <input  type="button" class="btnSend" id="btnSend" style="float:right;display:block" value="Enviar" onclick="registrarAgente()" />
                         <br /><br />

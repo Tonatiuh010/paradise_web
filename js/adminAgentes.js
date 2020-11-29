@@ -1,8 +1,7 @@
 ﻿var slideIndex = 1;
 
 
-function registrarAgente() {
-    document.getElementById("msg").innerHTML = "";
+function registrarAgente() { 
 
     var agenteOb = null;
 
@@ -28,7 +27,14 @@ function registrarAgente() {
                         }
 
                     }
+            },
+            verify: function () {                
+                if (this.apPat == "" || this.nombre == "" || this.fecNac == "" || this.usuario.correo == "" || this.usuario.nameUser == ""|| this.usuario.passwd.passContent==false) {
+                    return false;
+                } else {
+                    return true;
                 }
+            }
         };
 
     var ajax = new XMLHttpRequest();
@@ -38,7 +44,7 @@ function registrarAgente() {
             var res = JSON.parse(ajax.responseText);
 
             if (res.res==false){
-                console.log(res.error);
+                showError(res.error);
             } else {
                 location.reload();
              
@@ -47,15 +53,16 @@ function registrarAgente() {
             
         }
     };
+    agenteOb.verify();
 
     //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
     ajax.open("GET", "../php/actions/registrarAgente.php?b=" + JSON.stringify(agenteOb), true);
-    if (agenteOb.usuario.passwd.passContent != false) {
+    if (agenteOb.verify()) {
         
-        ajax.send();
+       ajax.send();
     } else {
         // Mostrar Diálogo
-        console.log("contraseñas no coinciden");
+        showError("Favor de verificar que los datos ingresados sean correctos.");
     }
     
 }

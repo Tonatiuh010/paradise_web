@@ -6,13 +6,27 @@
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
             
-            document.getElementById("msg").innerHTML=ajax.responseText;
+            var res = JSON.parse(ajax.responseText);
+
+            if (res.res == false) {
+                showError(res.error);
+            } else {
+                location.reload();
+
+            }
 
         }
     }
 
     ajax.open("GET", "../php/actions/registrarEspacio.php?b=" + nombre, true);
-    ajax.send();
+
+
+    if (nombre!=""){
+       ajax.send();
+    } else {
+        showError("Favor de rellenar los campos asignados");
+    }
+    
 
     document.getElementById("txtEspacio").innerHTML="";
 }
@@ -24,15 +38,24 @@ function insertarTL() {
 
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
+            var res = JSON.parse(ajax.responseText);
 
-            document.getElementById("msg").innerHTML = ajax.responseText;
+            if (res.res == false) {
+                showError(res.error);
+            } else {
+                location.reload();
+
+            }
         }
     }
 
 
     ajax.open("GET", "../php/actions/registrarTipoLugar.php?b=" + nombre, true);
-    ajax.send();
-
+    if (nombre != "") {
+        ajax.send();
+    } else {
+        showError("Favor de rellenar los campos asignados");
+    }
     document.getElementById("txtTL").innerHTML = "";
 }
 

@@ -48,9 +48,9 @@
             $command->execute();
 
             if ($command->error!=""){
-                    echo 'Error: '.$command->error;
+                    return json_encode(array('res'=>false,'error'=>$command->error));
              } else {
-                    echo 'registrado';
+                    return json_encode(array('res'=>true));
              }
 
                 mysqli_stmt_close($command);
