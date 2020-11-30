@@ -22,47 +22,7 @@ function lugares() {
     ajax.send();
 }
 
-//function novedad(n) {
-//    var arrayLugares = JSON.parse(n);
-//    var novsec = document.getElementById("novedades");
 
-//    var arreglos = arrayLugares.length;
-//    var lugar = arrayLugares[arreglos - 1];
-
-//    if (lugar.imagenes.length > 0) {
-//        var img = document.createElement('Img');
-//        img.setAttribute('class', 'imagen');
-//        img.setAttribute('src', '../img/lugares/' + lugar.num + "/" + lugar.imagenes[0].nombre);
-//    } else {
-//        var img = document.createElement('Img');
-//        img.setAttribute('class', 'imagen');
-//        img.setAttribute('src', '../img/Loto_paradise.png');
-
-//    }
-
-//    var imgsec1 = document.createElement('section');
-//    imgsec1.setAttribute('class', 'sec2');
-
-//    var descripcion = document.createElement('Section');
-//    descripcion.innerHTML = '<h2>' + lugar.nombre + '</h2></br></br>' + lugar.desc;
-//    descripcion.setAttribute('class', 'sec');
-
-//    var logo = document.createElement('img');
-//    logo.setAttribute('class', 'secLogo');
-//    logo.setAttribute('src', '../img/logoOficial.png');
-
-//    var seccion = document.createElement('Section');
-//    seccion.setAttribute('class', 'inside_novedad');
-
-//    imgsec1.appendChild(img);
-//    seccion.appendChild(imgsec1);
-//    seccion.appendChild(descripcion);
-//    novsec.appendChild(seccion);
-
-//    console.log(lugar);
-//    console.log(img);
-
-//}
 
 function lugaresList(ls) {
     //var y = 0;

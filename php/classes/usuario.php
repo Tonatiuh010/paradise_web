@@ -27,7 +27,7 @@ require_once("imagenes.php");
         public function getTipo(){return $this->tipo;}
         public function setTipo($var){$this->tipo=$var;}
 
-         public function getImagen(){return $this->imagen;}
+        public function getImagen(){return $this->imagen;}
         public function setImagen($var){$this->imagen=$var;}
 
 
@@ -161,24 +161,50 @@ require_once("imagenes.php");
             $command=$conn->prepare($sql);
                   
 
-                  $command->bind_param('i',$c);     //se recibe el número de cliente que a su vez, en el procedimiento almacenado
-                                                    //va a encontrar el numero de usuario para poderlo eliminar
-                                                    //como es eliminacion por cascada, automaticamente borra al usuario y al cliente
+                  $command->bind_param('i',$c);     
+
                   $command->execute();
 
                   if ($command->error!=""){
                     //$mensaje= "Error ---> ".$command->error;
                     return false;
-
+                    //return "Error ---> ".$command->error;
                   } else {
 
-                    //$mensaje= "Registrado";
+                    //$mensaje= "Eliminado";
                     return true;
                     
                   }
 
             mysqli_stmt_close($command);
             $conn->close();
+        }
+
+        public function deleteUserbyEmail($c){
+            $conn=mysqlConnection::getConnection();
+            $sql="call sp_delete_user_email(?);";//SQL Sentence
+            $command=$conn->prepare($sql);
+                  
+
+                  $command->bind_param('s',$c);     
+
+                  $command->execute();
+
+                  if ($command->error!=""){
+                    //$mensaje= "Error ---> ".$command->error;
+                    return false;
+                    //return "Error ---> ".$command->error;
+
+                  } else {
+
+                    //$mensaje= "Registrado";
+                    return true;
+                    //return 'eliminado';
+                  }
+
+            mysqli_stmt_close($command);
+            $conn->close();
+            
         }
 
         public function getJsonObject(){

@@ -2,6 +2,10 @@ function createDialog(msg) {
     var dialogo = document.createElement('dialog');
     dialogo.setAttribute('id', 'dialog_error');
 
+    var logo = document.createElement('img');
+    logo.src = "../img/logoOficial.png";
+    logo.style.width = '40%';
+
     var mensaje = document.createElement('section');
     mensaje.setAttribute('id', 'mensaje');
     mensaje.innerHTML = '</br >' + msg + '</br></br>';
@@ -10,13 +14,19 @@ function createDialog(msg) {
     boton.innerHTML = 'Cerrar';
     boton.setAttribute('id', 'cerrar_error');
 
-    if (msg == 'Registrado Exitosamente') {
-        mensaje.innerHTML = '</br >' + msg + ' inicie sesión para continuar </br></br>';
+    console.log(msg);
+    if (msg == 1) {
+        mensaje.innerHTML = '</br > Registrado inicie sesión para continuar </br></br>';
         boton.addEventListener('click', function () { reloadIndex(); });
     } else {
-        boton.addEventListener('click', function () { closeError(); });
+        if (msg == 2) {
+            console.log('entre');
+            mensaje.innerHTML = '</br > Favor de llenar todos los campos </br></br>';
+        }
+            boton.addEventListener('click', function () { closeError(); });
     }
 
+    dialogo.appendChild(logo);
     dialogo.appendChild(mensaje);
     dialogo.appendChild(boton);
     document.body.appendChild(dialogo);

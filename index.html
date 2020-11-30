@@ -36,8 +36,8 @@
         </section>
         <section></section>
         <section class="barraBusqueda">
-            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-            <button type="button" id="search" class="search-button">Buscar</button>
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
         </section>
 
     </nav>
@@ -213,7 +213,14 @@
 
 
         }
-        
+
+
+        function buscador() {
+
+            var parametro = document.getElementById('general-search').value;
+
+            location.href = './php/actions/PHP_BUSCADOR.php?prm=' + parametro;
+        }
 
     </script>
 

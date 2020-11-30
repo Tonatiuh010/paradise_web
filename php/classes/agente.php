@@ -237,6 +237,46 @@ require_once("agTelefono.php");
 			}
 		}
 
+        public function updateAgente($mat,$tel,$us,$pwd){
+
+            $conn=mysqlConnection::getConnection();
+
+            //call sp_update_perfilAgen(matricula,number_case,cambio);
+            //case 1= nombre de usuario
+            //case 2= contraseña
+            //case 3= agregar telefono
+
+            $case;
+            $cambio;
+
+            if($us!=''){$case=1; $cambio=$us;}
+            if($pwd!=''){$case=2; $cambio=$pwd;}
+            if($tel!=''){$case=3; $cambio=$tel;}
+
+            $sql="call sp_update_perfilAgen (?,?,?);";//SQL Sentence
+            $command=$conn->prepare($sql);
+                  
+                $command->bind_param('sss',$mat,$case,$cambio);
+
+                $command->execute();
+
+                if ($command->error!=""){
+                return $command->error;
+                    
+
+                } else {
+
+                return "Cambios realizados";
+                   
+                    
+                }
+
+            
+
+            mysqli_stmt_close($command);
+            $conn->close();
+        }
+
         public function getJsonObject(){
 
             return json_encode(

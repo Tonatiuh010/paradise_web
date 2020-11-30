@@ -1235,6 +1235,28 @@ border-radius: 2%;*/
     /*box-shadow: 2px 2px 10px rgba(0,0,0,.25);*/
 }
 
+.childConf5 {
+    display: grid;
+    grid-template-columns: 2.3fr 1fr;
+    padding-left: 10%;
+    color: darkslategray;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-color: gray;
+}
+
+.updBotontel {
+    width: 68%;
+    height: 50%;
+    margin-top: 5%;
+    /*background-color: var(--pcolor1);*/
+    background-color: var(--boton);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-family: Georgia;
+}
+
 .imgButton {
     margin-top: 3%;
     width: 98%;
@@ -1270,6 +1292,9 @@ border-radius: 2%;*/
     font-family: Georgia;
 }
 
+
+
+
 /*.child2Conf {
     display: block;
     padding-top: 5%;
@@ -1304,6 +1329,32 @@ border-radius: 2%;*/
     height: 60%;
     grid-template-columns: 1fr 2fr;
     grid-gap: 2%;
+}
+
+#numeros-agente {
+    display: grid;
+    min-height: 45%;
+    max-height: 60%;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 2%;
+    text-align: left;
+}
+
+.eliminar {
+    border: 2px solid;
+    border-radius: 5px;
+    border-color: hsl(0, 0%, 92%);
+    padding:2%;
+    height:auto;
+}
+
+.tel-label {
+    padding:2%;
+    height:45%;
+    text-align: left;
+    background-color: hsl(0, 0%, 92%);
+    border:none;
+    border-radius:5px;
 }
 
 .udpPsswd2 {
@@ -1343,4 +1394,93 @@ border-radius: 2%;*/
     padding-bottom: 2%;
     padding-left: 5%;
     padding-right: 5%;
+    width: 40%;
+    margin-left: 25%;
+    margin-right: 25%;
+    font-family: Georgia;
+}
+
+.numRestxt{
+    width:100%;
+    height:100%;
+    text-align:center;
+}
+
+.sup-sec-udp {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+    grid-gap: 2%;
+    height:20%;
+
+}
+
+.botones3{
+    display:grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-gap:5%;
+}
+
+.btn5{
+    width:100%;
+    height:100%;
+    color:white;
+    font-family:Georgia;
+    background-color:var(--boton);
+    border:none;
+    border-radius:5px;
+}
+
+.labelDialog {
+    text-align: left;
+}
+
+.aut-neg-res {
+    height: 100%;
+    width: 100%;
+    text-align:center;
+    align-content:center;
+}
+
+.txtNotas{
+    width:100%;
+    font-family:Georgia;
+    font-size:medium;
+    padding:2%;
+}
+
+.lbimg{
+    text-align:left;
+}
+
+.otro-boton {
+    background-color: var(--boton);
+    font-family: Georgia;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 102%;
+    height: 25px;
+}
+
+.btn-form-img {
+    background-color: var(--boton);
+    font-family: Georgia;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 50%;
+    height: 25px;
+}
+
+.img-perfil-dialog[open] {
+    text-align: left;
+    width: 30%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: Georgia;
+    font-size: medium;
+    margin-left: 30%;
+    margin-right: 30%;
 }

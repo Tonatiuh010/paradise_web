@@ -8,6 +8,7 @@
     <title>Mi Perfil - Paradise</title>
 
     <script src="../js/session.js" charset="ISO-8859-1"></script>
+    <script src="../js/barra_busqueda.js" charset="ISO-8859-1"></script>
     <script src="../js/cliente_perfil.js" charset="ISO-8859-1"></script>
     <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
     <link rel="stylesheet" href="../css/dialogos_css.css" />
@@ -33,8 +34,8 @@
         </section>
         <section></section>
         <section class="barraBusqueda">
-            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-            <button type="button" id="search" class="search-button">Buscar</button>
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
         </section>
 
     </nav>
@@ -42,31 +43,41 @@
     <main>
         <nav>
             <a></a>
-            <a><hr class="hotl" /></a>
-            <a><hr class="hotl" /></a>
-            <a><hr class="hotl" /></a>
-            <a><hr class="hotl" /></a>
+            <button class="fil-reservaciones" id="autorizada" onclick="filtrarReservaciones(1)">Autorizadas</button>
+            <button class="fil-reservaciones" id="rechazada" onclick="filtrarReservaciones(2)">Rechazadas</button>
+            <button class="fil-reservaciones" id="proceso" onclick="filtrarReservaciones(3)">En espera</button>
+            <a></a>
         </nav>
 
         <section class="secPrincipal">
             <section class="perfil">
-                <img src="../img/user_sin_foto.png" id="imgCliente" class="userFoto" />
-                <i id="user_name"></i>
                 <section class="Plateral">
-                    <button class="latButton" onclick="usarHistorial()"><hr /><br />Historial<br /><br /><hr /></button>
-                    <button class="latButton" onclick="usarConfiguracion()"><hr /><br />Configuración<br /><br /><hr /></button>
-                    <section class="secbtn"><hr /><br /><a href="../php/actions/session_out.php";>Cerrar Sesión</a><br /><br /><hr /></section>
-                    <img src="../img/logoOficial.png" alt="Logotipo" class="latLogo" />
+                    <img src="../img/user_sin_foto.png" id="imgCliente" height="70%" />
+                    <br />
+                    <i id="user_name"></i>
+                    <br /><br /><hr /><br />
                 </section>
-            </section>
 
+                <section class="cli-lateral">
+                    <button class="latButton" onclick="usarHistorial()"><img src="../img/historial.png" class="icons" /></button>
+                    <button class="latButton" onclick="usarHistorial()">Historial</button>
+                    
+                    <button class="latButton" onclick="usarConfiguracion()"><img src="../img/configuracion.png" class="icons" /></button>
+                    <button class="latButton" onclick="usarConfiguracion()">Configuración</button>
+
+                    <a href="../php/actions/session_out.php";><img src="../img/log_out.png" width="90%;" /></a>
+                    <button class="latButton"><a href="../php/actions/session_out.php";>Cerrar Sesión</a></button>
+                </section>
+                <br />
+                <img src="../img/logoOficial.png" alt="Logotipo" width="100%" style="bottom:0%;" />
+            </section>
 
             <section class="acciones">
                 
                 <section class="historial" id="historial" style="display:none">
                     <br />
                     <h3>Consulta tus reservaciones</h3>
-                    <section id="listaRes" style="display:none; width:100%; height:100%;"></section>
+                    <section id="listaRes" width:100%; height:100%;"></section>
                     <br />
                 </section>
 

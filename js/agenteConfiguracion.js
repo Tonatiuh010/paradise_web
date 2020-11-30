@@ -2,6 +2,8 @@
 
 function buscarAgente() {       
     var ajax = new XMLHttpRequest();    
+    //var seccion = document.getElementById('data');
+    //seccion.innerHTML = '';
       
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
@@ -19,11 +21,11 @@ function buscarAgente() {
 
 function fillDataShc(ob) {    
     var seccion = document.getElementById('data');
-    var sectionTel = document.getElementById('secTel');
+    var tellist = document.getElementById('numeros-agente');
     
     //--------------------------- Variables del JSON ------------------------------------------------
     var obj = JSON.parse(ob);
-
+    console.log(obj);
     
     if (obj.usuario.imagen.length>0){
         var img = document.getElementById("imgAgente");        
@@ -65,7 +67,7 @@ function fillDataShc(ob) {
     child3.innerHTML = edad;
 
     var child4 = document.createElement('section');
-    child4.setAttribute("class", "childConf");
+    child4.setAttribute("class", "childConf5");
 
     var user_bt = document.createElement("button");
     user_bt.setAttribute("class", "updBoton");
@@ -80,7 +82,7 @@ function fillDataShc(ob) {
     //ESTO LO HIZO TONATIUH
 
     var tel_bt = document.createElement("button");
-    tel_bt.setAttribute("class", "updBoton");
+    tel_bt.setAttribute("class", "updBotontel");
     tel_bt.addEventListener('click', function () { updTel(); });
     tel_bt.innerHTML = 'Cambiar';
 
@@ -94,36 +96,61 @@ function fillDataShc(ob) {
     for (var x = 0; x < telefono.length; x++) {
 
         if (x == telefono.length-1) {
-            str += telefono[x].telefono;
+            //str += telefono[x].telefono;
+            str += '<li>' + telefono[x].telefono + '</li>';
         } else {
 
-            str += telefono[x].telefono + ",<br>";
+            str += '<li>' + telefono[x].telefono + '</li>';
         }
-        var sect = document.createElement("section");
-        sect.className = "telefs";
-        sect.innerHTML = telefono[x].telefono;
 
-        var btn = document.createElement("button");
-        btn.setAttribute('class', 'updBoton');
-        btn.innerHTML = "Eliminar Telefono";
+        if (x == telefono.length - 1) {
+            var del_tel_sec = document.createElement('section');
+            del_tel_sec.setAttribute('class', 'tel-label');
+            del_tel_sec.innerHTML= '<li>' + telefono[x].telefono + '</li>';
+        } else {
+            var del_tel_sec = document.createElement('section');
+            del_tel_sec.setAttribute('class', 'tel-label');
+            del_tel_sec.innerHTML = '<li>' + telefono[x].telefono + '</li>';
+        }
 
-        btn.addEventListener("click", function (_x) {
-            return function () {
-                eliminarTelefono(telefono[_x]);
-                var telfs = document.getElementsByClassName("telefs");
-                telfs[_x].style.display = "none";
+        var num_telefono = telefono[x].num;
+
+        var btn_eliminar = document.createElement('button');
+        btn_eliminar.innerHTML = 'eliminar';
+        btn_eliminar.setAttribute('class', 'udpButtons');
+        btn_eliminar.addEventListener('click', function () { eliminarTelefono(num_telefono); });
+
+        tellist.appendChild(del_tel_sec);
+        tellist.appendChild(btn_eliminar);
+
+        //var sect = document.createElement("section");
+        //sect.className = "telefs";
+        //sect.innerHTML = telefono[x].telefono;
+
+        //var btn = document.createElement("button");
+        //btn.setAttribute('class', 'updBoton');
+        //btn.innerHTML = "Eliminar Telefono";
+
+        //btn.addEventListener("click", function (_x) {
+        //    return function () {
+        //        eliminarTelefono(telefono[_x]);
+        //        var telfs = document.getElementsByClassName("telefs");
+        //        telfs[_x].style.display = "none";
                 
-            }
+        //    }
             
             
-        }(x));
+        //}(x));
 
 
-        sect.appendChild(btn);
+        //sect.appendChild(btn);
         //sectionTel.appendChild(sect);
     }
 
-    child4.innerHTML = str;
+    var telefonos = document.createElement('section');
+    telefonos.innerHTML = str;
+    child4.appendChild(telefonos);
+    //child4.innerHTML = str;
     child4.appendChild(tel_bt);
 
     var child5 = document.createElement('section');
@@ -223,6 +250,49 @@ function updTel() {
     document.getElementById('udpTel').style.display = "block";
 }
 
+function update() {
+    confirmar = true;
+
+    txtTelefono = document.getElementById('txtTelefono').value;
+    if (txtTelefono == null) {
+        txtTelefono = '';
+    }
+    txtUsuario = document.getElementById('txtUsuario').value;
+    if (txtUsuario == null) {
+        txtUsuario = '';
+    }
+
+    var confipassword = document.getElementById('veri_psswd').value;
+    var txtPass = document.getElementById('psswd').value;
+
+
+    if (txtPass == null) {
+        txtPass = '';
+    } else {
+        if (txtPass != confipassword) {
+            confirmar = false;
+            var mensaje = 'Verifique que las contraseñas coincidan';
+            showError(mensaje);
+        }
+    }
+
+    if (confirmar != false) {
+
+        var ajax = new XMLHttpRequest();
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                showError(ajax.responseText);
+            }
+        };
+
+
+        ajax.open("GET", "../php/actions/update_agente.php?txtTelefono=" + txtTelefono + "&txtUsuario=" + txtUsuario + "&pass=" + txtPass, true);
+        ajax.send();
+    }
+
+}
+
 //function abrirDialogEdit() {
 //    var dialog = document.getElementById("update");
 //    dialog.showModal();
@@ -237,23 +307,29 @@ function updTel() {
 //}
 
 
-function eliminarTelefono(obj) {    
+function eliminarTelefono(tel) {    
     var ajax = new XMLHttpRequest();
 
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            //console.log(ajax.responseText);
+            console.log(ajax.responseText);
            
-            if (ajax.responseText==false){
+            if (ajax.responseText == false) {
+
                 console.log("error");
+            } else {
+                alert('Eliminado');
+                window.location.href = "HTML_AGEN_CONFIGURACION.html";
             }
         }
     };
 
 
-    ajax.open("GET", "../php/actions/eliminarTelefono.php?b="+obj.num, true);
+    ajax.open("GET", "../php/actions/eliminarTelefono.php?b="+tel, true);
     ajax.send();
 }
+
+
 
 function reloadd() {
     location.reload();
@@ -261,12 +337,24 @@ function reloadd() {
 
 function abrirDialogEdit() {
     var dialog = document.getElementById("dialogUpd");
+    disableScroll();
     dialog.showModal();
 }
 
 
 function closeDialogEdit() {
     var dialog = document.getElementById("dialogUpd");
+    enableScroll();
     dialog.close();
 
+}
+
+function disableScroll() {
+    window.scrollTo(0, 0);
+    window.addEventListener('scroll', disableScroll);
+}
+
+function enableScroll() {
+    window.scrollTo(0, 0);
+    window.removeEventListener('scroll', disableScroll);
 }

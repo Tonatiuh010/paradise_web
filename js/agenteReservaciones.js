@@ -232,8 +232,13 @@ function fillReservaciones(ob) {
 
         slide.appendChild(pat);
         slide.appendChild(esp);
-        slide.appendChild(left_arrow);
-        slide.appendChild(right_arrow);
+
+        if (arrayPreReservaciones.length > 1) {
+
+            slide.appendChild(left_arrow);
+            slide.appendChild(right_arrow);
+        }
+        
 
         historial.appendChild(slide);
 
@@ -270,6 +275,7 @@ function showReservaciones(n) {
 
 function openDialogReservacion(num) {
     var dialogo = document.getElementById("update");
+    disableScroll();
     dialogo.showModal();
 
     var prNum = document.getElementById("lblNum");
@@ -279,6 +285,7 @@ function openDialogReservacion(num) {
 
 function cerrar() {
     var dialogo = document.getElementById("update");
+    enableScroll();
     dialogo.close();
 }
 
@@ -287,7 +294,7 @@ function altaReservacion() {
 
     var ajax = new XMLHttpRequest();
 
-    var status = document.getElementById("statusShc");
+    var status = document.getElementById("statusShc2");
 
     var obj = {
         num: document.getElementById("lblNum").value,

@@ -68,8 +68,6 @@
     };
 
     
-
-    //ajax.open("GET", "../php/sendLugar.php?b="+JSON.stringify(lugarOb), true);
     ajax.open("GET", "../php/actions/registrarLugar.php?b=" + JSON.stringify(lugarOb), true);
 
     if (lugarOb.verificacion()){
@@ -77,14 +75,15 @@
     } else {
         
         var errorMsg = "Favor de Rellenar Todos los campos";
-        showError("Favor de Rellenar Todos los campos");
+        showError(errorMsg);
     }
     
 }
 
 
+
 function buscarLugar() {
-    createDialog();
+    //createDialog();
     document.getElementById("listLugar").innerHTML = "";
 
     var ajax = new XMLHttpRequest();

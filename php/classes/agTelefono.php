@@ -36,7 +36,7 @@
             }
 
             public function deleteTelefono(){
-                $sql="call SP_delete_telefono(?);";
+            $sql="call SP_delete_telefono(?);";
             $conn=mysqlConnection::getConnection();
             $command=$conn->prepare($sql);
             $command->bind_param('i',$this->num);

@@ -9,6 +9,7 @@
     <script src="../js/dialog.js" charset="ISO-8859-1"></script>
     <script src="../js/agenteReservaciones.js" charset="ISO-8859-1"></script>
     <script src="../js/session.js" charset="ISO-8859-1"></script>
+    <script src="../js/barra_busqueda.js" charset="ISO-8859-1"></script>
     <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
 </head>
 
@@ -35,8 +36,8 @@
         </section>
         <section></section>
         <section class="barraBusqueda">
-            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-            <button type="button" id="search" class="search-button">Buscar</button>
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
         </section>
 
     </nav>
@@ -97,27 +98,34 @@
     <dialog id="update" class="upd-agen-dlg">
         <form>
 
-            <label>Número de Reservación:</label>
-            <input type='text' class="dlabel" id='lblNum' required disabled><br /><br />
+            <section class="sup-sec-udp">
+                <label class="labelDialog">Número de Reservación:</label>
+                <input type='text' id='lblNum' class="numRestxt" required disabled>
+                <select id="statusShc2" class="aut-neg-res">
 
+                    <option value="Rechazada">
+                        Rechazar
+                    </option>
+
+                    <option value="Autorizada">
+                        Autorizar
+                    </option>
+
+                </select>
+            </section>
+            <br />
 
             <label>Notas:</label><br />
-            <textarea rows="15" cols="80" id="txtNotas"></textarea>
+            <textarea rows="10" cols="60" id="txtNotas" class="txtNotas"></textarea>
 
-            <select id="statusShc" class="select">
 
-                <option value="Rechazada">
-                    Rechazar
-                </option>
-
-                <option value="Autorizada">
-                    Autorizar
-                </option>
-
-            </select>
-            <br /><br /><br />
-            <button type="button" class="botond" onclick="altaReservacion()">Enviar</button>
-            <button type="button" class="botonc" onclick="cerrar()">Cancelar</button>
+            <br /><br />
+            <section class="botones3">
+                <img src="../img/logoOficial.png" alt="Logotipo" width="100%" />
+                <button type="button" class="btn5" onclick="altaReservacion()">Enviar</button>
+                <button type="button" class="btn5" onclick="cerrar()">Cancelar</button>
+            </section>
+            
 
         </form>
     </dialog>

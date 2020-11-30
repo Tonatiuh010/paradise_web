@@ -10,7 +10,14 @@
 
     $obj=new cliente($ob_cli->nombre,$ob_cli->paterno,$ob_cli->materno,$ob_cli->nacimiento,$ob_cli->telefono,$ob_cli->usuario,$ob_cli->contrasenia,$ob_cli->correo); 
     //$obj=new cliente('Pedro','Jimenez','Rieta','1997-02-02','','','pancrasio','pancrasioLT@gmail.com');       
-    $respuesta =$obj->insertarCli();
-    echo $respuesta;
+    $respuesta =json_decode($obj->insertarCli());
+
+    if($respuesta->res==true){
+        echo 1;
+    }else{
+        echo $respuesta->error;
+    }
+
+    
 
 ?>

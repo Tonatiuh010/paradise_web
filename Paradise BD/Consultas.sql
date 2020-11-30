@@ -276,6 +276,11 @@ select tlNum numero, tlNombre nombre from tipoLugar;
 #select * from VW_tipolugares_admin;
 
 ##--------------------------------------------- EL basurero -----------------------------------------------
-select DISTINCT num, Lugar, Descripcion, Costo, Capacidad from vw_lugares_filtros_list where (Categoria =1  and Costo = 2500) or (categoria=1);
+
+
 
 select * from vw_lugares_filtros_list;
+
+use paradise;
+select * from vw_reservacion_completa;
+select * from vw_reservacion_completa where estado='Rechazada' and cliente=10;

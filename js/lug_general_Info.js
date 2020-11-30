@@ -130,9 +130,13 @@ function reservar() {
 
         ajax.onreadystatechange = function () {
             if (ajax.status == 200 && ajax.readyState == 4) {
-                if (ajax.responseText == true) {
+                if (ajax.responseText == 1) {
+                    console.log(ajax.responseText);
                     alert('Reservación en proceso, revise en su historial de reservaciones para continuar');
                     window.location.href = "../../index.html";
+                } else {
+                    document.getElementById('reservacion').close();
+                    showError(ajax.responseText);
                 }
             }
         };
@@ -149,8 +153,15 @@ function reservar() {
 
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200 && ajax.readyState == 4) {
-                    alert('Reservación en proceso, inicie sesión para revisar su historial de reservaciones');
-                    window.location.href = "../../index.html";
+                    if (ajax.responseText == 1) {
+                        console.log(ajax.responseText);
+                        alert('Reservación en proceso, inicie sesión para revisar su historial de reservaciones');
+                        window.location.href = "../../index.html";
+                    } else {
+                        document.getElementById('reservacion').close();
+                        showError(ajax.responseText);
+                    }
+                    
                 }
             };
 
@@ -313,8 +324,10 @@ function fill_img(img) {
 
                 if (arrayImg[y]) {
 
-                    var imgbox = document.createElement('section');
+                    var imgbox = document.createElement('a');
                     imgbox.setAttribute('class', 'ch1');
+                    //imgbox.setAttribute('href', '../../img/lugares/' + lugID + '/' + arrayImg[y].nombre);
+                    imgbox.href = '../../img/lugares/' + lugID + '/' + arrayImg[y].nombre
                     var img = document.createElement("img");
                     img.setAttribute('class', 'ch2');
 

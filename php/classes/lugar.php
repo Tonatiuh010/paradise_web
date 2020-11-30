@@ -505,6 +505,41 @@
                 $conn->close();         
                 return json_encode($list);
         }
+
+
+        public function buscador_navegador($prm){
+            
+            $conn=mysqlConnection::getConnection();
+
+             $sql="call sp_navegador_busqueda (?);";
+                $command=$conn->prepare($sql);
+                 
+                $command->bind_param('s',$prm);
+
+                $command->execute();
+
+                //$command->bind_result($counter);
+
+                $command->bind_result($numero,$nombre,$desc,$costo,$capacidad);
+
+                       $list=array();
+
+                       while($command->fetch()){
+
+                                $this->num=$numero;
+                                $this->nombre=$nombre;
+                                $this->desc=$desc;
+                                $this->costo=$costo;
+                                $this->capacidad=$capacidad;
+                                 
+                                array_push($list,json_decode(self::getJsonObject()));                                               
+                       }          
+
+                mysqli_stmt_close($command);
+                $conn->close();         
+                return json_encode($list);
+        }
+
         
      }
 
