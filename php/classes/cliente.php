@@ -103,6 +103,7 @@ require_once("usuario.php");
                             $this->materno=$materno;
                             $this->nacimiento=$nacimiento; 
                             $this->edad=$edad;
+                            $this->telefono=$telefono;
 
                             parent:: setNum($num_us);
                             parent:: setNombre($usuario);
@@ -120,6 +121,7 @@ require_once("usuario.php");
                       $sql="select * from vw_cliente_perfil where nombre=? and email=?;";
 
                       $conn=mysqlConnection::getConnection();
+                      parent::__construct();
                       $command=$conn->prepare($sql);
                       $command->bind_param('ss',$args[0],$args[1]);
                       $command->bind_result($num,                   //Generamos nuevas variables que nos
@@ -151,6 +153,7 @@ require_once("usuario.php");
                             parent:: setContrasenia($contrasenia);
                             parent:: setCorreo($correo);
                             parent:: setTipo($tipo);
+                            //parent:: setImagen($);
 
                             array_push($list,json_decode(self::getJsonObject()));
                             }
@@ -209,7 +212,9 @@ require_once("usuario.php");
             $correo= parent:: getCorreo();
 
             if($verificar==false){
-                echo 'Cuenta de usuario ya existe verifique su nombre de usuario o su correo';
+				$error='Cuenta de usuario ya existe verifique su nombre de usuario o su correo';
+				return json_encode(array("res"=>false,"error"=>$error));
+                //echo 'Cuenta de usuario ya existe verifique su nombre de usuario o su correo';
             }else{
                 $sql="call SP_insert_cliente (?,?,?,?,?,?);";//SQL Sentence
                 $command=$conn->prepare($sql);
@@ -228,17 +233,19 @@ require_once("usuario.php");
                   $command->execute();
 
                   if ($command->error!=""){
-                    return "Error ---> ".$command->error;
+                    parent:: deleteUserbyEmail($correo);
+                    //return "Error ---> ".$command->error;
+                    return json_encode(array("res"=>false,"error"=>$command->error));
                     
 
                   } else {
 
 
-
+                    return json_encode(array("res"=>true));
 
                     //return "Registrado";
 
-                    return "Registrado Exitosamente";
+                    //return true;
 
                    
                     
@@ -292,7 +299,9 @@ require_once("usuario.php");
 
         public function deleteCliente($c){
             $conn=mysqlConnection::getConnection();
-            $verificar= parent::deleteUserCli($c);
+            $verificar= parent::deleteUserbyEmail($c);
+
+            //return $verificar;
 
             if($verificar==true){
                 return true;

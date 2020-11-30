@@ -3,10 +3,13 @@
 <head>
     <title>Agente - Paradise</title>
     <link rel="stylesheet" href="../css/cssBase.css" />
+    <link rel="stylesheet" href="../css/dialogos_css.css" />
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" href="../img/Loto_icon.png">
 
     <script src="../js/dialog.js" charset="ISO-8859-1"></script>
+    <script src="../js/barra_busqueda.js" charset="ISO-8859-1"></script>
+    <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
     <script src="../js/agenteConfiguracion.js" charset="ISO-8859-1"></script>
     <script src="../js/session.js" charset="ISO-8859-1"></script>
 </head>
@@ -34,8 +37,8 @@
         </section>
         <section></section>
         <section class="barraBusqueda">
-            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-            <button type="button" id="search" class="search-button">Buscar</button>
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
         </section>
 
     </nav>
@@ -112,15 +115,23 @@
                             </section>
                         </section>
                         <section id="udpTel" style="display:none">
-                            <section class="getConfig">
-                                <label class="pss_us">Número de Teléfono: </label>
-                                <input class="txt_input" name="txtTelefono" type="tel" id="txtTelefono" required />
-                                <section></section>
-                                <section class="botones2">
-                                    <button class="udpButtons" id="telefono" onclick="update()">Guardar</button>
-                                    <button class="udpButtons" id="cancel" onclick="reloadd()">Cancelar</button>
+                            <section class="eliminar">
+                                <h4>Agregar número teléfonico</h4><br />
+                                <section class="getConfig">
+                                    <label class="pss_us">Número de Teléfono: </label>
+                                    <input class="txt_input" name="txtTelefono" type="tel" id="txtTelefono" required />
+                                    <section></section>
+                                    <section class="botones2">
+                                        <button class="udpButtons" id="telefono" onclick="update()">Guardar</button>
+                                        <button class="udpButtons" id="cancel" onclick="reloadd()">Cancelar</button>
+                                    </section>
+                                    <section></section><section></section>
                                 </section>
-                                <section></section><section></section>
+                            </section>
+                            <br />
+                            <section class="eliminar">
+                                <h4>Eliminar número</h4><br />
+                                <section id="numeros-agente"></section>
                             </section>
                         </section>
                     </section>

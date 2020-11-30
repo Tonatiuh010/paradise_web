@@ -145,6 +145,75 @@
                 mysqli_stmt_close($command);
                 $conn->close(); 
                 return json_encode($list);
+        }
+
+        public function getAllReservacionesByEstadoAndCliente($estado){
+             $sql="select * from vw_reservacion_completa where estado=? and cliente=?;";
+
+                $conn=mysqlConnection::getConnection();
+
+                $command=$conn->prepare($sql);                                 
+                $command->bind_param('si',$estado,$this->cliente);
+
+                 $command->execute();
+
+                $command->bind_result($num,             //Generamos nuevas variables que nos
+                                    $registro,                //almacenen los resultados obtenidos 
+                                    $inicio,               //desde la base de datos
+                                    $termino,               //NOTA: Las variables deben ir acomodadas
+                                    $estado,            //según el orden en el que estan en la BD
+                                    $notas,                  //en este caso, el orden de los campos en la vista o consulta
+                                    $lugar,
+                                    $cliente,
+                                    $agente,
+                                    $confirmacion,        
+                                    $dias,
+                                    $total);
+
+
+               
+
+                $list=array();
+
+                while ($command->fetch()){
+                    
+                $this->num=$num;                            
+                $this->registro=$registro;
+                $this->inicio=$inicio;
+                $this->termino=$termino;
+                $this->status=$estado; 
+                $this->notas=$notas;
+
+                if($lugar==null){
+                    $this->lugar=new lugar();
+                }else{
+                    $this->lugar=new lugar($lugar);
+                }
+                
+                if($cliente==null){
+                    $this->cliente=new cliente();
+                }else{
+                    $this->cliente=new cliente($cliente);
+                }
+                
+                if($agente==null){
+                    $this->agente=new agente();
+                }else{
+                    $this->agente=new agente($agente);
+                }
+                
+                parent:: setNum($num);
+                parent:: setConfirmada($confirmacion);
+                parent:: setDias($dias);
+                parent:: setTotal($total);
+
+
+                array_push($list,json_decode(self::getJsonObject()));                    
+                }
+
+              mysqli_stmt_close($command);
+              $conn->close(); 
+              return json_encode($list);
         }        
 
 
@@ -427,6 +496,27 @@
 
         }
 
+        public function cliente_cancelarPR(){
+            $sql="call sp_preReservacion_cancelada (?);";
+            
+             $conn=mysqlConnection::getConnection();
+
+             $command=$conn->prepare($sql);
+             $command->bind_param('i',$this->num);
+             
+             $command->execute();
+
+             if ($command->error!=""){
+                return false;
+                die;
+             }
+
+              mysqli_stmt_close($command);
+              $conn->close();
+
+             return true;
+        }
+
         public function verifyReservacion($i,$f,$l){
             $conn=mysqlConnection::getConnection();
                 $validar=0;
@@ -497,7 +587,7 @@
             $validar=self::verifyReservacion($i,$f,$l);
 
                 if($validar!=0){
-                    return false;
+                    return json_encode(array("res"=>false,"error"=>''));;
                 }else{
 
                     //                          Fecha inicial/Fecha de cierre/Lugar/Cliente
@@ -512,12 +602,14 @@
                       $command->execute();
 
                       if ($command->error!=""){
-                        return false;
+                        return json_encode(array("res"=>false,"error"=>$command->error));
+                        //return "Error ---> ".$command->error;
                     
 
                       } else {
-
-                        return true;
+                        
+                        return json_encode(array("res"=>true));
+                        //return true;
                    
                       }
 

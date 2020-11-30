@@ -9,6 +9,7 @@
     <script src="../js/dialog.js" charset="ISO-8859-1"></script>
     <script src="../js/adminLugar.js" charset="ISO-8859-1"></script>
     <script src="../js/session.js" charset="ISO-8859-1"></script>
+    <script src="../js/barra_busqueda.js" charset="ISO-8859-1"></script>
     <script src="../js/error_dialog.js" charset="ISO-8859-1"></script>
     <link rel="stylesheet" href="../css/dialogos_css.css" />
 </head>
@@ -36,8 +37,8 @@
         </section>
         <section></section>
         <section class="barraBusqueda">
-            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-            <button type="button" id="search" class="search-button">Buscar</button>
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
         </section>
 
     </nav>
@@ -209,7 +210,7 @@
       <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
     
     <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
-    <section>
+    <!--<section>
         <dialog id="updateImg" class="imgDialog">
 
             
@@ -235,7 +236,7 @@
             <br />
 
         </dialog>
-    </section>
+    </section>-->
     <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
 
 

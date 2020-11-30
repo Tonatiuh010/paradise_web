@@ -32,6 +32,7 @@ function usarConfiguracion() {
     //document.getElementById('update').style.display = 'none';
 }
 
+
 function fillData(ob) {
 
     var seccion = document.getElementById('data');
@@ -159,9 +160,6 @@ function fillData(ob) {
 
     seccion.appendChild(parent);
 
-    
-    
-
     parent.appendChild(child1_1);
     parent.appendChild(child1);
 
@@ -171,7 +169,8 @@ function fillData(ob) {
     parent.appendChild(child3_3);
     parent.appendChild(child3);
 
-    if (telefono != null) {
+
+    if (telefono == null || telefono!='') {
         parent.appendChild(child4_4);
         parent.appendChild(child4);
     }
@@ -265,6 +264,9 @@ function usarHistorial() {
     //document.getElementById('reservacion').style.display = "None";
     document.getElementById('historial').style.display = "block";
     document.getElementById('configuracion').style.display = "None";
+    document.getElementById('proceso').style.display = 'block';
+    document.getElementById('rechazada').style.display = 'block';
+    document.getElementById('autorizada').style.display = 'block';
 
     document.getElementById("listaRes").innerHTML = "";
 
@@ -282,18 +284,87 @@ function usarHistorial() {
     ajax.send();
 }
 
+function filtrarReservaciones(fil) {
+
+    var filtro = '';
+
+    //case 1: autorizadas
+    //case 2: rechazadas
+    //case 3: en espera
+
+    switch (fil) {
+        case 1: filtro = 'Autorizada';
+            break;
+        case 2: filtro = 'Rechazada';
+            break;
+        case 3: filtro = 'Proceso';
+            break;
+        default: showError('Something is wrong');
+            break;
+    }
+
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            fillHistorial(ajax.responseText);
+            //console.log(ajax.responseText);
+        }
+    };
+
+
+    ajax.open("GET", "../php/actions/show_cliente_reservaciones_estado.php?status="+filtro, true);
+    ajax.send();
+}
+
 function fillHistorial(ht) {
     var y=0;
     var arrayHistorial = JSON.parse(ht);
-    var historial = document.getElementById('historial');
+    var contenido = document.getElementById('listaRes');
+    contenido.innerHTML = '';
 
     while (arrayHistorial[y]) {
+        var telefono = arrayHistorial[y].agente.telefono;
 
         var slide = document.createElement('section');
         slide.className = "slides fade";
 
         var pat = document.createElement('Section');
         pat.setAttribute("class", "pat");
+
+        var right_arrow = document.createElement('img');
+        right_arrow.setAttribute("class", "next");
+        right_arrow.src = "../img/next_page.png";
+        right_arrow.addEventListener('click', function () { plusSlides(1); });
+
+        var vacia = document.createElement('section');
+        var btnCancelar = document.createElement('button');
+        btnCancelar.innerHTML = 'Cancelar Reservación';
+        btnCancelar.setAttribute('class', 'btnCancelar');
+        
+
+        if (arrayHistorial[y].status == 'Proceso') {
+            var pre_reservacion = arrayHistorial[y].reservacion.num;
+            btnCancelar.addEventListener('click', function () { cancelarPR(pre_reservacion); })
+            vacia.appendChild(btnCancelar);
+        }
+
+
+        var left_arrow = document.createElement('img');
+        left_arrow.setAttribute("class", "prev");
+        left_arrow.src = "../img/prev_page.png";
+        left_arrow.addEventListener('click', function () { plusSlides(-1); });
+
+        var flechas = document.createElement("Section");
+        flechas.setAttribute("class", "flechas");
+
+        if (arrayHistorial.length > 1) {
+            flechas.appendChild(left_arrow);
+            flechas.appendChild(vacia);
+            flechas.appendChild(right_arrow);
+            slide.appendChild(flechas);
+        }
 
         //------------------ C H I L D  1 -----------------------
         var child1 = document.createElement('Section');
@@ -362,11 +433,26 @@ function fillHistorial(ht) {
                         + arrayHistorial[y].agente.materno;
         lb7_1.setAttribute('class', 'labelR');
 
+
+        var str = "";
+
+        for (var x = 0; x < telefono.length; x++) {
+
+            if (x == telefono.length - 1) {
+                //str += telefono[x].telefono;
+                str += '<li>' + telefono[x].telefono + '</li>';
+            } else {
+
+                str += '<li>' + telefono[x].telefono + '</li>';
+            }
+
+        }
+
         var lb8 = document.createElement("Section");
         lb8.innerHTML = 'Telefono del Agente: ';
         lb8.setAttribute('class', 'labelL');
         var lb8_1 = document.createElement("Section");
-        lb8_1.innerHTML = arrayHistorial[y].agente.telefono;
+        lb8_1.innerHTML = str;
         lb8_1.setAttribute('class', 'labelR');
 
         var lb9 = document.createElement("Section");
@@ -423,25 +509,18 @@ function fillHistorial(ht) {
         pat.appendChild(child1);
         pat.appendChild(child2);
 
-        var right_arrow = document.createElement('img');
-        right_arrow.setAttribute("class", "next");
-        right_arrow.src = "../img/next_page.png";
-        right_arrow.addEventListener('click', function () { plusSlides(1); });
-
-        var left_arrow = document.createElement('img');
-        left_arrow.setAttribute("class", "prev");
-        left_arrow.src = "../img/prev_page.png";
-        left_arrow.addEventListener('click', function () { plusSlides(-1); });
+        
 
         var esp = document.createElement("Section");
         esp.setAttribute("class", "espacio");
 
+        
+
         slide.appendChild(pat);
         slide.appendChild(esp);
-        slide.appendChild(left_arrow);
-        slide.appendChild(right_arrow);
+       
 
-        historial.appendChild(slide);
+        contenido.appendChild(slide);
 
         y++;
 
@@ -476,6 +555,21 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = 'block';
 
 
+}
+
+function cancelarPR(reservacion) {
+    console.log(reservacion);
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            showError(ajax.responseText);
+        }
+    };
+
+
+    ajax.open("GET", "../php/actions/cancelar_pre_reservacion.php?res=" + reservacion, true);
+    ajax.send();
 }
 
 function buscarRes() {

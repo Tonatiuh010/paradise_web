@@ -313,6 +313,9 @@ begin
 end//
 DELIMITER ;
 
+
+
+
 #################################### BORRAR A UN CLIENTE ################################################
 #drop procedure sp_delete_perfilCli;
 DELIMITER //
@@ -500,6 +503,129 @@ begin
     where num=id;
 end//
 DELIMITER ;
+
+
+
+
+##Procedimiendo almacenado perdido :D
+DELIMITER //
+create procedure SP_preReservacion_asignarAgente(
+in pr int,
+in agente char (7)
+
+)
+begin 
+		update pre_Reservacion set FK_Agente=agente where prNum=pr;
+end //
+DELIMITER ;
+
+
+
+select * from usuario;
+
+select * from vw_cliente_perfil;
+
+delete from usuario where usCorreo='iabarcae@yahoo.es';
+
+call sp_dias_disponibles('2020-12-25','2020-12-27',2);
+call sp_dias_disponibles('2020-12-21','2020-12-24',2);
+
+#call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
+select *from cliente;
+
+alter table pre_Reservacion
+auto_increment=0;
+select * from pre_Reservacion;
+
+select * from usuario;
+
+
+
+
+###############################################################################################################
+	#NUEVO
+###############################################################################################################
+#################################### ACTUALIZAR A UN AGENTE ################################################
+
+DELIMITER //
+create procedure sp_update_perfilAgen
+(
+	in agente char(7),
+	in campo int,
+	in cambio varchar(60)
+)
+begin
+	case
+	  when campo=1 then
+			UPDATE agente INNER JOIN usuario
+			ON FK_usuario = usNum 
+			SET usNombre = cambio
+			where agMatricula = agente;
+	  when campo=2 then
+			UPDATE agente INNER JOIN usuario
+			ON FK_usuario = usNum 
+			SET usContrasenia = cambio
+			where agMatricula = agente;
+	  when campo=3 then
+			insert into telef_agentes(tgTelefono,FK_agente) values(cambio,agente);
+	end case;
+    
+end//
+DELIMITER ;
+
+################################## BUSCADOR DEL NAVEGADOR #################################################
+#drop procedure sp_navegador_busqueda;
+
+DELIMITER //
+create procedure sp_navegador_busqueda(
+	in parametro varchar(100)
+)
+begin 
+		select DISTINCT lugNum as num, lugNombre as lugar, lugDescripcion as descripcion, lugCosto as costo, lugCapacidad as capacidad 
+		from vw_lugar_complete_data 
+		where (lugNombre like (concat(parametro,'%')) or lugNombre like (concat('%',parametro,'%')) or lugNombre like (concat('%',parametro)))
+		or (lugDescripcion like (concat(parametro,'%')) or lugDescripcion like (concat('%',parametro,'%')) or lugDescripcion like (concat('%',parametro)))
+		or (lugCosto like (concat(parametro,'%')) or lugCosto like (concat('%',parametro,'%')) or lugCosto like (concat('%',parametro)))
+		or (lugCapacidad like (concat(parametro,'%')) or lugCapacidad like (concat('%',parametro,'%')) or lugCapacidad like (concat('%',parametro)))
+		or (tlNombre like (concat(parametro,'%')) or tlNombre like (concat('%',parametro,'%')) or tlNombre like (concat('%',parametro)))
+		or (mun_nombre like (concat(parametro,'%')) or mun_nombre like (concat('%',parametro,'%')) or mun_nombre like (concat('%',parametro)))
+		or (espNombre like (concat(parametro,'%')) or espNombre like (concat('%',parametro,'%')) or espNombre like (concat('%',parametro)));
+end //
+DELIMITER ;
+
+call sp_navegador_busqueda('puerto');
+
+/*################################### DELETE USER BY EMAIL #####################################*/
+
+DELIMITER //
+create procedure sp_delete_user_email(
+in email varchar(50)
+
+)
+begin 
+		delete from usuario where usCorreo=email;
+end //
+DELIMITER ;
+
+################################### PRE RESERVACION CANCELADA POR EL CLIENTE ##############################
+call SP_preReservacion_cancelada
+
+DELIMITER //
+create procedure sp_preReservacion_cancelada
+(
+	in pr int
+)
+begin
+	 declare mensaje varchar(40);
+     set mensaje='CANCELADA POR EL CLIENTE';
+     
+     update pre_reservacion 
+     set prStatus='Rechazada', prNotas=mensaje
+     where prNum=pr;
+
+end//
+DELIMITER ;
+
 ################################### DIAS DISPONIBLES PRE-RESERVACIÓN Y RESERVACIÓN ##############################
 
 #drop procedure sp_dias_disponibles;
@@ -531,7 +657,7 @@ begin
      
      set resultado=(select count(*)
      from pre_Reservacion
-     where prFechaInic<= busqueda and prFechaFin>=busqueda and FK_Lugar=lugar);
+     where prFechaInic<= busqueda and prFechaFin>=busqueda and FK_Lugar=lugar and prStatus!='Rechazada');
      
      SET counter=counter+1;
      SET ocupado = ocupado + resultado;
@@ -539,30 +665,3 @@ begin
 
 end//
 DELIMITER ;
-
-##Procedimiendo almacenado perdido
-DELIMITER //
-create procedure SP_preReservacion_asignarAgente(
-in pr int,
-in agente char (7)
-
-)
-begin 
-		update pre_Reservacion set FK_Agente=agente where prNum=pr;
-end //
-DELIMITER ;
-
-
-
-
-call sp_dias_disponibles('2020-12-25','2020-12-27',2);
-call sp_dias_disponibles('2020-12-21','2020-12-24',2);
-
-#call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
-select *from cliente;
-
-alter table pre_Reservacion
-auto_increment=0;
-select * from pre_Reservacion;
-
-select * from usuario;

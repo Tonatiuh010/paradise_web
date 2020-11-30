@@ -232,8 +232,13 @@ function fillReservaciones(ob) {
 
         slide.appendChild(pat);
         slide.appendChild(esp);
-        slide.appendChild(left_arrow);
-        slide.appendChild(right_arrow);
+
+        if (arrayPreReservaciones.length > 1) {
+
+            slide.appendChild(left_arrow);
+            slide.appendChild(right_arrow);
+        }
+        
 
         historial.appendChild(slide);
 

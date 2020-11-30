@@ -10,7 +10,7 @@
 
 
     <script src="../../js/lug_general_Info.js" charset="ISO-8859-1"></script>
-    <script src="../../js/error_dialog.js" charset="ISO-8859-1"></script>
+    <!--<script src="../../js/error_dialog.js" charset="ISO-8859-1"></script>-->
 
 </head>
 <body onload="sesion(0); extract_img();">
@@ -27,15 +27,15 @@
             <article id="login" style="display:none;">
                 <article class="login-icon">
                     <a><img src="../../img/Loto_paradise.png" width="40%;" height="100%" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    <a href="php/actions/session_out.php" ;><img src="../../img/log_out.png" width="30%;" height="100%" /></a>
+                    <a href="session_out.php" ;><img src="../../img/log_out.png" width="30%;" height="100%" /></a>
                 </article>
             </article>
 
         </section>
         <section></section>
         <section class="barraBusqueda">
-            <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-            <button type="button" id="search" class="search-button">Buscar</button>
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
         </section>
 
     </nav>
@@ -177,6 +177,82 @@
             window.scrollTo(0, 0);
         }
 
+        function createDialog(msg) {
+            var dialogo = document.createElement('dialog');
+            dialogo.setAttribute('id', 'dialog_error');
+
+            var logo = document.createElement('img');
+            logo.src = "../../img/logoOficial.png";
+            logo.style.width = '40%';
+
+            var mensaje = document.createElement('section');
+            mensaje.setAttribute('id', 'mensaje');
+            mensaje.innerHTML = '</br >' + msg + '</br></br>';
+
+            var boton = document.createElement('button');
+            boton.innerHTML = 'Cerrar';
+            boton.setAttribute('id', 'cerrar_error');
+
+            console.log(msg);
+            if (msg == true) {
+                mensaje.innerHTML = '</br > Registrado inicie sesión para continuar </br></br>';
+                boton.addEventListener('click', function () { reloadIndex(); });
+            } else {
+                boton.addEventListener('click', function () { closeError(); });
+            }
+
+            dialogo.appendChild(logo);
+            dialogo.appendChild(mensaje);
+            dialogo.appendChild(boton);
+            document.body.appendChild(dialogo);
+    
+
+        }
+
+        function showError(msg) {
+            createDialog(msg);
+    
+            var dialogo = document.getElementById('dialog_error');
+
+            disableScroll();
+            dialogo.showModal();
+        }
+        //backDrop;
+
+        function closeError() {
+            var dialogo = document.getElementById('dialog_error');
+            enableScroll();
+            dialogo.close();
+            document.body.removeChild(dialogo);
+            location.reload();
+        }
+
+
+        function disableScroll() {
+            window.scrollTo(0, 0);
+            window.addEventListener('scroll', disableScroll);
+
+        }
+
+        function enableScroll() {
+            window.scrollTo(0, 0);
+            window.removeEventListener('scroll', disableScroll); 
+        }
+
+        function reloadIndex() {
+            location.href = "../index.html";
+        }
+
+        function scroll() {
+            window.scrollTo(0, 0);
+        }
+
+        function buscador() {
+
+            var parametro = document.getElementById('general-search').value;
+
+            location.href = 'PHP_BUSCADOR.php?prm=' + parametro;
+        }
     </script>
 
 

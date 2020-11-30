@@ -331,18 +331,20 @@ main {
     left: 28%;
     right: 28%;
     color: darkslategray;
-    border: 15px solid;
-    border-color: rgba(3,95,108,0.8);
-    background-color: white;
+    border: 3px solid;
+    border-color: black;
+    /*background-color: hsl(0, 0%, 92%);*/
     font-family: Georgia;
     font-size: medium;
     line-height: 1.5;
 }
 
 #cerrar_error {
-    background-color: rgba(77,209,196,0.8);
-    color: black;
+    background-color: #006C51;
+    color: white;
     width: 50%;
+    border: none;
+    border-radius: 5px;
     font-family: Georgia;
     font-size: medium;
     line-height: 1.5;

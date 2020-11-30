@@ -4,6 +4,8 @@ require_once("../classes/agTelefono.php");
 
        $obj= new agTelefono();
        $obj->setNum($_GET['b']);    
+
+       echo $_GET['b'];
     
        echo $obj->deleteTelefono();
                         
