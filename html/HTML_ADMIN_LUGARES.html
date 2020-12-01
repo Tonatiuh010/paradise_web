@@ -95,7 +95,7 @@
                             <input class="in" type='number' id="txtCapacidadLugar" required />
                         <label>Descripción del Lugar:</label> 
                             <!--<input class="in" type='text'  />-->
-                    <textarea rows="3" cols="60" id="txtDescLugar" maxlength="120" ></textarea>
+                    <textarea rows="4" cols="50" id="txtDescLugar" maxlength="120"  class="desc-lugar"></textarea>
 
                         <select  id="CBCiudades" required>
                             <option value="TIJ">
@@ -167,35 +167,41 @@
 
     </section>
 
+        
+    </main>
+
         <!--------------------------------------DIALOGO MODIFICALO SI GUSTAS------------------------------------------------------------------>
-        <dialog id="update">
+        <dialog id="update" class="update-dialog">
             <form>
-                <label>Número de Lugar:</label> 
-                    <input type='text'  class="dlabel" id='lblNum' required disabled><br /><br />
-                <label>Nombre del Lugar:</label> 
-                    <input type='text'  class="dlabel" id='lblNombre' required disabled><br /><br />
-
-                <label>Costo del Lugar:</label> 
-                    <input type='number'  class="dlabel" id="txtCostoLugarD"  /><br /><br />
-                <label>Capacidad del Lugar:</label> 
-                    <input type='number'  class="dlabel" id="txtCapacidadLugarD" required /><br /><br />
-
-                <section id="dialogEsp"></section>
+                <section class="upd-grid">
+                    <label class="label-udp">Número de Lugar:</label> 
+                    <input class="input-udp" type='text' id='lblNum' required disabled>
+                    <label class="label-udp">Nombre del Lugar:</label> 
+                    <input class="input-udp" type='text' id='lblNombre' required disabled>
+                    <label class="label-udp">Costo del Lugar:</label> 
+                    <input class="input-udp" type='number' id="txtCostoLugarD"  />
+                    <label class="label-udp">Capacidad del Lugar:</label> 
+                    <input class="input-udp" type='number' id="txtCapacidadLugarD" required />
+                </section>
+                
+                <section id="dialogEsp" class="color-gray"></section>
 
                 <p id="msgD"></p>
 
-
-                <button type="button"  class="botond" onclick="updateLugar()">Enviar</button>
-                <button type="button"  class="botonc" onclick="cerrar()">Cancelar</button>
+                <br />
+                <section class="botones2">
+                    <button type="button" class="buton-dlg" onclick="updateLugar()">Enviar</button>
+                    <button type="button" class="buton-dlg" onclick="cerrar()">Cancelar</button>
+                </section>
+                <br /><br />
+                <img src="../img/logoOficial.png" alt="Logotipo" width="50%" />
                 <!--Por el momento esto solo cierra el dialogo, tu cambia la función-->
             </form>
         </dialog>
         <!--------------------------------------------------------------------------------------------------------------------------------------->
-    </main>
 
         <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
-        <section>
-            <dialog id="addImg" class="imgDialog">
+          <dialog id="addImg" class="imgDialog">
             <form method="post" id="imgForm" action="../php/actions/registrarImgLugar.php" enctype="multipart/form-data">
                 <h2>Selecciona las imagenes del lugar</h2><br />
                 <input type="file" id="files" name="files[]" multiple accept="image/*" class="upload" onchange="previewImg()"/><br /><br />
@@ -204,11 +210,13 @@
                     <section class="child"></section>
                     <section class="child"></section>
                 </section><br />
-                <button type="submit" class="botond" >Subir</button>
-                <button type="button" class="botonc" onclick="imgDialogClose()">Omitir</button>
+                <section class="botones2">
+                    <button type="submit" class="btn-imagenes" >Subir</button>
+                    <button type="button" class="btn-imagenes" onclick="imgDialogClose()">Omitir</button>
+                </section>
+                
             </form>
-            </dialog>
-        </section>
+          </dialog>
       <!--------------------------------------DIALOGO PARA IMAGENES ------------------------------------------------------------------>
     
     <!--------------------------------------EDIT DIALOG PARA IMAGENES ------------------------------------------------------------------>
@@ -218,13 +226,14 @@
             
 
             <form method="post" id="updateimgForm" action="../php/actions/registrarImgLugar.php" enctype="multipart/form-data">
-                <h2>Añadir Imágenes</h2><br />
+                <h2>Añadir ó Eliminar Imágenes</h2><br />
                 <input type="file" id="filesUpd" name="files[]" multiple accept="image/*" class="upload" onchange="previewImg()" /><br /><br />
                 
-               
-                    
-                <button type="submit" class="botond">Subir</button>
-                <button type="button" class="botonc" onclick="closeEditImgDialog()">Guardar Cambios</button>
+                <section class="botones2">
+                    <button type="submit" class="btn-imagenes">Subir</button>
+                    <button type="button" class="btn-imagenes" onclick="closeEditImgDialog()">Guardar Cambios</button>
+                </section>
+                <br /><br />
             </form>
 
             
