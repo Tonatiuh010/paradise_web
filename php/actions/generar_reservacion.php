@@ -4,60 +4,69 @@
  require_once("../classes/cliente.php");
 
 
-    $caso=$_GET['caso'];
-    $obj= json_decode($_GET['obj']);
-
-    switch($caso){
-        case 1:
-            session_start();
-
-                $ob=new pre_reservacion();    
-                $resultado=json_decode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$_SESSION['ID']));
+    $ob=new pre_reservacion();    
+    $resultado=json_decode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$_SESSION['ID']));
 
                 if($resultado->res==true){
                     echo 1;
                 }else{
                     echo 'Lo sentimos, las fechas solicitadas ya se encuentran apartadas';
                 }
-            break;
-        case 2:
-            $obj_clie=new cliente($obj->nombre,$obj->paterno,$obj->materno,$obj->nacimiento,$obj->telefono,'',$obj->contrasenia,$obj->correo); 
-            //$obj=new cliente('Pedros','Jimeneces','Rueca','1997-02-02','','','pancrasio','pancrasios150@gmail.com');       
-            $respuesta =$obj_clie->insertarCli();
-            $res= json_decode($respuesta);
-            //var_dump($intento->res);
 
-            $nombre=$obj->nombre;
-            $correo=$obj->correo;
+
+    //$caso=$_GET['caso'];
+    //$obj= json_decode($_GET['obj']);
+    //switch($caso){
+    //    case 1:
+    //        session_start();
+
+    //            $ob=new pre_reservacion();    
+    //            $resultado=json_decode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$_SESSION['ID']));
+
+    //            if($resultado->res==true){
+    //                echo 1;
+    //            }else{
+    //                echo 'Lo sentimos, las fechas solicitadas ya se encuentran apartadas';
+    //            }
+    //        break;
+    //    case 2:
+    //        $obj_clie=new cliente($obj->nombre,$obj->paterno,$obj->materno,$obj->nacimiento,$obj->telefono,'',$obj->contrasenia,$obj->correo); 
+    //        //$obj=new cliente('Pedros','Jimeneces','Rueca','1997-02-02','','','pancrasio','pancrasios150@gmail.com');       
+    //        $respuesta =$obj_clie->insertarCli();
+    //        $res= json_decode($respuesta);
+    //        //var_dump($intento->res);
+
+    //        $nombre=$obj->nombre;
+    //        $correo=$obj->correo;
     
-            if($res->res==true){
-                $cli= new cliente($nombre,$correo);
-                $cliente=$cli->getNum();
+    //        if($res->res==true){
+    //            $cli= new cliente($nombre,$correo);
+    //            $cliente=$cli->getNum();
 
-                $ob=new pre_reservacion();    
-                //$resultado=json_encode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$cliente));
+    //            $ob=new pre_reservacion();    
+    //            //$resultado=json_encode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$cliente));
 
-                $resultado=json_decode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$cliente));
+    //            $resultado=json_decode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$cliente));
                 
 
-                if($resultado->res==true){
-                    echo 1;
-                }else{
-                    $borrar=new cliente();
-                    $finalizar=$borrar->deleteCliente($obj->correo);
+    //            if($resultado->res==true){
+    //                echo 1;
+    //            }else{
+    //                $borrar=new cliente();
+    //                $finalizar=$borrar->deleteCliente($obj->correo);
 
-                    if($resultado->error==''){
-                        echo 'Lo sentimos, las fechas solicitadas ya se encuentran apartadas';
-                    }else{
-                        echo $resultado->error;
-                    }
+    //                if($resultado->error==''){
+    //                    echo 'Lo sentimos, las fechas solicitadas ya se encuentran apartadas';
+    //                }else{
+    //                    echo $resultado->error;
+    //                }
                     
-                }
-            }else{
-                echo $res->error;
-            }
-            break;
-    }
+    //            }
+    //        }else{
+    //            echo $res->error;
+    //        }
+    //        break;
+    //}
 
 
 

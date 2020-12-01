@@ -10,6 +10,7 @@ function inicio_sesion() {
 
     ajax.onreadystatechange = function () {
         if (ajax.status == 200 && ajax.readyState == 4) {
+            console.log(ajax.responseText);
             fill(ajax.responseText);
             //console.log(ajax.responseText);
         }
