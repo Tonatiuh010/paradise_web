@@ -30,183 +30,195 @@ function fillReservacionAlta(ob) {
     var historial = document.getElementById("listAltaReservaciones");
     historial.innerHTML = "";
 
-    while (arrayPreReservaciones[y]) {
+    console.log(arrayPreReservaciones.length);
 
-        var slide = document.createElement('section');
-        slide.className = "reservaciones fade";
+    if (arrayPreReservaciones.length > 0) {
+        while (arrayPreReservaciones[y]) {
 
-        var pat = document.createElement('Section');
-        pat.setAttribute("class", "pat");
+            var slide = document.createElement('section');
+            slide.className = "reservaciones fade";
 
-        //------------------ C H I L D  1 -----------------------
-        var child1 = document.createElement('Section');
-        child1.setAttribute("class", "ch1");
+            var pat = document.createElement('Section');
+            pat.setAttribute("class", "pat");
 
-        var lb1 = document.createElement("Section");
-        lb1.innerHTML = 'Reservación: ' + arrayPreReservaciones[y].num;
+            //------------------ C H I L D  1 -----------------------
+            var child1 = document.createElement('Section');
+            child1.setAttribute("class", "ch1");
 
-        var lb2 = document.createElement("Section");
-        lb2.innerHTML = arrayPreReservaciones[y].lugar.nombre;
-        //lb2.setAttribute('class', 'centrar');
+            var lb1 = document.createElement("Section");
+            lb1.innerHTML = 'Reservación: ' + arrayPreReservaciones[y].num;
 
-        var lb4 = document.createElement("Section");
-        lb4.innerHTML = 'Fechas solicitadas: </br>' +
-                        arrayPreReservaciones[y].inicio + '</br>' +
-                        arrayPreReservaciones[y].termino;
+            var lb2 = document.createElement("Section");
+            lb2.innerHTML = arrayPreReservaciones[y].lugar.nombre;
+            //lb2.setAttribute('class', 'centrar');
 
-        var lb5 = document.createElement("Section");
-        lb5.innerHTML = 'Estado: ' + arrayPreReservaciones[y].status;
+            var lb4 = document.createElement("Section");
+            lb4.innerHTML = 'Fechas solicitadas: </br>' +
+                arrayPreReservaciones[y].inicio + '</br>' +
+                arrayPreReservaciones[y].termino;
 
-        if (arrayPreReservaciones[y].reservacion.total != null) {
-            var lb5_1 = document.createElement("Section");
-            lb5_1.innerHTML = 'Total: $' + arrayPreReservaciones[y].reservacion.total;
-        } else {
-            var lb5_1 = document.createElement("Section");
-            lb5_1.innerHTML = 'Total: ---';
-        }
+            var lb5 = document.createElement("Section");
+            lb5.innerHTML = 'Estado: ' + arrayPreReservaciones[y].status;
 
-
-        child1.appendChild(lb1);
-        child1.appendChild(lb2);
-        //child1.appendChild(lb3);
-        child1.appendChild(lb4);
-        child1.appendChild(lb5);
-        child1.appendChild(lb5_1);
-
-        //-------------------------------------------------------
-
-        //------------------ C H I L D  2 -----------------------
-        var child2 = document.createElement('Section');
-        child2.setAttribute("class", "ch2");
-        //child2.setAttribute('class', 'labelL');
-
-        var lb3 = document.createElement("Section");
-        lb3.innerHTML = 'Solicitud: ';
-        lb3.setAttribute('class', 'labelL');
-        var lb3_1 = document.createElement("Section");
-        lb3_1.setAttribute('class', 'labelR');
-        lb3_1.innerHTML = arrayPreReservaciones[y].registro;
-
-        var lb6 = document.createElement("Section");
-        lb6.innerHTML = 'Cliente: ';
-        lb6.setAttribute('class', 'labelL');
-        var lb6_1 = document.createElement("Section");
-        lb6_1.innerHTML = arrayPreReservaciones[y].cliente.nombre + ' '
-                        + arrayPreReservaciones[y].cliente.paterno + ' '
-                        + arrayPreReservaciones[y].cliente.materno;
-        lb6_1.setAttribute('class', 'labelR');
-
-        var lb7 = document.createElement("Section");
-        lb7.innerHTML = 'Agente: ';
-        lb7.setAttribute('class', 'labelL');
-        var lb7_1 = document.createElement("Section");
-        lb7_1.innerHTML = arrayPreReservaciones[y].agente.nombre + ' '
-                        + arrayPreReservaciones[y].agente.paterno + ' '
-                        + arrayPreReservaciones[y].agente.materno;
-        lb7_1.setAttribute('class', 'labelR');
-
-        var lb8 = document.createElement("Section");
-        lb8.innerHTML = 'Telefono del Cliente: ';
-        lb8.setAttribute('class', 'labelL');
-        var lb8_1 = document.createElement("Section");
-        lb8_1.innerHTML = arrayPreReservaciones[y].cliente.telefono;
-        lb8_1.setAttribute('class', 'labelR');
-
-        var lb9 = document.createElement("Section");
-        lb9.innerHTML = 'Correo del Cliente: ';
-        lb9.setAttribute('class', 'labelL');
-        var lb9_1 = document.createElement("Section");
-        lb9_1.innerHTML = arrayPreReservaciones[y].cliente.usuario.correo;
-        lb9_1.setAttribute('class', 'labelR');
-
-        var lb10 = document.createElement("Section");
-
-        lb10.setAttribute('class', 'labelL');
-        var lb10_1 = document.createElement("Section");
-        lb10_1.setAttribute('class', 'labelR');
-
-
-
-        var btn = document.createElement("button");
-        btn.className = "asignarbtn";
-        btn.innerHTML = "Asignar Agente";
-        btn.addEventListener("click", function (_y) {
-
-            //Mi botón kawai ;v
-            return function () {
-                openDialogAddAgente(arrayPreReservaciones[_y].num);
+            if (arrayPreReservaciones[y].reservacion.total != null) {
+                var lb5_1 = document.createElement("Section");
+                lb5_1.innerHTML = 'Total: $' + arrayPreReservaciones[y].reservacion.total;
+            } else {
+                var lb5_1 = document.createElement("Section");
+                lb5_1.innerHTML = 'Total: ---';
             }
 
 
-        }(y));
+            child1.appendChild(lb1);
+            child1.appendChild(lb2);
+            //child1.appendChild(lb3);
+            child1.appendChild(lb4);
+            child1.appendChild(lb5);
+            child1.appendChild(lb5_1);
+
+            //-------------------------------------------------------
+
+            //------------------ C H I L D  2 -----------------------
+            var child2 = document.createElement('Section');
+            child2.setAttribute("class", "ch2");
+            //child2.setAttribute('class', 'labelL');
+
+            var lb3 = document.createElement("Section");
+            lb3.innerHTML = 'Solicitud: ';
+            lb3.setAttribute('class', 'labelL');
+            var lb3_1 = document.createElement("Section");
+            lb3_1.setAttribute('class', 'labelR');
+            lb3_1.innerHTML = arrayPreReservaciones[y].registro;
+
+            var lb6 = document.createElement("Section");
+            lb6.innerHTML = 'Cliente: ';
+            lb6.setAttribute('class', 'labelL');
+            var lb6_1 = document.createElement("Section");
+            lb6_1.innerHTML = arrayPreReservaciones[y].cliente.nombre + ' '
+                + arrayPreReservaciones[y].cliente.paterno + ' '
+                + arrayPreReservaciones[y].cliente.materno;
+            lb6_1.setAttribute('class', 'labelR');
+
+            var lb7 = document.createElement("Section");
+            lb7.innerHTML = 'Agente: ';
+            lb7.setAttribute('class', 'labelL');
+            var lb7_1 = document.createElement("Section");
+            lb7_1.innerHTML = arrayPreReservaciones[y].agente.nombre + ' '
+                + arrayPreReservaciones[y].agente.paterno + ' '
+                + arrayPreReservaciones[y].agente.materno;
+            lb7_1.setAttribute('class', 'labelR');
+
+            var lb8 = document.createElement("Section");
+            lb8.innerHTML = 'Telefono del Cliente: ';
+            lb8.setAttribute('class', 'labelL');
+            var lb8_1 = document.createElement("Section");
+            lb8_1.innerHTML = arrayPreReservaciones[y].cliente.telefono;
+            lb8_1.setAttribute('class', 'labelR');
+
+            var lb9 = document.createElement("Section");
+            lb9.innerHTML = 'Correo del Cliente: ';
+            lb9.setAttribute('class', 'labelL');
+            var lb9_1 = document.createElement("Section");
+            lb9_1.innerHTML = arrayPreReservaciones[y].cliente.usuario.correo;
+            lb9_1.setAttribute('class', 'labelR');
+
+            var lb10 = document.createElement("Section");
+
+            lb10.setAttribute('class', 'labelL');
+            var lb10_1 = document.createElement("Section");
+            lb10_1.setAttribute('class', 'labelR');
 
 
-        lb10_1.appendChild(btn);
+
+            var btn = document.createElement("button");
+            btn.className = "asignarbtn";
+            btn.innerHTML = "Asignar Agente";
+            btn.addEventListener("click", function (_y) {
+
+                //Mi botón kawai ;v
+                return function () {
+                    openDialogAddAgente(arrayPreReservaciones[_y].num);
+                }
 
 
-        child2.appendChild(lb3);
-        child2.appendChild(lb3_1);
-        child2.appendChild(lb6);
-        child2.appendChild(lb6_1);
-        child2.appendChild(lb7);
-        child2.appendChild(lb7_1);
-        child2.appendChild(lb8);
-        child2.appendChild(lb8_1);
-        child2.appendChild(lb9);
-        child2.appendChild(lb9_1);
-        child2.appendChild(lb10);
-        child2.appendChild(lb10_1);
+            }(y));
 
-        //-------------------------------------------------------
 
-        //------------------ C H I L D  3 -----------------------
-        var child3 = document.createElement('Section');
-        child3.setAttribute("class", "ch3");
+            lb10_1.appendChild(btn);
 
-        imagenes = arrayPreReservaciones[y].lugar.imagenes.length;
 
-        if (imagenes > 0) {
-            var imglb = document.createElement('Img');
-            imglb.setAttribute('class', 'ImgCH');
-            imglb.setAttribute('src', '../img/lugares/' + arrayPreReservaciones[y].lugar.num + "/" + arrayPreReservaciones[y].lugar.imagenes[0].nombre);
-        } else {
-            var imglb = document.createElement('img');
-            imglb.setAttribute('class', 'ImgCH');
-            imglb.src = '../img/index/anuncio5.jpg';
+            child2.appendChild(lb3);
+            child2.appendChild(lb3_1);
+            child2.appendChild(lb6);
+            child2.appendChild(lb6_1);
+            child2.appendChild(lb7);
+            child2.appendChild(lb7_1);
+            child2.appendChild(lb8);
+            child2.appendChild(lb8_1);
+            child2.appendChild(lb9);
+            child2.appendChild(lb9_1);
+            child2.appendChild(lb10);
+            child2.appendChild(lb10_1);
+
+            //-------------------------------------------------------
+
+            //------------------ C H I L D  3 -----------------------
+            var child3 = document.createElement('Section');
+            child3.setAttribute("class", "ch3");
+
+            imagenes = arrayPreReservaciones[y].lugar.imagenes.length;
+
+            if (imagenes > 0) {
+                var imglb = document.createElement('Img');
+                imglb.setAttribute('class', 'ImgCH');
+                imglb.setAttribute('src', '../img/lugares/' + arrayPreReservaciones[y].lugar.num + "/" + arrayPreReservaciones[y].lugar.imagenes[0].nombre);
+            } else {
+                var imglb = document.createElement('img');
+                imglb.setAttribute('class', 'ImgCH');
+                imglb.src = '../img/index/anuncio5.jpg';
+            }
+
+            child3.appendChild(imglb);
+
+            child1.appendChild(child3);
+            //-------------------------------------------------------
+
+            pat.appendChild(child1);
+            pat.appendChild(child2);
+
+            var right_arrow = document.createElement('img');
+            right_arrow.setAttribute("class", "next");
+            right_arrow.src = "../img/next_page.png";
+            right_arrow.addEventListener('click', function () { plusReservaciones(1); });
+
+            var left_arrow = document.createElement('img');
+            left_arrow.setAttribute("class", "prev");
+            left_arrow.src = "../img/prev_page.png";
+            left_arrow.addEventListener('click', function () { plusReservaciones(-1); });
+
+            var esp = document.createElement("Section");
+            esp.setAttribute("class", "espacio");
+
+            slide.appendChild(pat);
+            slide.appendChild(esp);
+            slide.appendChild(left_arrow);
+            slide.appendChild(right_arrow);
+
+            historial.appendChild(slide);
+
+            y++;
+
+            showReservaciones(slideReservaciones);
         }
+    } else {
+        var monitor = document.createElement('img');
+        monitor.src = '../img/sin_pendientes.png';
+        monitor.className = 'admin-carpeta';
 
-        child3.appendChild(imglb);
-
-        child1.appendChild(child3);
-        //-------------------------------------------------------
-
-        pat.appendChild(child1);
-        pat.appendChild(child2);
-
-        var right_arrow = document.createElement('img');
-        right_arrow.setAttribute("class", "next");
-        right_arrow.src = "../img/next_page.png";
-        right_arrow.addEventListener('click', function () { plusReservaciones(1); });
-
-        var left_arrow = document.createElement('img');
-        left_arrow.setAttribute("class", "prev");
-        left_arrow.src = "../img/prev_page.png";
-        left_arrow.addEventListener('click', function () { plusReservaciones(-1); });
-
-        var esp = document.createElement("Section");
-        esp.setAttribute("class", "espacio");
-
-        slide.appendChild(pat);
-        slide.appendChild(esp);
-        slide.appendChild(left_arrow);
-        slide.appendChild(right_arrow);
-
-        historial.appendChild(slide);
-
-        y++;
-
-        showReservaciones(slideReservaciones);
+        historial.appendChild(monitor);
     }
+
+    
 
 
 }

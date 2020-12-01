@@ -557,6 +557,7 @@ function updateLugar() {
 
 function abrir(a) {
     var dialogo = document.getElementById('update');
+    disableScroll();
     dialogo.showModal();
 
 
@@ -584,7 +585,7 @@ function cerrar() {
     for (var x = 0; x < ch.length; x++) {
         ch[x].checked = false;
     }
-
+    enableScroll();
     document.getElementById('update').close();
 
 
@@ -600,17 +601,20 @@ function imgDialogOpen(lug) {
     input.value = lug;
     input.style.display = "none";
     imgForm.appendChild(input);
+    disableScroll();
     dialogo.showModal();
 }
 
 function imgDialogClose() {
+    enableScroll();
     document.getElementById("addImg").close();
 
 }
 
 
 function editImgDialog(obj) {
-    var dialogo = document.getElementById('updateImg'); 
+    var dialogo = document.getElementById('updateImg');
+    disableScroll();
     dialogo.showModal();
 
     
@@ -660,6 +664,7 @@ function editImgDialog(obj) {
 }
 
 function closeEditImgDialog() {
+    enableScroll();
     document.getElementById("updateImg").close();
     var section = document.getElementById("imgList");
     section.innerHTML = "";

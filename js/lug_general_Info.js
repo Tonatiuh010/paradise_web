@@ -61,8 +61,16 @@ function setForm(ob) {
 
 function abrir_reservacion() {
     var dialogo = document.getElementById('reservacion');
-    disableScroll();
-    dialogo.showModal();
+
+    if (activada == true) {
+        disableScroll();
+        dialogo.showModal();
+    } else {
+        var msg = 2;
+        showError(msg);
+    }
+
+    
 }
 
 function cerrar_reservacion() {
@@ -136,11 +144,9 @@ function reservar() {
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200 && ajax.readyState == 4) {
                     if (ajax.responseText == 1) {
-                        console.log(ajax.responseText);
                         alert('Reservación en proceso, revise en su historial de reservaciones para continuar');
                         window.location.href = "../../index.html";
                     } else {
-                        console.log(ajax.responseText);
                         document.getElementById('reservacion').close();
                         showError(ajax.responseText);
                     }
