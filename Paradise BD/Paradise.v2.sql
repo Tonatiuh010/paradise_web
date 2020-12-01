@@ -1,4 +1,5 @@
 drop database paradise;
+
 create database paradise;
 use paradise;
 
@@ -23,15 +24,7 @@ create table espacio
 	espNombre varchar(20) not null,
     
     constraint PK_espacio_num primary key (espNum)
-);	
-
-/*create table metodoPag
-(		
-	mp_Num int auto_increment not null,
-	pm_Metodo varchar(30) not null,
-    
-    constraint PK_metodoPag_num primary key (mp_Num)
-);	*/
+);
 
 create table usuario
 (		
@@ -98,22 +91,6 @@ create table cliente
     constraint FK_cliente_usuario foreign key (FK_usuario) references usuario(usNum) on delete cascade
 );
 
-
-
-/*create table tipo_US
-(		
-	tuCod	char(3)	not null,
-	tuTipo	varchar(20)	not null,
-    
-    constraint PK_tipoUS_cod primary key (tuCod)
-);*/
-
-
-#alter table usuario
-#modify column usTipoUS varchar(15);
-
-# ALTER TABLE usuario CHANGE `usContraseña` `usContrasenia` varchar(30);
-
 CREATE TABLE lugar (
     lugNum INT AUTO_INCREMENT,
     lugNombre VARCHAR(30) NOT NULL,
@@ -153,10 +130,6 @@ create table imagenesLugar
     constraint FK_imagenes_lugar foreign key (FK_Lugar) references lugar(lugNum) on delete cascade
 );
 
-
-alter table imagenesLugar auto_increment = 1;
-select * from imagenesLugar;
-delete from imagenesLugar where img_Num between 1 and 100;
 create table lugEspacio
 (		
 	lg_NumEspacio int not null,
@@ -177,7 +150,7 @@ create table pre_Reservacion
 	prFechaRegistro datetime not null,	
 	prFechaInic date not null,	
 	prFechaFin	date not null,
-	prStatus varchar(20) not null,	#Aquí se agregará un cosntraint para 'Activa', 'Proceso','Rechazada'
+	prStatus varchar(20) not null,
     prNotas text null,
 	FK_Lugar int not null,
 	FK_Cliente int not null,
@@ -199,9 +172,6 @@ create table reservacion
     constraint PFK_reservación_num foreign key (resNumPR) references pre_Reservacion(prNum) on delete cascade
 );
 
-/*alter table reservacion
-modify column resTotPagar decimal(12,2);*/
-
 create table pre_res_Cancelada
 (
 	prcNum	int	primary key not null,	#Primaria Foranea
@@ -210,42 +180,6 @@ create table pre_res_Cancelada
     
     constraint PFK_preResCan_lugar foreign key (prcNum) references pre_Reservacion(prNum) on delete cascade
 );
-
-/*create table agentes_Baja
-(
-	abConsecutivo	int auto_increment not null,
-	abMatricula	char(7) not null,	
-	abNombre	varchar(40)	not null,
-	abApPat	varchar(20)	not null,
-	abApMat	varchar(20)	null,
-	abFecNac	date	not null,
-	abEdad	tinyint	null,
-	abCorreo	varchar(30) not null,	
-	abContrasenia	varchar(30)	not null,
-	FK_genero	char(1)	not null, 
-	FK_TipoUS	char(3)	not null,
-    
-    constraint PK_agBaja_consecutivo primary key (abConsecutivo),
-    constraint FK_agBaja_tipoUS foreign key (FK_TipoUS) references tipo_US(tuCod) on delete cascade,
-    constraint FK_agBaja_genero foreign key (FK_genero) references genero(genCod) on delete cascade
-);		
-
-create table clientes_Baja
-(		
-	cbNum	int	auto_increment not null,
-	cbNombre	varchar(40)	not null,
-	cbApPat	varchar(20)	not null,
-	cbApMat	varchar(20)	null,
-	cbFecNac	date not null,
-	cbEdad	tinyint	null,
-	cbCorreo	varchar(30) not null,	
-	cbContrasenia	varchar(30)	not null,
-	FK_TipoUS	char(3)	not null,
-    
-    constraint PK_cliBaja_num primary key (cbNum),
-    constraint FK_cliBaja_tipoUS foreign key (FK_TipoUS) references tipo_US(tuCod) on delete cascade
-);*/
-
 
 create table imagenesUsuario
 (		

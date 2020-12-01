@@ -322,7 +322,7 @@ function fillLugarShc(ob) {
 
                     var lb3 = document.createElement('section');
                     lb3.setAttribute('class', 'label');
-                    lb3.innerHTML = 'Tipo: ' + arrayLugar[x].tipoLugar.nombre;
+                    lb3.innerHTML = 'Tipo: ' + arrayLugar[y].tipoLugar.nombre;
 
                     child1.appendChild(imgsec);
                     child1.appendChild(lb1);
@@ -416,12 +416,12 @@ function fillLugarShc(ob) {
                     var btn = document.createElement("button");
                     btn.setAttribute('class', 'btnGLug1');
 
-                    btn.addEventListener("click", function (_x) {
+                    btn.addEventListener("click", function (_y) {
                         return function () {
-                            abrir(arrayLugar[_x]);
+                            abrir(arrayLugar[_y]);
                         }
 
-                    }(x));
+                    }(y));
                     btn.innerHTML = "Editar";
 
 
@@ -429,12 +429,12 @@ function fillLugarShc(ob) {
                     var btnImg = document.createElement("button");
                     btnImg.setAttribute('class', 'btnGLug2');
 
-                    btnImg.addEventListener("click", function (_x) {
+                    btnImg.addEventListener("click", function (_y) {
                         return function () {
-                            editImgDialog({ lugar: arrayLugar[_x].num, imagenes: arrayLugar[_x].imagenes });
+                            editImgDialog({ lugar: arrayLugar[_y].num, imagenes: arrayLugar[_y].imagenes });
                         }
 
-                    }(x));
+                    }(y));
                     btnImg.innerHTML = "Imagen";
 
                     row4.setAttribute('class', 'label');

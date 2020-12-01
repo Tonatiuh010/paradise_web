@@ -1,4 +1,6 @@
-﻿function loadPictures() {
+﻿var slide = 0;
+
+function loadPictures() {
     var ajax = new XMLHttpRequest();
 
     lista = '';
@@ -83,14 +85,17 @@ function fillPictures(obj) {
                 internalSection.appendChild(left_arrow);
 
                 seccion.appendChild(internalSection);
+
+                showPictures(slide);
             }
+            
         }
     }
-    showPictures(0);
+    
 }
 
 
-var slide = 0;
+
 
 
 function plusPictures(n) {

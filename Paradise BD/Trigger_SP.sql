@@ -15,7 +15,6 @@ begin
 end //
 DELIMITER ;
 
-# drop procedure SP_insert_agente;
 DELIMITER //
 create procedure SP_insert_agente (	
 	in nombre varchar(30),
@@ -40,7 +39,6 @@ begin
 end //
 DELIMITER ;
 
-# drop procedure SP_insert_userAg;
 DELIMITER //
 create procedure SP_insert_userAg(
 	out num int,
@@ -64,9 +62,6 @@ begin
 end//
 DELIMITER ;
 
-
-################################# ELIMINAR TELEFONO ############################
-
 DELIMITER //
 create procedure SP_delete_telefono(
 in num int
@@ -77,17 +72,6 @@ delete from telef_agentes where tgNum=num;
 end //
 DELIMITER ;
 
-/*
-call SP_insert_userAg ('jose_guadalupe','constrasenia','joseGuadalupe@outloo.com');
-call SP_insert_agente ('JOSE GUADALUPE','LOZANO','VALDEZ','2000-12-23','Masculino','joseGuadalupe@outloo.com','6645577934');
-select * from agente;
-select * from telef_agentes;
-select * from usuario;
-*/
-
-########################################### INSERTAR A UN CLIENTE ##################################################
-
-#----- TRIGGER DE VERIFICACION -------------------------- #
 DELIMITER //
 create trigger DIS_CLIENTE_INSERT before insert on cliente
 for each row 
@@ -99,7 +83,6 @@ begin
 end //
 DELIMITER ;
 
-# drop procedure SP_insert_cliente;
 DELIMITER //
 create procedure SP_insert_cliente (
 	in nombre varchar(30),
@@ -118,7 +101,7 @@ begin
 end//
 DELIMITER ;
 
-# drop procedure SP_insert_userCli;
+
 DELIMITER //
 create procedure SP_insert_userCli(
 	out num int,
@@ -143,21 +126,6 @@ begin
 end//
 DELIMITER ;
 
-
-/*
-call SP_insert_userCli ('daniel01','basura','daniel@outlook.com');
-call SP_insert_userCli (null,'password','guadalupe@hotmail.com');
-call SP_insert_cliente ('DANIEL','TINAJERO','TRISTAN','1980-01-15','6647733133','daniel@outlook.com');
-select * from cliente;
-select * from usuario;
-*/
-
-# ALTER TABLE agente AUTO_INCREMENT = 0;
-
-########################################### INSERTAR UN LUGAR ####################################################
-
-# drop procedure SP_insert_lugar;
-
 DELIMITER //
 create procedure SP_insert_lugar(
 	out numLug int,    
@@ -166,8 +134,6 @@ create procedure SP_insert_lugar(
     in costo decimal(12,2),
     in capacidad int,
     in tipoLug int,
-    # in proveedor char(5),
-    
     in calle varchar(40),
     in numInt varchar(25),
     in numExt varchar(25),
@@ -194,8 +160,6 @@ begin
 end//
 DELIMITER 
 
-########################################### Actualizar UN LUGAR ####################################################
-#drop procedure SP_update_lugar
 DELIMITER //
 create procedure SP_update_lugar 
 (
@@ -208,13 +172,6 @@ begin
 end //
 DELIMITER ;
 
-
-#call SP_update_lugar(1,20899,300);
-
-##-------------------------------------------- Insert Espacios - Lugar ---------------------------------
-
-#drop procedure SP_insertar_EspLug;
-
 DELIMITER //
 create procedure SP_insertar_EspLug (
 	in numEsp int,
@@ -224,10 +181,6 @@ begin
 	insert into lugEspacio (lg_NumEspacio,lg_NumLugar) values (numEsp,numLug);
 end//
 DELIMITER ;
-
-##-------------------------------------------- Delete Espacios - Lugar ---------------------------------
-
-#drop procedure SP_delete_EspLug;
 
 DELIMITER //
 create procedure SP_delete_EspLug (
@@ -239,12 +192,6 @@ begin
 end//
 DELIMITER ;
 
-
-######################################### INICIO DE SESIÓN ###################################################
-
-#No ejecutar sin antes antes ejecutar la vista 'vw_primary_user' en la linea 94 en 'Consultas.sql'
-#drop procedure sp_log_in;
-
 DELIMITER //
 create procedure sp_log_in
 (
@@ -253,10 +200,7 @@ create procedure sp_log_in
 )
 begin
 	set @tipoU=(select tipo from vw_user_list
-				where contrasenia = passwd  and (correo=usern or nombre=usern));
-	/*set @tipoU=(select tipo from vw_primary_user
-				where contrasenia = passwd  and (correo=usern or username=usern));*/
-                
+				where contrasenia = passwd  and (correo=usern or nombre=usern));                
 	if(@tipoU='Cliente') then
 		select numc as id, numU, tipo from vw_primary_user
 		where contrasenia = passwd  and (correo=usern or username=usern);
@@ -269,14 +213,6 @@ begin
 	end if;
 end// 
 DELIMITER ;
-
-
-#call sp_log_in ('tonatiuh','sandwich');
-#select * from usuario;
-#select * from cliente;
-
-#################################### ACTUALIZAR A UN CLIENTE ################################################
-#drop procedure sp_update_perfilCli;
 
 DELIMITER //
 create procedure sp_update_perfilCli
@@ -306,11 +242,6 @@ begin
 end//
 DELIMITER ;
 
-
-
-
-#################################### BORRAR A UN CLIENTE ################################################
-#drop procedure sp_delete_perfilCli;
 DELIMITER //
 create procedure sp_delete_perfilCli
 (
@@ -323,10 +254,6 @@ begin
 end//
 DELIMITER ;
 
-#call sp_delete_perfilCli(1);
-
-
-####################################### GENERAR PRE-RESERVACIÓN ###########################################
 DELIMITER //
 create trigger DIS_PRE_RESERVACION_REGISTRO before insert on pre_Reservacion 
 for each row 
@@ -335,8 +262,6 @@ begin
 end //
 DELIMITER ;
 
-
-##drop procedure SP_PRE_RESERVACION_REGISTRO ;
 DELIMITER //
 create procedure SP_PRE_RESERVACION_REGISTRO 
 (
@@ -350,13 +275,6 @@ begin
     ((SELECT NOW()),fecha_inicial,fecha_finalizar,'Proceso',lugar,cliente);
 end //
 DELIMITER ;
-
-call SP_PRE_RESERVACION_REGISTRO('2020-12-20','2020-12-23',2,10);
-#select * from pre_reservacion;
-
-
-####################################### CALCULAR RESERVACIÓN ###########################################
-#drop trigger DIS_RESERVACION_DIAS;
 
 DELIMITER //
 create trigger DIS_RESERVACION_DIAS before insert on reservacion 
@@ -375,13 +293,7 @@ begin
 end //
 DELIMITER ;
 
-#insert reservacion(resNumPR) values(1);
-
-############################################### Insert Reservacion #####################################
-
-#drop procedure SP_insertarReservacion;
-
-	DELIMITER // 
+DELIMITER // 
     create procedure SP_insertarReservacion (
 		in pr int,
         in notas text
@@ -391,15 +303,6 @@ DELIMITER ;
         update pre_Reservacion set prNotas=notas, prStatus='Autorizada' where prNum=pr;
     end //
     DELIMITER ;
-    
-    #call SP_insertarReservacion();
-    
-############################################### Insert Reservacion #####################################
-
-
-############################################### Rechazar reservacion #####################################
-
-#drop procedure SP_updatePreReservacion
 
 DELIMITER //
  create procedure SP_updatePreReservacion(
@@ -411,10 +314,6 @@ DELIMITER //
     end //
     DELIMITER ;
 
-############################################### Rechazar#####################################
-
-############################################### Insert Espacios #####################################
-#drop procedure SP_insert_espacios
 DELIMITER //
 create procedure SP_insert_espacios 
 (
@@ -424,9 +323,6 @@ begin
 		insert into espacio (espNombre) values (nombre);
 end //
 DELIMITER ;
-
-
-#################################### Borrar imagenes #############################################################
 
 DELIMITER //
 create procedure SP_delete_imagen 
@@ -438,15 +334,6 @@ begin
 end //
 DELIMITER ;
 
-###################################################################################################################
-
-
-#call SP_insert_espacios ('Test');
-
-
-
-############################################### Insert Tipo Lugar #####################################
-#drop procedure SP_insert_TL
 DELIMITER //
 create procedure SP_insert_TL
 (
@@ -456,8 +343,6 @@ begin
 		insert into tipoLugar (tlNombre) values (nombre);
 end //
 DELIMITER ;
-
-##################################### Acceder a la vista "vw_lugar_complete_data############################################
 
 DELIMITER //
 create procedure SP_lugares_complete_list
@@ -484,8 +369,6 @@ begin
 end//
 DELIMITER ;
 
-############################################ PERFIL CLIENTE #####################################################
-
 DELIMITER //
 create procedure sp_perfil_cliente
 (
@@ -497,10 +380,6 @@ begin
 end//
 DELIMITER ;
 
-
-
-
-##Procedimiendo almacenado perdido :D
 DELIMITER //
 create procedure SP_preReservacion_asignarAgente(
 in pr int,
@@ -511,34 +390,6 @@ begin
 		update pre_Reservacion set FK_Agente=agente where prNum=pr;
 end //
 DELIMITER ;
-
-
-
-select * from usuario;
-
-select * from vw_cliente_perfil;
-
-delete from usuario where usCorreo='iabarcae@yahoo.es';
-
-call sp_dias_disponibles('2020-12-25','2020-12-27',2);
-call sp_dias_disponibles('2020-12-21','2020-12-24',2);
-
-#call SP_PRE_RESERVACION_REGISTRO('2020-12-21','2020-12-24',2,10);
-select *from cliente;
-
-alter table pre_Reservacion
-auto_increment=0;
-select * from pre_Reservacion;
-
-select * from usuario;
-
-
-
-
-###############################################################################################################
-	#NUEVO
-###############################################################################################################
-#################################### ACTUALIZAR A UN AGENTE ################################################
 
 DELIMITER //
 create procedure sp_update_perfilAgen
@@ -566,9 +417,6 @@ begin
 end//
 DELIMITER ;
 
-################################## BUSCADOR DEL NAVEGADOR #################################################
-#drop procedure sp_navegador_busqueda;
-
 DELIMITER //
 create procedure sp_navegador_busqueda(
 	in parametro varchar(100)
@@ -586,22 +434,14 @@ begin
 end //
 DELIMITER ;
 
-call sp_navegador_busqueda('puerto');
-
-/*################################### DELETE USER BY EMAIL #####################################*/
-
 DELIMITER //
 create procedure sp_delete_user_email(
 in email varchar(50)
-
 )
 begin 
 		delete from usuario where usCorreo=email;
 end //
 DELIMITER ;
-
-################################### PRE RESERVACION CANCELADA POR EL CLIENTE ##############################
-call SP_preReservacion_cancelada
 
 DELIMITER //
 create procedure sp_preReservacion_cancelada
@@ -618,10 +458,6 @@ begin
 
 end//
 DELIMITER ;
-
-################################### DIAS DISPONIBLES PRE-RESERVACIÓN Y RESERVACIÓN ##############################
-
-#drop procedure sp_dias_disponibles;
 
 DELIMITER //
 create procedure sp_dias_disponibles
