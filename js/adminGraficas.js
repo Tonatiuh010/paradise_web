@@ -21,7 +21,7 @@ var graficasAdmin = [
     }
 ];
 
-window.onload = function(){
+ function loadSvg(){
     let elem = document.getElementById("graficas"),
         items = document.getElementsByClassName('svgU'),
         btnPrev =document.getElementById("prev"),

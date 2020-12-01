@@ -327,8 +327,11 @@ function fill_img(img) {
                     imgbox.appendChild(img);
                     imagenes.appendChild(imgbox);
                     
-
+                    
                     y++;
+
+
+                    showSlides(slideIndex);
                 }
 
             }
@@ -340,7 +343,7 @@ function fill_img(img) {
 
 
 
-    showSlides(slideIndex);
+  
 }
 
 

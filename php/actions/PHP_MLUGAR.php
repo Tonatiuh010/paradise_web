@@ -21,7 +21,7 @@
             <article><a href="../../index.html" ;>INICIO</a></article>
             <article><a href="../../html/HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
             <article><a href="../../html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
-            <article><a href="../../html/construccion.html" ;>PROMOCIONES</a></article>
+            <article><a href="../../html/HTML_ESTADISTICAS.html" ;>ESTADISTICAS</a></article>
             <article id="log"><a href="../../html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
             <article id="login" style="display:none;">
