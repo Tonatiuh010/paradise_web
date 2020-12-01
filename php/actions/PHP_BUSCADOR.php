@@ -1,4 +1,4 @@
-﻿
+
 <html lang="en">
 <head>
     <title>Lugares y Salones - Paradise</title>
@@ -9,11 +9,11 @@
     <link rel="shortcut icon" href="../../img/Loto_icon.png">
 
 
-    <script src="../../js/lug_general_Info.js" charset="ISO-8859-1"></script>
+    <!--<script src="../../js/lug_general_Info.js" charset="ISO-8859-1"></script>-->
     <!--<script src="../../js/error_dialog.js" charset="ISO-8859-1"></script>-->
 
 </head>
-<body onload="sesion(0); extract_img();">
+<body onload="sesion(0)">
     <nav>
         <section><img src="../../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 

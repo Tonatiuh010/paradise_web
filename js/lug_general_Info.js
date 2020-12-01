@@ -117,62 +117,42 @@ function reservar() {
     fecFin = document.getElementById('evenFin').value;
     lugar = document.getElementById('lugar').value;
 
-    if (activada == true) {
-        var ajax = new XMLHttpRequest();
-        caso = 1;
+    if (fecInic != '' && fecFin != '' && lugar != '') {
+        if (activada == true) {
+            var ajax = new XMLHttpRequest();
 
-        obj =
-        {
-            fecInic: document.getElementById('evenInic').value,
-            fecFin: document.getElementById('evenFin').value,
-            lugar: lugID
-        };
-
-        ajax.onreadystatechange = function () {
-            if (ajax.status == 200 && ajax.readyState == 4) {
-                if (ajax.responseText == 1) {
-                    console.log(ajax.responseText);
-                    alert('Reservación en proceso, revise en su historial de reservaciones para continuar');
-                    window.location.href = "../../index.html";
-                } else {
-                    document.getElementById('reservacion').close();
-                    showError(ajax.responseText);
-                }
-            }
-        };
-
-        ajax.open("get", "generar_reservacion.php?caso=" + caso + "&obj=" + JSON.stringify(obj), true);
-        ajax.send();
-    } else {
-        var ajax = new XMLHttpRequest();
-        caso = 2;
-
-        obj = verifyForm();
-
-        if (obj != '') {
+            obj =
+            {
+                fecInic: document.getElementById('evenInic').value,
+                fecFin: document.getElementById('evenFin').value,
+                lugar: lugID
+            };
 
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200 && ajax.readyState == 4) {
                     if (ajax.responseText == 1) {
                         console.log(ajax.responseText);
-                        alert('Reservación en proceso, inicie sesión para revisar su historial de reservaciones');
+                        alert('Reservación en proceso, revise en su historial de reservaciones para continuar');
                         window.location.href = "../../index.html";
                     } else {
+                        console.log(ajax.responseText);
                         document.getElementById('reservacion').close();
                         showError(ajax.responseText);
                     }
-                    
                 }
             };
 
             ajax.open("get", "generar_reservacion.php?caso=" + caso + "&obj=" + JSON.stringify(obj), true);
             ajax.send();
+        } else {
+            var msg = 2;
+            showError(msg);
+
         }
-
-
+    } else {
+        var msg = 'Favor de anexar las fechas a solicitar';
+        showError(msg);
     }
-
-
 }
 
 function verifyForm() {

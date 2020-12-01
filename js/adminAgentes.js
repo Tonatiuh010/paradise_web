@@ -117,7 +117,6 @@ function clearForm() {
 
 function fillAgenteShc(ob) {
 
-
     var list = document.getElementById("listAgen");
     list.style.display = "block"; 
     var arrayAgentes = JSON.parse(ob);
@@ -130,46 +129,47 @@ function fillAgenteShc(ob) {
 
     var y = 0;
 
-    for (x = 0; x < paneles; x++) {
+    if (arrayAgentes.length > 0) {
+        for (x = 0; x < paneles; x++) {
 
-        var panel = document.createElement('section');
-        panel.className = "paneles fade";
+            var panel = document.createElement('section');
+            panel.className = "paneles fade";
 
-        var right_arrow = document.createElement('img');
-        right_arrow.setAttribute("class", "right");
-        right_arrow.src = "../img/next_page.png";
-        right_arrow.addEventListener('click', function () { plusPaneles(1); });
+            var right_arrow = document.createElement('img');
+            right_arrow.setAttribute("class", "right");
+            right_arrow.src = "../img/next_page.png";
+            right_arrow.addEventListener('click', function () { plusPaneles(1); });
 
-        var left_arrow = document.createElement('img');
-        left_arrow.setAttribute("class", "left");
-        left_arrow.src = "../img/prev_page.png";
-        left_arrow.addEventListener('click', function () { plusPaneles(-1); });
+            var left_arrow = document.createElement('img');
+            left_arrow.setAttribute("class", "left");
+            left_arrow.src = "../img/prev_page.png";
+            left_arrow.addEventListener('click', function () { plusPaneles(-1); });
 
-        var esp2 = document.createElement("Section");
-        esp2.setAttribute("class", "espacio");
+            var esp2 = document.createElement("Section");
+            esp2.setAttribute("class", "espacio");
 
-        list.appendChild(panel);
+            list.appendChild(panel);
 
-        for (a = 0; a < 5; a++) {
+            for (a = 0; a < 5; a++) {
 
-            var agente_sec = document.createElement('section');
-            agente_sec.setAttribute("class", "patern2");
+                var agente_sec = document.createElement('section');
+                agente_sec.setAttribute("class", "patern2");
 
-            var esp = document.createElement("Section");
-            esp.setAttribute("class", "espacio");
+                var esp = document.createElement("Section");
+                esp.setAttribute("class", "espacio");
 
-            if (arrayAgentes[y]) {
+                if (arrayAgentes[y]) {
 
-                panel.appendChild(agente_sec);
-                panel.appendChild(esp);
+                    panel.appendChild(agente_sec);
+                    panel.appendChild(esp);
 
-                var child1 = document.createElement('section');
-                child1.setAttribute('class', 'chl1');
+                    var child1 = document.createElement('section');
+                    child1.setAttribute('class', 'chl1');
 
-                var child2 = document.createElement('section');
-                child2.setAttribute('class', 'chl2');
+                    var child2 = document.createElement('section');
+                    child2.setAttribute('class', 'chl2');
 
-                //--------------------------------------- C H I L D  1 -----------------------------------------------------------------
+                    //--------------------------------------- C H I L D  1 -----------------------------------------------------------------
                     if (arrayAgentes[y].usuario.imagen.length > 0) {
                         var img = document.createElement('Img');
                         img.setAttribute('class', 'img');
@@ -180,46 +180,46 @@ function fillAgenteShc(ob) {
                         img.setAttribute('src', '../img/perfil_usuario.png');
                     }
 
-               
 
-                var imgsec = document.createElement('section');
-                imgsec.setAttribute('class', 'imgsec');
 
-                imgsec.appendChild(img);
-                child1.appendChild(imgsec);
+                    var imgsec = document.createElement('section');
+                    imgsec.setAttribute('class', 'imgsec');
 
-                //-----------------------------------------------------------------------------------------------------------------------
+                    imgsec.appendChild(img);
+                    child1.appendChild(imgsec);
 
-                //--------------------------------------- C H I L D  2 -----------------------------------------------------------------
-                var row1 = document.createElement('section');
-                var row2 = document.createElement('section');
-                var row3 = document.createElement('section');
+                    //-----------------------------------------------------------------------------------------------------------------------
 
-                child2.appendChild(row1);
-                child2.appendChild(row2);
-                child2.appendChild(row3);
+                    //--------------------------------------- C H I L D  2 -----------------------------------------------------------------
+                    var row1 = document.createElement('section');
+                    var row2 = document.createElement('section');
+                    var row3 = document.createElement('section');
 
-                var lb1 = document.createElement('section');
-                lb1.setAttribute('class', 'label');
-                lb1.innerHTML = 'Matricula: ' + arrayAgentes[y].matricula;
+                    child2.appendChild(row1);
+                    child2.appendChild(row2);
+                    child2.appendChild(row3);
 
-                var lb2 = document.createElement('section');
-                lb2.setAttribute('class', 'label');
-                lb2.innerHTML = 'Género: ' + arrayAgentes[y].genero;
+                    var lb1 = document.createElement('section');
+                    lb1.setAttribute('class', 'label');
+                    lb1.innerHTML = 'Matricula: ' + arrayAgentes[y].matricula;
 
-                var lb3 = document.createElement('section');
-                lb3.setAttribute('class', 'label');
-                lb3.innerHTML = 'Edad: ' + arrayAgentes[y].edad;
+                    var lb2 = document.createElement('section');
+                    lb2.setAttribute('class', 'label');
+                    lb2.innerHTML = 'Género: ' + arrayAgentes[y].genero;
 
-                row1.appendChild(lb1);
-                row1.appendChild(lb2);
-                row1.appendChild(lb3);
-                row1.setAttribute('class', 'chl2-1');
+                    var lb3 = document.createElement('section');
+                    lb3.setAttribute('class', 'label');
+                    lb3.innerHTML = 'Edad: ' + arrayAgentes[y].edad;
 
-                row2.innerHTML = 'Nombre: ' + arrayAgentes[y].nombre + " " + arrayAgentes[y].paterno + " " + arrayAgentes[y].materno + '</br>';
-                row2.setAttribute('class', 'label');
+                    row1.appendChild(lb1);
+                    row1.appendChild(lb2);
+                    row1.appendChild(lb3);
+                    row1.setAttribute('class', 'chl2-1');
 
-                var lb4 = document.createElement('section');
+                    row2.innerHTML = 'Nombre: ' + arrayAgentes[y].nombre + " " + arrayAgentes[y].paterno + " " + arrayAgentes[y].materno + '</br>';
+                    row2.setAttribute('class', 'label');
+
+                    var lb4 = document.createElement('section');
                     var str = "";
                     for (var i = 0; i < arrayAgentes[y].telefono.length; i++) {
 
@@ -234,49 +234,56 @@ function fillAgenteShc(ob) {
                             }
                         }
                     }
-                lb4.innerHTML = str;
-                lb4.setAttribute('class', 'labe2');
+                    lb4.innerHTML = str;
+                    lb4.setAttribute('class', 'labe2');
 
-                var lb5 = document.createElement('section');
-                lb5.setAttribute('class', 'chl2-2-1')
+                    var lb5 = document.createElement('section');
+                    lb5.setAttribute('class', 'chl2-2-1')
 
-                var lb6 = document.createElement('section');
-                lb6.innerHTML = 'Usuario : ' + arrayAgentes[y].usuario.nombre;
+                    var lb6 = document.createElement('section');
+                    lb6.innerHTML = 'Usuario : ' + arrayAgentes[y].usuario.nombre;
 
-                var lb7 = document.createElement('section');
-                lb7.innerHTML = 'Correo : ' + arrayAgentes[y].usuario.correo;
+                    var lb7 = document.createElement('section');
+                    lb7.innerHTML = 'Correo : ' + arrayAgentes[y].usuario.correo;
 
-                lb5.appendChild(lb6);
-                lb5.appendChild(lb7);
+                    lb5.appendChild(lb6);
+                    lb5.appendChild(lb7);
 
-                row3.appendChild(lb4);
-                row3.appendChild(lb5);
-                row3.setAttribute('class', 'chl2-2');
+                    row3.appendChild(lb4);
+                    row3.appendChild(lb5);
+                    row3.setAttribute('class', 'chl2-2');
 
-                //-----------------------------------------------------------------------------------------------------------------------
+                    //-----------------------------------------------------------------------------------------------------------------------
 
-                agente_sec.appendChild(child1);
-                agente_sec.appendChild(child2);
+                    agente_sec.appendChild(child1);
+                    agente_sec.appendChild(child2);
 
-                y++;
+                    y++;
+                }
             }
+
+            if (arreglos > 5) {
+                if (x == 0) {
+                    panel.appendChild(right_arrow);
+                    panel.appendChild(esp2);
+                } else {
+                    panel.appendChild(right_arrow);
+                    panel.appendChild(left_arrow);
+                    panel.appendChild(esp2);
+                }
+            }
+
+            showPaneles(slideIndex);
         }
-		
-		if(arreglos>5){
-				if (x == 0) {
-					panel.appendChild(right_arrow);
-					panel.appendChild(esp2);
-				} else {
-					panel.appendChild(right_arrow);
-					panel.appendChild(left_arrow);
-					panel.appendChild(esp2);
-				}
-		}
 
+    } else {
+        var carpeta = document.createElement('img');
+        carpeta.src = '../img/carpeta_vacia.png';
+        carpeta.className = 'admin-carpeta';
 
+        list.appendChild(carpeta);
     }
-
-    showPaneles(slideIndex);
+    
 
 }
 
