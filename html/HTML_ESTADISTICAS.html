@@ -14,36 +14,46 @@
 
     </head>   
     <body onload="sesion(0); loadSvg(); ">    
-        <nav class="NavOficial">
-            <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />    
-            <section class="pruebaMenu">
-                <article><a href="../index.html" ;>INICIO</a></article>
-                <article><a href="../html/HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
-                <article><a href="../html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
-                <article><a href="../html/HTML_ESTADISTICAS.html" ;>ESTADISTICAS</a></article>
-                <article id="log"><a href="../html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
+        <nav class="navOficial">
+        <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
-                <article id="login" style="display:none;">
-                    <article class="login-icon">
-                        <a><img src="../img/Loto_paradise.png" width="40%;" height="100%" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="30%;" height="100%" /></a>
-                    </article>
+        <section class="menu">
+            <article><a href="../index.html" ;>INICIO</a></article>
+            <article><a href="../html/HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
+            <article><a href="../html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
+            <article><a href="../html/HTML_ESTADÍSTICAS.html" ;>ESTADÍSTICAS</a></article>
+            <article id="log"><a href="../html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
+
+            <article id="login" style="display:none;">
+                <article class="login-icon">
+                    <a><img src="../img/Loto_paradise.png" width="40%;" height="100%" id="imgHome" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="30%;" height="100%" /></a>
                 </article>
-    
-            </section>
-            <br />
-            <section class="barraBusqueda">
-                <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-                <button type="button" id="search" class="boton">Buscar</button>
-            </section>
-            <br />
-        </nav>
-        <br />
+            </article>
+
+        </section>
+        <section></section>
+        <section class="barraBusqueda">
+            <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+            <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
+        </section>
+
+    </nav>
+
         <main>    
-                <section id="graficas">     
-                    <span id="prev" class="prev">&#10094;</span>
-                    <span id="next" class="next">&#10095;</span>      
+
+            <section class="principal">
+                <h2>¿No sabes que elegir? <br /> ¡Consulta las estadísticas del sitio!</h2>
+                <br />
+                <section id="graficas">   
+                    <section class="botones2">
+                        <article><span id="prev" class="prev">&#10094;</span></article>
+                        <article><span id="next" class="next">&#10095;</span></article>      
+                    </section>  
                 </section>
+                <br />
+            </section>
+                
         </main>    
     </body>
 </html>

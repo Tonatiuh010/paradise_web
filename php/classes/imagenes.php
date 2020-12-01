@@ -76,7 +76,7 @@
         public function getAllImagenesByLugar($n){
 
             $sql="select img_Num,img_Nombre from imagenesLugar where FK_Lugar=?";
-             $conn=mysqlConnection::getConnection();
+            $conn=mysqlConnection::getConnection();
             $command=$conn->prepare($sql);
             $command->bind_param('i',$n);
             $command->execute();
