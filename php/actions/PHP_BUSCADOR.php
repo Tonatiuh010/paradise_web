@@ -8,12 +8,10 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" href="../../img/Loto_icon.png">
 
-
-    
-    <!--<script src="../../js/error_dialog.js" charset="ISO-8859-1"></script>-->
-
 </head>
+
 <body onload="sesion(0);">
+
     <nav>
         <section><img src="../../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
