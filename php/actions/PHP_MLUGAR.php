@@ -194,9 +194,9 @@
             boton.setAttribute('id', 'cerrar_error');
 
             console.log(msg);
-            if (msg == true) {
-                mensaje.innerHTML = '</br > Registrado inicie sesión para continuar </br></br>';
-                boton.addEventListener('click', function () { reloadIndex(); });
+            if (msg == 2) {
+                mensaje.innerHTML = '</br > Inicie Sesión para continuar. </br> Si no tienes cuenta puedes registrate ahora </br><a class="a-a" href = "../../html/HTML_REGISTRO.html"> Registro</a ></br ></br > ';
+                boton.addEventListener('click', function () { reloadSesion(); });
             } else {
                 boton.addEventListener('click', function () { closeError(); });
             }
@@ -239,8 +239,8 @@
             window.removeEventListener('scroll', disableScroll); 
         }
 
-        function reloadIndex() {
-            location.href = "../index.html";
+        function reloadSesion() {
+            location.href = "../../html/HTML_LOG_IN.html";
         }
 
         function scroll() {

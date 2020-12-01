@@ -202,3 +202,11 @@ button{
     font-family:Georgia;
     font-size:medium;
 }
+
+.admin-carpeta {
+    padding-top: 10%;
+    height: 60%;
+    text-align: center;
+    display: inline-block;
+    /*padding-left: 10%;*/
+}

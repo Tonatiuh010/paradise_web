@@ -324,209 +324,218 @@ function fillHistorial(ht) {
     var contenido = document.getElementById('listaRes');
     contenido.innerHTML = '';
 
-    while (arrayHistorial[y]) {
-        var telefono = arrayHistorial[y].agente.telefono;
+    if (arrayHistorial.length > 0) {
+        while (arrayHistorial[y]) {
+            var telefono = arrayHistorial[y].agente.telefono;
 
-        var slide = document.createElement('section');
-        slide.className = "slides fade";
+            var slide = document.createElement('section');
+            slide.className = "slides fade";
 
-        var pat = document.createElement('Section');
-        pat.setAttribute("class", "pat");
+            var pat = document.createElement('Section');
+            pat.setAttribute("class", "pat");
 
-        var right_arrow = document.createElement('img');
-        right_arrow.setAttribute("class", "next");
-        right_arrow.src = "../img/next_page.png";
-        right_arrow.addEventListener('click', function () { plusSlides(1); });
+            var right_arrow = document.createElement('img');
+            right_arrow.setAttribute("class", "next");
+            right_arrow.src = "../img/next_page.png";
+            right_arrow.addEventListener('click', function () { plusSlides(1); });
 
-        var vacia = document.createElement('section');
-        var btnCancelar = document.createElement('button');
-        btnCancelar.innerHTML = 'Cancelar Reservación';
-        btnCancelar.setAttribute('class', 'btnCancelar');
-        
-
-        if (arrayHistorial[y].status == 'Proceso') {
-            var pre_reservacion = arrayHistorial[y].reservacion.num;
-            btnCancelar.addEventListener('click', function () { cancelarPR(pre_reservacion); })
-            vacia.appendChild(btnCancelar);
-        }
+            var vacia = document.createElement('section');
+            var btnCancelar = document.createElement('button');
+            btnCancelar.innerHTML = 'Cancelar Reservación';
+            btnCancelar.setAttribute('class', 'btnCancelar');
 
 
-        var left_arrow = document.createElement('img');
-        left_arrow.setAttribute("class", "prev");
-        left_arrow.src = "../img/prev_page.png";
-        left_arrow.addEventListener('click', function () { plusSlides(-1); });
-
-        var flechas = document.createElement("Section");
-        flechas.setAttribute("class", "flechas");
-
-        if (arrayHistorial.length > 1) {
-            flechas.appendChild(left_arrow);
-            flechas.appendChild(vacia);
-            flechas.appendChild(right_arrow);
-            slide.appendChild(flechas);
-        }
-
-        //------------------ C H I L D  1 -----------------------
-        var child1 = document.createElement('Section');
-        child1.setAttribute("class", "ch1");
-
-        var lb1 = document.createElement("Section");
-        lb1.innerHTML = 'Reservación';
-
-        var lb2 = document.createElement("Section");
-        lb2.innerHTML = arrayHistorial[y].lugar.nombre;
-        //lb2.setAttribute('class', 'centrar');
-
-        var lb4 = document.createElement("Section");
-        lb4.innerHTML = 'Fechas solicitadas: </br>' +
-                        arrayHistorial[y].inicio + '</br>' +
-                        arrayHistorial[y].termino;
-
-        var lb5 = document.createElement("Section");
-        lb5.innerHTML = 'Estado: ' + arrayHistorial[y].status;
-
-        if (arrayHistorial[y].reservacion.total != null) {
-            var lb5_1 = document.createElement("Section");
-            lb5_1.innerHTML = 'Total: $' + arrayHistorial[y].reservacion.total;
-        } else {
-            var lb5_1 = document.createElement("Section");
-            lb5_1.innerHTML = 'Total: ---';
-        }
-        
-
-        child1.appendChild(lb1);
-        child1.appendChild(lb2);
-        //child1.appendChild(lb3);
-        child1.appendChild(lb4);
-        child1.appendChild(lb5);
-        child1.appendChild(lb5_1);
-        
-        //-------------------------------------------------------
-
-        //------------------ C H I L D  2 -----------------------
-        var child2 = document.createElement('Section');
-        child2.setAttribute("class", "ch2");
-        //child2.setAttribute('class', 'labelL');
-
-        var lb3 = document.createElement("Section");
-        lb3.innerHTML = 'Solicitud: ';
-        lb3.setAttribute('class', 'labelL');
-        var lb3_1 = document.createElement("Section");
-        lb3_1.setAttribute('class', 'labelR');
-        lb3_1.innerHTML = arrayHistorial[y].registro;
-
-        var lb6 = document.createElement("Section");
-        lb6.innerHTML = 'Cliente: ';
-        lb6.setAttribute('class', 'labelL');
-        var lb6_1 = document.createElement("Section");
-        lb6_1.innerHTML = arrayHistorial[y].cliente.nombre + ' '
-                        + arrayHistorial[y].cliente.paterno + ' '
-                        + arrayHistorial[y].cliente.materno;
-        lb6_1.setAttribute('class', 'labelR');
-
-        var lb7 = document.createElement("Section");
-        lb7.innerHTML = 'Agente: ';
-        lb7.setAttribute('class', 'labelL');
-        var lb7_1 = document.createElement("Section");
-        lb7_1.innerHTML = arrayHistorial[y].agente.nombre + ' '
-                        + arrayHistorial[y].agente.paterno + ' '
-                        + arrayHistorial[y].agente.materno;
-        lb7_1.setAttribute('class', 'labelR');
-
-
-        var str = "";
-
-        for (var x = 0; x < telefono.length; x++) {
-
-            if (x == telefono.length - 1) {
-                //str += telefono[x].telefono;
-                str += '<li>' + telefono[x].telefono + '</li>';
-            } else {
-
-                str += '<li>' + telefono[x].telefono + '</li>';
+            if (arrayHistorial[y].status == 'Proceso') {
+                var pre_reservacion = arrayHistorial[y].reservacion.num;
+                btnCancelar.addEventListener('click', function () { cancelarPR(pre_reservacion); })
+                vacia.appendChild(btnCancelar);
             }
 
+
+            var left_arrow = document.createElement('img');
+            left_arrow.setAttribute("class", "prev");
+            left_arrow.src = "../img/prev_page.png";
+            left_arrow.addEventListener('click', function () { plusSlides(-1); });
+
+            var flechas = document.createElement("Section");
+            flechas.setAttribute("class", "flechas");
+
+            if (arrayHistorial.length > 1) {
+                flechas.appendChild(left_arrow);
+                flechas.appendChild(vacia);
+                flechas.appendChild(right_arrow);
+                slide.appendChild(flechas);
+            }
+
+            //------------------ C H I L D  1 -----------------------
+            var child1 = document.createElement('Section');
+            child1.setAttribute("class", "ch1");
+
+            var lb1 = document.createElement("Section");
+            lb1.innerHTML = 'Reservación';
+
+            var lb2 = document.createElement("Section");
+            lb2.innerHTML = arrayHistorial[y].lugar.nombre;
+            //lb2.setAttribute('class', 'centrar');
+
+            var lb4 = document.createElement("Section");
+            lb4.innerHTML = 'Fechas solicitadas: </br>' +
+                arrayHistorial[y].inicio + '</br>' +
+                arrayHistorial[y].termino;
+
+            var lb5 = document.createElement("Section");
+            lb5.innerHTML = 'Estado: ' + arrayHistorial[y].status;
+
+            if (arrayHistorial[y].reservacion.total != null) {
+                var lb5_1 = document.createElement("Section");
+                lb5_1.innerHTML = 'Total: $' + arrayHistorial[y].reservacion.total;
+            } else {
+                var lb5_1 = document.createElement("Section");
+                lb5_1.innerHTML = 'Total: ---';
+            }
+
+
+            child1.appendChild(lb1);
+            child1.appendChild(lb2);
+            //child1.appendChild(lb3);
+            child1.appendChild(lb4);
+            child1.appendChild(lb5);
+            child1.appendChild(lb5_1);
+
+            //-------------------------------------------------------
+
+            //------------------ C H I L D  2 -----------------------
+            var child2 = document.createElement('Section');
+            child2.setAttribute("class", "ch2");
+            //child2.setAttribute('class', 'labelL');
+
+            var lb3 = document.createElement("Section");
+            lb3.innerHTML = 'Solicitud: ';
+            lb3.setAttribute('class', 'labelL');
+            var lb3_1 = document.createElement("Section");
+            lb3_1.setAttribute('class', 'labelR');
+            lb3_1.innerHTML = arrayHistorial[y].registro;
+
+            var lb6 = document.createElement("Section");
+            lb6.innerHTML = 'Cliente: ';
+            lb6.setAttribute('class', 'labelL');
+            var lb6_1 = document.createElement("Section");
+            lb6_1.innerHTML = arrayHistorial[y].cliente.nombre + ' '
+                + arrayHistorial[y].cliente.paterno + ' '
+                + arrayHistorial[y].cliente.materno;
+            lb6_1.setAttribute('class', 'labelR');
+
+            var lb7 = document.createElement("Section");
+            lb7.innerHTML = 'Agente: ';
+            lb7.setAttribute('class', 'labelL');
+            var lb7_1 = document.createElement("Section");
+            lb7_1.innerHTML = arrayHistorial[y].agente.nombre + ' '
+                + arrayHistorial[y].agente.paterno + ' '
+                + arrayHistorial[y].agente.materno;
+            lb7_1.setAttribute('class', 'labelR');
+
+
+            var str = "";
+
+            for (var x = 0; x < telefono.length; x++) {
+
+                if (x == telefono.length - 1) {
+                    //str += telefono[x].telefono;
+                    str += '<li>' + telefono[x].telefono + '</li>';
+                } else {
+
+                    str += '<li>' + telefono[x].telefono + '</li>';
+                }
+
+            }
+
+            var lb8 = document.createElement("Section");
+            lb8.innerHTML = 'Telefono del Agente: ';
+            lb8.setAttribute('class', 'labelL');
+            var lb8_1 = document.createElement("Section");
+            lb8_1.innerHTML = str;
+            lb8_1.setAttribute('class', 'labelR');
+
+            var lb9 = document.createElement("Section");
+            lb9.innerHTML = 'Correo del Agente: ';
+            lb9.setAttribute('class', 'labelL');
+            var lb9_1 = document.createElement("Section");
+            lb9_1.innerHTML = arrayHistorial[y].agente.usuario.correo;
+            lb9_1.setAttribute('class', 'labelR');
+
+            var lb10 = document.createElement("Section");
+            lb10.innerHTML = 'Notas: ';
+            lb10.setAttribute('class', 'labelL');
+            var lb10_1 = document.createElement("Section");
+            lb10_1.innerHTML = arrayHistorial[y].notas;
+            lb10_1.setAttribute('class', 'labelR');
+
+            child2.appendChild(lb3);
+            child2.appendChild(lb3_1);
+            child2.appendChild(lb6);
+            child2.appendChild(lb6_1);
+            child2.appendChild(lb7);
+            child2.appendChild(lb7_1);
+            child2.appendChild(lb8);
+            child2.appendChild(lb8_1);
+            child2.appendChild(lb9);
+            child2.appendChild(lb9_1);
+            child2.appendChild(lb10);
+            child2.appendChild(lb10_1);
+
+            //-------------------------------------------------------
+
+            //------------------ C H I L D  3 -----------------------
+            var child3 = document.createElement('Section');
+            child3.setAttribute("class", "ch3");
+
+            imagenes = arrayHistorial[y].lugar.imagenes.length;
+
+            if (imagenes > 0) {
+                var imglb = document.createElement('Img');
+                imglb.setAttribute('class', 'ImgCH');
+                imglb.setAttribute('src', '../img/lugares/' + arrayHistorial[y].lugar.num + "/" + arrayHistorial[y].lugar.imagenes[0].nombre);
+            } else {
+                var imglb = document.createElement('img');
+                imglb.setAttribute('class', 'ImgCH');
+                imglb.src = '../img/index/anuncio5.jpg';
+            }
+
+            child3.appendChild(imglb);
+
+            child1.appendChild(child3);
+            //-------------------------------------------------------
+
+
+            pat.appendChild(child1);
+            pat.appendChild(child2);
+
+
+
+            var esp = document.createElement("Section");
+            esp.setAttribute("class", "espacio");
+
+
+
+            slide.appendChild(pat);
+            slide.appendChild(esp);
+
+
+            contenido.appendChild(slide);
+
+            y++;
+
         }
 
-        var lb8 = document.createElement("Section");
-        lb8.innerHTML = 'Telefono del Agente: ';
-        lb8.setAttribute('class', 'labelL');
-        var lb8_1 = document.createElement("Section");
-        lb8_1.innerHTML = str;
-        lb8_1.setAttribute('class', 'labelR');
+        showSlides(slideIndex);
 
-        var lb9 = document.createElement("Section");
-        lb9.innerHTML = 'Correo del Agente: ';
-        lb9.setAttribute('class', 'labelL');
-        var lb9_1 = document.createElement("Section");
-        lb9_1.innerHTML = arrayHistorial[y].agente.usuario.correo;
-        lb9_1.setAttribute('class', 'labelR');
+    } else {
+        var carpeta = document.createElement('img');
+        carpeta.src = '../img/carpeta_vacia.png';
+        carpeta.className = 'admin-carpeta';
 
-        var lb10 = document.createElement("Section");
-        lb10.innerHTML = 'Notas: ';
-        lb10.setAttribute('class', 'labelL');
-        var lb10_1 = document.createElement("Section");
-        lb10_1.innerHTML = arrayHistorial[y].notas;
-        lb10_1.setAttribute('class', 'labelR');
-
-        child2.appendChild(lb3);
-        child2.appendChild(lb3_1);
-        child2.appendChild(lb6);
-        child2.appendChild(lb6_1);
-        child2.appendChild(lb7);
-        child2.appendChild(lb7_1);
-        child2.appendChild(lb8);
-        child2.appendChild(lb8_1);
-        child2.appendChild(lb9);
-        child2.appendChild(lb9_1);
-        child2.appendChild(lb10);
-        child2.appendChild(lb10_1);
-
-        //-------------------------------------------------------
-
-        //------------------ C H I L D  3 -----------------------
-        var child3 = document.createElement('Section');
-        child3.setAttribute("class", "ch3");
-
-        imagenes=arrayHistorial[y].lugar.imagenes.length;
-
-        if (imagenes > 0) {
-            var imglb = document.createElement('Img');
-            imglb.setAttribute('class', 'ImgCH');
-            imglb.setAttribute('src', '../img/lugares/' + arrayHistorial[y].lugar.num + "/" + arrayHistorial[y].lugar.imagenes[0].nombre);
-        } else {
-            var imglb = document.createElement('img');
-            imglb.setAttribute('class', 'ImgCH');
-            imglb.src = '../img/index/anuncio5.jpg';
-        }
-
-        child3.appendChild(imglb);
-
-        child1.appendChild(child3);
-        //-------------------------------------------------------
-
-        
-        pat.appendChild(child1);
-        pat.appendChild(child2);
-
-        
-
-        var esp = document.createElement("Section");
-        esp.setAttribute("class", "espacio");
-
-        
-
-        slide.appendChild(pat);
-        slide.appendChild(esp);
-       
-
-        contenido.appendChild(slide);
-
-        y++;
-
+        contenido.appendChild(carpeta);
     }
-
-    showSlides(slideIndex);
 
 }
 
@@ -596,6 +605,7 @@ function reloadd() {
 
 function abrirDialogEdit() {
     var dialog = document.getElementById("dialogUpd");
+    disableScroll();
     dialog.showModal();
 }
 

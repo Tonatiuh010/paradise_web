@@ -56,6 +56,7 @@
                     //var_dump($resultado);
 
 			        $x = 0;
+
 			
                     while($x < count($resultado)){
 
@@ -87,6 +88,13 @@
                 ?>
 
             </section>
+
+            <?php 
+                
+                if(count($resultado)>0){}else{echo '<img class="admin-carpeta" src="../../img/carpeta_vacia.png"/></section>';}
+            
+            ?>
+
         </section>
 
     </main>
