@@ -284,10 +284,11 @@ function fillLugarShc(ob) {
                 panel.appendChild(left_arrow);
             }
         }
+        showPanel(slideIndex);
     }
 
 
-    showPanel(slideIndex);
+    
 }
 
 

@@ -97,7 +97,7 @@
                                 //echo $espacio[$x]->nombre;
                             }
                         echo '</th></tr>';
-                        echo '<tr><th class="tipol"></br><button class="resButton" onclick="abrir_reservacion()">Generar Reservación</button><h3></th></tr>';
+                        echo '<tr><th class="tipol"></br><button id="btnReservar" class="resButton" onclick="abrir_reservacion()">Generar Reservación</button><h3></th></tr>';
                         echo '<table/></section></br>';
 
 

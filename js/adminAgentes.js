@@ -273,10 +273,10 @@ function fillAgenteShc(ob) {
 				}
 		}
 
-
+		showPaneles(slideIndex);
     }
 
-    showPaneles(slideIndex);
+    
 
 }
 

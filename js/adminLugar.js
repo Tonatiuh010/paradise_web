@@ -463,11 +463,11 @@ function fillLugarShc(ob) {
             }
         }
 
-
+        showPanel(slideIndex);
     }
 
 
-    showPanel(slideIndex);
+    
 
 
 }

@@ -94,6 +94,11 @@ function sesion(type) {
                 activada = true;
                 userID = obj_user.user;
                 typeUser = obj_user.tipo;
+                if (typeUser == 'Administrador' || typeUser == 'Agente') {
+                    document.getElementById("btnReservar").style.display="none";
+                }
+
+
                 extractData();
 
             } else {

@@ -170,9 +170,10 @@ function fillClientesShc(ob) {
                 panel.appendChild(esp2);
             }
         }
+        showPaneles(slideIndex);
     }
 
-    showPaneles(slideIndex);
+    
 }
 
 function plusPaneles(n) {
