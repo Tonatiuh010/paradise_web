@@ -153,7 +153,7 @@ function reservar() {
                 }
             };
 
-            ajax.open("get", "generar_reservacion.php?caso=" + caso + "&obj=" + JSON.stringify(obj), true);
+            ajax.open("get", "generar_reservacion.php?obj=" + JSON.stringify(obj), true);
             ajax.send();
         } else {
             var msg = 2;
