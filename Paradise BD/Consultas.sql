@@ -233,7 +233,7 @@ usContrasenia as contrasenia, usCorreo as correo, usTipoUS as tipo
 from agente inner join usuario
 on FK_usuario=usNum;
 
-
+select * from VW_agente_admin ;
 #select * from agente;
 #select * from usuario;
 

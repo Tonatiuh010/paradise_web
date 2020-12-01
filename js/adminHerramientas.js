@@ -329,6 +329,7 @@ function fillLugarShc(ob) {
             //panel.appendChild(lb7);
             //panel.appendChild(right_arrow);
             //panel.appendChild(left_arrow);
+            showPanel(slideIndex);
         }
 
         if (arreglos > 5) {
@@ -344,9 +345,6 @@ function fillLugarShc(ob) {
 
 
     }
-
-
-    showPanel(slideIndex);
 
 
     

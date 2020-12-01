@@ -467,7 +467,6 @@ function fillLugarShc(ob) {
             showPanel(slideIndex);
 
         }
-
     } else {
         var carpeta = document.createElement('img');
         carpeta.src = '../img/carpeta_vacia.png';
@@ -475,8 +474,6 @@ function fillLugarShc(ob) {
 
         list.appendChild(carpeta);
     }
-
-
 }
 
 function plusPaneles(n) {

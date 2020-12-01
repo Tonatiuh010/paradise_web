@@ -174,6 +174,7 @@ function fillClientesShc(ob) {
 
             showPaneles(slideIndex);
         }
+
     } else {
         var carpeta = document.createElement('img');
         carpeta.src = '../img/carpeta_vacia.png';
@@ -181,7 +182,7 @@ function fillClientesShc(ob) {
 
         list.appendChild(carpeta);
     }
-   
+
 }
 
 function plusPaneles(n) {

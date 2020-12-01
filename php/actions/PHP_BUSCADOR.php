@@ -8,12 +8,10 @@
     <meta meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" href="../../img/Loto_icon.png">
 
-
-    <!--<script src="../../js/lug_general_Info.js" charset="ISO-8859-1"></script>-->
-    <!--<script src="../../js/error_dialog.js" charset="ISO-8859-1"></script>-->
-
 </head>
-<body onload="sesion(0)">
+
+<body onload="sesion(0);">
+
     <nav>
         <section><img src="../../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
 
@@ -95,6 +93,44 @@
 
 
     <script>
+
+    function sesion(type) {
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.status == 200 && ajax.readyState == 4) {
+            var obj_user = JSON.parse(ajax.responseText);
+            var respuesta = obj_user.res;
+           
+
+            if (respuesta == true) {
+                document.getElementById('log').style.display = "none";
+
+                document.getElementById('login').style.display = "block";
+                var lotoHome = document.getElementById('imgHome');
+                lotoHome.addEventListener('click', function () {
+                    location.href = "../../" + obj_user.index;
+                });
+
+                activada = true;
+                userID = obj_user.user;
+                typeUser = obj_user.tipo;               
+
+            } else {
+                if (obj_user.index != '') {
+                    showError("Error de inicio de sesión.");
+                    document.body.innerHTML = "";
+                    location.href = "../" + obj_user.index;
+                }
+            }
+
+        }
+    }
+
+    ajax.open("GET", "session_verify.php?b="+type, true);
+    ajax.send();
+}
 
         function php_lugar(prm) {
             location.href = 'PHP_MLUGAR.php?id=' + prm;
