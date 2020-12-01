@@ -13,13 +13,14 @@
         <script src="../js/session.js"></script>
     </head>   
     <body onload="sesion(2); loadSvg()">    
-        <nav class="NavOficial">
-            <img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" />    
-            <section class="pruebaMenu">
+        <nav class="navOficial">
+            <section><img src="../img/logoOficial.png" alt="Logotipo" width="30%" class="logoNav" /></section>
+
+            <section class="menu">
                 <article><a href="../index.html" ;>INICIO</a></article>
                 <article><a href="../html/HTML_QUIENES_SOMOS.html" ;>¿QUIÉNES SOMOS?</a></article>
                 <article><a href="../html/HTML_LUGARES.html" ;>LUGARES Y SALONES</a></article>
-                <article><a href="../html/HTML_ESTADISTICAS.html" ;>ESTADISTICAS</a></article>
+                <article><a href="../html/HTML_ESTADISTICAS.html" ;>ESTADÍSTICAS</a></article>
                 <article id="log"><a href="../html/HTML_LOG_IN.html" ;>INICIAR SESION</a></article>
 
                 <article id="login" style="display:none;">
@@ -28,54 +29,58 @@
                         <a href="../php/actions/session_out.php" ;><img src="../img/log_out.png" width="30%;" height="100%" /></a>
                     </article>
                 </article>
+
             </section>
-            <br />
+            <section></section>
             <section class="barraBusqueda">
-                <input type="text" id="searchterm" class="busqueda" placeholder="¿Qué estás buscando?" />
-                <button type="button" id="search" class="boton">Buscar</button>
+                <input type="text" id="general-search" class="busqueda" placeholder="¿Qué estás buscando?" />
+                <button type="button" id="general-button" class="search-button" onclick="buscador()">Buscar</button>
             </section>
-            <br />
+
         </nav>
-        <br />
+
         <main>
     
             <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
-            <nav>
-                <section class="Nav2do">     
-                </section>
+            <nav class="agenNav">
+                <a></a>
+                <a></a>
+                <a></a>
             </nav>
             <!--------------------------------------- SEGUNDO NAVEGADOR ------------------------------------------------------------------------->
     
             <section class="principal">
     
-                <section class="lateral">
-                    <ul>    
-                        <li>
-                            <a href="HTML_AGEN_GRAFICAS.html">Graficas</a>
-                        </li>    
-                        <li>
-                            <a href="HTML_ADMIN_RESERVACIONES.html">Reservaciones</a>
-                        </li>    
-                        <li>
-                            <a href="HTML_ADMIN_AGENTES.html">Agentes</a>
-                        </li>    
-                        <li>
-                            <a href="HTML_ADMIN_LUGARES.html">Lugares</a>    
-                            <a href="HTML_ADMIN_HERRAMIENTAS.html">
-                                <ol>
-                                    > Herramientas del Lugar
-                                </ol>
-                            </a>
-                        </li>    
-                        <li>
-                            <a href="HTML_ADMIN_CLIENTES.html">Clientes</a>
-                        </li>    
-                    </ul>
+            <section class="panel-lateral">
+                <section class="perfil-agen">
+                    <img src="../img/user_sin_foto.png" id="imgAgente" height="70%" />
+                    <br />
+                    <i id="user_name"></i>
+                    <br /><br /><hr /><br />
                 </section>
+            
+                <section class="agen-lateral">
+                    <a href="HTML_AGEN_GRAFICAS.html"><img src="../img/estadistica.png" class="icons"/></a>
+                    <a class="opciones" href="HTML_AGEN_GRAFICAS.html">Estadísticas</a>
+                    <a  href="HTML_AGEN_RESERVACIONES.html"><img src="../img/reservaciones.png" class="icons"/></a>
+                    <a class="opciones" href="HTML_AGEN_RESERVACIONES.html">Reservaciones</a>
+                    <a href="HTML_AGEN_LUGARES.html"><img src="../img/lugar.png" class="icons"/></a>
+                    <a class="opciones" href="HTML_AGEN_LUGARES.html">Lugares</a>
+
+                    <a href="HTML_AGEN_HISTORIAL.html"><img src="../img/historial.png" class="icons"/></a>
+                    <a class="opciones" href="HTML_AGEN_HISTORIAL.html">Historial</a>
+
+                    <a href="HTML_AGEN_CONFIGURACION.html"><img src="../img/configuracion.png" class="icons"/></a>
+                    <a class="opciones" href="HTML_AGEN_CONFIGURACION.html">Configuración</a>
+                    <a></a>
+                </section>
+            </section>
     
                 <section class="sn" id="graficas">     
-                    <span id="prev" class="prev">&#10094;</span>
-                    <span id="next" class="next">&#10095;</span>      
+                    <section class="botones2">
+                        <article><span id="prev" class="prev">&#10094;</span></article>
+                        <article><span id="next" class="next">&#10095;</span></article>      
+                    </section> 
                 </section>
             </section>
         </main>    

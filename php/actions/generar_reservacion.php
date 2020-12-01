@@ -3,6 +3,9 @@
  require_once("../classes/pre_reservacion.php");
  require_once("../classes/cliente.php");
 
+ $obj= json_decode($_GET['obj']);
+
+ session_start();
 
     $ob=new pre_reservacion();    
     $resultado=json_decode($ob->insertReservacion($obj->fecInic,$obj->fecFin,$obj->lugar,$_SESSION['ID']));
