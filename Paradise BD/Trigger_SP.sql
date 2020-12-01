@@ -1,12 +1,5 @@
 use paradise;
 
-######
-#NOTA: ANTES DE EJECUTAR LO SIGUIENTE, PRIMERO EJECUTE LAS VISTAS EN EL SCRIPT CONSULTAS
-######
-
-############################################ INSERTAR A UN AGENTE ##################################################
-
-#----- TRIGGER DE VERIFICACION -------------------------- #
 DELIMITER //
 create trigger DIS_AGENTE_INSERT before insert on agente
 for each row 

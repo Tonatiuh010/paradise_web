@@ -13,7 +13,7 @@ var graficasAdmin = [
     }
 ];
 
-window.onload = function(){
+function loadSvg(){
     let elem = document.getElementById("graficas"),
         items = document.getElementsByClassName('svgU'),
         btnPrev =document.getElementById("prev"),
@@ -49,8 +49,10 @@ window.onload = function(){
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                let data =JSON.parse(this.responseText);     
-                graficaBarra(elem,titulo, data);
+                let data = JSON.parse(this.responseText);
+                graficaBarra(elem, titulo, data);
+
+                
             }
         };
         xmlhttp.open("GET", "../php/actions/AcGraficas.php?type="+id, true);
