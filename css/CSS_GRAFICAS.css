@@ -247,14 +247,14 @@ main > nav {
     float: left;
 }
 
-.principal{
+.principal-html{
     display:inline-block;
     width:70%;
     padding:5%;
     
 }
 
-.principal > h2 {
+.principal-html > h2 {
     font-family: Georgia;
     color: darkslategray;
     line-height: 1.5;

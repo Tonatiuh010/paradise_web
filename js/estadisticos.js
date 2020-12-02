@@ -5,7 +5,7 @@ var graficasAdmin = [
     },
     {
         id:4,
-        title: 'Lugares por munucipio'
+        title: 'Lugares por municipio'
     }
 ];
 

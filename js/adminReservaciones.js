@@ -432,7 +432,8 @@ function fillPReservacionShc(ob) {
 
    historial.innerHTML = "";
 
-    while (arrayPreReservaciones[y]) {
+	if(arrayPreReservaciones.length>0){
+		while (arrayPreReservaciones[y]) {
 
         var slide = document.createElement('section');
         slide.className = "reservacionesCons fade";
@@ -593,6 +594,14 @@ function fillPReservacionShc(ob) {
 
         showReservacionesCons(slideReservacionesCons);
     }
+	}else{
+		var carpeta = document.createElement('img');
+        carpeta.src = '../img/carpeta_vacia.png';
+        carpeta.className = 'admin-carpeta';
+
+        historial.appendChild(carpeta);
+	}		
+    
 }
 
 

@@ -64,7 +64,7 @@ function fillReservaciones(ob) {
 
     var historial = document.getElementById('listReservaciones');
 
-    if (arrayPreReservaciones > 0) {
+    if (arrayPreReservaciones.length > 0) {
         while (arrayPreReservaciones[y]) {
 
             var slide = document.createElement('section');
