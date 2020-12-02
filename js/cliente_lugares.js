@@ -41,7 +41,8 @@ function lugaresList(ls) {
     //left_arrow.setAttribute('class', 'colores');
 
 
-        var y = 0;
+    var y = 0;
+    if (arreglos>0) {
 
         for (x = 0; x < paneles; x++) {
 
@@ -134,7 +135,11 @@ function lugaresList(ls) {
                     
                     lugSec.appendChild(lb6);
 
+                    
+
                     y++;
+
+                    showSlides(slideIndex);
                 }
 
                 
@@ -157,8 +162,15 @@ function lugaresList(ls) {
             
         }
     
+    } else {
 
-    showSlides(slideIndex);
+        var monitor = document.createElement('img');
+        monitor.src = '../img/carpeta_vacia.png';
+        monitor.className = 'admin-carpeta';
+
+        lugares.appendChild(monitor);
+    }
+ 
     //showSlides(0);
 
 }
@@ -351,6 +363,9 @@ function fillCompresData(ob) {
 
     var y = 0;
 
+
+    if (arreglos>0){
+
     for (x = 0; x < paneles; x++) {
 
         var panel = document.createElement('section');
@@ -443,6 +458,7 @@ function fillCompresData(ob) {
                 lugSec.appendChild(lb6);
 
                 y++;
+                showSlides(slideIndex);
             }
 
         }
@@ -459,9 +475,16 @@ function fillCompresData(ob) {
         }
         
     }
+    } else {
+        var monitor = document.createElement('img');
+        monitor.src = '../img/carpeta_vacia.png';
+        monitor.className = 'admin-carpeta';
 
+        lugares.appendChild(monitor);
 
-    showSlides(slideIndex);
+    }
+
+    
 
     
 }

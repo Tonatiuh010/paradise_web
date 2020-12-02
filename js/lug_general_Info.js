@@ -138,7 +138,29 @@ function reservar() {
             {
                 fecInic: document.getElementById('evenInic').value,
                 fecFin: document.getElementById('evenFin').value,
-                lugar: lugID
+                lugar: lugID,
+
+                verify: function () {
+                    var dataInicio = fecInic.split("-");
+                     var dataFinal=fecFin.split("-");
+                     
+                     var inicio = new Date(dataInicio[0], dataInicio[1], dataInicio[2]); //31 de diciembre de 2015
+                     var final = new Date(dataFinal[0], dataFinal[1], dataFinal[2]); //30 de noviembre de 2014
+
+                     var hoy = new Date();
+
+                     if (final<inicio || inicio<hoy || final<hoy){
+                         
+                         return false;
+                     } else {
+                         
+                         return true;
+                    }
+
+                                      
+                }
+
+
             };
 
             ajax.onreadystatechange = function () {
@@ -154,7 +176,17 @@ function reservar() {
             };
 
             ajax.open("get", "generar_reservacion.php?obj=" + JSON.stringify(obj), true);
-            ajax.send();
+            
+            if (obj.verify()!=false){
+
+                ajax.send();
+
+            } else {
+                showError("Las fechas solicitadas no son coherentes.");
+
+            }
+
+            
         } else {
             var msg = 2;
             showError(msg);

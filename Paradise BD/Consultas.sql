@@ -81,7 +81,7 @@ from pre_Reservacion right join reservacion
 on prNum=resNumPR
 where resFecConfirmacion is null or resTotDias is null or resTotPagar is null;
 
-CREATE VIEW VW_lugar_admin AS
+create VIEW VW_lugar_admin AS
     SELECT 
         lugNum numero,
         lugNombre nombre,
@@ -129,7 +129,7 @@ CREATE VIEW VW_lugar_admin AS
     WHERE
         dl.dlNum IS NULL;
 
-CREATE view VW_agente_admin as 
+create view VW_agente_admin as 
 select agMatricula as matricula, agNombre as nombre,agApPat as paterno,agApMat as materno,agFecNac as
 nacimiento,agEdad as edad, agGenero as genero, usNum as num, usNombre as usuario, 
 usContrasenia as contrasenia, usCorreo as correo, usTipoUS as tipo

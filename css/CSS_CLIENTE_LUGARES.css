@@ -30,6 +30,14 @@
     --nav: rgba(95,210,181,0.15);
 }
 
+.admin-carpeta{
+    padding-top:10%;
+    height:60%;
+    text-align:center;
+    display:inline-block;
+    
+}
+
 #imgHome {
     cursor: pointer;
 }

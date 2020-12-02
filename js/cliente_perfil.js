@@ -360,12 +360,12 @@ function fillHistorial(ht) {
             var flechas = document.createElement("Section");
             flechas.setAttribute("class", "flechas");
 
-            if (arrayHistorial.length > 1) {
+      
                 flechas.appendChild(left_arrow);
                 flechas.appendChild(vacia);
                 flechas.appendChild(right_arrow);
                 slide.appendChild(flechas);
-            }
+      
 
             //------------------ C H I L D  1 -----------------------
             var child1 = document.createElement('Section');
@@ -613,5 +613,5 @@ function abrirDialogEdit() {
 function closeDialogEdit() {
     var dialog = document.getElementById("dialogUpd");
     dialog.close();
-
+    enableScroll();
 }
