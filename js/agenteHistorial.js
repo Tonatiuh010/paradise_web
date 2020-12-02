@@ -61,8 +61,9 @@ function fillReservaciones(ob) {
     console.log(arrayPreReservaciones);
 
     var historial = document.getElementById('listReservaciones');
-
-    while (arrayPreReservaciones[y]) {
+	
+	if(arrayPreReservaciones.length>0){
+		while (arrayPreReservaciones[y]) {
 
         var slide = document.createElement('section');
         slide.className = "reservaciones fade";
@@ -223,6 +224,15 @@ function fillReservaciones(ob) {
 
         showReservaciones(slideReservaciones);
     }       
+	}else{
+		var carpeta = document.createElement('img');
+        carpeta.src = '../img/sin_pendientes.png';
+        carpeta.className = 'admin-carpeta';
+
+        historial.appendChild(carpeta);
+	}
+
+    
 }
 
 
