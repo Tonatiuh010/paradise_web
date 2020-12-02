@@ -36,9 +36,6 @@ create view vw_primary_user as
 	on ag.FK_usuario=us.usNum 
 	where cliNum is null or agMatricula is null;
     
-    
-    select * from vw_user_list ;
-    
     create view vw_user_list as
 		select usNum as numU, usNombre as nombre, usCorreo as correo, usContrasenia as contrasenia, usTipoUS as tipo 
     from usuario;

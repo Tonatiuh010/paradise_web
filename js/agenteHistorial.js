@@ -62,6 +62,10 @@ function fillReservaciones(ob) {
 
     var historial = document.getElementById('listReservaciones');
 
+    if (arrayPreReservaciones.length>0){
+
+    
+
     while (arrayPreReservaciones[y]) {
 
         var slide = document.createElement('section');
@@ -222,7 +226,15 @@ function fillReservaciones(ob) {
         y++;
 
         showReservaciones(slideReservaciones);
-    }       
+    }     
+        
+    } else {
+        var monitor = document.createElement('img');
+        monitor.src = '../img/sin_pendientes.png';
+        monitor.className = 'admin-carpeta';
+
+        historial.appendChild(monitor);
+    }
 }
 
 

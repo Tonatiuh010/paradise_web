@@ -1,4 +1,4 @@
-use paradise;
+
 
 DELIMITER //
 create trigger DIS_AGENTE_INSERT before insert on agente

@@ -1,5 +1,3 @@
-use paradise;
-
 insert into municipio values ('ESE','Ensenada'),('MXL','Mexicali'),('TIJ','Tijuana'),('ROS','Rosarito'),('TEC','Tecate');
 
 insert into espacio(espNombre) values
@@ -153,8 +151,11 @@ insert into usuario(usNombre,usContrasenia,usCorreo,usTipoUS) values
     in fecha_finalizar date,
     in lugar int,
     in cliente int
-*/
-
-call SP_PRE_RESERVACION_REGISTRO ();
+    
+    
+    call SP_PRE_RESERVACION_REGISTRO ();
 call SP_preReservacion_asignarAgente();
 call SP_insertarReservacion();
+
+*/
+
