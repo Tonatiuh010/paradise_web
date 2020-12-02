@@ -55,7 +55,7 @@
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {
-            
+            console.log(ajax.responseText);
             var response = JSON.parse(ajax.responseText);
             if (response.res!=true){
                 showError("Error al momento de registrar: " + response.error);
@@ -260,7 +260,7 @@ function fillLugarShc(ob) {
 
     var y = 0;
 
-    if (arrayLugar.length) {
+    if (arrayLugar.length>0) {
         for (x = 0; x < paneles; x++) {
 
             var panel = document.createElement('section');

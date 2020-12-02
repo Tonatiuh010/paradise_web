@@ -1,16 +1,296 @@
+/*
+    DISEÑO DE LA PAGINA DEL ADMIN
+*/
+
+:root {
+    --color1: #FFC973;
+    /*AMARILLO CLARITO*/
+    --color2: #FFB640;
+    /*AMARILLO MENOS CLARITO*/
+    --color3: #A66600;
+    /*NARANJA OSCURO*/
+    --color4: #BF8830;
+    /*NARANJA OSCURO CLARO*/
+    --color5: #FF9E00;
+    /*NARANJA INTENSO*/
+    --color6: #7D71D8;
+    /*AZUL CLARITO*/
+    --color7: #5D4BD8;
+    /*AZUL-MORADO CLARO*/
+    --color8: #150873;
+    /*AZUL MARINO*/
+    --color9: #392E85;
+    /*AZUL MARINO CLARO*/
+    --color10: #2A17B1;
+    /*AZUL REY*/
+    --color11: #35D2AB;
+    /*UN TONO MÁS ARRIBA DEL LOGO*/
+    --color12: #1F7C65;
+    /*TURQUESA-GRIS*/
+    --color13: #00A67C;
+    /*TURQUESA OSCURO*/
+    --logo: #5FD2B5;
+    --boton: #006C51;
+    --nav: rgba(95,210,181,0.15);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: white;
+    text-align: center;
+}
+
+#imgHome {
+    cursor: pointer;
+}
+
+.navOficial {
+    height: 11%;
+    padding: 2%;
+    padding-bottom: 1%;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2%;
+    background-color: var(--nav);
+}
+
+.logoNav {
+    width: 90%;
+    float: left;
+    clear: both;
+}
+
+.menu {
+    width: 100%;
+    float: right;
+    font-family: Georgia;
+    font-size: 100%;
+    text-align: center;
+    clear: both;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 2fr 1fr 1.5fr
+}
+
+.barraBusqueda {
+    padding-right: 3%;
+    font-family: Georgia;
+    text-align: right;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.busqueda {
+    width: 60%;
+    height: 100%;
+}
+
+.search-button {
+    height: 100%;
+    width: 10%;
+    font-family: Georgia;
+    background-color: var(--boton);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.login-icon {
+    float: left;
+    width: 85%;
+    height: 70%;
+    /*    display:grid;*/
+    text-align: right;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0%;
+}
+
+main {
+    width: 100%;
+    height: 90%;
+    background-color: white;
+}
+
+.admNav {
+    background-color: rgba(5,8,115,0.4);
+}
+
+.admNav2 {
+    background-color: rgba(5,8,115,0.4);
+    height: 3%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1%;
+    clear: both;
+    padding: 1%;
+}
+
+.agenNav {
+    background-color: var(--color1);
+    height: 3%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1%;
+    clear: both;
+    padding: 1%;
+}
+
+.espNav {
+    height: 3%;
+    /*background-color: rgba(255, 69, 0,0.5);*/
+    background-color: var(--color1);
+    /* background-color: rgba(5,8,115,0.4);*/
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1%;
+}
+
+main > nav {
+    height: 3%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1%;
+    clear: both;
+    padding: 1%;
+}
+
+.sn {
+    width: 70%;
+    height: 90%;
+    padding: 3%;
+    float: right;
+    /*background-color: aquamarine;*/
+}
+
+.opciones {
+    padding-top: 5%;
+}
+
+.icons {
+    width: 90%;
+}
+
+.lateral {
+    font-family: Georgia;
+    line-height: 1.5;
+    /*background-color: rgb(171,255,255);*/
+    background-color: hsl(0, 0%, 92%);
+    width: 18%;
+    height: 95%;
+    padding: 3%;
+    color: darkslategray;
+    float: left;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 2fr 2fr 2fr 2fr 2fr 1fr 2fr;
+    grid-gap: 5%;
+}
+
+.lateral > a {
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+.botones2 {
+    width:100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2%;
+}
+
+.agenNav {
+    background-color: var(--color1);
+    height: 3%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1%;
+    clear: both;
+    padding: 1%;
+}
+
+.agen-lateral {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 2fr 2fr 2fr 2fr 2fr 1fr 2fr;
+    grid-gap: 5%;
+}
+
+.agen-lateral > a {
+    text-decoration: none;
+    color: darkslategray;
+}
+
+.panel-lateral {
+    font-family: Georgia;
+    line-height: 1.5;
+    text-align: left;
+    /*background-color: rgb(171,255,255);*/
+    background-color: hsl(0, 0%, 92%);
+    width: 18%;
+    height: 100%;
+    padding: 3%;
+    color: darkslategray;
+    float: left;
+}
+
+.principal-html{
+    display:inline-block;
+    width:70%;
+    padding:5%;
+    
+}
+
+.principal-html > h2 {
+    font-family: Georgia;
+    color: darkslategray;
+    line-height: 1.5;
+    /*background-color: hsl(0, 0%, 95%);*/
+    border-radius: 5px;
+    border: 2px solid hsl(0, 0%, 95%);
+    margin-right: -1.5%;
+    margin-left: 1%;
+}
+
+
+/**********************************************************************************************************************************/
 .prev, .next {
     background-color: rgba(0,0,0,0.7);
     padding: 8px;
-    margin: 10px;
+    /*margin: 10px;*/
     color: #fff;
     border-radius: 5px;
     transition: 0.4s ease;
     border-radius: 5px;
     color: white;
     font-weight: bold;
-     font-size: 18px;
-     cursor: pointer;
+    font-size: 18px;
+    cursor: pointer;
     user-select: none;
+    width: 20%;
+}
+
+.next{
+    margin-right:-2.5%;
+    float:right;
+}
+
+.prev{
+    margin-left:2.4%;
+    float:left;
 }
 
 .prev:hover, .next:hover {
@@ -43,7 +323,7 @@
     position: relative;
     float: center;
     width: 100%;
-    height: 600px;
+    height: 100%;
     margin: 10px;
     background: #fff;
     border: 1px solid #ddd;
@@ -83,6 +363,8 @@
 }
 
 .column {
-    fill: #42a5f5;
-    stroke: #1976d2;
+    /*fill: #42a5f5;*/
+    /*stroke: #1976d2;*/
+    fill: var(--logo);
+    stroke: hsl(0, 0%, 92%);
 }

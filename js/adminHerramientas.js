@@ -227,7 +227,7 @@ function fillLugarShc(ob) {
 
                     var lb3 = document.createElement('section');
                     lb3.setAttribute('class', 'label');
-                    lb3.innerHTML = 'Tipo: ' + arrayLugar[x].tipoLugar.nombre;
+                    lb3.innerHTML = 'Tipo: ' + arrayLugar[y].tipoLugar.nombre;
 
                     child1.appendChild(imgsec);
                     child1.appendChild(lb1);

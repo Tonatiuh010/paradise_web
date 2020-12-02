@@ -62,11 +62,8 @@ function fillReservaciones(ob) {
 
     var historial = document.getElementById('listReservaciones');
 
-    if (arrayPreReservaciones.length>0){
-
-    
-
-    while (arrayPreReservaciones[y]) {
+	if(arrayPreReservaciones.length>0){
+		while (arrayPreReservaciones[y]) {
 
         var slide = document.createElement('section');
         slide.className = "reservaciones fade";
@@ -226,6 +223,7 @@ function fillReservaciones(ob) {
         y++;
 
         showReservaciones(slideReservaciones);
+
     }     
         
     } else {
